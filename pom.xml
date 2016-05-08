@@ -16,6 +16,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>invest</finalName>
+    <finalName>investdata</finalName>
   </build>
 </project>
