@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMapConfig
+PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+        <properties resource="jdbc.properties" />
+        <settings useStatementNamespaces="true"
+                cacheModelsEnabled="true"
+                enhancementEnabled="true"
+                lazyLoadingEnabled="true"
+                maxRequests="64"
+                maxSessions="20"
+                maxTransactions="10"/>
+        <transactionManager type="JDBC">
+                 <dataSource  type="com.umpay.common.persist.ibatis.C3p0DataSourceFactory">
+                        <property name="driverClass" value="${driverClass}" />
+                        <property name="jdbcUrl" value="${jdbcUrl}" />
+                        <property name="user" value="${user}" />
+                        <property name="password" value="${password}" />
+                        <property name="minPoolSize" value="1" />
+                        <property name="initialPoolSize" value="1" />
+                        <property name="maxPoolSize" value="2" />
+                        <property name="acquireIncrement" value="1" />
+                        <property name="checkoutTimeout" value="10000" />
+                        <property name="maxIdleTime" value="60" />
+                        <property name="idleConnectionTestPeriod" value="60" />
+                </dataSource>
+        </transactionManager>
+		<sqlMap resource="com/umpay/dao/sqlmap/MerInf.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/GoodsInf.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/User.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/RetCode.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/MerBank.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/GoodsBank.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/UserBank.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/Order.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/Trans.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/BankInf.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/SegMobile.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/CommonCall.xml" /> 
+        <sqlMap resource="com/umpay/dao/sqlmap/Common.xml" />
+        <sqlMap resource="com/umpay/dao/sqlmap/BatchInf.xml" />
+        <sqlMap resource="com/umpay/dao/sqlmap/TransAll.xml" />
+        <sqlMap resource="com/umpay/dao/sqlmap/UserService.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/Change.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/UserInf.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/MobileBankInf.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/TrcmBatch.xml" />
+        <sqlMap resource="com/umpay/dao/sqlmap/TrcmdeeInf.xml" />
+        <sqlMap resource="com/umpay/dao/sqlmap/TrcmderInf.xml" />
+        <sqlMap resource="com/umpay/dao/sqlmap/TtransLmt.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/MobileFee.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/UserImsi.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/TfcRegisterInf.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/UAccount.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/UserLottery.xml"/>
+        <sqlMap resource="com/umpay/dao/sqlmap/TpubutifeeInf.xml"/>
+        <!--话费充值业务表  -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TMfeeTrans.xml"/>
+        <!--话费充值业务渠道控制表  -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TMfeeCtl.xml"/>
+        <!--空中充值代理商表  -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TsproxyMer.xml"/>
+        <!--彩票业务表-->
+        <sqlMap resource="com/umpay/dao/sqlmap/TLottTrans.xml"/>
+        <!--公共事业缴费表  -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TPfeeTrans.xml"/>
+         <!--话费充值流程用户控制表  -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TCustLmt.xml"/>
+        <!--话费充值业务流程控制表  -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TBusiLmt.xml"/>
+        <!-- 渠道信息表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/ChnlInf.xml"/>
+        <!-- 回缴款交易表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TFrcTrans.xml"/>
+        <!-- 用户交易过程控制 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TradeCtrl.xml"/>
+        <!-- 特殊交易用户订单表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TSorder.xml"/>
+        <!-- 交易明细表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TSorderDtl.xml"/>
+        <!-- 内部对账日期维护 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TInnerStlconf.xml"/>
+        <!-- 彩票开奖信息入库 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TLottPrize.xml"/>
+        <!-- 资金归集业务关联联系人表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TFrcContact.xml"/>
+        <!-- 扩展后的话费充值业务渠道控制表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TMfeeCtlExt.xml"/>
+        <!-- UECP机构关系表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/TUecpMerTag.xml" />
+        <!-- ec_order订单表 -->
+        <sqlMap resource="com/umpay/dao/sqlmap/EcOrderPo.xml" />
+</sqlMapConfig>
