@@ -10,17 +10,29 @@
 <meta name="document-state" content="dynamic"/>
 <link href="css/i.css" type="text/css" rel="stylesheet"/>
 <link href="css/s.css" type="text/css" rel="stylesheet"/>
+<link href="css/jquery.autocomplete.css" type="text/css" rel="stylesheet"/>
+<script language="javascript" src="js/jquery-2.2.3.min.js"></script>
+<script language="javascript" src="js/jquery.autocomplete.min.js"></script>
+<script type="text/javascript">
+$( function () {
+               var  data  =   " Core Selectors Attributes Traversing Manipulation CSS Events Effects Ajax Utilities " .split( "   " );
+  
+             $( ' #keyword ' ).autocomplete(data).result( function (event, data, formatted) {
+                  alert(data);
+             });
+         });
+</script>
 </head>
 <body id="home">
 <div class="wbyTop fn-clear">
-  <div class="wbyLinks fn-right"><span><a target="_blank" href="">登陆</a> <a target="_blank" href="">注册</a>|<a href="">关于我们</a></span></div>
+  <div class="wbyLinks fn-right"><span><a target="_blank" href="login.jsp">登陆</a> <a target="_blank" href="reg.jsp">注册</a>|<a href="">关于我们</a></span></div>
 </div>
 <div id="wrapper" style="margin-bottom:0;">
   <div id="header">
     <h1 id="logo"><img src="images/logo.png" height="80px" alt="投资数据网"/></h1>
     <div id="sbox">
       <form name="btform" action="">
-        <input type="text" baiduSug="2" autocomplete="off" placeholder="请输入您要查找的股票代码" id="input" name="q" class="stbox"/>
+        <input type="text" baiduSug="2" placeholder="请输入您要查找的股票代码" id="keyword" name="q" class="stbox"/>
         <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton"/>
       </form>
     </div>
