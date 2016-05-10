@@ -13,12 +13,7 @@
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-
-
-	<!-- ========================= GENERAL DEFINITIONS ========================= -->
-
-	<!-- Configurer that replaces ${...} placeholders with values from properties files -->
-	<!-- (in this case, mail and JDBC related properties) -->
+	<!-- 
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
@@ -26,20 +21,9 @@
 				<value>WEB-INF/jdbc.properties</value>
 			</list>
 		</property>
-	</bean>
-
-	<!-- MailSender used by EmailAdvice -->
-	<!--
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="${mail.host}"/>
-	</bean>
-	-->
-	<bean id="petStore" class="org.springframework.samples.jpetstore.domain.logic.PetStoreImpl">
-		<property name="accountDao" ref="accountDao"/>
-		<property name="categoryDao" ref="categoryDao"/>
-		<property name="productDao" ref="productDao"/>
-		<property name="itemDao" ref="itemDao"/>
-		<property name="orderDao" ref="orderDao"/>
-	</bean>
+	</bean> -->
+	
+	<bean id="loginAction" class="com.investdata.action.LoginAction"/>
+	
 
 </beans>

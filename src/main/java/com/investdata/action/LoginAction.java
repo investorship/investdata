@@ -1,18 +1,21 @@
 package com.investdata.action;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.log4j.Logger;
+
+import com.investdata.common.BaseAction;
 
 /**
  * 登录Action
  */
-public class LoginAction {
+public class LoginAction extends BaseAction {
+	Logger logger = Logger.getLogger(LoginAction.class);
 	
-	public static void main(String[] args) {
-		System.out.println();
-		int times = 0;
-		List<String> aa = new ArrayList<String>();
-		
-		//lizhibin fjfjfjfjfj okkkk
+	public static final String success = "success";
+	
+	public String login() {
+		logger.info("olosjfjsdfjksjfdjf");
+		System.err.println("012901201291930213");
+		return success;
 	}
+	
 }
