@@ -3,17 +3,14 @@ package com.investdata.action;
 import org.apache.log4j.Logger;
 
 import com.investdata.common.BaseAction;
+import com.investdata.common.factory.DaoFactory;
 
 /**
  * 登录Action
  */
 public class LoginAction extends BaseAction {
 	private static final long serialVersionUID = -4003526420872337090L;
-	Logger logger = Logger.getLogger(LoginAction.class);
-	private String username;
-	private String pwd;
-	
-	private String captcha;
+	private Logger logger = Logger.getLogger(LoginAction.class);	
 	
 	public String execute() throws Exception {
 		logger.info("进入登录流程..");
@@ -22,9 +19,13 @@ public class LoginAction extends BaseAction {
 	
 	public String login() {
 		System.err.println("username=" + username + " password=" + pwd + " cap=" + captcha);
+		DaoFactory.getTUserDao();
 		return INPUT;
 	}
 	
+	private String username;
+	private String pwd;
+	private String captcha;
 	
 	public String getUsername() {
 		return username;
