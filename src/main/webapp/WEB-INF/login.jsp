@@ -2,23 +2,29 @@
 <html>
 <head> 
 <meta charset="utf-8" />
-<title>投资数据网 - 登陆</title>
+<title>投资数据网 - 登录</title>
 <meta name="viewport" content="width=1010"/>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="css/list.css" type="text/css" rel="stylesheet"/>
-<link href="css/login.css" type="text/css" rel="stylesheet"/>
+<link href="../css/list.css" type="text/css" rel="stylesheet"/>
+<link href="../css/login.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript">
+	function login() {
+		document.getElementById('form').submit();
+	}
+
+</script>
 </head>
 <body>
 <div class="wbyTop fn-clear">
-  <div class="wbyLinks fn-right"><span><a target="_blank" href="">登陆</a> <a target="_blank" href="">注册</a>|<a href="">关于我们</a></span></div>
+  <div class="wbyLinks fn-right"><span><a target="_self" href="login/login.action">登录</a> <a target="_self" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
 </div>
 <!-- header start -->
 <div class="header">
   <div class="wrap clearfix">
-    <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
+    <div class="logo" data-sudaclick="toplogo"><a href=""><img src="../images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
     <div class="search"  data-sudaclick="topsearch">
-      <form action="" method="get" target="_blank" id="search_f">
+      <form action="login/login!login" method="post" target="_blank" id="search_f">
         <input type="text" name="k" class="search_k" value="请输入您要查找的股票代码" onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}" onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="search_k" />
         <input type="submit" class="search_smt" value="快速查找" />
       </form>
@@ -28,10 +34,10 @@
 <div class="content wrap clearfix">
   <div class="center">
     <div class="wrap">
-      <div class="signup-top"> 用户登陆 </div>
+      <div class="signup-top"> 用户登录 </div>
       <div class="box">
         <div class="loginBox">
-          <form onsubmit="return valiForm();" method="post" id="form"> 
+          <form method="post" id="form" action="login/login!login.action"> 
             <div class="login">
               <div class="clear"> <span>用户名：</span>
                 <input type="text" name="username" id="username" value="" placeholder="请输入您的用户名" class="loginValue">
@@ -50,13 +56,13 @@
             <div class="login">
               <div class="clear"> <span><b class="importantB">*</b>验证码：</span>
                 <input placeholder="请输入验证码" id="captcha" name="captcha" style="width: 80px;" class="loginValue">
-                <span style="width: 5px;"></span><a style="float:left; line-height:40px; padding-left:10px;" href=""><img style="float:left;" src="images/ico.jpg" id="captchaimg">看不清楚？换一张</a>
+                <span style="width: 5px;"></span><a style="float:left; line-height:40px; padding-left:10px;" href=""><img style="float:left;" src="../images/ico.jpg" id="captchaimg">看不清楚？换一张</a>
                 <p id="captchamsg" class="phone"></p>
               </div>
             </div>
             
             <div class="loginBtn clear">
-              <input type="submit" class="regBtn" value="登录">
+              <input type="submit" class="regBtn" value="登录" onclick="javascript:login()">
             </div>
             <div class="login_forget">
 						<span><a href="">忘记密码？</a></span>

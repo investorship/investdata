@@ -4,14 +4,21 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.action.extension" value="action"/>
     <constant name="struts.objectFactory" value="spring" />
     
-    <package name="default" namespace="/login" extends="struts-default">
+    <!-- 登录 -->
+    <package name="login" namespace="/login" extends="struts-default">
         <action name="login" class="loginAction">
-            <result name="success" type="redirect">http://www.baidu.com</result>
+            <result name="input">/WEB-INF/login.jsp</result>
+        </action>
+    </package>
+    
+    <!-- 注册 -->
+    <package name="reg" namespace="/reg" extends="struts-default">
+        <action name="reg" class="regAction">
+            <result name="input">/WEB-INF/reg.jsp</result>
         </action>
     </package>
 	

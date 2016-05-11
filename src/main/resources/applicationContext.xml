@@ -24,6 +24,6 @@
 	</bean> -->
 	
 	<bean id="loginAction" class="com.investdata.action.LoginAction"/>
-	
+	<bean id="regAction" class="com.investdata.action.RegAction"/>
 
 </beans>

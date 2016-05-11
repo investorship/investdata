@@ -6,17 +6,17 @@
 <meta name="viewport" content="width=1010"/>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="css/list.css" type="text/css" rel="stylesheet"/>
-<link href="css/login.css" type="text/css" rel="stylesheet"/>
+<link href="../css/list.css" type="text/css" rel="stylesheet"/>
+<link href="../css/login.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <div class="wbyTop fn-clear">
-  <div class="wbyLinks fn-right"><span><a target="_blank" href="">登陆</a> <a target="_blank" href="">注册</a>|<a href="">关于我们</a></span></div>
+  <div class="wbyLinks fn-right"><span><a target="_self" href="">登陆</a> <a target="_self" href="">注册</a>|<a href="">关于我们</a></span></div>
 </div>
 <!-- header start -->
 <div class="header">
   <div class="wrap clearfix">
-    <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
+    <div class="logo" data-sudaclick="toplogo"><a href=""><img src="../images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
     <div class="search"  data-sudaclick="topsearch">
       <form action="" method="get" target="_blank" id="search_f">
         <input type="text" name="k" class="search_k" value="请输入您要查找的股票代码" onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}" onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="search_k" />
@@ -53,7 +53,7 @@
             <div class="login">
               <div class="clear"> <span><b class="importantB">*</b>验证码：</span>
                 <input placeholder="请输入验证码" id="captcha" name="captcha" style="width: 80px;" class="loginValue">
-                <span style="width: 5px;"></span><a style="float:left; line-height:40px; padding-left:10px;" href=""><img style="float:left;" src="images/ico.jpg" id="captchaimg">看不清楚？换一张</a>
+                <span style="width: 5px;"></span><a style="float:left; line-height:40px; padding-left:10px;" href=""><img style="float:left;" src="../images/ico.jpg" id="captchaimg">看不清楚？换一张</a>
                 <p id="captchamsg" class="phone"></p>
               </div>
             </div>

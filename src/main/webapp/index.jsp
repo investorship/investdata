@@ -11,21 +11,49 @@
 <link href="css/i.css" type="text/css" rel="stylesheet"/>
 <link href="css/s.css" type="text/css" rel="stylesheet"/>
 <link href="css/jquery.autocomplete.css" type="text/css" rel="stylesheet"/>
-<script language="javascript" src="js/jquery-2.2.3.min.js"></script>
-<script language="javascript" src="js/jquery.autocomplete.min.js"></script>
+<link href="css/jquery-ui.css" type="text/css" rel="stylesheet"/>
+
+<script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type="text/javascript">
-$( function () {
-               var  data  =   " Core Selectors Attributes Traversing Manipulation CSS Events Effects Ajax Utilities " .split( "   " );
-  
-             $( ' #keyword ' ).autocomplete(data).result( function (event, data, formatted) {
-                  alert(data);
-             });
-         });
+</script>
+<script type="text/javascript">
+$(function() {
+    var availableTags = [
+      "格力电器",
+      "贵州茅台",
+      "福耀玻璃",
+      "五粮液",
+      "伊利股份",
+      "伊利特",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "伊江股份",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $("#keyword").autocomplete({
+      source: availableTags
+    });
+  });
 </script>
 </head>
 <body id="home">
 <div class="wbyTop fn-clear">
-  <div class="wbyLinks fn-right"><span><a target="_blank" href="login.jsp">登陆</a> <a target="_blank" href="reg.jsp">注册</a>|<a href="">关于我们</a></span></div>
+  <div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
 </div>
 <div id="wrapper" style="margin-bottom:0;">
   <div id="header">
@@ -36,7 +64,7 @@ $( function () {
         <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton"/>
       </form>
     </div>
-    <div id="nums" style="font-size: 17px;">本站共索引 <span>7524458</span> 条磁力链资源！</div>
+    <div id="nums" style="font-size: 17px;">本站共索引 <span>7524458</span> 条财务数据</div>
     <div id="index_ad_top"></div>
   </div>
   <div id="container">
