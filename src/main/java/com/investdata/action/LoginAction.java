@@ -19,7 +19,7 @@ public class LoginAction extends BaseAction {
 	
 	public String login() {
 		System.err.println("username=" + username + " password=" + pwd + " cap=" + captcha);
-		DaoFactory.getTUserDao();
+//		DaoFactory.getTUserDao();
 		return INPUT;
 	}
 	

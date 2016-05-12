@@ -8,12 +8,49 @@
 <meta name="description" content="" />
 <link href="../css/list.css" type="text/css" rel="stylesheet"/>
 <link href="../css/login.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript">
-	function login() {
-		document.getElementById('form').submit();
-	}
-
+<link href="../css/jquery.validate.css" type="text/css" rel="stylesheet"/>
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.validate.min.js"></script>
+<script src="../js/jquery.validate.extend.js"></script>
+<script>
+$(document).ready(function(){
+    $("#loginForm").validate({
+        rules: {
+            username:{
+                required: true,
+                minlength: 2
+            },
+            pwd:{
+                required: true,
+                minlength: 6,
+                maxlength: 16
+            },
+            captcha:{
+                required: true,
+                equalTo: "S6WD"
+                
+            }
+        },
+        messages:{
+            username:{
+                required: "用户名不能为空",
+                minlength: "用户名的最小长度为2"
+            },
+            pwd:{
+                required: "密码不能为空",
+                minlength: "密码长度不能少于6个字符",
+                maxlength: "密码长度不能超过16个字符"
+            },
+            captcha:{
+                required: "验证码不能为空",
+                equalTo: "验证码错误"
+            }
+        }
+    });
+});
 </script>
+
+
 </head>
 <body>
 <div class="wbyTop fn-clear">
@@ -37,7 +74,7 @@
       <div class="signup-top"> 用户登录 </div>
       <div class="box">
         <div class="loginBox">
-          <form method="post" id="form" action="login/login!login.action"> 
+          <form method="post" id="loginForm" action="login/login!login.action"> 
             <div class="login">
               <div class="clear"> <span>用户名：</span>
                 <input type="text" name="username" id="username" value="" placeholder="请输入您的用户名" class="loginValue">
@@ -62,7 +99,7 @@
             </div>
             
             <div class="loginBtn clear">
-              <input type="submit" class="regBtn" value="登录" onclick="javascript:login()">
+              <input type="submit" class="regBtn" value="登录">
             </div>
             <div class="login_forget">
 						<span><a href="">忘记密码？</a></span>
