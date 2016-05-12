@@ -21,4 +21,4 @@ create table t_user
    primary key (username)
 );
 
-alter table t_user comment '用户信息表';
+alter table t_user comment '用户信息表'; 
