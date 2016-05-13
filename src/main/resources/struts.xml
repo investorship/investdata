@@ -13,6 +13,9 @@
         <action name="login" class="loginAction">
             <result name="input">/WEB-INF/login.jsp</result>
         </action>
+         <action name="adminLogin" class="loginAction">
+            <result name="input">/WEB-INF/admin/leftTree.jsp</result>
+        </action>
     </package>
     
     <!-- 注册 -->

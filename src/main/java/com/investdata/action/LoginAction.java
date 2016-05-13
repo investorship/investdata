@@ -23,6 +23,16 @@ public class LoginAction extends BaseAction {
 		return INPUT;
 	}
 	
+	/**
+	 * 管理员登录
+	 * @return
+	 */
+	public String adminLogin() {
+		System.err.println("username=" + username + " password=" + pwd + " cap=" + captcha);
+//		DaoFactory.getTUserDao();
+		return INPUT;
+	}
+	
 	private String username;
 	private String pwd;
 	private String captcha;

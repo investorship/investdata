@@ -111,6 +111,14 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 		</dependency>
+		
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+		<!-- 
+		<scope>provided</scope>   -->
+	</dependency>
 
 	</dependencies>
 	<build>
@@ -143,7 +151,7 @@
 					<artifactId>tools</artifactId>
 					<version>1.6.0</version>
 					<scope>system</scope>
-					<systemPath>C:\Program Files\Java\jdk1.6.0_39\lib\tools.jar</systemPath>
+					<systemPath>C:\Program Files\Java\jdk1.6.0_10\lib\tools.jar</systemPath>
 				</dependency>
 			</dependencies>
 		</profile>

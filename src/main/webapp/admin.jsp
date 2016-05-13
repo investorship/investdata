@@ -6,7 +6,7 @@
 <link href="css/admin/admlogin.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<form id="form1" runat="server">
+	<form id="admin" action="login/adminLogin!adminLogin.action">
 		<div class="Main">
 			<ul>
 				<li class="top"></li>
