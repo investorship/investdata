@@ -20,7 +20,7 @@
 	var setting = {};
 
 	var zNodes = [ {
-		name : "父节点1 - 展开",
+		name : "管理菜单",
 		open : true,
 		children : [ {
 			name : "父节点11 - 折叠",

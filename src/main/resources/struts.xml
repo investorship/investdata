@@ -14,7 +14,7 @@
             <result name="input">/WEB-INF/login.jsp</result>
         </action>
          <action name="adminLogin" class="loginAction">
-            <result name="input">/WEB-INF/admin/leftTree.jsp</result>
+            <result name="input">/WEB-INF/admin/main.jsp</result>
         </action>
     </package>
     
