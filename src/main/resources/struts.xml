@@ -8,6 +8,13 @@
     <constant name="struts.action.extension" value="action"/>
     <constant name="struts.objectFactory" value="spring" />
     
+    <!-- 首页 -->
+    <package name="index" namespace="/" extends="struts-default">
+        <action name="index" class="indexAction">
+            <result name="input">/WEB-INF/search.jsp</result>
+        </action>
+    </package>
+    
     <!-- 登录 -->
     <package name="login" namespace="/login" extends="struts-default">
         <action name="login" class="loginAction">
