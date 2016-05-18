@@ -38,7 +38,7 @@ body {
 			if (win && !window.opera) {
 				if (win.contentDocument
 						&& win.contentDocument.body.offsetHeight)
-					win.height = win.contentDocument.body.offsetHeight;
+					//win.height = win.contentDocument.body.offsetHeight;
 				elseif(win.Document && win.Document.body.scrollHeight)
 				win.height = win.Document.body.scrollHeight;
 			}
@@ -52,8 +52,6 @@ body {
 	<form id="form1" runat="server">
 		<div id="framecontentLeft">
 			<jsp:include page="leftTree.jsp" flush="true"/>
-			<div class="menu" id="menuDiv">
-			</div>
 		</div>
 		<div id="framecontentTop">
 			<div style="text-align: center;">
@@ -65,8 +63,8 @@ body {
 		</div>
 		<div id="maincontent">
 			<iframe id="content" name="content" height="100%"
-				onload="Javascript:SetWinHeight(this)" frameborder="0"
-				scrolling="yes" width="100%"></iframe>
+				onload="Javascript:SetWinHeight(this)" frameborder="2"
+				scrolling="no" width="100%"></iframe>
 		</div>
 	</form>
 
