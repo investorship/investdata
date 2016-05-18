@@ -51,8 +51,8 @@ body {
 <body>
 	<form id="form1" runat="server">
 		<div id="framecontentLeft">
+			<jsp:include page="leftTree.jsp" flush="true"/>
 			<div class="menu" id="menuDiv">
-			sfd
 			</div>
 		</div>
 		<div id="framecontentTop">
@@ -64,9 +64,9 @@ body {
 			</div>
 		</div>
 		<div id="maincontent">
-			<iframe id="content" name="content"
+			<iframe id="content" name="content" height="100%"
 				onload="Javascript:SetWinHeight(this)" frameborder="0"
-				scrolling="no" width="100%"></iframe>
+				scrolling="yes" width="100%"></iframe>
 		</div>
 	</form>
 

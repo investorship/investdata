@@ -25,7 +25,9 @@
 		children : [ {
 			name : "父节点11 - 折叠",
 			children : [ {
-				name : "叶子节点111"
+				name : "叶子节点111",
+				url  : "http://www.baidu.com",
+				target : "content"
 			}, {
 				name : "叶子节点112"
 			}, {
@@ -55,8 +57,6 @@
 </HEAD>
 
 <BODY>
-	<h1>最简单的树 -- 标准 JSON 数据</h1>
-	<h6>[ 文件路径: core/standardData.html ]</h6>
 	<div class="content_wrap">
 		<div class="zTreeDemoBackground left">
 			<ul id="treeDemo" class="ztree"></ul>
