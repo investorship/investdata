@@ -3,8 +3,10 @@ package com.investdata.common.factory;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.investdata.dao.TStockDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.impl.BaseDao;
+import com.investdata.dao.impl.StockDaoImpl;
 import com.investdata.dao.impl.UserDaoImpl;
 
 public class DaoFactory {
@@ -16,5 +18,13 @@ public class DaoFactory {
 			daoMap.put(key, new UserDaoImpl());
 		}
 		return (TUserDao) daoMap.get(key);
+	}
+	
+	public static TStockDao getTStockDao() {
+		String key = "TStockDao";
+		if (!daoMap.containsKey(key)) {
+			daoMap.put(key, new StockDaoImpl());
+		}
+		return (TStockDao) daoMap.get(key);
 	}
 }

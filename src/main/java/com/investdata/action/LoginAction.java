@@ -3,7 +3,6 @@ package com.investdata.action;
 import org.apache.log4j.Logger;
 
 import com.investdata.common.BaseAction;
-import com.investdata.common.factory.DaoFactory;
 
 /**
  * 登录Action

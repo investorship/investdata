@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="stock">
+	
+	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
+	<typeAlias alias="stock" type="com.investdata.dao.po.Stock"/>
+	
+	
+	<select id="getStocks" parameterClass="com.investdata.dao.po.Stock" resultClass="stock">
+		select * from t_stocks where
+			<isNotEmpty property="code"  >
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="name" >
+				name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="shortName" >
+				shortName = #shortName#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="category" >
+				category = #category#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+	</select>
+	
+	<update id="updateUser" parameterClass="org.guo.ibatis.dao.po.User">
+		update bbs.t_user set name = #name#, title= #title# where id = #id#
+	</update>
+	
+	<!--删除数据，并返回影响的记录条数. -->
+	<delete id="delByUser" parameterClass="org.guo.ibatis.dao.po.User" >
+		delete from bbs.t_user where id = #id#
+	</delete>
+	
+	
+	
+	<!-- 查询数据 返回List<User> resultClass必须指定，否则查询成功，但不返回数据-->
+	<select id="getAllUsers" resultClass="org.guo.ibatis.dao.po.User">
+		select * from bbs.t_user
+	</select>
+	
+	<!-- 插入一条数据并返回自增长的主键 -->
+	<insert id="insertAndGetPk" parameterMap="userParam">
+		insert into t_user (
+			id,
+			name,
+			sex,
+			age,
+			title,
+			phone,
+			address
+		) values (
+			?,?,?,?,?,?,?
+		)
+		
+	</insert>
+</sqlMap>
