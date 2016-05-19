@@ -11,6 +11,7 @@ import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
 import com.investdata.dao.TStockDao;
 import com.investdata.dao.po.Stock;
+import com.investdata.utils.StringUtils;
 
 /**
  * @author HaiLong.Guo
@@ -36,14 +37,19 @@ public class IndexAction extends BaseAction implements RequestAware, SessionAwar
 					String name = stock.getName();
 					String shrotName = stock.getShortName();
 					String market = stock.getMarket();
+					
+					stocksList
+							  .append("[\"").append(StringUtils.fillRSpace(shrotName, 5))
+							  .append(StringUtils.fillRSpace(code, 5))
+							  .append(StringUtils.fillRSpace(name, 5))
+							  .append(StringUtils.fillRSpace(market, 5));
+//							  .append(StringUtils.fillRSpace(str, length))
 				}
 				
 				
 			}else {
 				_log.info(String.format("股票列表数据加载有误stocks=[%s]", stocks));
 			}
-			
-			
 		}
 		
 		
