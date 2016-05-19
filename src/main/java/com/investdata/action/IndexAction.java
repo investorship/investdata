@@ -13,6 +13,8 @@ import com.investdata.dao.TStockDao;
 import com.investdata.dao.po.Stock;
 
 /**
+ * @author HaiLong.Guo
+ * @since 20160519
  * 跳转到首页Action
  */
 public class IndexAction extends BaseAction implements RequestAware, SessionAware {
