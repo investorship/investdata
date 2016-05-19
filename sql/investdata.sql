@@ -69,3 +69,31 @@ insert into t_industry_category values (26,'银行',1,CURRENT_TIMESTAMP);
 insert into t_industry_category values (27,'有色金属',1,CURRENT_TIMESTAMP);
 insert into t_industry_category values (28,'综合',1,CURRENT_TIMESTAMP);
 
+
+drop table if exists t_stocks;
+
+/*==============================================================*/
+/* Table: t_stocks                                              */
+/*==============================================================*/
+create table t_stocks
+(
+   code                 char(10) not null comment '股票代码',
+   name                 char(16) not null comment '股票名称',
+   shortname            char(10) not null comment '简称 比如格力电器 GLDQ 用于首页检索',
+   market               char(10) not null comment '所属市场  ',
+   ipotime              char(10) comment '上市时间',
+   ipostocks            decimal(16,2) comment '发行量',
+   category             int not null comment '所属行业',
+   issuedPE             char(10) comment '发行市盈率',
+   issuedprice          decimal(10,2) comment '发行价格',
+   address              char(50) comment '公司地址',
+   compywebsite         char(50) comment '公司网址',
+   reportaddress        char(50) comment '公告地址-可以链接巨潮资讯或沪深交易所网站',
+   phone                char(25) comment '公司电话',
+   legaler              char(20) comment '企业法人',
+   flag                 int not null comment '标志位 0-停用 1-启用',
+   intime               timestamp not null comment '入库时间',
+   primary key (code)
+);
+
+alter table t_stocks comment '股票信息表';
