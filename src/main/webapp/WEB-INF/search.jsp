@@ -40,14 +40,17 @@ $(function() {
 		var availableTags = ${stockData};
 	    $("#keyword").autocomplete({
 	    	source:availableTags,
+	    	maxRows:12,
+	    	matchSubset:true,
+	    	cacheLength: 1000,
+	    	scroll: true,
+	    	
 	    	select: function( event, ui ){
 		    	var selectVal = ui.item.value.split("    ");
 		    	var keyword = selectVal[1];
 		    	
 		      }
-	    }).result(function(event, data, formatted) { 
-	    	alert('item='+ data); 
-	    }); 
+	    })
 	 });
   });
   
@@ -70,7 +73,7 @@ $(function() {
 			</h1>
 			<div id="sbox">
 				<form id="keywordForm" name="btform" action="">
-					<input type="text" baiduSug="2" placeholder="股票代码" id="keyword"
+					<input type="text" baiduSug="2" placeholder="代码,名称或拼音" id="keyword"
 						name="q" class="stbox" /> <input type="submit"
 						onmouseout="this.className=''"
 						onmousedown="this.className='mousedown'"
