@@ -18,9 +18,9 @@ public class SqlMapClientFactory {
 	private static final String log4jFile = "log4j.properties";
 	private static Logger log = Logger.getLogger(SqlMapClientFactory.class);
 	static {
-		URL  url = ClassLoader.getSystemResource(log4jFile);
+		/*URL  url = ClassLoader.getSystemResource(log4jFile);
 		String path = url.getPath();
-		PropertyConfigurator.configure(path);
+		PropertyConfigurator.configure(path);*/
 		Reader reader = null;
 		try {
 			reader = Resources.getResourceAsReader(ibatisFile);
@@ -33,5 +33,20 @@ public class SqlMapClientFactory {
 	
 	public static SqlMapClient getInstance() {
 		return sqlMapClient;
+	}
+	
+	public static void main(String[] args) {
+		URL  url = ClassLoader.getSystemResource(log4jFile);
+		String path = url.getPath();
+		System.err.println(path);
+		
+		PropertyConfigurator.configure(path);
+		Reader reader = null;
+		try {
+			reader = Resources.getResourceAsReader(ibatisFile);
+		} catch (IOException e) {
+			log.error("读取ibatis配置文件出现异常", e);
+		}
+		sqlMapClient = SqlMapClientBuilder.buildSqlMapClient(reader);
 	}
 }

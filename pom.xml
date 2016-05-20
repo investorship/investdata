@@ -111,17 +111,32 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-		
-	<dependency>
-		<groupId>javax.servlet</groupId>
-		<artifactId>jstl</artifactId>
-		<version>1.2</version>
-		<!-- 
-		<scope>provided</scope>   -->
-	</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
 
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/java/com/investdata/dao/sqlmap</directory>
+				<targetPath>${project.build.directory}/classes/com/investdata/dao/sqlmap</targetPath>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<targetPath>${project.build.directory}/classes/</targetPath>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<!-- 跳过测试编译 -->
@@ -131,9 +146,18 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
 		</plugins>
 		<finalName>investdata</finalName>
 	</build>
+
 
 	<!-- 解决 miss tools.jar 问题 -->
 	<profiles>

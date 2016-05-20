@@ -31,32 +31,34 @@ public class IndexAction extends BaseAction implements RequestAware, SessionAwar
 			List<Stock> stocks = stockDao.getStocks(new Stock());
 			if (stocks != null && stocks.size() > 0) {
 				_log.info(String.format("股票列表数据加载完毕stocks.size=[%s]", stocks.size()));
-				
-				for (Stock stock : stocks) {
+				stocksList.append("[\"");
+				for (int i=0; i< stocks.size(); i++) {
+					Stock stock = stocks.get(i);
 					String code = stock.getCode();
 					String name = stock.getName();
 					String shrotName = stock.getShortName();
 					String market = stock.getMarket();
 					
+					if (i > 0) {
+						stocksList.append("\"");
+					}
+					
 					stocksList
-							  .append("[\"").append(StringUtils.fillRSpace(shrotName, 5))
-							  .append(StringUtils.fillRSpace(code, 5))
-							  .append(StringUtils.fillRSpace(name, 5))
-							  .append(StringUtils.fillRSpace(market, 5));
-//							  .append(StringUtils.fillRSpace(str, length))
+							  .append(StringUtils.fillRSpace(shrotName, 13))
+							  .append(StringUtils.fillRSpace(code, 13))
+							  .append(StringUtils.fillRSpace(name, 13))
+							  .append(market)
+							  .append("\"").append(",").append("\n");
 				}
-				
-				
+				stocksList.deleteCharAt(stocksList.length() -1); //删除最后一个回车符
+				stocksList.deleteCharAt(stocksList.length() -1); //删除最后一个回车符
+				stocksList.append("]");
 			}else {
 				_log.info(String.format("股票列表数据加载有误stocks=[%s]", stocks));
 			}
 		}
 		
-		
-		if (stocksList.length() == 0) {
-			stocksList.append("[\"HLMD    600256    海立美达    A股    深圳\"").append(",").append("\n");
-			stocksList.append("\"SHFZ    600254    双汇发展    A股    上海\"]");			
-		}
+		_log.info(String.format("stocksList=[%s]\n", stocksList.toString()));
 		
 		request.put("stockData", stocksList.toString());
 		return INPUT;

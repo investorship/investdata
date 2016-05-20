@@ -12,19 +12,13 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
                 maxSessions="20"
                 maxTransactions="10"/>
         <transactionManager type="JDBC">
-                 <dataSource  type="com.umpay.common.persist.ibatis.C3p0DataSourceFactory">
-                        <property name="driverClass" value="${driverClass}" />
-                        <property name="jdbcUrl" value="${jdbcUrl}" />
-                        <property name="user" value="${user}" />
-                        <property name="password" value="${password}" />
-                        <property name="minPoolSize" value="1" />
-                        <property name="initialPoolSize" value="1" />
-                        <property name="maxPoolSize" value="2" />
-                        <property name="acquireIncrement" value="1" />
-                        <property name="checkoutTimeout" value="10000" />
-                        <property name="maxIdleTime" value="60" />
-                        <property name="idleConnectionTestPeriod" value="60" />
+                 <dataSource  type="SIMPLE">
+		            <property name="JDBC.Driver" value="${driverClass}" />
+					<property name="JDBC.ConnectionURL" value="${jdbcUrl}" />
+					<property name="JDBC.Username" value="${user}" />
+					<property name="JDBC.Password" value="${password}" />
                 </dataSource>
         </transactionManager>
-		<sqlMap resource="com/umpay/dao/sqlmap/MerInf.xml"/>
+		<sqlMap resource="com/investdata/dao/sqlmap/User.xml"/>
+		<sqlMap resource="com/investdata/dao/sqlmap/Stock.xml"/>
 </sqlMapConfig>
