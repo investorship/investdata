@@ -73,11 +73,4 @@ public class IndexAction extends BaseAction implements RequestAware, SessionAwar
 		this.request = request;
 		
 	}
-	
-	public static void main(String[] args) {
-		StringBuilder s1 = new StringBuilder();
-		s1.append("[\"HLMD   600256	 海立美达      A股      深圳\"").append(",").append("\n");
-		s1.append("\"SHFZ   600254	 双汇发展      A股      上海\"]");	
-		System.err.println(s1);
-	}
 }
