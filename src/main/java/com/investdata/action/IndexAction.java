@@ -21,46 +21,59 @@ import com.investdata.utils.StringUtils;
 public class IndexAction extends BaseAction implements RequestAware, SessionAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	private Logger _log = Logger.getLogger(IndexAction.class);
-	private static StringBuilder stocksList = new StringBuilder();
+	private static StringBuilder stocksItems = new StringBuilder();
 	private Map<String,Object> request = null;
 	
 	public String execute() throws Exception {
 		_log.info("进入主页加载股票列表数据流程");
-		if (stocksList.length() == 0) { //股票列表未被初始化.
+		if (stocksItems.length() == 0) { //股票列表未被初始化.
 			TStockDao stockDao = DaoFactory.getTStockDao();
 			List<Stock> stocks = stockDao.getStocks(new Stock());
 			if (stocks != null && stocks.size() > 0) {
 				_log.info(String.format("股票列表数据加载完毕stocks.size=[%s]", stocks.size()));
-				stocksList.append("[\"");
+				StringBuilder stockSelKey = new StringBuilder();
+				stocksItems.append("[");
 				for (int i=0; i< stocks.size(); i++) {
 					Stock stock = stocks.get(i);
 					String code = stock.getCode();
 					String name = stock.getName();
 					String shrotName = stock.getShortName();
 					String market = stock.getMarket();
+					/**
+					 * 最终格式
+					 * [
+		                  {label: "key1", value: "v1" },
+		                  {label: "key2", value: "v2" },
+		               ];
+					 */
 					
-					if (i > 0) {
-						stocksList.append("\"");
-					}
-					
-					stocksList
+					stockSelKey
+							  .append("{label: \"")
 							  .append(StringUtils.fillRSpace(shrotName, 13))
 							  .append(StringUtils.fillRSpace(code, 13))
 							  .append(StringUtils.fillRSpace(name, 13))
 							  .append(market)
-							  .append("\"").append(",").append("\n");
+							  .append("\",")
+							  .append(" value: \"")
+							  .append(code)
+							  .append("\"")
+							  .append(" },")
+							  .append("\n");
+					
+					stocksItems.append(stockSelKey);
+					stockSelKey.setLength(0); //清空
+					
 				}
-				stocksList.deleteCharAt(stocksList.length() -1); //删除最后一个回车符
-				stocksList.deleteCharAt(stocksList.length() -1); //删除最后一个回车符
-				stocksList.append("]");
+				stocksItems.deleteCharAt(stocksItems.length() -2 ); //删除最后一个逗号
+				stocksItems.append(" ]");
 			}else {
 				_log.info(String.format("股票列表数据加载有误stocks=[%s]", stocks));
 			}
 		}
 		
-		_log.info(String.format("stocksList=[%s]\n", stocksList.toString()));
+		_log.info(String.format("stocksList=[%s]\n", stocksItems.toString()));
 		
-		request.put("stockData", stocksList.toString());
+		request.put("stocksItems", stocksItems.toString());
 		return INPUT;
 	}
 
