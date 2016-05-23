@@ -2,7 +2,7 @@
 <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
 var availableTags = ${stocksItems};
 $(function() {
 	//从后台获取数据.
