@@ -1,85 +1,92 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html>
 <head> 
 <meta charset="utf-8" />
+<base href="<%=basePath%>">
 <title>投资数据网 - 注册</title>
 <meta name="viewport" content="width=1010"/>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="../css/list.css" type="text/css" rel="stylesheet"/>
-<link href="../css/login.css" type="text/css" rel="stylesheet"/>
+<link href="css/basic.css" type="text/css" rel="stylesheet"/>
+<link href="css/list.css" type="text/css" rel="stylesheet"/>
+<link href="css/login.css" type="text/css" rel="stylesheet"/>
+<jsp:include page="autocomplete.jsp" />
 </head>
 <body>
 <div class="wbyTop fn-clear">
-  <div class="wbyLinks fn-right"><span><a target="_self" href="">登陆</a> <a target="_self" href="">注册</a>|<a href="">关于我们</a></span></div>
+  <div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" >注册</a>|<a href="">关于我们</a></span></div>
 </div>
 <!-- header start -->
 <div class="header">
   <div class="wrap clearfix">
-    <div class="logo" data-sudaclick="toplogo"><a href=""><img src="../images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
+    <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
     <div class="search"  data-sudaclick="topsearch">
-      <form action="" method="get" target="_blank" id="search_f">
-        <input type="text" name="k" class="search_k" value="请输入您要查找的股票代码" onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}" onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="search_k" />
+      <form action="stock/stock.action" method="get" target="_blank" id="search_f">
+        <input type="text" name="k" class="search_k" value="请输入您要查找的股票代码" onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}" onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="keyword" />
         <input type="submit" class="search_smt" value="快速查找" />
       </form>
     </div>
   </div>
 </div>
-<div class="content wrap clearfix">
-  <div class="center">
-    <div class="wrap">
-      <div class="signup-top"> 用户注册 </div>
-      <div class="box">
-        <div class="loginBox">
-          <form onsubmit="return valiForm();" method="post" id="form"> 
-            <div class="login">
-              <div class="clear"> <span><b class="importantB">*</b>电子邮箱：</span>
-                <input type="text" name="email" id="email" value="" placeholder="请输入您的邮箱" class="loginValue">
-                <p id="emailmsg" class="phone"></p>
-              </div>
-            </div> 
-            <div class="login">
-              <div class="clear"> <span><b class="importantB">*</b>登录密码：</span>
-                <input type="password" placeholder="6-20个英语字母、数字、符号的组合" name="pwd" id="pwd" class="loginValue">
-                <p id="pwdmsg" class="phone"></p>
-              </div>
-            </div> 
-            <div class="login">
-              <div class="clear"> <span><b class="importantB">*</b>重复密码：</span>
-                <input type="password" placeholder="确保两次输入完全一致" name="repwd" id="repwd" value="" class="loginValue">
-                <p id="repwdmsg" class="phone"></p>
-              </div>
-            </div>
-            <div class="login">
-              <div class="clear"> <span><b class="importantB">*</b>验证码：</span>
-                <input placeholder="请输入验证码" id="captcha" name="captcha" style="width: 80px;" class="loginValue">
-                <span style="width: 5px;"></span><a style="float:left; line-height:40px; padding-left:10px;" href=""><img style="float:left;" src="../images/ico.jpg" id="captchaimg">看不清楚？换一张</a>
-                <p id="captchamsg" class="phone"></p>
-              </div>
-            </div>
-            
-            <div class="loginBtn clear">
-              <input type="submit" class="regBtn" value="同意以下协议，提交">
-            </div>
-            <div class="login_forget"> <span>我已经注册，现在就去<a href="" class="PlateTitleA1">登录</a></span> </div>
-          </form>
-        </div>
-        <div style="display:block;" class="regText">
-          <h4>阅读并接受《投资数据网-用户协议》</h4>
-          <p class="regP"> 投资数据网平台是一个方便投资数据爱好者交流的平台，本平台不参与也不提供任何保密的买卖，买卖双方均为本站注册用户。做为注册用户， 您应保证进行的交易不侵犯任何第三方的权利或适用法律。 在法律允许范围内，本网站将不对用户的任何损害、利润损失、收入损失、业务损失、数据损失负责，除非损失是因本网站违反此服务条款所致。 本网站不对任何因网络故障、网络中断或网络延迟，以及其它任何因无法正常访问本网站而导致的损失负责。 如果本网站的内容中包括由第三方提供的其它网站链接，这些链接仅用于提供信息，我们无法对其内容负责， 本网站不对因使用其内容而导致的损失负责。 如果出现诈骗或是其他违法行为，本网站将向有关监管部门提供所有必需的用户信息。 当监管部门要求调查诈骗或其他非法行为时，用户的帐户可能会被冻结。投资数据网保留一切解释权。 </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- content end --> 
+<div class="maincontent">
+    <div id="pg-reg">
+        <div class="container_12_1080">
+            <div class="color-white-bg ui-box-white-bg regbox" >
+                <div class="ui-tab-content ui-tab-content-current">
+                    <div class="step1">
+                        <div class="ad"><hr class="hr0" /></div>
+						
+                        <p class="go-login">已有账号？<a href=" ">立即登录</a>   </p>
+                        <form class="ui-form left" onsubmit="return valiForm();" method="post" action=" " >
+                            <fieldset>
+                                <div class="ui-form-item">
+                                    <label class="ui-label"><span class="ui-form-required">*</span>电子邮箱</label>
+                                    <input class="ui-input input-icon" type="text" placeholder="请输入您的邮箱">
+                                </div>
+                                <div class="ui-form-item">
+                                    <label class="ui-label"><span class="ui-form-required">*</span>登录密码</label>
+                                    <input class="ui-input input-icon" type="password" placeholder="请输入您的密码">
+                                </div>
+                                <div class="ui-form-item">
+                                    <label class="ui-label"><span class="ui-form-required">*</span>重复密码</label>
+                                    <input class="ui-input input-icon" type="text" placeholder="请输入您的重复密码">
+                                </div>
+                                <div class="ui-form-item code-item">
+                                    <label class="ui-label"><span class="ui-form-required">*</span>验证码</label>
+                                    <input class="ui-input input-icon code" type="text" name="randCode" id="randCode">
+                                    <a href="" class="code-box">
+                                        <img border="0" src="images/ico.jpg" alt="验证码"></a>
+                                    <p class="refresh-box">
+                                        看不清？<a href="">换一张</a>
+                                    </p>
+                                </div>
+                                <div class="ui-form-item" style="height: 50px">
+                                    <input type="checkbox"> 我已阅读并同意<a href=" " target="_blank">《投资数据网注册服务协议》</a>
 
-<!-- footer start -->
-<div class="footer">
-  <div class="wrap">
-    <p>Copyright &copy; 2016 投资数据网 &nbsp;京ICP证160506号&nbsp;<a href="" title="雪球" target="_blank">雪球</a> &nbsp; <a href="" title="巨潮资讯网" target="_blank">巨潮资讯网</a></p>
-  </div>
+                                </div>
+                                <div class="ui-form-item" style="padding-bottom:65px">
+                                    <div>
+
+                                        <input type="submit"  class="ui-button-register ui-button-orange ui-button-register-1" value="注 册">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- footer end -->
+<div id="footer">
+    <p>Copyright © 2016 投资数据网 &nbsp;京ICP证160506号&nbsp;<a href="" title="雪球" target="_blank">雪球</a> &nbsp; <a href="" title="巨潮资讯网" target="_blank">巨潮资讯网</a> <br>
+        <span class="lianxi"></span> </p>
+</div>
 </body>
 </html>
