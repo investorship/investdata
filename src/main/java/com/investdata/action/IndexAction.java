@@ -23,6 +23,7 @@ public class IndexAction extends BaseAction implements RequestAware, SessionAwar
 	private Logger _log = Logger.getLogger(IndexAction.class);
 	private static StringBuilder stocksItems = new StringBuilder();
 	private Map<String,Object> request = null;
+	private Map<String,Object> session = null;
 	
 	public String execute() throws Exception {
 		_log.info("进入主页加载股票列表数据流程");
@@ -73,12 +74,12 @@ public class IndexAction extends BaseAction implements RequestAware, SessionAwar
 		
 		_log.info(String.format("stocksList=[%s]\n", stocksItems.toString()));
 		
-		request.put("stocksItems", stocksItems.toString());
+		session.put("stocksItems", stocksItems.toString());
 		return INPUT;
 	}
 
 	public void setSession(Map<String, Object> session) {
-		
+		this.session = session;
 		
 	}
 

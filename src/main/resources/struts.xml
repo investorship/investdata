@@ -31,6 +31,13 @@
             <result name="input">/WEB-INF/reg.jsp</result>
         </action>
     </package>
+    
+     <!-- 股票明细 -->
+    <package name="stock" namespace="/stock" extends="struts-default">
+        <action name="stock" class="stockAction">
+            <result name="input">/WEB-INF/stock.jsp</result>
+        </action>
+    </package>
 	
 	<!-- Add packages here 
     <include file="example.xml"/>-->

@@ -1,71 +1,4 @@
-html, body, h1, h2, h3, h4, h5, h6, p, blockquote, ul, li, form, input, figure {
-	margin: 0;
-	padding: 0;
-}
-ul, li {
-	list-style: none outside;
-}
-table {
-	border-collapse: collapse;
-}
-img {
-	vertical-align: middle;
-	background: none;
-	border: none;
-}
-label, input, select {
-	vertical-align: middle;
-	margin: 0;
-	padding: 0;
-	outline: none;
-}
-label, input, select, textarea {
-	font-family: inherit;
-}
-input {
-	-webkit-appearance: none;
-	border-radius: 0;
-}
-input:focus {
-	outline: none;
-}
-a {
-	text-decoration: none;
-}
-cite, code, i, em, s {
-	font-style: normal;
-	text-decoration: inherit;
-	font-family: inherit;
-}
-html, body {
-	font: 100 12px/20px 'Arial', 'Microsoft Yahei', 'å¾®è½¯é›…é»‘', 'Simsun', 'å®‹ä½“';
-	color: #000;
-}
-header, nav, figure, aside, article, section, footer {
-	display: block;
-}
-mark, var, time, output, meter {
-	display: inline;
-}
-mark {
-	background: #ff0;
-}
-.clearfix {
-	zoom: 1;
-}
-.clearfix:after {
-	display: block;
-	content: '.';
-	clear: both;
-	height: 0;
-	font-size: 0;
-	line-height: 0;
-	overflow: hidden;
-}
-.wrap {
-	width: 1000px;
-	margin: 0 auto;
-}
+
 .cspec {
 	color: #e60012 !important;
 }
@@ -73,7 +6,7 @@ a.cspec:link, a.cspec:visited, a.cspec:hover {
 	color: #e60012 !important;
 }
 code.s_dot {
-	font-family: 'å®‹ä½“';
+	font-family: 'ËÎÌå';
 	vertical-align: middle;
 }
 .marked {
@@ -89,7 +22,7 @@ a:link .marked, a:visited .marked, a:hover .marked {
 	color: #333 !important;
 }
 .tit01 {
-	font: 100 20px/24px 'Arial', 'Microsoft Yahei', 'å¾®è½¯é›…é»‘', 'Simhei', 'é»‘ä½“';
+	font: 100 20px/24px 'Arial', 'Microsoft Yahei', 'Î¢ÈíÑÅºÚ', 'Simhei', 'ºÚÌå';
 	color: #e60012;
 	padding-top: 20px;
 }
@@ -102,7 +35,7 @@ a:link .marked, a:visited .marked, a:hover .marked {
 	width: 80px;
 	padding-left: 10px;
 	border-left: 2px solid #000;
-	font: 100 18px/24px 'Arial', 'Microsoft Yahei', 'å¾®è½¯é›…é»‘', 'Simhei', 'é»‘ä½“';
+	font: 100 18px/24px 'Arial', 'Microsoft Yahei', 'Î¢ÈíÑÅºÚ', 'Simhei', 'ºÚÌå';
 	color: #000;
 	margin-top: 3px;
 	_display: inline;
@@ -117,7 +50,7 @@ a:link .marked, a:visited .marked, a:hover .marked {
 .list01 {
 	overflow: hidden;
 	zoom: 1;
-	font: 100 16px/30px 'Arial', 'Microsoft Yahei', 'å¾®è½¯é›…é»‘', 'Simhei', 'é»‘ä½“';
+	font: 100 16px/30px 'Arial', 'Microsoft Yahei', 'Î¢ÈíÑÅºÚ', 'Simhei', 'ºÚÌå';
 }
 .list01 li {
 	float: left;
@@ -161,7 +94,7 @@ a:link .marked, a:visited .marked, a:hover .marked {
 .list02 h3 {
 	overflow: hidden;
 	zoom: 1;
-	font: 100 16px/24px 'Arial', 'Microsoft Yahei', 'å¾®è½¯é›…é»‘', 'Simhei', 'é»‘ä½“';
+	font: 100 16px/24px 'Arial', 'Microsoft Yahei', 'Î¢ÈíÑÅºÚ', 'Simhei', 'ºÚÌå';
 }
 .list02 h3 a:link {
 	color: #000;
@@ -179,55 +112,7 @@ a:link .marked, a:visited .marked, a:hover .marked {
 	font-size: 14px;
 	color: #9a9a9a;
 }
-/* header */
-.header {
-	padding: 15px 0;
-	background: #ebebeb;
-}
-.header .logo {
-	float: left;
-	_display: inline;
-}
-.header .search {
-	float: right;
-	_display: inline;
-}
-.header .search_k {
-	width: 320px;
-	height: 38px;
-	padding-left: 10px;
-	border: 1px solid #d4d4d4;
-	border-right: none;
-	background: #fcfcfc;
-	color: #d4d4d4;
-	font-size: 16px;
-	line-height: 38px\9;
-}
-.header .search_k:focus {
-	background: none;
-	color: #000;
-}
-.header .search_smt {
-	border: none;
-	color: #fff;
-	background: #2e82ff ;
-	width: 84px;
-	height: 40px;
-	cursor: pointer;
-	font-size: 16px; 
-}
-.header .search_smt:hover {
-	opacity: 0.8;
-	filter: alpha(opacity=80);
-}
-.header h1 {
-	width: 0;
-	height: 0;
-	font-size: 0;
-	line-height: 0;
-	visibility: hidden;
-	overflow: hidden;
-}
+
 /* quick_links */
 .quick_links {
 	background: #fcfcfc;
@@ -250,50 +135,9 @@ a:link .marked, a:visited .marked, a:hover .marked {
 	color: #e60012;
 	text-decoration: underline;
 }
-/* content */
-.content {
-	padding-top: 40px;
-}
-/* main */
-.main {
-	float: left;
-	width: 750px;
-	_display: inline;
-}
-/* nav */
-.nav {
-	width: 750px;
-	overflow: hidden;
-	zoom: 1;
-	padding-bottom: 7px;
-	border-bottom: 1px solid #e60012;
-}
-.nav p {
-	width: 780px;
-	overflow: hidden;
-	zoom: 1;
-}
-.nav a {
-	display: inline-block;
-	height: 40px;
-	padding: 0 0px;
-	font: 100 20px/40px 'Arial', 'Microsoft Yahei', 'å¾®è½¯é›…é»‘', 'Simsun', 'é»‘ä½“';
-	margin-right: 0px;
-}
-.nav a:link, .nav a:visited {
-	color: #383d40;
-}
-.nav a:hover {
-	color: #e60012;
-}
-.nav a.selected, .nav a.selected:link, .nav a.selected:visited, .nav a.selected:hover {
-	color: #fff;
-	background: #e60012;
-}
-.nav .s_dot {
-	font-size: 12px;
-	line-height: 40px;
-}
+
+ 
+
 .labspace {
 	width: 58px;
 	display: inline-block;
@@ -318,28 +162,11 @@ a:link .marked, a:visited .marked, a:hover .marked {
 	_display: inline;
 }
 .aside h2 {
-	font: 100 22px/40px 'Arial', 'Microsoft Yahei', 'å¾®è½¯é›…é»‘', 'Simhei', 'é»‘ä½“';
+	font: 100 22px/40px 'Arial', 'Microsoft Yahei', 'Î¢ÈíÑÅºÚ', 'Simhei', 'ºÚÌå';
 	color: #e60012;
 }
-/* footer */
-.footer {
-	margin-top: 30px;
-}
-.footer div {
-	border-top: 1px solid #eaeaea;
-	padding: 20px 0 40px;
-	color: #666;
-	text-align: center;
-	line-height: 30px;
-	font-size: 12px;
-}
-.footer a:link, .footer a:visited {
-	color: #666;
-}
-.footer a:hover {
-	color: #e60012;
-	text-decoration: underline;
-}
+body{position: relative}
+
 /* btn_top */
 .btn_top {
 	position: fixed;
@@ -367,7 +194,7 @@ a:link .marked, a:visited .marked, a:hover .marked {
 	background-position: 0 -50px;
 }
 body,td,th {
-	font-family: Arial, "Microsoft Yahei", "å¾®è½¯é›…é»‘", Simsun, "å®‹ä½“";
+	font-family: Arial, "Microsoft Yahei", "Î¢ÈíÑÅºÚ", Simsun, "ËÎÌå";
 }
 
 
@@ -379,22 +206,65 @@ body,td,th {
     height: 0;
     visibility: hidden;
 }
-.wbyTop {
-    border-bottom: 1px solid #f2f2f2;
-    color: #eaeaea;
-    height: 35px;
-    line-height: 35px;
-	background:#0e6eb8;
-}
-.wbyLinks {
-    float: right;
-    padding-right: 10px;
-    width: 270px;
-}
-.wbyLinks a {
-    color: #fff;
-    padding: 0 5px;
-}
+
 ins, a {
     text-decoration: none;
 }
+
+/*content*/
+.content{  
+    margin: 0 auto;
+    width: 1200px;
+    min-height: 750px;
+    height: auto !important;
+}
+.content a{color: #506eaa;text-decoration: none;}
+.hotcities { width:1160px; margin-top:5px; border-top: 2px solid #dedede; border-bottom: 1px solid #dfdfdf; height: 70px; padding: 0 20px;
+    filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=#e9e9e9,endcolorstr=#ffffff,gradientType=0);
+    -ms-filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=#e9e9e9,endcolorstr=#ffffff,gradientType=0);/*IE8*/
+    background:#fff; /* Ò»Ð©²»Ö§³Ö±³¾°½¥±äµÄä¯ÀÀÆ÷ */
+    background:-moz-linear-gradient(top, #e9e9e9, #ffffff);
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#e9e9e9), to(#ffffff));
+    background:-o-linear-gradient(top, #e9e9e9, #ffffff)}
+.hotcities h2 { border-right: 1px solid #dfdfdf; font-size: 22px; display:inline-block; font-weight:normal; padding: 0 20px 0 0; height: 70px; line-height: 70px; vertical-align: top; }
+.hotcities h2 a { font-size: 30px; margin: 0 0 0 6px; color: #FD8000;}
+.hotcities h2 a span{ margin-left:5px;}
+.hotcities .headInf{ display:inline-block; width: 840px; height: 60px; line-height: 20px; padding:0px 20px; padding-top: 15px; color:#506eaa}
+.province_choose { border-bottom: 1px solid #E4E5E5; color: #616161; font-size: 14px; height: 42px; padding: 20px 0 0 26px; background:#fff; position:relative;}
+.province_choose span{ float:left;}
+.province_choose label { float: left; font-weight: 700; height: 26px; line-height: 26px; font: bold 16px/24px Arial;}
+.province_choose select { width:100px; border: 1px solid #E2E2E2; display: inline; float: left; height: 22px; margin-left: 10px; margin-top: 2px; }
+.province_choose #btn { border: 0 none; cursor: pointer; display: inline; float: left; height: 22px; margin: 2px 0 0 10px; width: 46px; color:#fff; background:#00aa5f; }
+.province_choose .share{ position:absolute; top:50%; margin-top:-18px; right:20px;}
+
+.hot_city { float:left; width:1200px; font: bold 14px/24px Arial; clear:both; overflow:hidden; border-bottom:1px #dfdfdf solid; padding:10px 28px; background:#fff;}
+.hot_city dt { float:left; margin-right:10px; font-size: 16px;}
+.hot_city dd a{ margin:0px 8px;}
+.hot_city dd a:hover{ color:#ed5f01; text-decoration:underline;}
+
+
+.pinyin{ float:left; width:1170px; margin-bottom:25px;  background: #fafafa; border-bottom:1px #dfdfdf solid; position: relative; padding:15px 28px;}
+.pinyin:before,.pinyin:after{ content:""; position:absolute; width:0; height:0; border-style:solid;}
+.pinyin:before{ left:50%; bottom:-24px; margin-left:-10px; border-width:12px; border-color:#dfdfdf transparent transparent transparent;}
+.pinyin:after{ left:50%; bottom:-20px; margin-left:-8px; border-width:10px; border-color:#fafafa transparent transparent transparent;}
+.pinyin dt{ float:left; margin-right:10px; font: bold 16px/27px Arial;}
+.pinyin dd { width: 1002px; height: 36px;}
+.pinyin a { font-size: 18px; width:25px; height:25px; text-align:center; line-height:25px; display:inline-block;}
+.pinyin a:hover{ background:#00aa5f; color:#fff;}
+
+
+.city_box{background:#fff;}
+.city_box ul{ height:auto;overflow:hidden}
+.city_box .pt15{ padding-bottom:15px}
+.city_box .letter-list{ width:100%; height:auto; overflow:hidden}
+.city_box .letter-list .city-list{ height:auto; overflow:hidden; border-bottom:1px solid #F0F0F0; background:#FAFAFA; z-index:1; position:relative;}
+.city_box .letter-list .city-list .letter{ float:left; padding-top:13px; width:140px; line-height:100%; font-size:20px; text-align:center; z-index:1;}
+.city_box .letter-list .city-list .arrow{ display:none; position:absolute; top:17px; left:41px; width:0; height:0; border-width:7px; border-style:solid; border-color:#00aa5f #FFF #00aa5f #00aa5f; z-index:10}
+.city_box .letter-list .city-list .cities{ float:left; width:1010px; padding:12px 25px; background:#FFF}
+.city_box .letter-list .city-list .cities li{ float:left; line-height:26px; padding-right:15px; white-space:nowrap}
+.city_box .letter-list .city-list-hover{ background:#00aa5f; cursor:pointer}
+.city_box .letter-list .city-list-hover .letter{ color:#FFF}
+.city_box .letter-list .city-list-hover .arrow{ display:inline-block; }
+.city_box .letter-list .city-list-hover .cities{ background:#FAFAFA}
+.city_box .letter-list .city-list .cities li a{ padding:3px 5px;}
+.city_box .letter-list .city-list .cities li a:hover{ background:#778a98; color:#fff;}
