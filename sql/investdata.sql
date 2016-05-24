@@ -1,6 +1,6 @@
 /** 创建数据库**/
 drop database if exists investdata;
-create database investdata;
+create database investdata; 
 use investdata;
 
 drop table if exists t_user;
