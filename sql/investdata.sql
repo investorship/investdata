@@ -6,7 +6,7 @@ use investdata;
 drop table if exists t_user;
 
 /*==============================================================*/
-/* Table: t_user_b                                                */
+/* Table: t_user                                                */
 /*==============================================================*/
 create table t_user
 (

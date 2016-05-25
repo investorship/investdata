@@ -17,6 +17,49 @@
 <link href="css/list.css" type="text/css" rel="stylesheet"/>
 <link href="css/login.css" type="text/css" rel="stylesheet"/>
 <jsp:include page="autocomplete.jsp" />
+<script type="text/javascript">
+	//更换验证码 防止缓存，使用时间戳
+	function changeImageAuth() {
+		$("#imageAuth").attr("src","imageAuth/imageAuth.action?timestamp="+new Date().getTime());
+	}
+</script>
+<jsp:include page="jquery_validate.jsp" />
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#regForm").validate({
+        rules: {
+        	userName:{
+                required: true,
+                minlength: 2
+            },
+            pwd:{
+                required: true,
+                minlength: 6,
+                maxlength: 16
+            },
+            repwd:{
+                required: true,
+                equalTo: "#pwd"
+            }
+        },
+        messages:{
+        	userName:{
+                required: "用户名不能为空",
+                minlength: "用户名的最小长度为2"
+            },
+            pwd:{
+                required: "密码不能为空",
+                minlength: "密码长度不能少于6个字符",
+                maxlength: "密码长度不能超过16个字符"
+            },
+            repwd:{
+                required: "确认密码不能为空",
+                equalTo: "确认密码和密码不一致"
+            }
+        }
+    });
+});
+</script>
 </head>
 <body>
 <div class="wbyTop fn-clear">
@@ -42,37 +85,37 @@
                     <div class="step1">
                         <div class="ad"><hr class="hr0" /></div>
 						
-                        <p class="go-login">已有账号？<a href=" ">立即登录</a>   </p>
-                        <form class="ui-form left" onsubmit="return valiForm();" method="post" action=" " >
+                        <p class="go-login">已有账号？<a href="login/login.action">立即登录</a>   </p>
+                        <form class="ui-form left" id="regForm" method="post" action="reg/reg.action" >
                             <fieldset>
-                                <div class="ui-form-item">
-                                    <label class="ui-label"><span class="ui-form-required">*</span>电子邮箱</label>
-                                    <input class="ui-input input-icon" type="text" placeholder="请输入您的邮箱">
+                             	<div class="ui-form-item">
+                                    <label class="ui-label"><span class="ui-form-required">*</span>用户名</label>
+                                    <input class="ui-input input-icon" name="userName" type="text" placeholder="请输入用户名">
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>登录密码</label>
-                                    <input class="ui-input input-icon" type="password" placeholder="请输入您的密码">
+                                    <input class="ui-input input-icon" name="pwd" type="password" placeholder="请输入您的密码">
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>重复密码</label>
-                                    <input class="ui-input input-icon" type="text" placeholder="请输入您的重复密码">
+                                    <input class="ui-input input-icon" name="repwd" type="text" placeholder="请输入您的重复密码">
+                                </div>
+                                <div class="ui-form-item">
+                                    <label class="ui-label"><span class="ui-form-required">*</span>电子邮箱</label>
+                                    <input class="ui-input input-icon" name="email" type="text" placeholder="请输入您的可用邮箱地址">
+                                    <p class="refresh-box">邮箱地址用于接收账户激活链接 </p>
                                 </div>
                                 <div class="ui-form-item code-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>验证码</label>
                                     <input class="ui-input input-icon code" type="text" name="randCode" id="randCode">
-                                    <a href="" class="code-box">
-                                        <img border="0" src="images/ico.jpg" alt="验证码"></a>
-                                    <p class="refresh-box">
-                                        看不清？<a href="">换一张</a>
-                                    </p>
+                                    <img border="0" id="imageAuth" class="code-box" src="imageAuth/imageAuth.action" alt="验证码">
+                                    <p class="refresh-box"> 看不清？<a href="javascript:changeImageAuth()">换一张</a> </p>
                                 </div>
                                 <div class="ui-form-item" style="height: 50px">
                                     <input type="checkbox"> 我已阅读并同意<a href=" " target="_blank">《投资数据网注册服务协议》</a>
-
                                 </div>
                                 <div class="ui-form-item" style="padding-bottom:65px">
                                     <div>
-
                                         <input type="submit"  class="ui-button-register ui-button-orange ui-button-register-1" value="注 册">
                                     </div>
                                 </div>

@@ -27,5 +27,5 @@
 	<bean id="loginAction" class="com.investdata.action.LoginAction"/>
 	<bean id="regAction" class="com.investdata.action.RegAction"/>
 	<bean id="stockAction" class="com.investdata.action.StockAction"/>
-
+	<bean id="imageAuthAction" class="com.investdata.action.AuthImageAction"/>
 </beans>

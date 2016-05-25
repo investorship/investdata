@@ -4,31 +4,59 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    <constant name="struts.action.extension" value="action"/>
-    <constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.action.extension" value="action" />
+	<constant name="struts.objectFactory" value="spring" />
+
+	<!-- 首页 -->
+	<package name="index" namespace="/" extends="struts-default">
+		<action name="index" class="indexAction">
+			<result name="input">/WEB-INF/search.jsp</result>
+		</action>
+	</package>
+
+	<!-- 登录 -->
+	<package name="login" namespace="/login" extends="struts-default">
+		<action name="login" class="loginAction">
+			<result name="input">/WEB-INF/login.jsp</result>
+		</action>
+		<action name="adminLogin" class="loginAction">
+			<result name="input">/WEB-INF/admin/main.jsp</result>
+		</action>
+	</package>
+
+	<!-- 注册 -->
+	<package name="reg" namespace="/reg" extends="struts-default">
+		<action name="reg" class="regAction">
+			<result name="input">/WEB-INF/reg.jsp</result>
+		</action>
+	</package>
+
+	<!-- 股票明细 -->
+	<package name="stock" namespace="/stock" extends="struts-default">
+		<action name="stock" class="stockAction">
+			<result name="input">/WEB-INF/stock.jsp</result>
+		</action>
+	</package>
     
-    <!-- 首页 -->
-    <package name="index" namespace="/" extends="struts-default">
-        <action name="index" class="indexAction">
-            <result name="input">/WEB-INF/search.jsp</result>
+     <!-- 股票明细 -->
+    <package name="stock" namespace="/stock" extends="struts-default">
+        <action name="stock" class="stockAction">
+            <result name="input">/WEB-INF/stock.jsp</result>
         </action>
     </package>
     
-    <!-- 登录 -->
-    <package name="login" namespace="/login" extends="struts-default">
-        <action name="login" class="loginAction">
-            <result name="input">/WEB-INF/login.jsp</result>
-        </action>
-         <action name="adminLogin" class="loginAction">
-            <result name="input">/WEB-INF/admin/main.jsp</result>
+     <!-- 股票明细 -->
+    <package name="stock" namespace="/stock" extends="struts-default">
+        <action name="stock" class="stockAction">
+            <result name="input">/WEB-INF/stock.jsp</result>
         </action>
     </package>
     
-    <!-- 注册 -->
-    <package name="reg" namespace="/reg" extends="struts-default">
-        <action name="reg" class="regAction">
-            <result name="input">/WEB-INF/reg.jsp</result>
+     <!-- 股票明细 -->
+    <package name="stock" namespace="/stock" extends="struts-default">
+        <action name="stock" class="stockAction">
+            <result name="input">/WEB-INF/stock.jsp</result>
         </action>
     </package>
     
@@ -39,6 +67,16 @@
         </action>
     </package>
 	
-	<!-- Add packages here 
-    <include file="example.xml"/>-->
+	<!-- 图片验证码 -->
+	<package name="imageAuth" namespace="/imageAuth" extends="struts-default">
+		<action name="imageAuth" class="imageAuthAction">
+			<result name="input" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- Add packages here <include file="example.xml"/> -->
 </struts>

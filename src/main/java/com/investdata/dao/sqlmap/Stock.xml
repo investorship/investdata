@@ -6,7 +6,7 @@
 	<typeAlias alias="stock" type="com.investdata.dao.po.Stock"/>
 	
 	
-	<select id="getAllStocks" parameterClass="com.investdata.dao.po.Stock" resultClass="stock">
+	<select id="getStocks" parameterClass="com.investdata.dao.po.Stock" resultClass="stock">
 		select code,name,shortname,market from t_stocks
 	</select>
 <!-- 	<select id="getStocks" parameterClass="com.investdata.dao.po.Stock" resultClass="stock">

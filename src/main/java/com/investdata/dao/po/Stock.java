@@ -121,11 +121,12 @@ public class Stock {
 	
 	@Override
 	public String toString() {
-		StringBuilder stockBuilder = new StringBuilder();
-		stockBuilder.append("code="+code + "-name=" + name + "-shorName="+ shortName + "-market=" + market + "-ipotime=" +ipotime + "-ipoStocks=" + ipoStocks
+		String StockToString = 
+				"code="+code + "-name=" + name + "-shorName="+ shortName + "-market=" + market + "-ipotime=" +ipotime + "-ipoStocks=" + ipoStocks
 				+ "-category=" + category + "-issuedPE=" + issuedPE + "-issuedPrice=" + issuedPrice + "-address=" + address + "-compyWebsite=" + compyWebsite
-				+"-reportAddress=" + reportAddress + "-phone=" + phone + "-legaler=" + legaler + "-flag=" + flag + "-intime=" + intime);
-		return stockBuilder.toString();
+				+"-reportAddress=" + reportAddress + "-phone=" + phone + "-legaler=" + legaler + "-flag=" + flag + "-intime=" + intime;
+		
+		return StockToString;
 	}	
 	
 }

@@ -5,4 +5,29 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="user" type="com.investdata.dao.po.User"/>
 	
+	
+	<select id="getUser" parameterClass="com.investdata.dao.po.User" resultClass="user">
+		select username,password,email,ispayer,paydate,enddate,flag,intime from t_user
+		<isNotEmpty property="username"  >
+				username = #username#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="password" >
+				password = #password#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="email" >
+				email = #email#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="ispayer" >
+				ispayer = #ispayer#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="paydate" >
+				paydate = #paydate#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="intime" >
+				intime = #intime#
+			</isNotEmpty>
+	</select>
 </sqlMap>
