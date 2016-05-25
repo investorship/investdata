@@ -8,4 +8,5 @@ public class BaseAction extends ActionSupport {
 	public static final String FAIL = "fail";
 	public static final String LOGIN_SUCC = "login_succ";
 	public static final String LOGIN_FAIL = "login_fail";
+	public static final String LOGOUT = "logout";
 }

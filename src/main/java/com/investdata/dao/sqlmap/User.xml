@@ -8,7 +8,7 @@
 	
 	<select id="getUser" parameterClass="com.investdata.dao.po.User" resultClass="user">
 		select username,password,email,ispayer,paydate,enddate,flag,intime from t_user
-		<isNotEmpty property="username"  >
+		<!-- <isNotEmpty property="username"  >
 				username = #username#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="password" >
@@ -28,6 +28,6 @@
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="intime" >
 				intime = #intime#
-			</isNotEmpty>
+			</isNotEmpty> -->
 	</select>
 </sqlMap>

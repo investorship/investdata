@@ -1,7 +1,6 @@
 package com.investdata.utils;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -13,9 +12,10 @@ public class PropertiesUtils {
 	static  {
 		InputStream in = null;
 		try {
-			in = new BufferedInputStream (new FileInputStream("config.properties"));
+			in = new BufferedInputStream (PropertiesUtils.class.getResourceAsStream("/config.properties"));
 			pps.load(in);
 		} catch (Exception e) {
+			e.printStackTrace();
 			_log.error("读取config.properties文件错误！", e);
 		}  
 	}
@@ -27,6 +27,10 @@ public class PropertiesUtils {
 	 */
 	public static String getPropsValue(String key) {
 		return pps.getProperty(key);
+	}
+	
+	public static void main(String[] args) {
+		System.err.println(getPropsValue("enc3desKey"));
 	}
 		 
 }

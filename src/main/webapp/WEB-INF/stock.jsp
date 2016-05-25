@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath(); 
 	String basePath = request.getScheme() + "://"
@@ -22,8 +23,14 @@
 </head>
 <body>
 <div class="wbyTop fn-clear">
-    <div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
-    </div>
+    <c:choose>
+		<c:when test="${user == null}">
+			<div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
+		</c:when>
+		<c:otherwise>
+			<div class="wbyLinks fn-right">${user.userName}<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
+		</c:otherwise>
+	</c:choose>
 </div>
 <!-- header start -->
 <div class="header">

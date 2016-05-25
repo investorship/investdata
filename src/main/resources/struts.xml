@@ -19,6 +19,8 @@
 	<package name="login" namespace="/login" extends="struts-default">
 		<action name="login" class="loginAction">
 			<result name="input">/WEB-INF/login.jsp</result>
+			<result name="login_succ">/WEB-INF/search.jsp</result>
+			<result name="logout" type="redirect">/index.jsp</result>
 		</action>
 		<action name="adminLogin" class="loginAction">
 			<result name="input">/WEB-INF/admin/main.jsp</result>
@@ -38,34 +40,6 @@
 			<result name="input">/WEB-INF/stock.jsp</result>
 		</action>
 	</package>
-    
-     <!-- 股票明细 -->
-    <package name="stock" namespace="/stock" extends="struts-default">
-        <action name="stock" class="stockAction">
-            <result name="input">/WEB-INF/stock.jsp</result>
-        </action>
-    </package>
-    
-     <!-- 股票明细 -->
-    <package name="stock" namespace="/stock" extends="struts-default">
-        <action name="stock" class="stockAction">
-            <result name="input">/WEB-INF/stock.jsp</result>
-        </action>
-    </package>
-    
-     <!-- 股票明细 -->
-    <package name="stock" namespace="/stock" extends="struts-default">
-        <action name="stock" class="stockAction">
-            <result name="input">/WEB-INF/stock.jsp</result>
-        </action>
-    </package>
-    
-     <!-- 股票明细 -->
-    <package name="stock" namespace="/stock" extends="struts-default">
-        <action name="stock" class="stockAction">
-            <result name="input">/WEB-INF/stock.jsp</result>
-        </action>
-    </package>
 	
 	<!-- 图片验证码 -->
 	<package name="imageAuth" namespace="/imageAuth" extends="struts-default">

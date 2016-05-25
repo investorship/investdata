@@ -9,6 +9,7 @@ import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.po.User;
+import com.investdata.utils.Coder;
 import com.investdata.utils.PropertiesUtils;
 import com.investdata.utils.ThreeDes;
 
@@ -38,25 +39,31 @@ public class LoginAction extends BaseAction implements SessionAware {
 	public String login() throws Exception {
 		String userName = user.getUserName();
 		int index = userName.indexOf("@");
-		
 		if (index != -1 ) { //用邮箱当做用户名
 			user.setEmail(userName);
 			user.setUserName("");
 		}
 		
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey");
-//		String encPwd = ThreeDes.encryptMode(encKey.getBytes(), user.getPassword().trim());
-		
+		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), user.getPassword().getBytes()));
+		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
 		
 		TUserDao userDao = DaoFactory.getTUserDao();
 		User userObj = userDao.getUser(user);
 		
 		if (userObj != null) { //查询到用户信息后放入session
 			session.put("user", userObj);
-			return LOGIN_SUCC;
+			return LOGIN_SUCC; //跳转到首页
 		} else {
-			return LOGIN_FAIL;
+			return LOGIN_FAIL; //登录失败
 		}
+	}
+	
+	//退出
+	public String logout() throws Exception {
+		//清除session中用户信息。
+		session.remove("user");
+		return LOGOUT;
 	}
 	
 	/**

@@ -10,7 +10,7 @@ public class UserDaoImpl extends BaseDao implements TUserDao {
 	}
 	
 	public User getUser(User user) throws Exception {
-		User userObj = (User)dao.queryForObject("user.getUser", "user");
+		User userObj = (User)dao.queryForObject("user.getUser", user);
 		return userObj;
 	}
 

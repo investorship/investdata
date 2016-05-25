@@ -57,7 +57,7 @@
                             <input class="ui-input" name="user.userName" type="text" maxlength="48" placeholder="请输入用户名/邮箱">
                         </div>
                         <div class="ui-form-item">
-                            <input class="ui-input " name="user.pwd" type="password" placeholder="请输入您的密码">
+                            <input class="ui-input " name="user.password" type="password" placeholder="请输入您的密码">
                         </div>
                         
                         <div class="ui-form-item" style="height: 50px">
