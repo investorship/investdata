@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.investdata.common.BaseAction;
@@ -18,11 +17,10 @@ import com.investdata.utils.StringUtils;
  * @since 20160519
  * 跳转到首页Action
  */
-public class IndexAction extends BaseAction implements RequestAware, SessionAware {
+public class IndexAction extends BaseAction implements SessionAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	private Logger _log = Logger.getLogger(IndexAction.class);
 	private static StringBuilder stocksItems = new StringBuilder();
-	private Map<String,Object> request = null;
 	private Map<String,Object> session = null;
 	
 	public String execute() throws Exception {
@@ -70,21 +68,15 @@ public class IndexAction extends BaseAction implements RequestAware, SessionAwar
 			}else {
 				_log.info(String.format("股票列表数据加载有误stocks=[%s]", stocks));
 			}
+			_log.info(String.format("stocksList=[%s]\n", stocksItems.toString()));			
+			session.put("stocksItems", stocksItems.toString());
 		}
 		
-		_log.info(String.format("stocksList=[%s]\n", stocksItems.toString()));
-		
-		session.put("stocksItems", stocksItems.toString());
 		return INPUT;
 	}
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
-		
-	}
-
-	public void setRequest(Map<String, Object> request) {
-		this.request = request;
 		
 	}
 }
