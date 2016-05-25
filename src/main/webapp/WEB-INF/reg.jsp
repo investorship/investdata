@@ -41,7 +41,16 @@ $(document).ready(function(){
             repwd:{
                 required: true,
                 equalTo: "#pwd"
+            },
+            email:{
+            	required:true,
+            	email:true
+            },
+            randCode: {
+            	required: true,
+            	rangelength:[6,6]
             }
+            
         },
         messages:{
         	userName:{
@@ -56,6 +65,13 @@ $(document).ready(function(){
             repwd:{
                 required: "确认密码不能为空",
                 equalTo: "确认密码和密码不一致"
+            },
+            email:{
+            	required : "邮箱不能为空",
+            	email : "请输入正确的邮箱地址"
+            },randCode: {
+            	required: "验证码不能为空",
+            	rangelength: "验证码位数错误"
             }
         }
     });
@@ -69,7 +85,7 @@ $(document).ready(function(){
 			<div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
 		</c:when>
 		<c:otherwise>
-			<div class="wbyLinks fn-right">${user.userName}<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
+			<div class="wbyLinks fn-right">[${user.userName}]<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
 		</c:otherwise>
 	</c:choose>
 </div>
@@ -102,22 +118,22 @@ $(document).ready(function(){
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>登录密码</label>
-                                    <input class="ui-input input-icon" name="pwd" type="password" placeholder="请输入您的密码">
+                                    <input class="ui-input input-icon" name="password" type="password" placeholder="请输入您的密码">
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>重复密码</label>
-                                    <input class="ui-input input-icon" name="repwd" type="text" placeholder="请输入您的重复密码">
+                                    <input class="ui-input input-icon" name="repassword" type="text" placeholder="请输入您的重复密码">
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>电子邮箱</label>
-                                    <input class="ui-input input-icon" name="email" type="text" placeholder="请输入您的可用邮箱地址">
-                                    <p class="refresh-box">邮箱地址用于接收账户激活链接 </p>
+                                    <input class="ui-input input-icon" name="email" type="text" placeholder="用户接收账户激活链接">
                                 </div>
                                 <div class="ui-form-item code-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>验证码</label>
                                     <input class="ui-input input-icon code" type="text" name="randCode" id="randCode">
+                                    <a href="javascript:changeImageAuth()">
                                     <img border="0" id="imageAuth" class="code-box" src="imageAuth/imageAuth.action" alt="验证码">
-                                    <p class="refresh-box"> 看不清？<a href="javascript:changeImageAuth()">换一张</a> </p>
+                                    </a>
                                 </div>
                                 <div class="ui-form-item" style="height: 50px">
                                     <input type="checkbox"> 我已阅读并同意<a href=" " target="_blank">《投资数据网注册服务协议》</a>

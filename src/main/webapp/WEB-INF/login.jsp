@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -17,17 +18,23 @@
     <meta name="description" content=""/>
     <link href="css/basic.css" type="text/css" rel="stylesheet"/>
     <link href="css/login.css" type="text/css" rel="stylesheet"/>
-    <!-- 
-    <link href="css/jquery.validate.css" type="text/css" rel="stylesheet"/> -->
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/jquery.validate.extend.js"></script>
 	<jsp:include page="autocomplete.jsp" />
+	
+	<!-- 输入框变形，待解决
+	<jsp:include page="jquery_validate.jsp" /> -->
 	
 </head>
 <body>
 <div class="wbyTop fn-clear">
-    <div class="wbyLinks fn-right"><span><a target="_blank">登录</a> <a href="reg/reg.action">注册</a>|<a href="">关于我们</a></span>
-    </div>
+    <c:choose>
+		<c:when test="${user == null}">
+			<div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
+		</c:when>
+		<c:otherwise>
+			<div class="wbyLinks fn-right">[${user.userName}]<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
+		</c:otherwise>
+	</c:choose>
+</div>
 </div>
 <!-- header start -->
 <div class="header">

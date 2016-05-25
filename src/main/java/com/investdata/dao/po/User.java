@@ -21,14 +21,15 @@ public class User {
 	}
 
 	public String getPassword() {
-		if (password != null) {
-			return password.trim();
-		} else {
-			return "";
-		}
+		return password;
 	}
 
 	public void setPassword(String password) {
+		if (password != null) {
+			password = password.trim();
+		} else {
+			password = "";
+		}
 		this.password = password;
 	}
 
@@ -83,7 +84,7 @@ public class User {
 	@Override
 	public String toString() {
 		// 忽略密码
-		String userToString = "userName=" + userName + "-email=" + email
+		String userToString = "userName=" + userName + "-password=" + password + "-email=" + email
 				+ "-ispayer=" + ispayer + "-payDate=" + payDate + "-endDate="
 				+ endDate + "-flag=" + flag + "-intime=" + intime;
 		return userToString;
