@@ -66,7 +66,7 @@ $(document).ready(function(){
 <div class="wbyTop fn-clear">
   <c:choose>
 		<c:when test="${user == null}">
-			<div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
+			<div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
 		</c:when>
 		<c:otherwise>
 			<div class="wbyLinks fn-right">${user.userName}<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
@@ -79,7 +79,7 @@ $(document).ready(function(){
     <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
     <div class="search"  data-sudaclick="topsearch">
       <form action="stock/stock.action" method="get" target="_blank" id="search_f">
-        <input type="text" name="k" class="search_k" value="请输入您要查找的股票代码" onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}" onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="keyword" />
+        <input type="text" name="k" class="search_k" placeholder="输入股票代码,名称或拼音首字母" onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}" onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="keyword" />
         <input type="submit" class="search_smt" value="快速查找" />
       </form>
     </div>

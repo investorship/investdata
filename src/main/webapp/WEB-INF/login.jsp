@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="wbyTop fn-clear">
-    <div class="wbyLinks fn-right"><span><a target="_blank">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span>
+    <div class="wbyLinks fn-right"><span><a target="_blank">登录</a> <a href="reg/reg.action">注册</a>|<a href="">关于我们</a></span>
     </div>
 </div>
 <!-- header start -->

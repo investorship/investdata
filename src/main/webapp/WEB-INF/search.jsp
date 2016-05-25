@@ -44,7 +44,7 @@
     <h1 id="logo"><img src="images/logo.png" height="80px" alt="投资数据网"/></h1>
     <div id="sbox">
       <form name="btform" action="stock/stock.action">
-        <input type="text" baiduSug="2" autocomplete="off" placeholder="请输入您要查找的股票代码" id="keyword" name="q" class="stbox"/>
+        <input type="text" baiduSug="2" autocomplete="off" placeholder="输入股票代码,名称或拼音首字母" id="keyword" name="q" class="stbox"/>
         <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton"/>
       </form>
     </div>
