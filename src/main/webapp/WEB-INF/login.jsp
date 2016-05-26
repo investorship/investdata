@@ -19,9 +19,7 @@
     <link href="css/basic.css" type="text/css" rel="stylesheet"/>
     <link href="css/login.css" type="text/css" rel="stylesheet"/>
 	<jsp:include page="autocomplete.jsp" />
-	
-	<!-- 输入框变形，待解决
-	<jsp:include page="jquery_validate.jsp" /> -->
+	<jsp:include page="jquery_validate.jsp" /> 
 	
 </head>
 <body>
