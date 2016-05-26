@@ -10,7 +10,15 @@ public class User {
 	private String payDate;
 	private String endDate;
 	private int flag;
-	private Timestamp intime;
+	private Timestamp inTime;
+
+	public Timestamp getInTime() {
+		return inTime;
+	}
+
+	public void setInTime(Timestamp inTime) {
+		this.inTime = inTime;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -73,20 +81,14 @@ public class User {
 		this.flag = flag;
 	}
 
-	public Timestamp getIntime() {
-		return intime;
-	}
-
-	public void setIntime(Timestamp intime) {
-		this.intime = intime;
-	}
+	
 
 	@Override
 	public String toString() {
 		// 忽略密码
 		String userToString = "userName=" + userName + "-password=" + password + "-email=" + email
 				+ "-ispayer=" + ispayer + "-payDate=" + payDate + "-endDate="
-				+ endDate + "-flag=" + flag + "-intime=" + intime;
+				+ endDate + "-flag=" + flag + "-intime=" + inTime;
 		return userToString;
 	}
 

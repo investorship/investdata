@@ -13,6 +13,7 @@ import com.investdata.dao.po.User;
 import com.investdata.mail.MailSendWrapper;
 import com.investdata.utils.Coder;
 import com.investdata.utils.PropertiesUtils;
+import com.investdata.utils.StringUtils;
 import com.investdata.utils.ThreeDes;
 
 /**
@@ -40,51 +41,61 @@ public class RegAction extends BaseAction implements RequestAware {
 	 * @throws Exception
 	 */
 	public String reg() throws Exception {
-		_log.info("进入注册流程..");
-		User user = new User();
-		
 		//加密用户密码
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
-		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), user.getPassword().getBytes())); //密码加密
-		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
+		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())); //密码加密
+
+		User user = new User();
 		user.setUserName(userName);
+		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
 		user.setEmail(email);
 		
 		_log.info(String.format("新增用户信息user=[%s]", user));
 		TUserDao userDao = DaoFactory.getTUserDao();
 		userDao.add(user);
-		_log.info("新增用户成功!");
 		
 		//生成邮箱激活连接参数
-		String activeParams = "userName="+userName + "&email=" + email;
+		String activeParams = "userName="+userName + "&email=" + email + "regTime=" + StringUtils.get14Time();
 		String encActiveParams = new String(ThreeDes.encryptMode(encKey.getBytes(),activeParams.getBytes()));
+		encActiveParams = Coder.encryptBASE64(encActiveParams.getBytes());
 		_log.info(String.format("生成账户激活链接参数,activeParams=[%s],encActiveParams=[%s]",activeParams,encActiveParams));
 		
 		String activeLink = PropertiesUtils.getPropsValue("activeUrl","");
 		activeLink += encActiveParams;
 		_log.info(String.format("最终生成的激活链接为:[%s]", activeLink));
 		//设置邮件内容
-		mailMessage.setText(genActiveMailText(activeLink));
+		mailMessage.setTo(email);
+		mailMessage.setText(genActiveMailText(userName,activeLink));
 		//发送邮件
 		MailSendWrapper.SendMailNoPic(mailMessage);
 		
+		request.put("userName", userName);
+		request.put("email", email);
+		
 		return REG_SUCC;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	/*public String activeAccount() {
+		
+	}*/
 	
 	/**
 	 * 生成激活账户邮件内容
 	 * @param activeLink
 	 * @return
 	 */
-	private String genActiveMailText(String activeLink) {
-		String mailText = "";
-		mailText += "html><head></head><body><h3>投资数据网注册成功</h3>";
-		mailText += "\n 点击下面的链接，激活您的账户";
-		mailText += "<a href=\""+ activeLink +"\" title=\"账户激活链接\" >";
-		mailText += activeLink + "</a>";
+	private String genActiveMailText(String userName,String activeLink) {
+		String mailText = "尊敬的用户:" + userName + "\n";
+		mailText += "您的账户激活链接为:" + activeLink + "您可以点击链接或将链接在浏览器打开激活您的账户。\n";
+		mailText += "\n\n";
+		mailText += "感谢您对我们的关注与支持,祝您投资顺利。\n";
+		mailText += "投资数据网";
 		return mailText;
 	}
-
 
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
@@ -92,6 +103,30 @@ public class RegAction extends BaseAction implements RequestAware {
 	
 	public void setMailMessage(SimpleMailMessage mailMessage) {
 		this.mailMessage = mailMessage;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public void setRandCode(String randCode) {
+		this.randCode = randCode;
 	}
 
 }

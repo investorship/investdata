@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=1010"/>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+
 <link href="css/basic.css" type="text/css" rel="stylesheet"/>
 <link href="css/list.css" type="text/css" rel="stylesheet"/>
 <link href="css/login.css" type="text/css" rel="stylesheet"/>
@@ -33,14 +34,14 @@ $(document).ready(function(){
                 required: true,
                 minlength: 2
             },
-            pwd:{
+            password:{
                 required: true,
                 minlength: 6,
                 maxlength: 16
             },
-            repwd:{
+            repassword:{
                 required: true,
-                equalTo: "#pwd"
+                equalTo: "#repassword"
             },
             email:{
             	required:true,
@@ -57,12 +58,12 @@ $(document).ready(function(){
                 required: "用户名不能为空",
                 minlength: "用户名的最小长度为2"
             },
-            pwd:{
+            password:{
                 required: "密码不能为空",
                 minlength: "密码长度不能少于6个字符",
                 maxlength: "密码长度不能超过16个字符"
             },
-            repwd:{
+            repassword:{
                 required: "确认密码不能为空",
                 equalTo: "确认密码和密码不一致"
             },
@@ -110,7 +111,7 @@ $(document).ready(function(){
                         <div class="ad"><hr class="hr0" /></div>
 						
                         <p class="go-login">已有账号？<a href="login/login.action">立即登录</a>   </p>
-                        <form class="ui-form left" id="regForm" method="post" action="reg/reg.action" >
+                        <form class="ui-form left" id="regForm" method="post" action="reg/reg!reg.action" >
                             <fieldset>
                              	<div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>用户名</label>
@@ -122,7 +123,7 @@ $(document).ready(function(){
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>重复密码</label>
-                                    <input class="ui-input input-icon" name="repassword" type="text" placeholder="请输入您的重复密码">
+                                    <input class="ui-input input-icon" name="repassword" type="password" placeholder="请确认您的密码">
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>电子邮箱</label>

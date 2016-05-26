@@ -1,5 +1,8 @@
 package com.investdata.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class StringUtils {
 	
@@ -32,8 +35,19 @@ public class StringUtils {
 		 
 	}
 	
+	/**
+	 * 获取14位时间戳
+	 * @return
+	 */
+	public static String get14Time() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String retVal = sdf.format(new Date(System.currentTimeMillis()));
+		return retVal;
+	}
+	
 	public static void main(String[] args) {
-		String str = "HLMD";
-		System.err.println("|" + fillRSpace(str, 3) + "|");
+		System.err.println(get14Time());
+//		String str = "HLMD";
+//		System.err.println("|" + fillRSpace(str, 3) + "|");
 	}
 }

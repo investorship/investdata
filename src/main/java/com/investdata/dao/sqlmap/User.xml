@@ -5,6 +5,16 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="user" type="com.investdata.dao.po.User"/>
 	
+	<parameterMap  class="user" id="userParam">
+		<parameter property="userName" />
+		<parameter property="password" />
+		<parameter property="email"/>
+		<parameter property="ispayer"/>
+		<parameter property="payDate"/>
+		<parameter property="endDate"/>
+		<parameter property="flag"/>
+		<parameter property="inTime"/>
+	</parameterMap>
 	
 	<select id="getUser" parameterClass="com.investdata.dao.po.User" resultClass="user">
 		select username,password,email,ispayer,paydate,enddate,flag,intime from t_user
@@ -31,13 +41,18 @@
 			</isNotEmpty> -->
 	</select>
 	
-	<insert id="insertUser" parameterClass="user">
+	<insert id="insertUser" parameterMap="userParam">
 		insert into t_user (
 			username,
 			password,
-			email
+			email,
+			ispayer,
+			paydate,
+			enddate,
+			flag,
+			intime
 		) values (
-			?,?,?
+			?,?,?,?,?,?,?,?
 		)
 	</insert>
 	
