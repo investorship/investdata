@@ -30,4 +30,15 @@
 				intime = #intime#
 			</isNotEmpty> -->
 	</select>
+	
+	<insert id="insertUser" parameterClass="user">
+		insert into t_user (
+			username,
+			password,
+			email
+		) values (
+			?,?,?
+		)
+	</insert>
+	
 </sqlMap>

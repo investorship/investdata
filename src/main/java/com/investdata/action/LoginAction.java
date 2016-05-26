@@ -44,7 +44,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 			user.setUserName("");
 		}
 		
-		String encKey = PropertiesUtils.getPropsValue("enc3desKey");
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
 		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), user.getPassword().getBytes()));
 		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
 		

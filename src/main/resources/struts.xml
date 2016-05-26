@@ -31,6 +31,7 @@
 	<package name="reg" namespace="/reg" extends="struts-default">
 		<action name="reg" class="regAction">
 			<result name="input">/WEB-INF/reg.jsp</result>
+			<result name="reg_succ">/WEB-INF/reg_succ.jsp</result>
 		</action>
 	</package>
 

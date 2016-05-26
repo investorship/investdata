@@ -23,14 +23,15 @@ public class PropertiesUtils {
 	/**
 	 * 根据key获取配置文件信息
 	 * @param key
+	 * @param dft 默认值
 	 * @return
 	 */
-	public static String getPropsValue(String key) {
-		return pps.getProperty(key);
+	public static String getPropsValue(String key, String dft) {
+		String retVal = pps.getProperty(key);
+		if (StringUtils.isEmpty(retVal)) {
+			return dft;
+		}else {
+			return retVal;
+		}
 	}
-	
-	public static void main(String[] args) {
-		System.err.println(getPropsValue("enc3desKey"));
-	}
-		 
 }

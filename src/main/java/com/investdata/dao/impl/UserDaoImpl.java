@@ -6,7 +6,7 @@ import com.investdata.dao.po.User;
 public class UserDaoImpl extends BaseDao implements TUserDao {
 
 	public void add(User user) throws Exception {
-		dao.insert("",user);
+		dao.insert("user.insertUser",user);
 	}
 	
 	public User getUser(User user) throws Exception {

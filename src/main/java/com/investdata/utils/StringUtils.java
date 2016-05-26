@@ -18,6 +18,20 @@ public class StringUtils {
 		return str;
 	}
 	
+	/**
+	 * 判断字符串是否为空
+	 * @param str
+	 * @return
+	 */
+	public static boolean isEmpty(String str) {
+		if ("".equals(str) || str == null) {
+			return true;
+		}else {
+			return false;
+		}
+		 
+	}
+	
 	public static void main(String[] args) {
 		String str = "HLMD";
 		System.err.println("|" + fillRSpace(str, 3) + "|");

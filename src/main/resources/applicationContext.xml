@@ -17,7 +17,9 @@
 	<!-- struts2 中 action 对象 -->
 	<bean id="indexAction" class="com.investdata.action.IndexAction"/>
 	<bean id="loginAction" class="com.investdata.action.LoginAction"/>
-	<bean id="regAction" class="com.investdata.action.RegAction"/>
+	<bean id="regAction" class="com.investdata.action.RegAction">
+		<property name="mailMessage" ref="mailMessage"/>
+	</bean>
 	<bean id="stockAction" class="com.investdata.action.StockAction"/>
 	<bean id="imageAuthAction" class="com.investdata.action.AuthImageAction"/>
 	
@@ -31,10 +33,14 @@
 		</property>
 	</bean>
 	
+	<bean id="mailSendWrapper" class="com.investdata.mail.MailSendWrapper">
+		<property name="sender" ref="mailSender" />
+	</bean>
+	
 	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">  
-        <property name="from">  
-            <value>${mail.from}</value>  
-        </property>  
+        <property name="from" value="${mail.from}"></property>  
+        <property name="subject" value="${mail.subject}"></property>
+          
         <!-- 查看SimpleMailMessage源码还可以注入标题,内容等 -->  
     </bean>  
     
