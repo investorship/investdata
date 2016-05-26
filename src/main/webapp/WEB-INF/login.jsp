@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8"/>
     <base href="<%=basePath%>">
-    <title>投资数据网 - 登陆</title>
+    <title>投资数据网 - 登录</title>
     <meta name="viewport" content="width=1010"/>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>

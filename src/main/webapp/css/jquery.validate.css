@@ -3,7 +3,7 @@ body{
     font-size: 15px;
 }
 
-fieldset{    width: 680px;    }
+#fieldset{    width: 680px;    }
 
 legend{    margin-left: 8px;    }
 
