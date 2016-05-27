@@ -51,14 +51,14 @@ input.highlight{
 }
 
 label.error,label.tip{
-    float: left;
+   /*  float: left;
     height: 32px;
     line-height: 32px;
     font-size: 14px;
     text-align: left;
-    margin-left: 5px;
+    margin-left: 5px; */
     padding-left: 20px;
-    color: red;
+    /* color: red; */
     background: url('../images/error.png') no-repeat left center;
 }
 
@@ -70,4 +70,5 @@ label.tip{
 label.valid{
     background: url('../images/valid.png') no-repeat left center;
     width: 32px;
+    height: 32px;
 }

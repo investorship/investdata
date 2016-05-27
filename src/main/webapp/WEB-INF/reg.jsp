@@ -24,13 +24,15 @@ $(document).ready(function(){
     $("#regForm").validate({
         rules: {
         	userName:{
+        		userNameChar,
                 required: true,
-                minlength: 2
+                minlength: 3,
+                maxlength: 25
             },
             password:{
                 required: true,
                 minlength: 6,
-                maxlength: 16
+                maxlength: 30
             },
             repassword:{
                 required: true,
@@ -49,12 +51,13 @@ $(document).ready(function(){
         messages:{
         	userName:{
                 required: "用户名不能为空",
-                minlength: "用户名的最小长度为2"
+                minlength: "用户名的最小长度为3",
+                maxlength: "用户名的最大长度为25"
             },
             password:{
                 required: "密码不能为空",
                 minlength: "密码长度不能少于6个字符",
-                maxlength: "密码长度不能超过16个字符"
+                maxlength: "密码长度不能超过30个字符"
             },
             repassword:{
                 required: "确认密码不能为空",
@@ -114,11 +117,12 @@ $(document).ready(function(){
                             <fieldset>
                              	<div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>用户名</label>
-                                    <input class="ui-input input-icon" name="userName" type="text" placeholder="请输入用户名">
+                                    <input class="ui-input input-icon" name="userName" type="text" placeholder="请输入用户名" tip="3~25个字符">
                                 </div>
+                                <!--  -->
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>登录密码</label>
-                                    <input class="ui-input input-icon" name="password" type="password" placeholder="请输入您的密码">
+                                    <input class="ui-input input-icon"  id="password" name="password" type="password" placeholder="请输入您的密码">
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>重复密码</label>

@@ -532,7 +532,7 @@ img, input {
 #pg-reg .ui-form label.error {
     position: absolute;
     top: 10px;
-    left: 426px;
+    left: 407px;
     padding-left: 18px;
 }
 
@@ -548,7 +548,7 @@ img, input {
 #pg-reg .ui-form label.valid {
     position: absolute;
     top: 10px;
-    left: 424px;
+    left: 407px;
     padding-left: 18px;
     color: #aaa;
 }

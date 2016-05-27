@@ -45,3 +45,16 @@ $.validator.setDefaults({
         }*/
     }
 });
+
+
+/*******************************DIY插件字段校验*****************************************/
+$.validator.addMethod(
+    "userNameChar",
+    function(value, element){
+        /*var dotPos = value.indexOf('.');
+        return value > 0 && dotPos < 0 && (dotPos > 0 && value.substring(dotPos + 1) <= 2);*/
+    	
+        return value && /^[a-zA-Z0-9_u4e00-u9fa5]+$/.test(value);
+    },
+    "用户名只能由汉字、数字、字母或下划线组成"
+);
