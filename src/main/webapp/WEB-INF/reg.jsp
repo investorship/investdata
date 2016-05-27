@@ -24,7 +24,7 @@ $(document).ready(function(){
     $("#regForm").validate({
         rules: {
         	userName:{
-        		userNameChar,
+        		userNameChar: true,
                 required: true,
                 minlength: 3,
                 maxlength: 25
@@ -50,6 +50,7 @@ $(document).ready(function(){
         },
         messages:{
         	userName:{
+        		userNameChar: "用户名只能由汉字、数字、字母或下划线组成",
                 required: "用户名不能为空",
                 minlength: "用户名的最小长度为3",
                 maxlength: "用户名的最大长度为25"
