@@ -41,7 +41,7 @@ $(document).ready(function(){
             },
             repassword:{
                 required: true,
-                equalTo: "#repassword"
+                equalTo: "#password"
             },
             email:{
             	required:true,
@@ -70,7 +70,8 @@ $(document).ready(function(){
             email:{
             	required : "邮箱不能为空",
             	email : "请输入正确的邮箱地址"
-            },randCode: {
+            },
+            randCode: {
             	required: "验证码不能为空",
             	rangelength: "验证码位数错误"
             }
