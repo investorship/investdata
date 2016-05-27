@@ -14,17 +14,10 @@
 <meta name="viewport" content="width=1010"/>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-
 <link href="css/basic.css" type="text/css" rel="stylesheet"/>
 <link href="css/list.css" type="text/css" rel="stylesheet"/>
 <link href="css/login.css" type="text/css" rel="stylesheet"/>
 <jsp:include page="autocomplete.jsp" />
-<script type="text/javascript">
-	//更换验证码 防止缓存，使用时间戳
-	function changeImageAuth() {
-		$("#imageAuth").attr("src","imageAuth/imageAuth.action?timestamp="+new Date().getTime());
-	}
-</script>
 <jsp:include page="jquery_validate.jsp" />
 <script type="text/javascript">
 $(document).ready(function(){
@@ -70,14 +63,19 @@ $(document).ready(function(){
             email:{
             	required : "邮箱不能为空",
             	email : "请输入正确的邮箱地址"
-            },
-            randCode: {
+            },randCode: {
             	required: "验证码不能为空",
             	rangelength: "验证码位数错误"
             }
         }
     });
 });
+</script>
+<script type="text/javascript">
+	//更换验证码 防止缓存，使用时间戳
+	function changeImageAuth() {
+		$("#imageAuth").attr("src","imageAuth/imageAuth.action?timestamp="+new Date().getTime());
+	}
 </script>
 </head>
 <body>

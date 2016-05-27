@@ -1,3 +1,5 @@
+<link href="css/jquery.autocomplete.css" type="text/css" rel="stylesheet" />
+<link href="css/jquery-ui.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
 <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
