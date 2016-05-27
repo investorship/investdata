@@ -24,15 +24,16 @@ $(document).ready(function(){
     $("#regForm").validate({
         rules: {
         	userName:{
-        		userNameChar: true,
+        		availChar: true,
                 required: true,
                 minlength: 3,
                 maxlength: 25
             },
             password:{
+            	availChar: true,
                 required: true,
                 minlength: 6,
-                maxlength: 30
+                maxlength: 25
             },
             repassword:{
                 required: true,
@@ -45,17 +46,21 @@ $(document).ready(function(){
             randCode: {
             	required: true,
             	rangelength:[6,6]
+            },
+            agreee: {
+            	required: true
             }
             
         },
         messages:{
         	userName:{
-        		userNameChar: "用户名只能由汉字、数字、字母或下划线组成",
+        		availChar: "只能由数字、字母或下划线组成",
                 required: "用户名不能为空",
                 minlength: "用户名的最小长度为3",
                 maxlength: "用户名的最大长度为25"
             },
             password:{
+            	availChar: "只能由数字、字母或下划线组成",
                 required: "密码不能为空",
                 minlength: "密码长度不能少于6个字符",
                 maxlength: "密码长度不能超过30个字符"
@@ -66,10 +71,13 @@ $(document).ready(function(){
             },
             email:{
             	required : "邮箱不能为空",
-            	email : "请输入正确的邮箱地址"
+            	email : "邮箱地址格式错误"
             },randCode: {
             	required: "验证码不能为空",
             	rangelength: "验证码位数错误"
+            },
+            agreee: {
+            	required: "请同意我们的协议"
             }
         }
     });
@@ -123,15 +131,15 @@ $(document).ready(function(){
                                 <!--  -->
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>登录密码</label>
-                                    <input class="ui-input input-icon"  id="password" name="password" type="password" placeholder="请输入您的密码">
+                                    <input class="ui-input input-icon"  id="password" name="password" type="password" placeholder="请输入您的密码" tip="6~25个字符">
                                 </div>
                                 <div class="ui-form-item">
-                                    <label class="ui-label"><span class="ui-form-required">*</span>重复密码</label>
-                                    <input class="ui-input input-icon" name="repassword" type="password" placeholder="请确认您的密码">
+                                    <label class="ui-label"><span class="ui-form-required">*</span>确认密码</label>
+                                    <input class="ui-input input-icon" name="repassword" type="password" placeholder="请确认您的密码" tip="需与密码相同">
                                 </div>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>电子邮箱</label>
-                                    <input class="ui-input input-icon" name="email" type="text" placeholder="用户接收账户激活链接">
+                                    <input class="ui-input input-icon" name="email" type="text" placeholder="请输入您的邮箱地址" tip="邮箱用于接收账户激活链接，请确保邮箱可用">
                                 </div>
                                 <div class="ui-form-item code-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>验证码</label>
@@ -141,7 +149,7 @@ $(document).ready(function(){
                                     </a>
                                 </div>
                                 <div class="ui-form-item" style="height: 50px">
-                                    <input type="checkbox"> 我已阅读并同意<a href=" " target="_blank">《投资数据网注册服务协议》</a>
+                                    <input type="checkbox" name="agreee"> 我已阅读并同意<a href=" " target="_blank">《投资数据网注册服务协议》</a>
                                 </div>
                                 <div class="ui-form-item" style="padding-bottom:65px">
                                     <div>

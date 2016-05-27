@@ -20,7 +20,41 @@
     <link href="css/login.css" type="text/css" rel="stylesheet"/>
 	<jsp:include page="autocomplete.jsp" />
 	<jsp:include page="jquery_validate.jsp" /> 
-	
+	<script type="text/javascript">
+		$(document).ready(function(){
+		    $("#loginForm").validate({
+		        rules: {
+		        	userName:{
+		        		availChar: true,
+		                required: true,
+		                minlength: 3,
+		                maxlength: 25
+		            },
+		            password:{
+		            	availChar: true,
+		                required: true,
+		                minlength: 6,
+		                maxlength: 25
+		            }
+		            
+		        },
+		        messages:{
+		        	userName:{
+		        		availChar: "只能由数字、字母或下划线组成",
+		                required: "用户名不能为空",
+		                minlength: "用户名的最小长度为3",
+		                maxlength: "用户名的最大长度为25"
+		            },
+		            password:{
+		            	availChar: "只能由数字、字母或下划线组成",
+		                required: "密码不能为空",
+		                minlength: "密码长度不能少于6个字符",
+		                maxlength: "密码长度不能超过30个字符"
+		            }
+		        }
+		    });
+		});
+</script>
 </head>
 <body>
 <div class="wbyTop fn-clear">
@@ -59,14 +93,10 @@
                         <legend>登录</legend>
                         <div class="top-msg "> </div>
                         <div class="ui-form-item">
-                            <input class="ui-input" name="user.userName" type="text" maxlength="48" placeholder="请输入用户名/邮箱">
+                            <input class="ui-input" name="userName" type="text" maxlength="48" placeholder="请输入用户名/邮箱">
                         </div>
                         <div class="ui-form-item">
-                            <input class="ui-input " name="user.password" type="password" placeholder="请输入您的密码">
-                        </div>
-                        
-                        <div class="ui-form-item" style="height: 50px">
-                                    <input type="checkbox"> 我已阅读并同意<a href=" " target="_blank">《投资数据网注册服务协议》</a>
+                            <input class="ui-input " name="password" type="password" placeholder="请输入您的密码">
                         </div>
                         <div class="ui-form-item text-center">
                             <input type="submit" class="login-btn" value="立即登录">

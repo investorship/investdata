@@ -6,11 +6,19 @@ public class User {
 	private String userName;
 	private String password;
 	private String email;
-	private int ispayer;
+	private int isPayer;
 	private String payDate;
 	private String endDate;
 	private int flag;
 	private Timestamp inTime;
+
+	public int getIsPayer() {
+		return isPayer;
+	}
+
+	public void setIsPayer(int isPayer) {
+		this.isPayer = isPayer;
+	}
 
 	public Timestamp getInTime() {
 		return inTime;
@@ -49,13 +57,6 @@ public class User {
 		this.email = email;
 	}
 
-	public int getIspayer() {
-		return ispayer;
-	}
-
-	public void setIspayer(int ispayer) {
-		this.ispayer = ispayer;
-	}
 
 	public String getPayDate() {
 		return payDate;
@@ -87,7 +88,7 @@ public class User {
 	public String toString() {
 		// 忽略密码
 		String userToString = "userName=" + userName + "-password=" + password + "-email=" + email
-				+ "-ispayer=" + ispayer + "-payDate=" + payDate + "-endDate="
+				+ "-ispayer=" + isPayer + "-payDate=" + payDate + "-endDate="
 				+ endDate + "-flag=" + flag + "-intime=" + inTime;
 		return userToString;
 	}

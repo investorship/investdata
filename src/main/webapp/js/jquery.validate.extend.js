@@ -49,10 +49,10 @@ $.validator.setDefaults({
 
 /*******************************DIY插件字段校验*****************************************/
 $.validator.addMethod(
-    "userNameChar",
+    "availChar",
     function(value, element){
-        /*var dotPos = value.indexOf('.');
+        /*var dotPos = value.indexOf('.');^[0-9a-zA-Z_]{1,}$
         return value > 0 && dotPos < 0 && (dotPos > 0 && value.substring(dotPos + 1) <= 2);*/
-        return value && /^[a-zA-Z0-9_u4e00-u9fa5]+$/.test(value);
+        return value && /^[0-9a-zA-Z_]{1,}$/.test(value);
     }
 );

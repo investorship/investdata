@@ -9,7 +9,7 @@
 		<parameter property="userName" />
 		<parameter property="password" />
 		<parameter property="email"/>
-		<parameter property="ispayer"/>
+		<parameter property="isPayer"/>
 		<parameter property="payDate"/>
 		<parameter property="endDate"/>
 		<parameter property="flag"/>
@@ -17,28 +17,32 @@
 	</parameterMap>
 	
 	<select id="getUser" parameterClass="com.investdata.dao.po.User" resultClass="user">
-		select username,password,email,ispayer,paydate,enddate,flag,intime from t_user
-		<!-- <isNotEmpty property="username"  >
-				username = #username#
-			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="password" >
-				password = #password#
-			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="email" >
-				email = #email#
-			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="ispayer" >
-				ispayer = #ispayer#
-			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="paydate" >
-				paydate = #paydate#
-			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="flag" >
-				flag = #flag#
-			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="intime" >
-				intime = #intime#
-			</isNotEmpty> -->
+			select username,password,email,ispayer,paydate,enddate,flag,intime from t_user 
+			where 
+		<isNotEmpty property="userName"  >
+			username = #userName#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="password" >
+			password = #password#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="email" >
+			email = #email#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="isPayer" >
+			ispayer = #isPayer#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="payDate" >
+			paydate = #payDate#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="endDate" >
+			endDate = #endDate#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="flag" >
+			flag = #flag#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="inTime" >
+			intime = #inTime#
+		</isNotEmpty>
 	</select>
 	
 	<insert id="insertUser" parameterMap="userParam">

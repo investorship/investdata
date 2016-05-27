@@ -20,16 +20,9 @@ public class LoginAction extends BaseAction implements SessionAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	private Logger logger = Logger.getLogger(LoginAction.class);	
 	private Map<String,Object> session;
-	private User user;
+	private String userName;
+	private String password;
 	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public String execute() throws Exception {
 		logger.info("进入登录流程..");
 		return INPUT;
@@ -37,7 +30,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 	
 	//用户登录流程
 	public String login() throws Exception {
-		String userName = user.getUserName();
+		User user = new User();
 		int index = userName.indexOf("@");
 		if (index != -1 ) { //用邮箱当做用户名
 			user.setEmail(userName);
@@ -45,7 +38,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 		}
 		
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
-		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), user.getPassword().getBytes()));
+		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes()));
 		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
 		
 		TUserDao userDao = DaoFactory.getTUserDao();
@@ -78,6 +71,21 @@ public class LoginAction extends BaseAction implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	
 }
