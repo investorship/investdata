@@ -43,17 +43,24 @@
         <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton"/>
       </form>
     </div>
-    <div id="nums" style="font-size: 17px;">本站共索引 <span>7524458</span> 条磁力链资源！</div>
     <div id="index_ad_top"></div>
   </div>
   <div id="container">
     <div class="main">
-      <div class="hotwords">
+    <div class="hotwords">
         <div class="hwtit">
-          <h4>今日热搜</h4>
-          <span><a href="" title="今日热搜">更多&gt;&gt;</a></span></div>
-        <ul class="hwentry">       
+          <h4>股票  & 财务指标  <font color="#FF0000">热搜榜!</font></h4>
+          <span><a href="" title="今日热搜"></a></span></div>
+        	<ul class="hwentry">       
    
+          <li><a class="HotKey" href="" target="_blank">格力电器</a></li>
+          <li><a class="HotKey" href="" target="_blank">贵州茅台</a></li>
+          <li><a class="HotKey" href="" target="_blank">福耀玻璃</a></li>
+          <li><a class="HotKey" href="" target="_blank">宇通客车</a></li>
+          <li><a class="HotKey" href="" target="_blank">兴业银行</a></li>
+          <li><a class="HotKey" href="" target="_blank">中国平安</a></li>
+          <li><a class="HotKey" href="" target="_blank">保利地产</a></li>
+          <li><a class="HotKey" href="" target="_blank">海立美达</a></li>
           <li><a class="HotKey" href="" target="_blank">每股收益</a></li>
           <li><a class="HotKey" href="" target="_blank">稀释每股收益</a></li>
           <li><a class="HotKey" href="" target="_blank">流动比率</a></li>
@@ -62,12 +69,10 @@
           <li><a class="HotKey" href="" target="_blank">产权比率</a></li>
           <li><a class="HotKey" href="" target="_blank">扣非净利润</a></li>
           <li><a class="HotKey" href="" target="_blank">固定资产比率</a></li>
-          <li><a class="HotKey" href="" target="_blank">无形资产比率</a></li>
-          <li><a class="HotKey" href="" target="_blank">总资金周转率</a></li>
-          <li><a class="HotKey" href="" target="_blank">利润增长率</a></li>
-          <li><a class="HotKey" href="" target="_blank">运营资金</a></li> 
+         
         </ul>
       </div>
+    	
     </div>
   </div>
   <div id="ad_bottom_index" style="text-align:center;margin:auto"> </div>

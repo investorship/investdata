@@ -25,7 +25,7 @@ public class IndexAction extends BaseAction implements SessionAware {
 	
 	public String execute() throws Exception {
 		_log.info("进入主页加载股票列表数据流程");
-		if (stocksItems.length() == 0) { //股票列表未被初始化.
+		if (session.get("stocksItems") == null) { //股票列表未被初始化.
 			TStockDao stockDao = DaoFactory.getTStockDao();
 			List<Stock> stocks = stockDao.getStocks(new Stock());
 			if (stocks != null && stocks.size() > 0) {
