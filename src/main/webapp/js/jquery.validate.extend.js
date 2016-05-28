@@ -48,6 +48,7 @@ $.validator.setDefaults({
 
 
 /*******************************DIY插件字段校验*****************************************/
+/**输入的值是否为字母，数字，下划线**/
 $.validator.addMethod(
     "availChar",
     function(value, element){
@@ -56,3 +57,56 @@ $.validator.addMethod(
         return value && /^[0-9a-zA-Z_]{1,}$/.test(value);
     }
 );
+
+/**用户名重复**/
+$.validator.addMethod(
+	    "userNameRepet",
+	    function(value, element){
+	    	var resultVal = "";
+	    	$.ajax({
+		        type: "post",
+		        async: false,
+		        url: "reg/reg!checkUserName.action?userName=" + value,
+		        //方法传参的写法一定要对，与后台一致，区分大小写，不能为数组等，str1为形参的名字,str2为第二个形参的名字 
+		        data: "{}",
+		       // contentType: "application/json; charset=utf-8",
+		       	dataType: "json",
+		        success: function(data) {
+		           resultVal = data.ajaxResult;
+		        },
+		        error: function(err) { //如果出现异常，不做界面提示
+		        	resultVal = true;
+		        }
+		    });
+//	    	alert (resultVal);
+	    	return 'true' == resultVal;
+	    }
+);
+
+
+/**邮箱重复**/
+$.validator.addMethod(
+	    "emailRepet",
+	    function(value, element){
+	    	var resultVal = "";
+	    	$.ajax({
+		        type: "post",
+		        url: "reg/reg!checkEmail.action?email=" + value,
+		        //方法传参的写法一定要对，与后台一致，区分大小写，不能为数组等，str1为形参的名字,str2为第二个形参的名字 
+		        data: "{}",
+		       // contentType: "application/json; charset=utf-8",
+		       	dataType: "json",
+		        success: function(data) {
+		           resultVal = data.ajaxResult;
+		        },
+		        error: function(err) { //如果出现异常，不做界面提示
+		        	resultVal = true;
+		        }
+		    });
+	    	return 'true' == resultVal;
+	    }
+);
+
+
+
+

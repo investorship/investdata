@@ -35,6 +35,8 @@ public class LoginAction extends BaseAction implements SessionAware {
 		if (index != -1 ) { //用邮箱当做用户名
 			user.setEmail(userName);
 			user.setUserName("");
+		} else {
+			user.setUserName(userName);
 		}
 		
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");

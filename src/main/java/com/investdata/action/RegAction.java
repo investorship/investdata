@@ -29,10 +29,8 @@ public class RegAction extends BaseAction implements RequestAware {
 	private String repassword;
 	private String email;
 	private String randCode;
+	private String ajaxResult;
 
-	public String execute() throws Exception {
-		return INPUT;
-	}
 	
 	
 	/**
@@ -73,6 +71,52 @@ public class RegAction extends BaseAction implements RequestAware {
 		request.put("email", email);
 		
 		return REG_SUCC;
+	}
+	
+	/**
+	 * ajax 校验用户名是否已经被注册
+	 * @return
+	 */
+	public String checkUserName() throws Exception{
+		if (StringUtils.isEmpty(userName)) { //如果没获取到userName值，按失败处理
+			ajaxResult = "false";
+		}
+		
+		User user = new User();
+		user.setUserName(userName);
+		
+		TUserDao userDao = DaoFactory.getTUserDao();
+		User userObj = userDao.getUser(user);
+		
+		if (userObj == null) { //如果没查询到该用户名，则允许该用户注册
+			ajaxResult = "true";
+		} else {
+			ajaxResult = "false";
+		}
+		return AJAX;
+	}
+	
+	/**
+	 * ajax 校验邮箱是否已经被注册
+	 * @return
+	 */
+	public String checkEmail() throws Exception {
+		if (StringUtils.isEmpty(email)) { //如果没获取到email值，按失败处理
+			ajaxResult = "false";
+		}
+		User user = new User();
+		user.setEmail(email);
+		
+		TUserDao userDao = DaoFactory.getTUserDao();
+		User userObj = userDao.getUser(user);
+		
+		if (userObj == null) { //如果没查询到该邮箱，则允许该用户注册
+			ajaxResult = "true";
+		} else {
+			ajaxResult = "false";
+		}
+		
+		return AJAX;
 	}
 	
 	/**
@@ -128,5 +172,20 @@ public class RegAction extends BaseAction implements RequestAware {
 	public void setRandCode(String randCode) {
 		this.randCode = randCode;
 	}
+	
+	public String getAjaxResult() {
+		return ajaxResult;
+	}
 
+
+	public String execute() throws Exception {
+		return INPUT;
+	}
+	
+	public static void main(String[] args) {
+		String value = "lin";
+		String str = "{userName:" + "\"" + value+"\"}";
+		System.err.println(str);
+	}
+	
 }

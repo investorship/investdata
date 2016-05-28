@@ -1,63 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="user">
-	
+
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
-	<typeAlias alias="user" type="com.investdata.dao.po.User"/>
-	
-	<parameterMap  class="user" id="userParam">
+	<typeAlias alias="user" type="com.investdata.dao.po.User" />
+
+	<parameterMap class="user" id="userParam">
 		<parameter property="userName" />
 		<parameter property="password" />
-		<parameter property="email"/>
-		<parameter property="isPayer"/>
-		<parameter property="payDate"/>
-		<parameter property="endDate"/>
-		<parameter property="flag"/>
-		<parameter property="inTime"/>
+		<parameter property="email" />
+		<parameter property="isPayer" />
+		<parameter property="payDate" />
+		<parameter property="endDate" />
+		<parameter property="flag" />
+		<parameter property="inTime" />
 	</parameterMap>
-	
-	<select id="getUser" parameterClass="com.investdata.dao.po.User" resultClass="user">
-			select username,password,email,ispayer,paydate,enddate,flag,intime from t_user 
-			where 
-		<isNotEmpty property="userName"  >
+
+	<select id="getUser" parameterClass="com.investdata.dao.po.User"
+		resultClass="user">
+		select username,password,email,ispayer,paydate,enddate,flag,intime 
+		from t_user where
+		<isNotEmpty property="userName">
 			username = #userName#
 		</isNotEmpty>
-		<isNotEmpty prepend=" and " property="password" >
-			password = #password#
+		<isNotEmpty prepend=" AND " property="password">
+			password =
+			#password#
 		</isNotEmpty>
-		<isNotEmpty prepend=" and " property="email" >
-			email = #email#
+		<isNotEmpty prepend=" AND " property="email">
+			email =
+			#email#
 		</isNotEmpty>
-		<isNotEmpty prepend=" and " property="isPayer" >
-			ispayer = #isPayer#
+		<isNotEmpty prepend=" AND " property="isPayer">
+			ispayer =
+			#isPayer#
 		</isNotEmpty>
-		<isNotEmpty prepend=" and " property="payDate" >
-			paydate = #payDate#
+		<isNotEmpty prepend=" AND " property="payDate">
+			paydate =
+			#payDate#
 		</isNotEmpty>
-		<isNotEmpty prepend=" and " property="endDate" >
-			endDate = #endDate#
+		<isNotEmpty prepend=" AND " property="endDate">
+			endDate =
+			#endDate#
 		</isNotEmpty>
-		<isNotEmpty prepend=" and " property="flag" >
+		<isNotEmpty prepend=" AND " property="flag">
 			flag = #flag#
 		</isNotEmpty>
-		<isNotEmpty prepend=" and " property="inTime" >
-			intime = #inTime#
+		<isNotEmpty prepend=" AND " property="inTime">
+			intime =
+			#inTime#
 		</isNotEmpty>
 	</select>
-	
+
 	<insert id="insertUser" parameterMap="userParam">
 		insert into t_user (
-			username,
-			password,
-			email,
-			ispayer,
-			paydate,
-			enddate,
-			flag,
-			intime
+		username,
+		password,
+		email,
+		ispayer,
+		paydate,
+		enddate,
+		flag,
+		intime
 		) values (
-			?,?,?,?,?,?,?,?
+		?,?,?,?,?,?,?,?
 		)
 	</insert>
-	
+
 </sqlMap>
