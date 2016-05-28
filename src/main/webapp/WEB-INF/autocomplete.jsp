@@ -18,7 +18,8 @@ $(function() {
 	        },
 	    	select: function( event, ui ){
 		    	$("#keyword").val(ui.item.value);
-		      }
+		    	$("#search_f").submit();
+		    }
 	    })
 	 });
   });
