@@ -36,6 +36,19 @@ public class StringUtils {
 	}
 	
 	/**
+	 * 去掉字符串尾部的空格.
+	 * @param str
+	 * @return
+	 */
+	public static String trim(String str) {
+		if (str == null) {
+			return "";
+		} else {
+			return str.trim();
+		}
+	}
+	
+	/**
 	 * 获取14位时间戳
 	 * @return
 	 */

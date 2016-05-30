@@ -91,7 +91,32 @@ $.validator.addMethod(
 	    	var resultVal = "";
 	    	$.ajax({
 		        type: "post",
+		        async: false,
 		        url: "reg/reg!checkEmail.action?email=" + value,
+		        //方法传参的写法一定要对，与后台一致，区分大小写，不能为数组等，str1为形参的名字,str2为第二个形参的名字 
+		        data: "{}",
+		       // contentType: "application/json; charset=utf-8",
+		       	dataType: "json",
+		        success: function(data) {
+		           resultVal = data.ajaxResult;
+		        },
+		        error: function(err) { //如果出现异常，不做界面提示
+		        	resultVal = true;
+		        }
+		    });
+	    	return 'true' == resultVal;
+	    }
+);
+
+/**验证码是否正确**/
+$.validator.addMethod(
+	    "randCodeCheck",
+	    function(value, element){
+	    	var resultVal = "";
+	    	$.ajax({
+		        type: "post",
+		        async: false,
+		        url: "reg/reg!checkRandCode.action?randCode=" + value,
 		        //方法传参的写法一定要对，与后台一致，区分大小写，不能为数组等，str1为形参的名字,str2为第二个形参的名字 
 		        data: "{}",
 		       // contentType: "application/json; charset=utf-8",

@@ -46,6 +46,7 @@
 					email : true
 				},
 				randCode : {
+					randCodeCheck: true,
 					required : true,
 					rangelength : [ 6, 6 ]
 				},
@@ -78,6 +79,7 @@
 					email : "邮箱地址格式错误"
 				},
 				randCode : {
+					randCodeCheck: "您输入的验证码不正确",
 					required : "验证码不能为空",
 					rangelength : "验证码位数错误"
 				},
@@ -87,14 +89,6 @@
 			}
 		});
 	});
-	
-	function validCode() {
-		alert ('change ');
-	}
-	
-	function validUserName(obj) {
-	    
-	}
 	
 </script>
 <script type="text/javascript">
@@ -182,7 +176,7 @@
 									<div class="ui-form-item code-item">
 										<label class="ui-label"><span class="ui-form-required">*</span>验证码</label>
 										<input class="ui-input input-icon code" type="text"
-											name="randCode" id="randCode" onchange="javascript:validCode()"> <a
+											name="randCode" id="randCode" placeholder="不区分大小写"> <a
 											href="javascript:changeImageAuth()"> <img border="0"
 											id="imageAuth" class="code-box"
 											src="imageAuth/imageAuth.action" alt="验证码">

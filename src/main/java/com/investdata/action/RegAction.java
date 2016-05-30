@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.mail.SimpleMailMessage;
 
 import com.investdata.common.BaseAction;
@@ -19,10 +20,11 @@ import com.investdata.utils.ThreeDes;
 /**
  * 注册Action
  */
-public class RegAction extends BaseAction implements RequestAware {
+public class RegAction extends BaseAction implements RequestAware,SessionAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	Logger _log = Logger.getLogger(RegAction.class);
 	private Map<String,Object> request;
+	private Map<String,Object> session;
 	private SimpleMailMessage mailMessage;
 	private String userName;
 	private String password;
@@ -119,6 +121,23 @@ public class RegAction extends BaseAction implements RequestAware {
 		return AJAX;
 	}
 	
+	/**校验用户输入的验证码是否正确**/
+	public String checkRandCode() throws Exception {
+		if (StringUtils.isEmpty(randCode)) {
+			ajaxResult = "false";
+		}
+		
+		String sessionRandCode = (String)session.get("authImage"); //获取session中的验证码
+		//验证码不区分大小写。
+		if (StringUtils.trim(sessionRandCode).equals(randCode.toUpperCase())) {
+			ajaxResult = "true";
+		} else {
+			ajaxResult = "false";
+		}
+		
+		return AJAX;
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -186,6 +205,10 @@ public class RegAction extends BaseAction implements RequestAware {
 		String value = "lin";
 		String str = "{userName:" + "\"" + value+"\"}";
 		System.err.println(str);
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 	
 }
