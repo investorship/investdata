@@ -22,7 +22,8 @@ public class LoginAction extends BaseAction implements SessionAware {
 	private Map<String,Object> session;
 	private String userName;
 	private String password;
-	
+	private String ajaxResult;
+
 	public String execute() throws Exception {
 		logger.info("进入登录流程..");
 		return INPUT;
@@ -34,7 +35,6 @@ public class LoginAction extends BaseAction implements SessionAware {
 		int index = userName.indexOf("@");
 		if (index != -1 ) { //用邮箱当做用户名
 			user.setEmail(userName);
-			user.setUserName("");
 		} else {
 			user.setUserName(userName);
 		}
@@ -53,6 +53,38 @@ public class LoginAction extends BaseAction implements SessionAware {
 			return LOGIN_FAIL; //登录失败
 		}
 	}
+	
+	
+	/**
+	 * ajax校验用户名 密码是否成功
+	 * @return
+	 * @throws Exception
+	 */
+	public String checkLogin() throws Exception {
+		User user = new User();
+		int index = userName.indexOf("@");
+		if (index != -1 ) { //用邮箱当做用户名
+			user.setEmail(userName);
+		} else {
+			user.setUserName(userName);
+		}
+		
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
+		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes()));
+		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
+		
+		TUserDao userDao = DaoFactory.getTUserDao();
+		User userObj = userDao.getUser(user);
+		
+		if (userObj != null) { //查询到用户信息后放入session
+			ajaxResult = "true";
+		} else {
+			ajaxResult = "false";
+		}
+		
+		return AJAX;
+	}
+	
 	
 	//退出
 	public String logout() throws Exception {
@@ -89,5 +121,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 		this.password = password;
 	}
 
-	
+	public String getAjaxResult() {
+		return ajaxResult;
+	}
 }

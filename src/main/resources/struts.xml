@@ -16,11 +16,12 @@
 	</package>
 
 	<!-- 登录 -->
-	<package name="login" namespace="/login" extends="struts-default">
+	<package name="login" namespace="/login" extends="struts-default,json-default">
 		<action name="login" class="loginAction">
 			<result name="input">/WEB-INF/login.jsp</result>
 			<result name="login_succ">/WEB-INF/search.jsp</result>
 			<result name="logout" type="redirect">/index.jsp</result>
+			<result name="ajax" type="json"></result>
 		</action>
 		<action name="adminLogin" class="loginAction">
 			<result name="input">/WEB-INF/admin/main.jsp</result>
