@@ -101,7 +101,7 @@ $.validator.addMethod(
 		           resultVal = data.ajaxResult;
 		        },
 		        error: function(err) { //如果出现异常，不做界面提示
-		        	resultVal = false;
+		        	resultVal = true;
 		        }
 		    });
 	    	return 'true' == resultVal;
@@ -125,7 +125,7 @@ $.validator.addMethod(
 		           resultVal = data.ajaxResult;
 		        },
 		        error: function(err) { //如果出现异常，不做界面提示
-		        	resultVal = false;
+		        	resultVal = true;
 		        }
 		    });
 	    	return 'true' == resultVal;
