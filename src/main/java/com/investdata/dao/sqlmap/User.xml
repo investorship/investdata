@@ -9,63 +9,40 @@
 		<parameter property="userName" />
 		<parameter property="password" />
 		<parameter property="email" />
+		<parameter property="activeCode" />
 		<parameter property="isPayer" />
 		<parameter property="payDate" />
 		<parameter property="endDate" />
 		<parameter property="flag" />
 		<parameter property="inTime" />
 	</parameterMap>
-
-	<select id="getUser" parameterClass="com.investdata.dao.po.User"
-		resultClass="user">
-		select username,password,email,ispayer,paydate,enddate,flag,intime
-		from t_user
-		<dynamic prepend=" where ">
-			<isNotEmpty prepend=" AND " property="userName">
-				username = #userName#
-			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="password">
-				password =
-				#password#
-			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="email">
-				email =
-				#email#
-			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="isPayer">
-				ispayer =
-				#isPayer#
-			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="payDate">
-				paydate =
-				#payDate#
-			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="endDate">
-				endDate =
-				#endDate#
-			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="flag">
-				flag = #flag#
-			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="inTime">
-				intime =
-				#inTime#
-			</isNotEmpty>
-		</dynamic>
-	</select>
+	
+	<statement id="getUser" parameterClass="com.investdata.dao.po.User">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+	</statement>
+	
+	<update id="updateFlag" parameterClass="com.investdata.dao.po.User">
+		update t_user set flag = #flag#  where username = #userName#
+	</update>
+	
+	<sql id="select_what">
+		select username,password,email,activecode,ispayer,paydate,enddate,flag,intime from t_user
+	</sql>
 
 	<insert id="insertUser" parameterMap="userParam">
 		insert into t_user (
 		username,
 		password,
 		email,
+		activecode,
 		ispayer,
 		paydate,
 		enddate,
 		flag,
 		intime
 		) values (
-		?,?,?,?,?,?,?,?
+		?,?,?,?,?,?,?,?,?
 		)
 	</insert>
 

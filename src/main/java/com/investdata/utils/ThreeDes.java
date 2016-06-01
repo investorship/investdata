@@ -1,5 +1,8 @@
 package com.investdata.utils;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -54,13 +57,24 @@ public class ThreeDes {
  
     public static void main(String[] args) throws Exception { // 添加新安全算法,如果用JCE就要把它添加进去
 //        Security.addProvider(new com.sun.crypto.provider.SunJCE());
-        final byte[] keyBytes = Key;    //8字节的密钥
-        String szSrc = "123456";
+        /*final byte[] keyBytes = Key;    //8字节的密钥
+        String szSrc = "isdjfisjf8192=1";
         System.out.println("加密前的字符串:" + szSrc);
         byte[] encoded = encryptMode(keyBytes, szSrc.getBytes());
         System.out.println("加密后的字符串:" + new String(encoded));
         System.out.println("加密后的字符串:" + Coder.encryptBASE64(encoded));
+        
+        System.err.println("muti 8=" + Coder.encryptBASE64((encoded)).length());
+        System.err.println("------------- " + new String(decryptMode(keyBytes, Coder.decryptBASE64(Coder.encryptBASE64(encoded)))));
+        
+        
         byte[] srcBytes = decryptMode(keyBytes, encoded);
         System.out.println("解密后的字符串:" + (new String(srcBytes)));
+    	
+    	System.err.println(URLDecoder.decode("l5M%2FPz9eq3lFEOKgE6%2BW8oxvpdj4nanlKah9RFwVP77NOS9aej9emNi0xsPyQ4RP2PEvCHi%2FbJpPLSs%3D","UTF-8"));*/
+    	
+    	String str = "8123sfs你说的服2";
+    	System.err.println(new String(Coder.getMD5Code(str)).length());
+    	
     }
 }

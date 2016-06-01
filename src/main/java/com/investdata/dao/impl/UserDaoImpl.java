@@ -14,4 +14,8 @@ public class UserDaoImpl extends BaseDao implements TUserDao {
 		return userObj;
 	}
 
+	public int update(User user) throws Exception {
+		return dao.update("user.updateFlag",user);
+	}
+
 }

@@ -13,6 +13,7 @@ create table t_user
    username             char(30) not null comment '用户名',
    password             char(30) not null comment '密码',
    email                char(30) not null comment '邮箱',
+   activecode           char(32) not null comment '激活码',
    ispayer				int not null default 0 comment '是否付费用户 0-否 1-是',
    paydate				char(10) default ''  comment '付费时间',
    enddate				char(10) default '' comment '截止时间',

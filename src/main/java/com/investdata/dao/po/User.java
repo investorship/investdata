@@ -6,11 +6,20 @@ public class User {
 	private String userName;
 	private String password;
 	private String email;
+	private String activeCode;
 	private int isPayer;
 	private String payDate;
 	private String endDate;
 	private int flag;
 	private Timestamp inTime;
+
+	public String getActiveCode() {
+		return activeCode;
+	}
+
+	public void setActiveCode(String activeCode) {
+		this.activeCode = activeCode;
+	}
 
 	public int getIsPayer() {
 		return isPayer;
