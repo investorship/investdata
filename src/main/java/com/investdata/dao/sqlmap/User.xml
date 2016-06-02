@@ -17,11 +17,6 @@
 		<parameter property="inTime" />
 	</parameterMap>
 	
-	<statement id="getUser" parameterClass="com.investdata.dao.po.User">
-		<include refid="select_what" />
-		<include refid="where_conditions" />
-	</statement>
-	
 	<update id="updateFlag" parameterClass="com.investdata.dao.po.User">
 		update t_user set flag = #flag#  where username = #userName#
 	</update>
@@ -45,5 +40,51 @@
 		?,?,?,?,?,?,?,?,?
 		)
 	</insert>
-
+	
+	
+	<sql id="where_conditions">
+		<dynamic prepend=" where ">
+			<isNotEmpty prepend=" AND " property="userName">
+				username = #userName#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="password">
+				password =
+				#password#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="email">
+				email =
+				#email#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="activeCode">
+				activecode =
+				#activeCode#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="isPayer">
+				ispayer =
+				#isPayer#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="payDate">
+				paydate =
+				#payDate#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="endDate">
+				endDate =
+				#endDate#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="flag">
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="inTime">
+				intime =
+				#inTime#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!-- 引用的 select_what 和 where_conditons 必须在上面，否则报找不到 -->
+	<statement id="getUser" parameterClass="com.investdata.dao.po.User" resultClass="user">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+	</statement>
+	
 </sqlMap>

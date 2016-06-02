@@ -161,8 +161,8 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		String activeCode = activeParmas[1];
 		
 		User u1 = new User(); //按用户名 + 激活码查用户
-		u1.setUserName(activeUserName);
-		u1.setActiveCode(Coder.getMD5Code(activeCode));
+		u1.setUserName(activeUserName.substring(activeUserName.indexOf("=") + 1));
+		u1.setActiveCode(Coder.getMD5Code(activeCode.substring(activeCode.indexOf("=") + 1)));
 		
 		TUserDao userDao = DaoFactory.getTUserDao();
 		User user = userDao.getUser(u1);
@@ -173,7 +173,7 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		} 
 		
 		User u2 = new User();
-		u2.setUserName(activeUserName);
+		u2.setUserName(activeUserName.substring(activeUserName.indexOf("=") + 1));
 		u2.setFlag(1);
 		userDao.update(u2);
 		
@@ -238,9 +238,8 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 	}
 	
 	public static void main(String[] args) {
-		String value = "lin";
-		String str = "{userName:" + "\"" + value+"\"}";
-		System.err.println(str);
+		String str = "userName=zhangsan";
+		System.err.println(str.substring(str.indexOf("=") + 1));
 	}
 
 	public void setSession(Map<String, Object> session) {

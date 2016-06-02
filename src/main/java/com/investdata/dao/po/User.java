@@ -7,10 +7,10 @@ public class User {
 	private String password;
 	private String email;
 	private String activeCode;
-	private int isPayer;
+	private Integer isPayer;
 	private String payDate;
 	private String endDate;
-	private int flag;
+	private Integer flag;
 	private Timestamp inTime;
 
 	public String getActiveCode() {
@@ -21,12 +21,21 @@ public class User {
 		this.activeCode = activeCode;
 	}
 
-	public int getIsPayer() {
+
+	public Integer getIsPayer() {
 		return isPayer;
 	}
 
-	public void setIsPayer(int isPayer) {
+	public void setIsPayer(Integer isPayer) {
 		this.isPayer = isPayer;
+	}
+
+	public Integer getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
 	}
 
 	public Timestamp getInTime() {
@@ -83,13 +92,6 @@ public class User {
 		this.endDate = endDate;
 	}
 
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
 
 	
 
@@ -97,7 +99,7 @@ public class User {
 	public String toString() {
 		// 忽略密码
 		String userToString = "userName=" + userName + "-password=" + password + "-email=" + email
-				+ "-ispayer=" + isPayer + "-payDate=" + payDate + "-endDate="
+				+ "-activeCode=" + activeCode  +"-ispayer=" + isPayer + "-payDate=" + payDate + "-endDate="
 				+ endDate + "-flag=" + flag + "-intime=" + inTime;
 		return userToString;
 	}
