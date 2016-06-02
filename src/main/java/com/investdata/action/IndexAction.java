@@ -72,6 +72,27 @@ public class IndexAction extends BaseAction implements ApplicationAware {
 			application.put("stocksItems", stocksItems.toString());
 		}
 		
+		//加载财务指标
+		
+		/**
+		 * List<Finance> new ArrayList<Finance>();
+		 * List<String> select * from t_finance_index_info where pid = 0  父菜单
+		 * 
+		 * Finance finIndex = new Finance();
+		 * finIndex.setParentName();
+		 * 
+		 * for (String pid : List<String>) {
+		 *	List<Fiance> select * from  t_finance_index_info where pid = pid
+		 *	  finaIndex.setSubFianceIndex();
+		 *
+		 * }
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
+		
+		
 		return INPUT;
 	}
 
