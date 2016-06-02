@@ -6,7 +6,9 @@ use investdata;
 drop table if exists t_user;
 
 /*==============================================================*/
-/* Table: t_user                                                */
+/* Table: t_user                        
+ * 备注： 字段如果NOT NULL了就不在接收 NULL值(会报错) 此时default没有意义 
+ * 可以把 not null 去掉 在set对象时 不设置属性值，则使用default指定的值  */
 /*==============================================================*/
 create table t_user
 (
@@ -14,10 +16,10 @@ create table t_user
    password             char(30) not null comment '密码',
    email                char(30) not null comment '邮箱',
    activecode           char(32) not null comment '激活码',
-   ispayer				int not null default 0 comment '是否付费用户 0-否 1-是',
-   paydate				char(10) default ''  comment '付费时间',
-   enddate				char(10) default '' comment '截止时间',
-   flag                 int not null default 0 comment '标志位 0-停用 1-启用',
+   ispayer				int not null comment '是否付费用户 0-否 1-是',
+   paydate				char(10) DEFAULT ''  comment '付费时间',
+   enddate				char(10) DEFAULT '' comment '截止时间',
+   flag                 int not null comment '标志位 0-停用 1-启用',
    intime               timestamp not null DEFAULT now() comment '入库时间',
    primary key (username)
 );

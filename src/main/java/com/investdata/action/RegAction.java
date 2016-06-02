@@ -55,6 +55,8 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
 		user.setEmail(email);
 		user.setActiveCode(activeCodeMd5);
+		user.setIsPayer(0);
+		user.setFlag(0);
 		
 		_log.info(String.format("新增用户信息user=[%s]", user));
 		TUserDao userDao = DaoFactory.getTUserDao();
