@@ -80,95 +80,15 @@
     </div>
     <div class="city_box">
         <ul class="letter-list" id="J-city-list">
-            <li class="city-list"><span class="arrow"></span><span class="letter">每股指标</span>
+        	<c:forEach items="${parentsIndexList }" var="parentsIndex">
+            <li class="city-list"><span class="arrow"></span><span class="letter">${parentsIndex.name}</span>
                 <ul class="cities">
-                    <li><a href=" ">每股收益</a></li>
-                    <li><a href=" ">稀释每股收益</a></li>
-                    <li><a href=" ">每股净资产</a></li>
-                    <li><a href=" ">每股营业收入</a></li>
-                    <li><a href=" ">每股营业利润</a></li>
-                    <li><a href=" ">每股息税前利润</a></li>
+                	<c:forEach items="${parentsIndex.childsFinanceIndexInfoList }" var="childFinanceIndexInfo">
+	                    <li><a href="${childFinanceIndexInfo.action }">${childFinanceIndexInfo.name }</a></li>
+                    </c:forEach>
                 </ul>
             </li>
-            <li class="city-list"><span class="arrow"></span><span class="letter">偿债能力</span>
-                <ul class="cities">
-                    <li><a href="#"><span>流动比率</span></a></li>
-                    <li><a href="#">速动比率</a></li>
-                    <li><a href="#">现金比率</a></li>
-                    <li><a href="#">现金流量比率</a></li>
-                    <li><a href="#">资产负债率</a></li>
-                    <li><a href="#">股东权益比率</a></li>
-                    <li><a href="#">权益乘数</a></li>
-                    <li><a href="#">产权比率</a></li>
-                    <li><a href="#">偿债保障比率</a></li>
-                    <li><a href="#">利息保障倍数</a></li>
-                    <li><a href="#">现金利息保障倍数</a></li>
-                </ul>
-            </li>
-            <li class="city-list"><span class="arrow"></span><span class="letter">运营能力</span>
-                <ul class="cities">
-                    <li><a href="#"><span>应收账款周转率</span></a></li>
-                    <li><a href="#"><span>存货周转率</span></a></li>
-                    <li><a href="#"><span>营业周期</span></a></li>
-                    <li><a href="#"><span>存货周转天数</span></a></li>
-                    <li><a href="#">应收账款周转天数</a></li>
-                    <li><a href="#">流动资产周转率</a></li>
-                    <li><a href="#">固定资产周转率</a></li>
-                    <li><a href="#">总资产周转率</a></li>
-                </ul>
-            </li>
-            <li class="city-list"><span class="arrow"></span><span class="letter">盈利能力</span>
-                <ul class="cities">
-                    <li><a href="#">净资产收益率</a></li>
-                    <li><a href="#"><span>资产息税前利润率</span></a></li>
-                    <li><a href="#">资产利润率</a></li>
-                    <li><a href="#">资产净利率</a></li>
-                    <li><a href="#">东权益报酬率</a></li>
-                    <li><a href="#">平均权益乘数</a></li>
-                    <li><a href="#">销售净利率</a></li>
-                    <li><a href="#">销售毛利率</a></li>
-                    <li><a href="#">成本费用净利率</a></li>
-                    <li><a href="#">净资产收益率</a></li>
-                    <li><a href="#">净资产收益率</a></li>
-                </ul>
-            </li>
-            <li class="city-list"><span class="arrow"></span><span class="letter">发展能力</span>
-                <ul class="cities">
-                    <li><a href="#">销售增长率</a></li>
-                    <li><a href="#">资产增长率</a></li>
-                    <li><a href="#">股权资本增长率</a></li>
-                    <li><a href="#">利润增长率</a></li>
-                </ul>
-            </li>
-            <li class="city-list"><span class="arrow"></span><span class="letter">现金流量</span>
-                <ul class="cities">
-                    <li><a href="#"><span>销售现金比率</span></a></li>
-                    <li><a href="#"><span>每股经营现金流</span></a></li>
-                    <li><a href="#"><span>现金股利支付率</span></a></li>
-                    <li><a href="#"><span>主营业务现金比率</span></a></li>
-                    <li><a href="#"><span>自由现金流量</span></a></li>
-                </ul>
-            </li>
-            <li class="city-list"><span class="arrow"></span><span class="letter">资本结构</span>
-                <ul class="cities">
-                    <li><a href="#"><span>固定资产比率</span></a></li>
-                    <li><a href="#"><span>无形资产比率</span></a></li>
-                    <li><a href="#"><span>股东权益比率</span></a></li>
-                    <li><a href="#"><span>权益乘数</span></a></li>
-                    <li><a href="#"><span>负债结构比率</span></a></li>
-                    <li><a href="#"><span>长期负债权益比率</span></a></li>
-                    <li><a href="#"><span>营运资金</span></a></li>
-                </ul>
-            </li>
-            <li class="city-list"><span class="arrow"></span><span class="letter">核心业务质量</span>
-                <ul class="cities">
-                    <li><a href="#"><span>非经常性损益比率</span></a></li>
-                    <li><a href="#"><span>扣非净利润</span></a></li>
-                    <li><a href="#"><span>所得税/利润总额</span></a></li>
-                    <li><a href="#"><span> 营业外收支净额／利润总额</span></a></li>
-                </ul>
-            </li>
-
+            </c:forEach>
         </ul>
     </div>
 </div>

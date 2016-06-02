@@ -8,17 +8,17 @@ public class FinanceIndexInfo {
 	private Integer id;
 	private String name;
 	private Integer pid; 
-	private String  pName; 
 	private String action;
 	private Integer flag;
 	private Timestamp inTime;
-	private List<FinanceIndexInfo> subFinanceIndexInfoList;
+	private List<FinanceIndexInfo> childsFinanceIndexInfoList;
 	
-	public List<FinanceIndexInfo> getSubFinanceIndexInfoList() {
-		return subFinanceIndexInfoList;
+	
+	public List<FinanceIndexInfo> getChildsFinanceIndexInfoList() {
+		return childsFinanceIndexInfoList;
 	}
-	public void setSubFinanceIndexInfoList(List<FinanceIndexInfo> subFinanceIndexInfoList) {
-		this.subFinanceIndexInfoList = subFinanceIndexInfoList;
+	public void setChildsFinanceIndexInfoList(List<FinanceIndexInfo> childsFinanceIndexInfoList) {
+		this.childsFinanceIndexInfoList = childsFinanceIndexInfoList;
 	}
 	public Integer getId() {
 		return id;
@@ -38,12 +38,7 @@ public class FinanceIndexInfo {
 	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
-	public String getpName() {
-		return pName;
-	}
-	public void setpName(String pName) {
-		this.pName = pName;
-	}
+
 	public String getAction() {
 		return action;
 	}

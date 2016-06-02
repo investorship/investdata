@@ -21,4 +21,5 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
         </transactionManager>
 		<sqlMap resource="com/investdata/dao/sqlmap/User.xml"/>
 		<sqlMap resource="com/investdata/dao/sqlmap/Stock.xml"/>
+		<sqlMap resource="com/investdata/dao/sqlmap/FinanceIndexInfo.xml"/>
 </sqlMapConfig>

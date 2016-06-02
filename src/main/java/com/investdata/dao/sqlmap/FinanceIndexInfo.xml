@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="financeIndexInfo">
+
+	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
+	<typeAlias alias="financeIndexInfo" type="com.investdata.dao.po.FinanceIndexInfo" />
+
+	<parameterMap class="financeIndexInfo" id="financeIndexInfoParam">
+		<parameter property="id" />
+		<parameter property="name" />
+		<parameter property="pid" />
+		<parameter property="action" />
+		<parameter property="flag" />
+		<parameter property="inTime" />
+	</parameterMap>
+	
+	<select id="getParentFinanceIndexInfo" resultClass="financeIndexInfo">
+		select id,name,pid,action,flag,intime from t_finance_index_info where pid = #pid#
+	</select>
+	
+</sqlMap>

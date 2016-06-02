@@ -8,7 +8,9 @@ import org.apache.struts2.interceptor.ApplicationAware;
 
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TFinanceIndexInfoDao;
 import com.investdata.dao.TStockDao;
+import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.Stock;
 import com.investdata.utils.StringUtils;
 
@@ -74,25 +76,19 @@ public class IndexAction extends BaseAction implements ApplicationAware {
 		
 		//加载财务指标
 		
-		/**
-		 * List<Finance> new ArrayList<Finance>();
-		 * List<String> select * from t_finance_index_info where pid = 0  父菜单
-		 * 
-		 * Finance finIndex = new Finance();
-		 * finIndex.setParentName();
-		 * 
-		 * for (String pid : List<String>) {
-		 *	List<Fiance> select * from  t_finance_index_info where pid = pid
-		 *	  finaIndex.setSubFianceIndex();
-		 *
-		 * }
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
-		
-		
+		if (application.get("parentsIndexList") == null) {
+			TFinanceIndexInfoDao financeIndexInfoDao = DaoFactory.getTFinanceIndexInfoDao();
+			//获取父级财务指标
+			List<FinanceIndexInfo> parentsIndexList = financeIndexInfoDao.getParentFinanceIndexInfo(0);
+			
+			for (FinanceIndexInfo indexInfo : parentsIndexList) {
+				int pid = indexInfo.getId();
+				//获取子类指标
+				List<FinanceIndexInfo> childsFinanceIndexInfoList = financeIndexInfoDao.getParentFinanceIndexInfo(pid);
+				indexInfo.setChildsFinanceIndexInfoList(childsFinanceIndexInfoList);
+			}	
+			application.put("parentsIndexList", parentsIndexList);
+		}
 		return INPUT;
 	}
 

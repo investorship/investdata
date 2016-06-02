@@ -2989,7 +2989,7 @@ insert into t_stocks values ('600883','博闻科技','BWKJ','A股','',0,28,0,0,'
 insert into t_stocks values ('600884','杉杉股份','SSGF','A股','',0,28,0,0,'','','','','',1,now());
 insert into t_stocks values ('600892','宝诚股份','BCGF','A股','',0,28,0,0,'','','','','',1,now());
 
-drop table if exists t_finance_index_name;
+drop table if exists t_finance_index_info;
 
 /*==============================================================*/
 /* Table: t_finance_index_name                                  */
@@ -3009,13 +3009,13 @@ alter table t_finance_index_info comment '财务指标信息表';
 
 /**初始化财务指标信息数据**/
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股指标',0,'',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('偿债能力指标',0,'',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('盈利能力指标',0,'',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('成长能力指标',0,'',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('资本结构指标',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('偿债能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('盈利能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('成长能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资本结构',0,'',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('核心业务收益质量',0,'',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('营运能力指标',0,'',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金流量指标',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营运能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金流量',0,'',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('其他关注点',0,'',1,now());
 
 /**每股指标**/
