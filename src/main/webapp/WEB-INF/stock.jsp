@@ -56,6 +56,7 @@
             投资数据网站平台，投资者的在线手册提供开放性大数据信息金融数据信息等各类数据分类信息的免费查询，为大众服务。提供每股指标、偿债能力、营运能力等八大栏目，你只需点击相应栏目搜索即可。
         </div>
     </div>
+    <!-- 
     <div class="province_choose">
         <label>
             请选择分类：</label>
@@ -77,7 +78,7 @@
             <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
             <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
         </div>
-    </div>
+    </div> -->
     <div class="city_box">
         <ul class="letter-list" id="J-city-list">
         	<c:forEach items="${parentsIndexList }" var="parentsIndex">

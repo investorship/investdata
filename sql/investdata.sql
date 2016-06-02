@@ -24,7 +24,27 @@ create table t_user
    primary key (username)
 );
 
+
 alter table t_user comment '用户信息表'; 
+
+drop table if exists t_user_admin;
+
+/*==============================================================*/
+/* Table: t_user_admin                                          */
+/*==============================================================*/
+create table t_user_admin
+(
+   id                   int not null,
+   username             char(30) not null comment '用户名',
+   password             char(50) not null comment '密码',
+   email                char(30) not null,
+   perm_level           int not null comment '权限等级 1-录入员 2-审核员',
+   flag                 int not null comment '标志位 0-停用 1-启用',
+   intime               timestamp not null comment '入库时间',
+   primary key (username)
+);
+
+alter table t_user_admin comment '管理员用户信息表';
 
 drop table if exists t_industry_category;
 
@@ -3041,9 +3061,10 @@ insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金流
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产负债率',2,'solvent/solvent!dbastrt.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('权益乘数',2,'solvent/solvent!equmul.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('产权比率',2,'solvent/solvent!dbequrt.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('偿债保障比率',2,'solvent/solvent!debtEnsure .action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('息税前利润(EBIT)',2,'solvent/solvent!EBIT .action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('偿债保障比率',2,'solvent/solvent!debtEnsure.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('息税前利润(EBIT)',2,'solvent/solvent!EBIT.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('税息折旧及摊销前利润(EBITDA)',2,'solvent/solvent!EBITDA .action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('利息保障倍数',2,'solvent/solvent!intcvr.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('短期有息负债',2,'solvent/solvent!shortInterestDebt.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('长期有息负债',2,'solvent/solvent!longInterestDebt.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('有息负债',2,'solvent/solvent!interestDebt.action',1,now());
