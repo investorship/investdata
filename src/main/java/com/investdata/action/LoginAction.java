@@ -34,23 +34,8 @@ public class LoginAction extends BaseAction implements SessionAware {
 	
 	//用户登录流程
 	public String login() throws Exception {
-		User user = new User();
-		int index = userName.indexOf("@");
-		if (index != -1 ) { //用邮箱当做用户名
-			user.setEmail(userName);
-		} else {
-			user.setUserName(userName);
-		}
-		
-		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
-		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes()));
-		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
-		
-		TUserDao userDao = DaoFactory.getTUserDao();
-		User userObj = userDao.getUser(user);
-		
-		if (userObj != null) { //查询到用户信息后放入session
-			session.put("user", userObj);
+		checkLogin();
+		if (loginFlag) {
 			return LOGIN_SUCC; //跳转到首页
 		} else {
 			return LOGIN_FAIL; //登录失败
@@ -73,14 +58,14 @@ public class LoginAction extends BaseAction implements SessionAware {
 		}
 		
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
-		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes()));
-		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
-		
+		user.setPassword(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())));
 		TUserDao userDao = DaoFactory.getTUserDao();
 		User userObj = userDao.getUser(user);
 		
 		if (userObj != null) { //查询到用户信息后放入session
 			ajaxResult = "true";
+			loginFlag = true;
+			session.put("user", userObj);
 		} else {
 			ajaxResult = "false";
 		}
@@ -102,7 +87,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 	public String checkAdminLogin() throws Exception {
 		AdminUser admUser = new AdminUser();
 		admUser.setUserName(userName);
-
+		
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
 		admUser.setPassword(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())));
 		admUser.setFlag(1);
@@ -130,7 +115,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 		//再次验证
 		checkAdminLogin();
 		if (loginFlag) {
-			return INPUT;			
+			return INPUT;
 		} else {
 			return FAIL;
 		}
