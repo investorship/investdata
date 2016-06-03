@@ -13,8 +13,8 @@
 
 	<!-- struts2 中 action 对象 -->
 	<bean id="indexAction" class="com.investdata.action.IndexAction" />
-	<bean id="loginAction" class="com.investdata.action.LoginAction" />
-	<bean id="regAction" class="com.investdata.action.RegAction">
+	<bean id="loginAction" class="com.investdata.action.LoginAction" scope="prototype"/>
+	<bean id="regAction" class="com.investdata.action.RegAction" scope="prototype">
 		<property name="mailMessage" ref="mailMessage" />
 	</bean>
 	<bean id="stockAction" class="com.investdata.action.StockAction" />

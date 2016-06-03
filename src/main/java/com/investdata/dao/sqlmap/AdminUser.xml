@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="adminUser">
+
+	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
+	<typeAlias alias="adminUser" type="com.investdata.dao.po.AdminUser" />
+
+	<parameterMap class="adminUser" id="adminUserParam">
+		<parameter property="userName" />
+		<parameter property="password" />
+		<parameter property="email" />
+		<parameter property="permLevel" />
+		<parameter property="flag" />
+		<parameter property="inTime" />
+	</parameterMap>
+	
+	<sql id="select_what">
+		select username,password,email,perm_level,flag,intime from t_user_admin
+	</sql>
+	
+	
+	<sql id="where_conditions">
+		<dynamic prepend=" where ">
+			<isNotEmpty prepend=" AND " property="userName">
+				username = #userName#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="password">
+				password =
+				#password#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="email">
+				email =
+				#email#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="permLevel">
+				perm_level =
+				#permLevel#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="flag">
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="inTime">
+				intime =
+				#inTime#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!-- 引用的 select_what 和 where_conditons 必须在上面，否则报找不到 -->
+	<statement id="getAdminUser" parameterClass="com.investdata.dao.po.AdminUser" resultClass="adminUser">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+	</statement>
+	
+</sqlMap>

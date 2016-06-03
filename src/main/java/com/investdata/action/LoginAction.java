@@ -7,7 +7,9 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TAdminUserDao;
 import com.investdata.dao.TUserDao;
+import com.investdata.dao.po.AdminUser;
 import com.investdata.dao.po.User;
 import com.investdata.utils.Coder;
 import com.investdata.utils.PropertiesUtils;
@@ -23,6 +25,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 	private String userName;
 	private String password;
 	private String ajaxResult;
+	private boolean loginFlag; //登录验证标识
 
 	public String execute() throws Exception {
 		logger.info("进入登录流程..");
@@ -85,7 +88,6 @@ public class LoginAction extends BaseAction implements SessionAware {
 		return AJAX;
 	}
 	
-	
 	//退出
 	public String logout() throws Exception {
 		//清除session中用户信息。
@@ -97,9 +99,41 @@ public class LoginAction extends BaseAction implements SessionAware {
 	 * 管理员登录
 	 * @return
 	 */
-	public String adminLogin() {
+	public String checkAdminLogin() throws Exception {
+		AdminUser admUser = new AdminUser();
+		admUser.setUserName(userName);
+
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
+		admUser.setPassword(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())));
+		admUser.setFlag(1);
 		
-		return INPUT;
+		TAdminUserDao admUserDao = DaoFactory.getTAdminUserDao();
+		AdminUser admUserObj = admUserDao.getAdminUser(admUser);
+		
+		if (admUserObj != null) {
+			ajaxResult = "true";
+			loginFlag = true;
+			session.put("admUser", admUserObj);
+		} else {
+			ajaxResult = "false";
+		}
+		return AJAX_ADMIN;
+	}
+	
+	/**
+	 * 考虑到登录界面的ajax校验可以完全绕过，比如可以用httpClient模拟表单提交直接
+	 * 向action提交后台数据，恶意猜密码等，在跳转进入登录流程后依然要再次判断一遍
+	 * @return
+	 * @throws Exception
+	 */
+	public String adminLogin() throws Exception {
+		//再次验证
+		checkAdminLogin();
+		if (loginFlag) {
+			return INPUT;			
+		} else {
+			return FAIL;
+		}
 	}
 
 	public void setSession(Map<String, Object> session) {

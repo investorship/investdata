@@ -11,6 +11,7 @@ public class BaseAction extends ActionSupport {
 	public static final String LOGOUT = "logout";
 	public static final String REG_SUCC = "reg_succ";
 	public static final String AJAX = "ajax";
+	public static final String AJAX_ADMIN = "ajax_admin";
 	public static final String ACTIVE_FAIL = "active_fail";
 	public static final String ACTIVE_SUCC = "active_succ";
 }

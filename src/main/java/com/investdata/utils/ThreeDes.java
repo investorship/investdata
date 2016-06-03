@@ -65,14 +65,14 @@ public class ThreeDes {
         System.out.println("加密后的字符串:" + Coder.encryptBASE64(encoded));
         
         System.err.println("muti 8=" + Coder.encryptBASE64((encoded)).length());
-        System.err.println("------------- " + new String(decryptMode(keyBytes, Coder.decryptBASE64(Coder.encryptBASE64(encoded)))));
         
         
         byte[] srcBytes = decryptMode(keyBytes, encoded);
         System.out.println("解密后的字符串:" + (new String(srcBytes)));
     	
     	System.err.println(URLDecoder.decode("l5M%2FPz9eq3lFEOKgE6%2BW8oxvpdj4nanlKah9RFwVP77NOS9aej9emNi0xsPyQ4RP2PEvCHi%2FbJpPLSs%3D","UTF-8"));*/
-    	
+    	final byte[] keyBytes = Key;
+    	System.err.println("------------- " + new String(decryptMode(keyBytes, Coder.decryptBASE64(Coder.encryptBASE64("XF750hGM/VA=".getBytes())))));
     	String str = "8123sfs你说的服2";
     	System.err.println(new String(Coder.getMD5Code(str)).length());
     	
