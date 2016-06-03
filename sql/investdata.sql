@@ -3070,3 +3070,28 @@ insert into t_finance_index_info(name,pid,action,flag,intime) values ('有息负
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('有息负债比率',2,'solvent/solvent!interestDebtRatio.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('有形净值债务比率',2,'solvent/solvent!dbtaneQurt.action',1,now());
 
+/** 盈利能力**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('加权平均净资产收益率',3,'profitability/profitability!ROE.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('加权平均净资产收益率(扣非)',3,'profitability/profitability!ROEcut.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('经营性现金流与净利润比率',3,'profitability/profitability!cashFlowProfits.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产净利率',3,'profitability/profitability!ROA.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产利润率',3,'profitability/profitability!assetsProRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('毛利率',3,'profitability/profitability!grossProfit.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利率',3,'profitability/profitability!splashes.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利率(扣非)',3,'profitability/profitability!splashesKF.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('成本费用净利率',3,'profitability/profitability!costExpProRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产息税前利润率',3,'profitability/profitability!ebitRatio.action',1,now());
+
+/**成长能力指标**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率',3,'profitability/profitability!netprfgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率(扣非)',3,'profitability/profitability!netprfgrrtKF.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业利润增长率',4,'growthCapab/growthCapab!opeprfgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('利润总额增长率',4,'growthCapab/growthCapab!totprfgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业收入增长率',4,'profitability/profitability!opeincmgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净资产增长率',4,'profitability/profitability!netassgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产增长率',4,'profitability/profitability!totassgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('股东权益相对年初增长率',4,'growthCapab/growthCapab!shareHolderEquity.action',1,now());
+
+
+
+
