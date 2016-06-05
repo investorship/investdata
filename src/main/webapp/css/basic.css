@@ -1,0 +1,178 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* header */
+.header {
+    padding: 15px 0;
+    background: #0765c5;
+}
+.header .logo {
+    float: left;
+    _display: inline;
+}
+.header .search {
+    float: right;
+    _display: inline;
+}
+.header .search_k {
+    width: 320px;
+    height: 38px;
+    padding-left: 10px;
+    /*border: 1px solid #d4d4d4;*/
+    border-right: none;
+    background: #fcfcfc;
+    color: #d4d4d4;
+    font-size: 16px;
+    line-height: 38px\9;
+}
+.header .search_k:focus {
+    background: none;
+    color: #000;
+}
+.header .search_smt {
+    border: none;
+    color: #fff;
+    background: #2e82ff ;
+    width: 84px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.header .search_smt:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+.header h1 {
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    overflow: hidden;
+}/* nav */
+.nav {
+    width: 750px;
+    overflow: hidden;
+    zoom: 1;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #e60012;
+}
+.nav p {
+    width: 780px;
+    overflow: hidden;
+    zoom: 1;
+}
+.nav a {
+    display: inline-block;
+    height: 40px;
+    padding: 0 0px;
+    font: 100 20px/40px 'Arial', 'Microsoft Yahei', '微软雅黑', 'Simsun', '黑体';
+    margin-right: 0px;
+}
+.nav a:link, .nav a:visited {
+    color: #383d40;
+}
+.nav a:hover {
+    color: #e60012;
+}
+.nav a.selected, .nav a.selected:link, .nav a.selected:visited, .nav a.selected:hover {
+    color: #fff;
+    background: #e60012;
+}
+.nav .s_dot {
+    font-size: 12px;
+    line-height: 40px;
+}
+/* Footer style */
+
+#footer {height:85px;background: #ebebeb;border-top:1px solid #dbdbdb;}
+
+#footer p {line-height:25px;text-align: center;color:#777;}
+
+#footer a{color:#777; text-decoration:none;}
+html, body, h1, h2, h3, h4, h5, h6, p, blockquote, ul, li, form, input, figure {
+    margin: 0;
+    padding: 0;
+}
+ul, li {
+    list-style: none outside;
+}
+table {
+    border-collapse: collapse;
+}
+img {
+    vertical-align: middle;
+    background: none;
+    border: none;
+}
+label, input, select {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+label, input, select, textarea {
+    font-family: inherit;
+}
+input { 
+    border-radius: 0;
+}
+input:focus {
+    outline: none;
+}
+a {
+    text-decoration: none;
+}
+cite, code, i, em, s {
+    font-style: normal;
+    text-decoration: inherit;
+    font-family: inherit;
+}
+html, body {
+    font: 100 14px/20px 'Arial', 'Microsoft Yahei', '微软雅黑', 'Simsun', '宋体';
+    color: #000;
+}
+header, nav, figure, aside, article, section, footer {
+    display: block;
+}
+mark, var, time, output, meter {
+    display: inline;
+}
+mark {
+    background: #ff0;
+}
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after {
+    display: block;
+    content: '.';
+    clear: both;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.wrap {
+    width: 1200px;
+    margin: 0 auto;
+}
+.wbyTop {
+    color: #eaeaea;
+    height: 35px;
+    line-height: 35px;
+    background:#000;
+}
+.wbyLinks {
+    float: right;
+    padding-right: 10px;
+    width: 270px;
+}
+.wbyLinks span a {
+    color: #fff;
+    padding: 0 5px; 
+}
+#search_f{
+    background:#fcfcfc;
+}

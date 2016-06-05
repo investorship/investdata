@@ -1,27 +1,49 @@
 /** 创建数据库**/
 drop database if exists investdata;
-create database investdata;
+create database investdata; 
 use investdata;
 
 drop table if exists t_user;
 
 /*==============================================================*/
-/* Table: t_user                                                */
+/* Table: t_user                        
+ * 备注： 字段如果NOT NULL了就不在接收 NULL值(会报错) 此时default没有意义 
+ * 可以把 not null 去掉 在set对象时 不设置属性值，则使用default指定的值  */
 /*==============================================================*/
 create table t_user
 (
    username             char(30) not null comment '用户名',
-   password             char(50) not null comment '密码',
+   password             char(30) not null comment '密码',
    email                char(30) not null comment '邮箱',
+   activecode           char(32) not null comment '激活码',
    ispayer				int not null comment '是否付费用户 0-否 1-是',
-   paydate				timestamp comment '付费时间',
-   enddate				timestamp comment '截止时间',
+   paydate				char(10) DEFAULT ''  comment '付费时间',
+   enddate				char(10) DEFAULT '' comment '截止时间',
    flag                 int not null comment '标志位 0-停用 1-启用',
-   intime               timestamp not null comment '入库时间',
+   intime               timestamp not null DEFAULT now() comment '入库时间',
    primary key (username)
 );
 
+
 alter table t_user comment '用户信息表'; 
+
+drop table if exists t_user_admin;
+
+/*==============================================================*/
+/* Table: t_user_admin                                          */
+/*==============================================================*/
+create table t_user_admin
+(
+   username             char(30) not null comment '用户名',
+   password             char(50) not null comment '密码',
+   email                char(30) not null comment '邮箱',
+   perm_level           int not null comment '权限等级 1-录入员 2-审核员',
+   flag                 int not null comment '标志位 0-停用 1-启用',
+   intime               timestamp not null DEFAULT now() comment '入库时间',
+   primary key (username)
+);
+
+alter table t_user_admin comment '管理员用户信息表';
 
 drop table if exists t_industry_category;
 
@@ -80,7 +102,7 @@ create table t_stocks
    code                 char(10) not null comment '股票代码',
    name                 char(16) not null comment '股票名称',
    shortname            char(10) not null comment '简称 比如格力电器 GLDQ 用于首页检索',
-   market               char(10) not null comment '所属市场  深交所/上交所',
+   market               char(10) not null comment 'A or B or H',
    ipotime              char(10) comment '上市时间',
    ipostocks            decimal(16,2) comment '发行量',
    category             int comment '所属行业',
@@ -2985,4 +3007,130 @@ insert into t_stocks values ('600851','海欣股份','HXGF','A股','',0,28,0,0,'
 insert into t_stocks values ('600883','博闻科技','BWKJ','A股','',0,28,0,0,'','','','','',1,now());
 insert into t_stocks values ('600884','杉杉股份','SSGF','A股','',0,28,0,0,'','','','','',1,now());
 insert into t_stocks values ('600892','宝诚股份','BCGF','A股','',0,28,0,0,'','','','','',1,now());
+
+drop table if exists t_finance_index_info;
+
+/*==============================================================*/
+/* Table: t_finance_index_name                                  */
+/*==============================================================*/
+create table t_finance_index_info
+(
+   id                   int not null auto_increment comment '流水号',
+   name                 char(20) not null comment '指标名称',
+   pid                  int not null comment '父节点流水号',
+   action               char(70) default '' comment 'action请求地址',
+   flag                 int not null comment '标志位 0-停用 1-启用',
+   intime               timestamp not null comment '入库时间',
+   primary key (id)
+);
+
+alter table t_finance_index_info comment '财务指标信息表';
+
+/**初始化财务指标信息数据**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股指标',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('偿债能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('盈利能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('成长能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资本结构',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('核心业务收益质量',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营运能力',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金流量',0,'',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('其他关注点',0,'',1,now());
+
+/**每股指标**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('基本每股收益',1,'perShare/perShare!EPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('稀释每股收益',1,'perShare/perShare!dilutEPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股营业收入',1,'perShare/perShare!mincmPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股营业利润',1,'perShare/perShare!opeprfPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股资本公积',1,'perShare/perShare!capsurfdPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股盈余公积',1,'perShare/perShare!surrefdPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股公积金',1,'perShare/perShare!accumfdPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股未分配利润',1,'perShare/perShare!undivprfPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股留存收益',1,'perShare/perShare!retearPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股经营活动现金流量',1,'perShare/perShare!opeCFPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股净现金流量',1,'perShare/perShare!CFPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股净资产',1,'perShare/perShare!NAPS.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('每股息税前利润',1,'perShare/perShare!EBITPS.action',1,now());
+
+/**偿债能力指标 **/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('流动比率',2,'solvent/solvent!currt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('速动比率',2,'solvent/solvent!qckrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金比率',2,'solvent/solvent!cash.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金流量比率',2,'solvent/solvent!cashFlow.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('产权比率',2,'solvent/solvent!dbequrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('偿债保障比率',2,'solvent/solvent!debtEnsure.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('息税前利润(EBIT)',2,'solvent/solvent!EBIT.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('税息折旧及摊销前利润(EBITDA)',2,'solvent/solvent!EBITDA .action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('利息保障倍数',2,'solvent/solvent!intcvr.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('短期有息负债',2,'solvent/solvent!shortInterestDebt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('长期有息负债',2,'solvent/solvent!longInterestDebt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('有息负债',2,'solvent/solvent!interestDebt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('有息负债比率',2,'solvent/solvent!interestDebtRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('有形净值债务比率',2,'solvent/solvent!dbtaneQurt.action',1,now());
+
+/** 盈利能力**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('加权平均净资产收益率',3,'profitability/profitability!ROE.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('加权平均净资产收益率(扣非)',3,'profitability/profitability!ROEcut.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产净利率',3,'profitability/profitability!ROA.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产利润率',3,'profitability/profitability!assetsProRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('毛利率',3,'profitability/profitability!grossProfit.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利率',3,'profitability/profitability!splashes.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利率(扣非)',3,'profitability/profitability!splashesKF.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('成本费用净利率',3,'profitability/profitability!costExpProRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产息税前利润率',3,'profitability/profitability!ebitRatio.action',1,now());
+
+/**成长能力指标**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率',3,'profitability/profitability!netprfgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率(扣非)',3,'profitability/profitability!netprfgrrtKF.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业利润增长率',4,'growthCapab/growthCapab!opeprfgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('利润总额增长率',4,'growthCapab/growthCapab!totprfgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业收入增长率',4,'profitability/profitability!opeincmgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净资产增长率',4,'profitability/profitability!netassgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产增长率',4,'profitability/profitability!totassgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('股东权益相对年初增长率',4,'growthCapab/growthCapab!shareHolderEquity.action',1,now());
+
+/**资本结构指标**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产负债率',5,'solvent/solvent!dbastrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('权益乘数',5,'solvent/solvent!equmul.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('固定资产比率',5,'capitalEnsemble/capitalEnsemble!fixassrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('无形资产比率',5,'capitalEnsemble/capitalEnsemble!intanassrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('商誉占比',5,'capitalEnsemble/capitalEnsemble!goodwill.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('股东权益比率',5,'capitalEnsemble/capitalEnsemble!equass.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('负债结构比率',5,'capitalEnsemble/capitalEnsemble!debtEnsemble.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('长期负债权益比率',5,'capitalEnsemble/capitalEnsemble!longDebtRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营运资金',5,'capitalEnsemble/capitalEnsemble!wrkcap.action',1,now());
+
+/**核心业务收益质量**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('投资收益  / 利润总额',6,'coreBusiQuality/coreBusiQuality!investProfitRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('公允价值变动  / 利润总额',6,'coreBusiQuality/coreBusiQuality!fairValueRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业外收支净额  / 利润总额',6,'coreBusiQuality/coreBusiQuality!noNBusiProRatio.action',1,now());
+
+/**营运能力指标**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('应收账款周转率',7,'operaCapacity/operaCapacity!aRTrat.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('存货周转率',7,'operaCapacity/operaCapacity!invtrtrrat.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('存货周转天数',7,'operaCapacity/operaCapacity!invtrtrday.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('应收账款周转天数',7,'operaCapacity/operaCapacity!aRTday.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('流动资产周转率',7,'operaCapacity/operaCapacity!currat.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('固定资产周转率',7,'operaCapacity/operaCapacity!fixassrat.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产周转率',7,'operaCapacity/operaCapacity!totassrat.action',1,now());
+
+/**现金流量指标**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('经营现金净流量',8,'cashFlow/cashFlow!operBusiCashRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('经营性现金流  / 净利润',8,'profitability/profitability!cashFlowProfits.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('主营业务现金比率',8,'cashFlow/cashFlow!coreBusiCashRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金及其等价物净增加额',8,'cashFlow/cashFlow!cashFlowInc.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产现金回收率',8,'cashFlow/cashFlow!cashAndAssetRatio.action',1,now());
+
+/**其他关注点**/
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('三项费用率',9,'otherConcerns/otherConcerns!threeExpRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('销售费用率',9,'otherConcerns/otherConcerns!salExpRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('管理费用率',9,'otherConcerns/otherConcerns!mgrExpRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('财务费用率',9,'otherConcerns/otherConcerns!financeExpRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('应收 / 营业收入',9,'otherConcerns/otherConcerns!recAcctBusiRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('预收 / 营业收入',9,'otherConcerns/otherConcerns!AdvanceAcctBusiRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('应付 / 存货',9,'otherConcerns/otherConcerns!dueAcctStock.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('存货 / 流动资产',9,'otherConcerns/otherConcerns!stockLiquid.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('固定资产 + 在建工程',9,'otherConcerns/otherConcerns!fixedAndunderCons.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('(固定资产 + 在建工程)占净资产比重',9,'otherConcerns/otherConcerns!fixedConsNetAsset.action',1,now());
+
 

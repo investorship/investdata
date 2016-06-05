@@ -1,60 +1,146 @@
 package com.investdata.action;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.investdata.common.BaseAction;
+import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TAdminUserDao;
+import com.investdata.dao.TUserDao;
+import com.investdata.dao.po.AdminUser;
+import com.investdata.dao.po.User;
+import com.investdata.utils.Coder;
+import com.investdata.utils.PropertiesUtils;
+import com.investdata.utils.ThreeDes;
 
 /**
  * 登录Action
  */
-public class LoginAction extends BaseAction {
+public class LoginAction extends BaseAction implements SessionAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	private Logger logger = Logger.getLogger(LoginAction.class);	
-	
+	private Map<String,Object> session;
+	private String userName;
+	private String password;
+	private String ajaxResult;
+	private boolean loginFlag; //登录验证标识
+
 	public String execute() throws Exception {
 		logger.info("进入登录流程..");
 		return INPUT;
 	}
 	
-	public String login() {
-		System.err.println("username=" + username + " password=" + pwd + " cap=" + captcha);
-//		DaoFactory.getTUserDao();
-		return INPUT;
+	//用户登录流程
+	public String login() throws Exception {
+		checkLogin();
+		if (loginFlag) {
+			return LOGIN_SUCC; //跳转到首页
+		} else {
+			return LOGIN_FAIL; //登录失败
+		}
+	}
+	
+	
+	/**
+	 * ajax校验用户名 密码是否成功
+	 * @return
+	 * @throws Exception
+	 */
+	public String checkLogin() throws Exception {
+		User user = new User();
+		int index = userName.indexOf("@");
+		if (index != -1 ) { //用邮箱当做用户名
+			user.setEmail(userName);
+		} else {
+			user.setUserName(userName);
+		}
+		
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
+		user.setPassword(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())));
+		TUserDao userDao = DaoFactory.getTUserDao();
+		User userObj = userDao.getUser(user);
+		
+		if (userObj != null) { //查询到用户信息后放入session
+			ajaxResult = "true";
+			loginFlag = true;
+			session.put("user", userObj);
+		} else {
+			ajaxResult = "false";
+		}
+		
+		return AJAX;
+	}
+	
+	//退出
+	public String logout() throws Exception {
+		//清除session中用户信息。
+		session.remove("user");
+		return LOGOUT;
 	}
 	
 	/**
 	 * 管理员登录
 	 * @return
 	 */
-	public String adminLogin() {
-		System.err.println("username=" + username + " password=" + pwd + " cap=" + captcha);
-//		DaoFactory.getTUserDao();
-		return INPUT;
+	public String checkAdminLogin() throws Exception {
+		AdminUser admUser = new AdminUser();
+		admUser.setUserName(userName);
+		
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey","");
+		admUser.setPassword(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())));
+		admUser.setFlag(1);
+		
+		TAdminUserDao admUserDao = DaoFactory.getTAdminUserDao();
+		AdminUser admUserObj = admUserDao.getAdminUser(admUser);
+		
+		if (admUserObj != null) {
+			ajaxResult = "true";
+			loginFlag = true;
+			session.put("admUser", admUserObj);
+		} else {
+			ajaxResult = "false";
+		}
+		return AJAX_ADMIN;
 	}
 	
-	private String username;
-	private String pwd;
-	private String captcha;
-	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getCaptcha() {
-		return captcha;
-	}
-	public void setCaptcha(String captcha) {
-		this.captcha = captcha;
-	}
-	
-	public String getPwd() {
-		return pwd;
+	/**
+	 * 考虑到登录界面的ajax校验可以完全绕过，比如可以用httpClient模拟表单提交直接
+	 * 向action提交后台数据，恶意猜密码等，在跳转进入登录流程后依然要再次判断一遍
+	 * @return
+	 * @throws Exception
+	 */
+	public String adminLogin() throws Exception {
+		//再次验证
+		checkAdminLogin();
+		if (loginFlag) {
+			return INPUT;
+		} else {
+			return FAIL;
+		}
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getAjaxResult() {
+		return ajaxResult;
 	}
 }

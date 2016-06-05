@@ -15,7 +15,7 @@ public class StockDaoImpl extends BaseDao implements TStockDao {
 	 * 返回股票信息
 	 */
 	public List<Stock> getStocks(Stock stock) throws Exception {
-		List<Stock> stocks = dao.queryForList("stock.getAllStocks", stock);
+		List<Stock> stocks = dao.queryForList("stock.getStocks", stock);
 		return stocks;
 	}
 
