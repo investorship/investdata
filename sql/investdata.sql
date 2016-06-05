@@ -3118,6 +3118,7 @@ insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('经营现金净流量',8,'cashFlow/cashFlow!operBusiCashRatio.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('经营性现金流  / 净利润',8,'profitability/profitability!cashFlowProfits.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('主营业务现金比率',8,'cashFlow/cashFlow!coreBusiCashRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金股利支付率',8,'cashFlow/cashFlow!cashPayRatio.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('现金及其等价物净增加额',8,'cashFlow/cashFlow!cashFlowInc.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产现金回收率',8,'cashFlow/cashFlow!cashAndAssetRatio.action',1,now());
 
