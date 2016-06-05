@@ -2,7 +2,7 @@
 
 /* common */
 
-html, body {padding: 0px;margin: 0px;width: 100%;height: 100%;min-width: 320px;font-family: arial;}
+html, body {padding: 0px;margin: 0px;width: 100%;height: 100%;min-width: 320px;font-family: "微软雅黑";}
 
 body {text-align: left; font:13px arial;background: #fff; color:#333;}
 
@@ -96,7 +96,7 @@ font-weight: bold;}
 
 #sbox input.stbox:hover {border-color:#bdbdbd;}
 
-#home .hotwords {background:#f8f8f8;width:620px;margin:10px auto;border-width:1px 0 0 1px;border-style:solid;border-color:#ddd;}
+#home .hotwords {background:#f8f8f8;width:732px;margin:10px auto;border-width:1px 0 0 1px;border-style:solid;border-color:#ddd;}
 
 #home .hotwords a {text-decoration:none;padding-left:10px;}
 
@@ -139,6 +139,7 @@ font-weight: bold;}
 }
 .wbyTop {
     border-bottom: 1px solid #f2f2f2;
+    background: #0765c5;
     color: #eaeaea;
     height: 35px;
     line-height: 35px;
@@ -149,7 +150,7 @@ font-weight: bold;}
     width: 270px;
 }
 .wbyLinks a {
-    color: #8a8a8a;
+    color: #fff;
     padding: 0 5px;
 }
 ins, a {
@@ -158,7 +159,7 @@ ins, a {
 
 /* Main style */
 
-#wrapper {min-height: 90%;height: auto !important;margin: 0px auto -86px;}
+#wrapper {min-height: 88%;height: auto !important;margin: 0px auto -86px;}
 
 #container {padding:0;overflow:hidden;}
 
@@ -204,9 +205,9 @@ color: #fff;
 
 .sele a:visited   {color: #0062C3; text-decoration:none;}
 
-.sele a.desc {background: url(../image/arrow.png) 100% 50% no-repeat;font-weight:bold;border-bottom:2px solid #38f;}
+.sele a.desc {background: url(../imagesarrow.png) 100% 50% no-repeat;font-weight:bold;border-bottom:2px solid #38f;}
 
-.sele a.asc {background: url(../image/arrow2.png) 100% 50% no-repeat; font-weight:bold;border-bottom:2px solid #38f;}
+.sele a.asc {background: url(../imagesarrow2.png) 100% 50% no-repeat; font-weight:bold;border-bottom:2px solid #38f;}
 
 /*
 
