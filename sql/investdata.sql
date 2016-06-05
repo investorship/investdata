@@ -45,6 +45,148 @@ create table t_user_admin
 
 alter table t_user_admin comment '管理员用户信息表';
 
+drop table if exists t_balance_sheet;
+
+/*==============================================================*/
+/* Table: t_balance_sheet                                       */
+/*==============================================================*/
+create table t_balance_sheet
+(
+   code                 char(10) not null comment '股票代码',
+   year                 int not null comment '年份',
+   note_recable         decimal(16,2) comment '应收票据',
+   adv_customers        decimal(16,2) comment '预收账款',
+   acc_payable          decimal(16,2) comment '应付账款',
+   constr_in_pro        decimal(16,2) comment '在建工程',
+   lntang_assets        decimal(16,2) comment '无形资产',
+   goodwill             decimal(16,2) comment '商誉',
+   short_term_loans     decimal(16,2) comment '短期借款',
+   note_payable         decimal(16,2) comment '应付票据',
+   debit_within_year    decimal(16,2) comment '一年内到期的非流动负债',
+   long_term_loans      decimal(16,2) comment '长期借款',
+   bounds_payable       decimal(16,2) comment '应付债券',
+   liquid_assets_start  decimal(16,2) comment '期初流动资产',
+   liquid_assets_end    decimal(16,2) comment '期末流动资产',
+   curr_liab            decimal(16,2) comment '流动负债',
+   curr_liab_non        decimal(16,2) comment '非流动负债',
+   goods_start          decimal(16,2) comment '期初存货',
+   goods_end            decimal(16,2) comment '期末存货',
+   cash                 decimal(16,2) comment '货币资金',
+   trad_assets          decimal(16,2) comment '交易性金融资产',
+   total_liab           decimal(16,2) comment '负债总额',
+   total_ass_start      decimal(16,2) comment '期初资产总额',
+   total_ass_end        decimal(16,2) comment '期末资产总额',
+   share_holder_start   decimal(16,2) comment '期初股东权益',
+   share_holder_end     decimal(16,2) comment '期末股东权益',
+   fixed_assets_start   decimal(16,2) comment '期初固定资产',
+   fixed_assets_end     decimal(16,2) comment '期末固定资产',
+   retain_earnings      decimal(16,2) comment '未分配利润',
+   acc_recable_start    decimal(16,2) comment '期初应收账款',
+   acc_recable_end      decimal(16,2) comment '期末应收账款',
+   capital_surplus      decimal(16,2) comment '资本公积',
+   surplus_reserve      decimal(16,2) comment '盈余公积',
+   flag                 int comment '标志位',
+   intime               timestamp comment '入库时间',
+   moduser              char(30) comment '修改人',
+   primary key (code, year)
+);
+
+alter table t_balance_sheet comment '资产负债表';
+
+
+
+/**利润表 **/
+drop table if exists t_incstate_sheets;
+
+/*==============================================================*/
+/* Table: t_incstate_sheets                                     */
+/*==============================================================*/
+create table t_incstate_sheets
+(
+   code                 char(10) not null comment '股票代码',
+   year                 int not null comment '年份',
+   busi_income_this     decimal(16,2) comment '本期营业收入',
+   busi_income_last     decimal(16,2) comment '上期营业收入',
+   opera_profits_this   decimal(16,2) comment '本期营业利润',
+   opera_profits_last   decimal(16,2) comment '上期营业利润',
+   income_tax           decimal(16,2) comment '所得税',
+   fixed_ass_depre      decimal(16,2) comment '固定资产折旧',
+   long_pre_amort       decimal(16,2) comment '长期待摊费用摊销',
+   total_profit_start   decimal(16,2) comment '期初利润总额',
+   total_profit_end     decimal(16,2) comment '期末利润总额',
+   market_consts_this   decimal(16,2) comment '本期销售费用',
+   market_consts_last   decimal(16,2) comment '上期销售费用',
+   finance_consts_this  decimal(16,2) comment '本期财务费用',
+   finance_consts_last  decimal(16,2) comment '上期财务费用',
+   mgr_consts_this      decimal(16,2) comment '本期管理费用',
+   mgr_consts_last      decimal(16,2) comment '上期管理费用',
+   busi_tax_surcharge   decimal(16,2) comment '营业税金及附加',
+   net_profits_this     decimal(16,2) comment '本期净利润',
+   net_profits_last     decimal(16,2) comment '上期净利润',
+   net_profits__kf_last decimal(16,2) comment '上期净利润（扣非）',
+   net_profits__kf_this decimal(16,2) comment '本期净利润（扣非）',
+   operat_cost          decimal(16,2) comment '营业成本',
+   busi_income_kf       decimal(16,2) comment '营业收入(扣非)',
+   fair_val_change      decimal(16,2) comment '公允价值变动',
+   invest_income        decimal(16,2) comment '投资收益',
+   non_opera_income     decimal(16,2) comment '营业外收入',
+   non_opera_outcome    decimal(16,2) comment '营业外支出',
+   flag                 int comment '标志位',
+   intime               timestamp comment '入库时间',
+   moduser              char(30) comment '修改人',
+   primary key (code, year)
+);
+
+alter table t_incstate_sheets comment '利润表';
+
+
+/** 现金流量表**/
+drop table if exists t_cashflow_sheet;
+
+/*==============================================================*/
+/* Table: t_cashflow_sheet                                      */
+/*==============================================================*/
+create table t_cashflow_sheet
+(
+   code                 char(10) not null comment '股票代码',
+   year                 int not null comment '年份',
+   opera_active_cash    decimal(16,2) comment '经营活动产生的现金流量净额 ',
+   cash_and_cashequ     decimal(16,2) comment '现金及现金等价物净增加额',
+   flag                 int comment '标志位',
+   intime               timestamp comment '入库时间',
+   moduser              char(30) comment '修改人',
+   primary key (code, year)
+);
+
+alter table t_cashflow_sheet comment '现金流量表';
+
+
+/** 综合数据项表 **/
+drop table if exists t_gendata_sheet;
+
+/*==============================================================*/
+/* Table: t_gendata_sheet                                       */
+/*==============================================================*/
+create table t_gendata_sheet
+(
+   cdoe                 char(10) not null comment '股票代码',
+   year                 int not null comment '年份',
+   total_stocks         decimal(14) comment '总股本',
+   roe_wa               decimal(10,2) comment '加权平均净资产收益率',
+   roe_wa_kf            decimal(10,2) comment '加权平均净资产收益率（扣非）',
+   dividen_pay_sum      decimal(16,2) comment '本年度发放的现金股利总和',
+   eps                  decimal(10,2) comment '基本每股收益',
+   eps_diluted          decimal(10,2) comment '稀释每股收益',
+   flag                 int comment '标志位',
+   intime               timestamp comment '入库时间',
+   moduser              char(30) comment '修改人',
+   primary key (cdoe, year)
+);
+
+alter table t_gendata_sheet comment '综合数据项表';
+
+
+
 drop table if exists t_industry_category;
 
 /*==============================================================*/
@@ -3133,5 +3275,6 @@ insert into t_finance_index_info(name,pid,action,flag,intime) values ('应付 / 
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('存货 / 流动资产',9,'otherConcerns/otherConcerns!stockLiquid.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('固定资产 + 在建工程',9,'otherConcerns/otherConcerns!fixedAndunderCons.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('(固定资产 + 在建工程)占净资产比重',9,'otherConcerns/otherConcerns!fixedConsNetAsset.action',1,now());
+
 
 
