@@ -31,20 +31,24 @@
 <script type="text/javascript">
 </script>
 <script type="text/javascript">
-var availableTags = ${stocksItems};
+
 $(function() {
 	//从后台获取数据.
+	var availableTags = ${stockData};
 	$(function() {
+		//从后台获取数据.
+		var availableTags = ${stockData};
 	    $("#keyword").autocomplete({
 	    	source:availableTags,
-	    	minLength:2,
-	    	max:10,
-	    	focus: function() {
-	            // 防止在获得焦点时插入值
-	            return false;
-	        },
+	    	maxRows:12,
+	    	matchSubset:true,
+	    	cacheLength: 1000,
+	    	scroll: true,
+	    	
 	    	select: function( event, ui ){
-		    	$("#keyword").val(ui.item.value);
+		    	var selectVal = ui.item.value.split("    ");
+		    	var keyword = selectVal[1];
+		    	
 		      }
 	    })
 	 });

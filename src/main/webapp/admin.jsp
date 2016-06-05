@@ -1,12 +1,28 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+<base href="<%=basePath%>">
 <title>后台管理登录界面</title>
 <link href="css/admin/admlogin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+<script language="javascript">
+	$(function() {
+		$("#submitBtn").click(function() {
+			$("#admin").attr("action","login/adminLogin!adminLogin.action") ;
+			$("#admin").submit();
+		});
+	});
+</script>
 </head>
 <body>
-	<form id="admin" action="login/adminLogin!adminLogin.action">
+	<form id="admin" method="post" action="login/adminLogin!adminLogin.action">
 		<div class="Main">
 			<ul>
 				<li class="top"></li>
@@ -33,7 +49,7 @@
 				<li class="topE"></li>
 				<li class="middle_A"></li>
 				<li class="middle_B"></li>
-				<li class="middle_C"><span class="btn"> <img alt=""
+				<li class="middle_C"><span class="btn"><img id="submitBtn" alt=""
 						src="images/admin/btnlogin.gif" />
 
 
