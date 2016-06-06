@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  * @author Bill
  *
  */
-public class Menu {
+public class MgrMenu {
 	
 		private int id;//菜单id
 		private int pid;//菜单父id
