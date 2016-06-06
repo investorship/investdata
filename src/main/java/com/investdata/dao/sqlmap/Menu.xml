@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="user">
+
+	<typeAlias alias="menu" type="com.investdata.dao.po.Menu" />
+
+	<parameterMap class="user" id="userParam">
+		<parameter property="userName" />
+		<parameter property="password" />
+		<parameter property="email" />
+		<parameter property="activeCode" />
+		<parameter property="isPayer" />
+		<parameter property="payDate" />
+		<parameter property="endDate" />
+		<parameter property="flag" />
+		<parameter property="inTime" />
+	</parameterMap>
+	
+	<update id="updateFlag" parameterClass="com.investdata.dao.po.User">
+		update t_user set flag = #flag#  where username = #userName#
+	</update>
+	
+	<sql id="select_what">
+		select username,password,email,activecode,ispayer,paydate,enddate,flag,intime from t_user
+	</sql>
+
+	<insert id="insertUser" parameterMap="userParam">
+		insert into t_user (
+		username,
+		password,
+		email,
+		activecode,
+		ispayer,
+		paydate,
+		enddate,
+		flag,
+		intime
+		) values (
+		?,?,?,?,?,?,?,?,?
+		)
+	</insert>
+	
+	
+	<sql id="where_conditions">
+		<dynamic prepend=" where ">
+			<isNotEmpty prepend=" AND " property="userName">
+				username = #userName#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="password">
+				password =
+				#password#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="email">
+				email =
+				#email#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="activeCode">
+				activecode =
+				#activeCode#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="isPayer">
+				ispayer =
+				#isPayer#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="payDate">
+				paydate =
+				#payDate#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="endDate">
+				endDate =
+				#endDate#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="flag">
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="inTime">
+				intime =
+				#inTime#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!-- 引用的 select_what 和 where_conditons 必须在上面，否则报找不到 -->
+	<statement id="getUser" parameterClass="com.investdata.dao.po.User" resultClass="user">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+	</statement>
+	
+</sqlMap>
