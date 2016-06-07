@@ -1,15 +1,19 @@
 package com.investdata.action;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
+import org.json.JSONObject;
 
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
 import com.investdata.dao.TAdminUserDao;
+import com.investdata.dao.TMgrMenuDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.po.AdminUser;
+import com.investdata.dao.po.MgrMenu;
 import com.investdata.dao.po.User;
 import com.investdata.utils.Coder;
 import com.investdata.utils.PropertiesUtils;
@@ -115,6 +119,29 @@ public class LoginAction extends BaseAction implements SessionAware {
 		//再次验证
 		checkAdminLogin();
 		if (loginFlag) {
+			//加载后台管理菜单
+			TMgrMenuDao mgrMenuDao = DaoFactory.getTMgrMenuDao();
+			MgrMenu mgrMenu = new MgrMenu();
+			mgrMenu.setFlag(1);
+			List <MgrMenu> menusList = mgrMenuDao.getMgrMenus(mgrMenu);
+			
+			StringBuilder menusJsonBuilders = new StringBuilder();
+			for (MgrMenu menu : menusList) {
+				JSONObject menuJson = new JSONObject();
+				menuJson.put("id", menu.getId());
+				menuJson.put("pId", menu.getPid());
+				menuJson.put("name", menu.getName());
+				int isLeaf = menu.getIsLeaf();
+				if (isLeaf == 1) {
+					menuJson.put("url", menu.getReqUrl());
+					menuJson.put("target", "content");
+				}
+				
+				menusJsonBuilders.append(menuJson).append(",").append("\n");
+			}
+			
+			menusJsonBuilders.delete(menusJsonBuilders.length()-2,menusJsonBuilders.length() -1);
+			session.put("jsonMenus", menusJsonBuilders);
 			return INPUT;
 		} else {
 			return FAIL;
@@ -142,5 +169,17 @@ public class LoginAction extends BaseAction implements SessionAware {
 
 	public String getAjaxResult() {
 		return ajaxResult;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		StringBuilder aa = new StringBuilder();
+		JSONObject json = new JSONObject();
+		json.put("userName", "zhangsan");
+		
+		aa.append(json).append(",\n");
+		json = new JSONObject();
+		json.put("paw", 123);
+		aa.append(json).append("\n");
+		System.err.println(aa);
 	}
 }

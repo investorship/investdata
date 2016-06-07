@@ -9,24 +9,23 @@ import java.sql.Timestamp;
  */
 public class MgrMenu {
 	
-		private int id;//菜单id
-		private int pid;//菜单父id
+		private Integer id;//菜单id
+		private Integer pid;//菜单父id
 		private String name;//菜单名称
-		private int isleaf;//是否叶子节点，0-否，1-是
-		private int flag;//是否启用标记,0-禁用，1-启用
-		private Timestamp intime;//入库时间
-		private String url;//url
-		
-		public int getId() {
+		private Integer isLeaf;//是否叶子节点，0-否，1-是
+		private String reqUrl; //菜单连接地址
+		private Integer flag;//是否启用标记,0-禁用，1-启用
+		private Timestamp inTime;//入库时间
+		public Integer getId() {
 			return id;
 		}
-		public void setId(int id) {
+		public void setId(Integer id) {
 			this.id = id;
 		}
-		public int getPid() {
+		public Integer getPid() {
 			return pid;
 		}
-		public void setPid(int pid) {
+		public void setPid(Integer pid) {
 			this.pid = pid;
 		}
 		public String getName() {
@@ -35,29 +34,29 @@ public class MgrMenu {
 		public void setName(String name) {
 			this.name = name;
 		}
-		public int getIsleaf() {
-			return isleaf;
+		public Integer getIsLeaf() {
+			return isLeaf;
 		}
-		public void setIsleaf(int isleaf) {
-			this.isleaf = isleaf;
+		public void setIsLeaf(Integer isLeaf) {
+			this.isLeaf = isLeaf;
 		}
-		public int getFlag() {
+		public String getReqUrl() {
+			return reqUrl;
+		}
+		public void setReqUrl(String reqUrl) {
+			this.reqUrl = reqUrl;
+		}
+		public Integer getFlag() {
 			return flag;
 		}
-		public void setFlag(int flag) {
+		public void setFlag(Integer flag) {
 			this.flag = flag;
 		}
-		public Timestamp getIntime() {
-			return intime;
+		public Timestamp getInTime() {
+			return inTime;
 		}
-		public void setIntime(Timestamp intime) {
-			this.intime = intime;
+		public void setInTime(Timestamp inTime) {
+			this.inTime = inTime;
 		}
-		public String getUrl() {
-			return url;
-		}
-		public void setUrl(String url) {
-			this.url = url;
-		}
-
+		
 }
