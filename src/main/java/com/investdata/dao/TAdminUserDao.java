@@ -1,7 +1,9 @@
 package com.investdata.dao;
 
+import java.util.List;
+
 import com.investdata.dao.po.AdminUser;
 
 public interface TAdminUserDao {
-	public AdminUser getAdminUser(AdminUser adminUser) throws Exception;
+	public List<AdminUser> getAdminUsers(AdminUser adminUser) throws Exception;
 }

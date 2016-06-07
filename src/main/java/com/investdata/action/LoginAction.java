@@ -97,12 +97,11 @@ public class LoginAction extends BaseAction implements SessionAware {
 		admUser.setFlag(1);
 		
 		TAdminUserDao admUserDao = DaoFactory.getTAdminUserDao();
-		AdminUser admUserObj = admUserDao.getAdminUser(admUser);
-		
-		if (admUserObj != null) {
+		List<AdminUser> adminUsers = admUserDao.getAdminUsers(admUser);
+		if (adminUsers != null && adminUsers.size() == 1) {
 			ajaxResult = "true";
 			loginFlag = true;
-			session.put("admUser", admUserObj);
+			session.put("admUser", adminUsers.get(0));
 		} else {
 			ajaxResult = "false";
 		}

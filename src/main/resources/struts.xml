@@ -57,6 +57,15 @@
 			</result>
 		</action>
 	</package>
+	
+	<!-- 后台管理菜单 -->
+	<package name="menuMgr" namespace="/menuMgr" extends="struts-default,json-default">
+		<action name="adminUserMgr" class="adminUserMgrAction">
+			<result name="input">/WEB-INF/admin/userMgr/adminUserQuery.jsp</result>
+			<result name="ajax" type="json"></result>
+		</action>
+	</package>
+	
 
 	<!-- Add packages here <include file="example.xml"/> -->
 </struts>

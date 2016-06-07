@@ -1,14 +1,14 @@
 package com.investdata.dao.impl;
 
+import java.util.List;
+
 import com.investdata.dao.TAdminUserDao;
 import com.investdata.dao.po.AdminUser;
 
 public class AdminUserDaoImpl extends BaseDao implements TAdminUserDao {
 
-
-	public AdminUser getAdminUser(AdminUser adminUser) throws Exception {
-		AdminUser admUser = (AdminUser)dao.queryForObject("adminUser.getAdminUser", adminUser);
-		return admUser;
+	public List<AdminUser> getAdminUsers(AdminUser adminUser) throws Exception {
+		return dao.queryForList("adminUser.getAdminUser", adminUser);
 	}
 
 }
