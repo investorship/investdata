@@ -9,114 +9,60 @@
 <html>
 <head>
 <style>
-html,body {
-	margin: 0;
-	padding: 0;
-	font-size: 75%;
-}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <base href="<%=basePath%>">
 <title>管理员用户信息查询</title>
+<link rel="stylesheet" type="text/css" href="css/admin/jquery-ui.theme.css" />
 <link rel="stylesheet" type="text/css" href="css/admin/ui.jqgrid.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 75%;
+}
+</style>
 <script src="js/jquery-2.2.3.min.js" type="text/javascript"></script>
-<script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/admin/grid.locale-en.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="js/admin/jquery.jqGrid.min.js" type="text/javascript"></script>
+<script src="js/admin/grid.locale-en.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	var data = [ {
-		userName : "xiao",
-		email : "hello@umpay.com",
-		perm_level : "1",
-		flag : "1",
-		intime : "2012-09-11"
-	}, {
-		userName : "xiaso",
-		email : "hell1o@umpay.com",
-		perm_level : "1",
-		flag : "1",
-		intime : "2013-09-11"
-	} ];
-
-	$(document).ready(function() {
-		$("#jqGrid").jqGrid({
-			url : 'menuMgr/adminUser!query.action',
-			datatype : "json",
-			colModel : [ {
-				label : 'userName',
-				name : 'userName',
-				width : 75
-			}, {
-				label : 'email',
-				name : 'email',
-				width : 90
-			}, {
-				label : 'perm_level',
-				name : 'perm_level',
-				width : 100
-			}, {
-				label : 'flag',
-				name : 'flag',
-				width : 80,
-				sorttype : 'integer'
-			},
-			// sorttype is used only if the data is loaded locally or loadonce is set to true
-			{
-				label : 'intime',
-				name : 'intime',
-				width : 80,
-				sorttype : 'number'
-			}],
-			viewrecords : true, // show the current page, data rang and total records on the toolbar
-			width : 780,
-			height : 200,
-			rowNum : 30,
-			loadonce : true, // this is just for the demo
-			pager : "#jqGridPager"
+$(document).ready(
+		   function() {
+		jQuery("#list4").jqGrid({
+		datatype: "local",
+		height: 250,
+		    colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		    colModel:[
+		    {name:'id',index:'id', width:60, sorttype:"int"},
+		    {name:'invdate',index:'invdate', width:90, sorttype:"date"},
+		    {name:'name',index:'name', width:100},
+		    {name:'amount',index:'amount', width:80, align:"right",sorttype:"float"},
+		    {name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},
+		    {name:'total',index:'total', width:80,align:"right",sorttype:"float"},
+		    {name:'note',index:'note', width:150, sortable:false}
+		    ],
+		    multiselect: true,
+		    caption: "Manipulating Array Data"
+		  });
+		var mydata = [
+		{id:"1",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+		{id:"2",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+		{id:"3",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+		{id:"4",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+		{id:"5",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+		{id:"6",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+		{id:"7",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+		{id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+		{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
+		];
+		for(var i=0;i<=mydata.length;i++)
+		jQuery("#list4").jqGrid('addRowData',i+1,mydata[i]);
 		});
-	});
-
-	/* $(document).ready(
-	 function() {
-	 jQuery("#list2").jqGrid({
-	 //url:"menuMgr/adminUser!query.action",
-	 datatype: "local",//前后交互的格式是json数据
-	 data: data,
-	 //mtype: 'GET',//交互的方式是发送httpget请求
-	 colNames:['userName','email','perm_level','flag','intime'], //表格的列名
-	 colModel:[
-	 {name:'userName',index:'userName', width:30},//每一列的具体信息，index是索引名，当需要排序时，会传这个参数给后端
-	 {name:'email',index:'email', width:65,align:"right"},
-	 {name:'perm_level',index:'perm_level', width:65,align:"right"}
-	 {name:'flag',index:'flag', width:65,align:"right"}
-	 {name:'intime',index:'intime', width:65,align:"right"}
-	 ],
-	 rowNum:100,//每一页的行数
-	 height: 'auto',
-	 rowList:[100,200,300],
-	 pager: '#pager2',
-	 sortname: 'id',
-	 viewrecords: true,
-	 sortorder: "desc",
-	 jsonReader: {//读取后端json数据的格式
-	 root: "rows",//保存详细记录的名称
-	 total: "total",//总共有页
-	 page: "page",//当前是哪一页
-	 records: "records",//总共记录数
-	 repeatitems: false
-	 },
-	 caption: "My jqgrid test"//表格名称
-	 });
-	
-	 jQuery("#list2").jqGrid('navGrid','#pager2',{edit:false,add:false,del:false});
-
-	 }); */
-</script>
-</head>
-<body>sfdsdfdsfsfd
-	<table id="jqGrid"></table>
-	<div id="jqGridPager"></div>
-</body>
-</html>
+		</script>
+		</head>
+		<body>
+		<table id="list4"></table>
+		</body>
+		</html>
