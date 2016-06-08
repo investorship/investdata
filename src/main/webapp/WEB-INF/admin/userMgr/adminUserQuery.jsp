@@ -57,9 +57,11 @@ $(document).ready(
 		{id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
 		{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
 		];
+		
 		for(var i=0;i<=mydata.length;i++)
 		jQuery("#list4").jqGrid('addRowData',i+1,mydata[i]);
 		});
+		
 		</script>
 		</head>
 		<body>
