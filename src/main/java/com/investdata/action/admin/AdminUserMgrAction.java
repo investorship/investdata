@@ -39,12 +39,19 @@ public class AdminUserMgrAction extends BaseAction  implements RequestAware{
 		for (int i=0; i< adminUsers.size(); i++) {
 			AdminUser adUser = adminUsers.get(i);
 			JSONObject jsonUser = new JSONObject();
-			jsonUser.put("userName", adUser.getUserName());
+			JSONObject rowsJson = new JSONObject();
+			rowsJson.put("id", i+1);
 			jsonUser.put("email", adUser.getEmail());
 			jsonUser.put("perm_level", adUser.getPermLevel());
 			jsonUser.put("flag", adUser.getFlag());
 			jsonUser.put("intime", adUser.getInTime());
-			rows.add(i,jsonUser);
+			
+			String jsonStr = jsonUser.toString().replace("{", "[");
+			jsonStr = jsonStr.replace("}", "]");
+			
+			rowsJson.put("cell", jsonStr);
+			
+			rows.add(i,rowsJson);
 		}
 		logger.debug(String.format("rows=[%s]", rows));
 		
