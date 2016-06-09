@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+    margin: 0;
+    padding: 0;
+}
+.content {
+    min-height:580px;
+    padding: 120px 0 0 0;
+    width: 1000px;
+    margin: 0 auto;
+}
+.clear {
+    zoom: 1;
+}
+#msg {
+    background-color: #EDFFD3;
+    background-position: -96px 4px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: red;
+}
+.uccontainer01 {
+    width: 1000px;
+    margin: 20px auto;
+    background: url("../images/bg_reg_complete_left.jpg") no-repeat scroll 36px 20px #FFFFFF;
+    padding: 0 0 0 190px;
+}
+.uccontainer01 ul {
+    padding: 20px 0 0 15px;
+}
+.uccontainer01 ul li {
+    padding: 12px 40px;
+}
+.uccontainer01 dl dd {
+    padding-top: 5px;
+}
+.uccontainer01 dl p {
+    padding-top: 5px;
+}
+.uccontainer01 .blue {
+    color: #0066AA !important;
+}
+.uccontainer01 h5 {
+    font-size: 1.5em;
+    margin-bottom: 0.553em;
+    color: #333333;
+    font-weight: bold;
+}
+.uccontainer01 .pd-btm15e {
+    padding-bottom: 1.5em;
+}
+.uccontainer01 .pd-top {
+    padding-top: 0.833em;
+}

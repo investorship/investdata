@@ -705,6 +705,19 @@ img, input {
     position: relative
 }
 
+#pg-reg .go-login-pwd {
+    text-align: left;
+    height: 65px;
+    line-height: 80px;
+    width: 82%;
+    margin: 0 auto;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 25px;
+    color: #000;
+    font-size: 24px;
+}
+
 #pg-reg .ui-form-item .no-style {
     border: 0 none;
     background: 0 0;

@@ -27,6 +27,11 @@
 		<action name="adminLogin" class="loginAction">
 			<result name="input">/WEB-INF/admin/main.jsp</result>
 		</action>
+		
+		<!-- 重置密码 -->
+		<action name="resetPwd" class="resetPwdAction">
+			<result name="input">/WEB-INF/resetpwd.jsp</result>
+		</action>
 	</package>
 
 	<!-- 注册 -->

@@ -184,7 +184,7 @@
 									</div>
 									<div class="ui-form-item" style="height: 50px">
 										<input type="checkbox" name="agreee"> 我已阅读并同意<a
-											href=" " target="_blank">《投资数据网注册服务协议》</a>
+											href="service_agreement.html" target="_blank">《投资数据网注册服务协议》</a>
 									</div>
 									<div class="ui-form-item" style="padding-bottom: 65px">
 										<div>

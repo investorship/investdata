@@ -6,117 +6,63 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<html> 
-<head> 
-<meta charset="utf-8" />
-<base href="<%=basePath%>">
-<title>投资数据网 - 注册</title>
-<meta name="viewport" content="width=1010"/>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="css/basic.css" type="text/css" rel="stylesheet"/>
-<link href="css/list.css" type="text/css" rel="stylesheet"/>
-<link href="css/login.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript">
-	//更换验证码 防止缓存，使用时间戳
-	function changeImageAuth() {
-		$("#imageAuth").attr("src","imageAuth/imageAuth.action?timestamp="+new Date().getTime());
-	}
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-    $("#regForm").validate({
-        rules: {
-        	userName:{
-                required: true,
-                minlength: 2
-            },
-            pwd:{
-                required: true,
-                minlength: 6,
-                maxlength: 16
-            },
-            repwd:{
-                required: true,
-                equalTo: "#pwd"
-            },
-            email:{
-            	required:true,
-            	email:true
-            },
-            randCode: {
-            	required: true,
-            	rangelength:[6,6]
-            }
-            
-        },
-        messages:{
-        	userName:{
-                required: "用户名不能为空",
-                minlength: "用户名的最小长度为2"
-            },
-            pwd:{
-                required: "密码不能为空",
-                minlength: "密码长度不能少于6个字符",
-                maxlength: "密码长度不能超过16个字符"
-            },
-            repwd:{
-                required: "确认密码不能为空",
-                equalTo: "确认密码和密码不一致"
-            },
-            email:{
-            	required : "邮箱不能为空",
-            	email : "请输入正确的邮箱地址"
-            },randCode: {
-            	required: "验证码不能为空",
-            	rangelength: "验证码位数错误"
-            }
-        }
-    });
-});
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <base href="<%=basePath%>">
+    <title>投资数据网 - 邮箱激活</title>
+    <meta name="viewport" content="width=1010"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link href="css/basic.css" type="text/css" rel="stylesheet"/>
+    <link href="css/success.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <div class="wbyTop fn-clear">
-  <c:choose>
-		<c:when test="${user == null}">
-			<div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
-		</c:when>
-		<c:otherwise>
-			<div class="wbyLinks fn-right">[${user.userName}]<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
-		</c:otherwise>
-	</c:choose>
+    <div class="wbyLinks fn-right"><span><a target="_blank" href="">登陆</a> <a target="_blank" href="">注册</a>|<a href="">关于我们</a></span>
+    </div>
 </div>
 <!-- header start -->
 <div class="header">
-  <div class="wrap clearfix">
-    <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a></div>
-    <div class="search"  data-sudaclick="topsearch">
-      <form action="stock/stock.action" method="get" target="_blank" id="search_f">
-        <input type="text" name="k" class="search_k" placeholder="输入股票代码,名称或拼音首字母" onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}" onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="keyword" />
-        <input type="submit" class="search_smt" value="快速查找" />
-      </form>
+    <div class="wrap clearfix">
+        <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="" title=""/></a></div>
     </div>
-  </div>
 </div>
-<div class="maincontent">
-    <div id="pg-reg">
-        <div class="container_12_1080">
-            <div class="color-white-bg ui-box-white-bg regbox" >
-                <div class="ui-tab-content ui-tab-content-current">
-                    <div class="step1">
-                       	<h3>亲爱的${userName}</h3>您以成功注册为投资数据网的用户，
-                       	认证信息已寄至您的${email }邮箱，
-                       	请登录您的邮箱查收，并点击邮箱中的认证链接以激活账户
-                    </div>
-                </div>
-            </div>
+<div class="content clear">
+    <div class="mainbody">
+        <div id="msg" style="display:none"></div>
+        <div class="uccontainer01">
+            <ul>
+                <li style="border-bottom:1px solid #EEEEEE !important">
+
+                    <h5 class="blue">${userName}: 恭喜注册完成！<br><br>
+                    		激活信息已寄至您的${email}邮箱,请查邮箱并激活账号</h5>
+                    <br>
+                </li>
+                <li style="padding-top:30px; padding-bottom:40px;color:#333">
+                    <dl>
+                        <dt>还没有收到确认邮件怎么办?</dt>
+                        <dd>1.看看是否在邮箱垃圾箱里</dd>
+                        <dd>2.如您想修改注册邮箱，请您联系QQ客服 : 123456789</dd>
+                        <dd>
+                            <span>3.如果您还没有收到激活的邮件，请试着<a href="" class="again blue">重发激活邮件</a></span>
+                            <span class="msg2 s_again_msg"></span></dd>
+                    </dl>
+                </li>
+                <ul>
+                </ul>
+            </ul>
         </div>
     </div>
 </div>
+
 <div id="footer">
-    <p>Copyright © 2016 投资数据网 &nbsp;京ICP证160506号&nbsp;<a href="" title="雪球" target="_blank">雪球</a> &nbsp; <a href="" title="巨潮资讯网" target="_blank">巨潮资讯网</a> <br>
-        <span class="lianxi"></span> </p>
+    <p>Copyright © 2016 投资数据网 &nbsp;京ICP证160506号&nbsp;
+        <a href="" title="雪球" target="_blank">雪球</a> &nbsp;
+        <a href="" title="巨潮资讯网" target="_blank">巨潮资讯网</a>
+        <br>
+        <span class="lianxi"></span></p>
 </div>
 </body>
 </html>

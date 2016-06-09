@@ -20,7 +20,7 @@
 	<bean id="stockAction" class="com.investdata.action.StockAction" />
 	<bean id="imageAuthAction" class="com.investdata.action.AuthImageAction" />
 	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" />
-
+	<bean id="resetPwdAction" class="com.investdata.action.ResetPwdAction" />
 
 
 	<bean id="propertyConfigurer"
