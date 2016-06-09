@@ -157,6 +157,14 @@ ins, a {
     text-decoration: none;
 }
 
+.note{
+    background: #FFFAE2;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #C97927;
+}
+
 /* Main style */
 
 #wrapper {min-height: 88%;height: auto !important;margin: 0px auto -86px;}

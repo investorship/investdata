@@ -28,7 +28,7 @@
 			<div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
 		</c:when>
 		<c:otherwise>
-			<div class="wbyLinks fn-right">${user.userName}<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
+			<div class="wbyLinks fn-right">${user.userName}<span><a href="login/login!logout.action">退出</a>|<a href="about_us.html">关于我们</a></span></div>
 		</c:otherwise>
 	</c:choose>
 </div>
@@ -50,10 +50,26 @@
 <div class="content">
     <div class="hotcities">
         <h2>
-            进入<a href="#">财务指标一览<span>»</span></a></h2>
+            <a href="javascript:void(0)">000651 格力电器</a>
+        </h2>
 
         <div class="headInf">
-            投资数据网站平台，投资者的在线手册提供开放性大数据信息金融数据信息等各类数据分类信息的免费查询，为大众服务。提供每股指标、偿债能力、营运能力等八大栏目，你只需点击相应栏目搜索即可。
+            <ul>
+                <li><span>上市时间：</span>2008-09-12</li>
+                <li><span>发行量：</span>2000000（股）</li>
+                <li><span>发行市盈率：</span>59</li>
+                <li><span>发行价格：</span>23.59</li>
+            </ul>
+            <ul>
+                <li><span>企业法人：</span>董明珠</li>
+                <li><span>所属行业：</span>家用电器</li>
+                <li><span>公司网址：</span>http://www.gree.com.cn </li>
+            </ul>
+            <ul>
+                <li><span>注册资本：</span>4920222（元）</li>
+                <li><span>电话：</span>0546-6834345</li>
+                <li><span>公告查询：</span>http://www.jcsx.cn</li>
+            </ul>
         </div>
     </div>
     <!-- 

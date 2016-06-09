@@ -29,10 +29,13 @@
 			<div class="wbyLinks fn-right"><span><a target="_blank" href="login/login.action">登录</a> <a target="_blank" href="reg/reg.action">注册</a>|<a href="">关于我们</a></span></div>
 		</c:when>
 		<c:otherwise>
-			<div class="wbyLinks fn-right">[${user.userName}]<span><a href="login/login!logout.action">退出</a>|<a href="">关于我们</a></span></div>
+			<div class="wbyLinks fn-right">[${user.userName}]<span><a href="login/login!logout.action">退出</a>|<a href="about_us.html">关于我们</a></span></div>
 		</c:otherwise>
 	</c:choose>
   
+</div>
+<div class="note">
+    尊敬的用户：目前股票财务数据正在维护中，请您随时关注我们，给您带来的不便敬请谅解。。
 </div>
 <div id="wrapper" style="margin-bottom:0;">
   <div id="header">
