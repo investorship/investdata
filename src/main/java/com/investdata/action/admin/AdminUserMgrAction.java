@@ -20,10 +20,12 @@ public class AdminUserMgrAction extends BaseAction  implements RequestAware{
 	private static final long serialVersionUID = -4003526420872337090L;
 	Logger logger = Logger.getLogger(AdminUserMgrAction.class);
 	private String jsonAjaxDataRows;
-	private Map<String, Object> request;
-	public String getJsonAjaxDataRows() {
-		return jsonAjaxDataRows;
+	private String jsonData;
+	public String getJsonData() {
+		return jsonData;
 	}
+
+	private Map<String, Object> request;
 
 	
 	public String execute() throws Exception {
@@ -45,8 +47,15 @@ public class AdminUserMgrAction extends BaseAction  implements RequestAware{
 			rows.add(i,jsonUser);
 		}
 		logger.debug(String.format("rows=[%s]", rows));
-		request.put("rows", rows);
-		jsonAjaxDataRows = rows.toString();
+		
+		JSONObject test = new JSONObject();
+		test.put("page", "1");
+		test.put("total", "1");
+		test.put("records", adminUsers.size());
+		test.put("rows", rows);
+		
+		jsonData = test.toString();
+		
 		return AJAX;
 	}
 
