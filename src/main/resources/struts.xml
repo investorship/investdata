@@ -71,6 +71,15 @@
 		</action>
 	</package>
 	
+	<!-- 后台管理菜单 -->
+	<package name="userMgr" namespace="/userMgr" extends="struts-default,json-default">
+		<action name="userMgr" class="userMgrAction">
+			<result name="input">/WEB-INF/admin/userMgr/userList.jsp</result>
+			<result name="ajax" type="json"></result>
+		</action>
+	</package>
+	
+	
 
 	<!-- Add packages here <include file="example.xml"/> -->
 </struts>
