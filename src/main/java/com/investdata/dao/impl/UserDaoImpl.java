@@ -1,5 +1,8 @@
 package com.investdata.dao.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.po.User;
 
@@ -16,6 +19,10 @@ public class UserDaoImpl extends BaseDao implements TUserDao {
 
 	public int update(User user) throws Exception {
 		return dao.update("user.updateFlag",user);
+	}
+	
+	public List<User> getUsers(Map map) throws Exception {
+		return dao.queryForList("user.FindByPage", map);
 	}
 
 }

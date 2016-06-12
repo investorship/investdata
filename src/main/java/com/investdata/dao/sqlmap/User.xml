@@ -87,4 +87,11 @@
 		<include refid="where_conditions" />
 	</statement>
 	
+	<!-- 分页查询 -->
+	<statement id="FindByPage" parameterClass="java.util.HashMap" resultClass="user">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+		limit #start#,#length#
+	</statement>
+	
 </sqlMap>
