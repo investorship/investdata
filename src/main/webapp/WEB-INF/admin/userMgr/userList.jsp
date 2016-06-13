@@ -20,12 +20,11 @@
 	$(document).ready( function () {
 	    $('#table_id').DataTable(
 	    		{
-	    			"dom":"lrtip",
 	    			"sPaginationType": "full_numbers", //分页风格，full_number会把所有页码显示出来
 	    			"iDisplayLength": 10,//每页显示10条数据
 	                "bAutoWidth": false,//宽度是否自动，感觉不好使的时候关掉试试
 	                "oLanguage": {//下面是一些汉语翻译
-	                    "sSearch": "搜索",
+	                    "sSearch": "模糊查询",
 	                    "sLengthMenu": "每页显示 _MENU_ 条记录",
 	                    "sZeroRecords": "没有检索到数据",
 	                    "sInfo": "显示 _START_ 至 _END_ 条 &nbsp;&nbsp;共 _TOTAL_ 条",
@@ -53,8 +52,29 @@
 	                               {"data": 'isPayer'},
 	                               {"data": 'payDate'},
 	                               {"data": 'endDate'},
-	                               {"data": 'flag'}
-	                           ]
+	                               {"data": 'flag'},
+	                               {"data": 'inTime'}
+	                ],
+	                "order": [
+	                          [6, "dsc"], 
+	                          [1, "asc"]
+	                 ],
+	                "columnDefs":[
+	                              {
+	                            	  "targets": [5], // 目标列位置，下标从0开始
+	                                  "data": "flag", // 数据列名
+	                                  "render": function(data, type, full) { // 返回自定义内容
+	                                		  return "停用";
+	                                	  }
+	                              },
+	                              {
+	                                  "targets": [7], // //增加一列,目标列位置，下标从0开始
+	                                  "data": "userName", // 数据列名
+	                                  "render": function(data, type, full) { // 返回自定义内容
+	                                      return "<a href=‘/update?userName=" + data + "‘>编辑</a>";
+	                              		}
+	                              }
+	                ]
 	    		}
 	    );
 	} );
@@ -71,6 +91,8 @@
 		    	<th>付费日期</th>
 		    	<th>截止日期</th>
 		    	<th>状态</th>
+		    	<th>注册时间</th>
+		    	<th>操作</th>
 		    </thead>
 		</table>
 	</div>
