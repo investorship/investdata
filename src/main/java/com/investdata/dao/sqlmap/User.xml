@@ -94,4 +94,9 @@
 		limit #start#,#length#
 	</statement>
 	
+	<!-- 查询总记录数 -->
+	<statement id="getTotalCount" resultClass="int">
+		select count(*) from t_user
+	</statement>
+	
 </sqlMap>

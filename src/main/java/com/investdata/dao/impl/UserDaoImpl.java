@@ -24,5 +24,9 @@ public class UserDaoImpl extends BaseDao implements TUserDao {
 	public List<User> getUsers(Map map) throws Exception {
 		return dao.queryForList("user.FindByPage", map);
 	}
+	
+	public Integer getTotalCount() throws Exception {
+		return (Integer)dao.queryForObject("user.getTotalCount");
+	}
 
 }

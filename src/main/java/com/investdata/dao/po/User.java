@@ -2,6 +2,8 @@ package com.investdata.dao.po;
 
 import java.sql.Timestamp;
 
+import org.json.JSONObject;
+
 public class User {
 	private String userName;
 	private String password;
@@ -102,6 +104,20 @@ public class User {
 				+ "-activeCode=" + activeCode  +"-ispayer=" + isPayer + "-payDate=" + payDate + "-endDate="
 				+ endDate + "-flag=" + flag + "-intime=" + inTime;
 		return userToString;
+	}
+	
+	public JSONObject toJson() throws Exception {
+		JSONObject jsonUser = new JSONObject();
+		jsonUser.put("userName", this.userName);
+		jsonUser.put("password", this.password);
+		jsonUser.put("email", this.email);
+		jsonUser.put("activeCode", this.activeCode);
+		jsonUser.put("isPayer", this.isPayer);
+		jsonUser.put("payDate", this.payDate);
+		jsonUser.put("endDate", this.endDate);
+		jsonUser.put("flag", this.flag);
+		jsonUser.put("inTime", this.inTime);
+		return jsonUser;
 	}
 
 }

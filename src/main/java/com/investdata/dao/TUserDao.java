@@ -11,5 +11,6 @@ public interface TUserDao {
 	public User getUser(User user) throws Exception;
 	public int update(User user) throws Exception;
 	public List<User> getUsers(Map map) throws Exception;
+	public Integer getTotalCount() throws Exception;
 	
 }

@@ -12,14 +12,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>注册用户管理</title>
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="js/DataTables/css/dataTables.jqueryui.css" />
+<link rel="stylesheet" type="text/css" href="dataTables/css/dataTables.jqueryui.css" />
 <script src="js/jquery-2.2.3.min.js" type="text/javascript"></script>
-<script type="text/javascript" charset="utf8" src="js/DataTables/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="js/DataTables/js/dataTables.jqueryui.js"></script>
+<script type="text/javascript" charset="utf8" src="dataTables/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="dataTables/js/dataTables.jqueryui.js"></script>
 <script type="text/javascript">
 	$(document).ready( function () {
 	    $('#table_id').DataTable(
 	    		{
+	    			"dom":"lrtip",
 	    			"sPaginationType": "full_numbers", //分页风格，full_number会把所有页码显示出来
 	    			"iDisplayLength": 10,//每页显示10条数据
 	                "bAutoWidth": false,//宽度是否自动，感觉不好使的时候关掉试试
@@ -40,74 +41,38 @@
 	                                "sLast": "末页"
 	                            }
 	                },
-	                "bProcessing": true, //开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好
-	                "serverSide": true, //开启服务器模式，使用服务器端处理配置datatable。注意：sAjaxSource参数也必须被给予为了给datatable源代码来获取所需的数据对于每个画。 这个翻译有点别扭。开启此模式后，你对datatables的每个操作 每页显示多少条记录、下一页、上一页、排序（表头）、搜索，这些都会传给服务器相应的值。
-	                "ajax": "userMgr/userMgr!query.action" //给服务器发请求的url
+	                "processing": true, //开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好
+	                "serverSide": true, //开启服务器模式，使用服务器端处理配置datatable
+	                "ajax":{
+	                	"url":"userMgr/userMgr!query.action",
+	                	"dataType": 'json'
+	                }, 
+	                "columns": [ //这个属性下的设置会应用到所有列，按顺序没有是空
+	                               {"data": 'userName'}, //data 表示发请求时候本列的列名，返回的数据中相同下标名字的数据会填充到这一列
+	                               {"data": 'email'},
+	                               {"data": 'isPayer'},
+	                               {"data": 'payDate'},
+	                               {"data": 'endDate'},
+	                               {"data": 'flag'}
+	                           ]
 	    		}
 	    );
 	} );
 </script>
 </head>
 <body>
-	<table id="table_id" class="display">
-    <thead>
-        <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-         <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-         <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-         <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-         <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-         <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-    </tbody>
-</table>
-
+	<div>导航区</div>
+	<div>
+		<table id="table_id" class="display">
+		    <thead>
+		    	<th>姓名</th>
+		    	<th>邮箱</th>
+		    	<th>是否付费用户</th>
+		    	<th>付费日期</th>
+		    	<th>截止日期</th>
+		    	<th>状态</th>
+		    </thead>
+		</table>
+	</div>
 </body>
-
 </html>
