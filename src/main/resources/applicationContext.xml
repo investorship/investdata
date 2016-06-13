@@ -21,7 +21,7 @@
 	<bean id="imageAuthAction" class="com.investdata.action.AuthImageAction" />
 	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" />
 	<bean id="resetPwdAction" class="com.investdata.action.ResetPwdAction" />
-	<bean id="userMgrAction" class="com.investdata.action.UserMgrAction" />
+	<bean id="userMgrAction" class="com.investdata.action.admin.UserMgrAction" />
 
 
 	<bean id="propertyConfigurer"
