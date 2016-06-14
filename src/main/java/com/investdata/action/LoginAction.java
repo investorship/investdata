@@ -77,11 +77,16 @@ public class LoginAction extends BaseAction implements SessionAware {
 		return AJAX;
 	}
 	
-	//退出
+	//普通用户退出
 	public String logout() throws Exception {
 		//清除session中用户信息。
 		session.remove("user");
 		return LOGOUT;
+	}
+	
+	public String adminLogout() throws Exception {
+		session.remove("admUser");
+		return ADMINLOGOUT;
 	}
 	
 	/**

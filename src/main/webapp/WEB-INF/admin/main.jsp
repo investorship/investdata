@@ -56,7 +56,12 @@ body {
 		<div id="framecontentTop">
 			<div style="text-align: center;">
 				<div style="float: right;">
-					<a href="Default.aspx?act=logout">退出</a>
+					<c:choose>
+						<c:when test="${admUser != null}">
+							您好, <font color="red"> ${admUser.userName}</font>
+							<a href="login/login!adminLogout.action">退出</a>
+						</c:when>
+					</c:choose>
 				</div>
 				<h1>后台管理系统</h1>
 			</div>
