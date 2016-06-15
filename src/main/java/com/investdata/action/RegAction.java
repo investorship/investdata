@@ -71,9 +71,12 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		String activeLink = PropertiesUtils.getPropsValue("activeUrl","");
 		activeLink += encActiveParamsStr;
 		_log.info(String.format("最终生成的激活链接为:[%s]", activeLink));
+		
+		
 		//设置邮件内容
 		mailMessage.setTo(email);
 		mailMessage.setText(genActiveMailText(userName,activeLink));
+		mailMessage.setSubject(PropertiesUtils.getPropsValue("active.mail.subject",""));
 		//发送邮件
 		MailSendWrapper.SendMailNoPic(mailMessage);
 		
@@ -134,7 +137,6 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		if (StringUtils.isEmpty(randCode)) {
 			ajaxResult = "false";
 		}
-		
 		String sessionRandCode = (String)session.get("authImage"); //获取session中的验证码
 		//验证码不区分大小写。
 		if (StringUtils.trim(sessionRandCode).equals(randCode.toUpperCase())) {
@@ -142,7 +144,6 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		} else {
 			ajaxResult = "false";
 		}
-		
 		return AJAX;
 	}
 	
@@ -154,7 +155,7 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 	public String activeAccount() throws Exception {
 		String[] activeParmas = activeLink.split("&");
 		if (activeParmas.length != 2) {
-			_log.info(String.format("激活链接参数异常activeParmas=[%s]", activeParmas));
+			_log.info(String.format("激活链接参数异常activeLink=[%s]", activeLink));
 			//激活失败
 			return ACTIVE_FAIL;
 		}

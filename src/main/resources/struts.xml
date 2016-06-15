@@ -29,9 +29,9 @@
 			<result name="input">/WEB-INF/admin/main.jsp</result>
 		</action>
 		
-		<!-- 重置密码 -->
-		<action name="resetPwd" class="resetPwdAction">
-			<result name="input">/WEB-INF/resetpwd.jsp</result>
+		<!-- 密码操作 -->
+		<action name="passwordOperAction" class="passwordOper" >
+			<result name="reset_pwd_input">/WEB-INF/resetpwd.jsp</result>
 		</action>
 	</package>
 

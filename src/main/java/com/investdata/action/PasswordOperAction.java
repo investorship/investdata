@@ -15,28 +15,17 @@ import com.investdata.utils.ThreeDes;
 /**
  * 重设密码
  */
-public class ResetPwdAction extends BaseAction {
+public class PasswordOperAction extends BaseAction {
 	private static final long serialVersionUID = -4003526420872337090L;
-	Logger _log = Logger.getLogger(ResetPwdAction.class);
-	private String userName;
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
+	Logger _log = Logger.getLogger(PasswordOperAction.class);
+	
 	private String email;
+	private String userName;
 	private SimpleMailMessage mailMessage;
-
-	public void setMailMessage(SimpleMailMessage mailMessage) {
-		this.mailMessage = mailMessage;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String execute() throws Exception {
 		_log.info("进入重设登录密码流程");
-		return INPUT;
+		return RESET_PWD_INPUT;
 	}
 	
 	public String sendResetMail() throws Exception{
@@ -49,31 +38,45 @@ public class ResetPwdAction extends BaseAction {
 			//跳转到全局excepiton视图
 		}
 		userName = user.getUserName();
-		String activeParams = "userName="+userName + "&email=" + email;
+		String resetPwdParams = "userName="+userName + "&email=" + email;
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
-		byte[] encActiveParamsByte = ThreeDes.encryptMode(encKey.getBytes(),activeParams.getBytes());
-		String encActiveParamsStr = Coder.encryptBASE64(encActiveParamsByte);
-		_log.info(String.format("重置密码链接参数,activeParams=[%s],encActiveParams=[%s]",activeParams,encActiveParamsStr));
+		byte[] encResetpwdParamsByte = ThreeDes.encryptMode(encKey.getBytes(),resetPwdParams.getBytes());
+		String encResetpwdParamsStr = Coder.encryptBASE64(encResetpwdParamsByte);
+		_log.info(String.format("重置密码链接参数,activeParams=[%s],encActiveParams=[%s]",resetPwdParams,encResetpwdParamsStr));
 		
-		String activeLink = PropertiesUtils.getPropsValue("activeUrl","");
-		activeLink += encActiveParamsStr;
-		_log.info(String.format("最终生成的重置密码链接为:[%s]", activeLink));
+		String resetpwdLink = PropertiesUtils.getPropsValue("resetpwdUrl","");
+		resetpwdLink += encResetpwdParamsStr;
+		_log.info(String.format("最终生成的重置密码链接为:[%s]", resetpwdLink));
 		//设置邮件内容
 		mailMessage.setTo(email);
-		mailMessage.setText(genActiveMailText(userName,activeLink));
+		mailMessage.setText(genResetPwdMailText(userName,resetpwdLink));
+		mailMessage.setSubject(PropertiesUtils.getPropsValue("resetPwd.mail.subject",""));
 		//发送邮件
 		MailSendWrapper.SendMailNoPic(mailMessage);
 		
 		return INPUT;
 	}
 
-	private String genActiveMailText(String userName2, String activeLink) {
+	private String genResetPwdMailText(String userName, String resetpwdLink) {
 		String mailText = "尊敬的用户:" + userName + "\n";
-		mailText += "您的账户激活链接为:\n" + activeLink + "请复制下面地址在浏览器打开激活您的账户。\n";
+		mailText += "请复制下面地址在浏览器打开重置您的密码。\n";
+		mailText += resetpwdLink + "\n";
 		mailText += "\n\n";
 		mailText += "感谢您对我们的关注与支持,祝您投资顺利。\n";
 		mailText += "投资数据网";
 		return mailText;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setMailMessage(SimpleMailMessage mailMessage) {
+		this.mailMessage = mailMessage;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

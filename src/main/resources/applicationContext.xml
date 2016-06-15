@@ -20,7 +20,7 @@
 	<bean id="stockAction" class="com.investdata.action.StockAction" />
 	<bean id="imageAuthAction" class="com.investdata.action.AuthImageAction" />
 	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" />
-	<bean id="resetPwdAction" class="com.investdata.action.ResetPwdAction">
+	<bean id="passwordOperAction" class="com.investdata.action.PasswordOperAction">
 		<property name="mailMessage" ref="mailMessage" />
 	</bean>
 	<bean id="userMgrAction" class="com.investdata.action.admin.UserMgrAction" />
@@ -44,8 +44,9 @@
 
 	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
 		<property name="from" value="${mail.from}"></property>
+		<!-- 邮件发送功能属于公共能力，主题会不同，所以动态设置，不注入
 		<property name="subject" value="${mail.subject}"></property>
-
+		 -->
 		<!-- 查看SimpleMailMessage源码还可以注入标题,内容等 -->
 	</bean>
 
