@@ -180,6 +180,7 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		u2.setFlag(1);
 		userDao.update(u2);
 		
+		request.put("userName", user.getUserName());
 		_log.info(String.format("账户[%s]激活成功", activeUserName));
 		
 		return ACTIVE_SUCC;
@@ -240,11 +241,6 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 		return INPUT;
 	}
 	
-	public static void main(String[] args) {
-		String str = "userName=zhangsan";
-		System.err.println(str.substring(str.indexOf("=") + 1));
-	}
-
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}

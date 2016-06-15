@@ -21,6 +21,9 @@
     font-size: 14px;
     color: red;
 }
+
+
+/* 注册成功界面 */
 .uccontainer01 {
     width: 1000px;
     margin: 20px auto;
@@ -54,3 +57,44 @@
 .uccontainer01 .pd-top {
     padding-top: 0.833em;
 }
+
+/* 激活成功界面 */
+
+.uccontainer02 {
+    width: 1000px;
+    margin: 20px auto;
+    background: url("../images/active_succ.jpg") no-repeat scroll 36px -10px #FFFFFF;
+    padding: 0 0 0 190px;
+}
+.uccontainer02 ul {
+    padding: 20px 0 0 15px;
+}
+.uccontainer02 ul li {
+    padding: 12px 40px;
+}
+.uccontainer02 dl dd {
+    padding-top: 5px;
+}
+.uccontainer02 dl p {
+    padding-top: 5px;
+}
+.uccontainer02 .blue {
+    color: #0066AA !important;
+}
+.uccontainer02 h5 {
+    font-size: 1.5em;
+    margin-bottom: 0.553em;
+    color: #333333;
+    font-weight: bold;
+}
+.uccontainer02 .pd-btm15e {
+    padding-bottom: 1.5em;
+}
+.uccontainer02 .pd-top {
+    padding-top: 0.833em;
+}
+
+
+
+
+

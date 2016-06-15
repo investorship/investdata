@@ -30,8 +30,9 @@
 		</action>
 		
 		<!-- 密码操作 -->
-		<action name="passwordOperAction" class="passwordOper" >
+		<action name="passwordOperAction" class="passwordOperAction" >
 			<result name="reset_pwd_input">/WEB-INF/resetpwd.jsp</result>
+			<result name="reset_pwd_succ">/WEB-INF/resetpwd_sendMail_succ.jsp.jsp</result>
 		</action>
 	</package>
 

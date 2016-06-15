@@ -1,6 +1,9 @@
 package com.investdata.action;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
+import org.apache.struts2.interceptor.RequestAware;
 import org.springframework.mail.SimpleMailMessage;
 
 import com.investdata.common.BaseAction;
@@ -10,17 +13,24 @@ import com.investdata.dao.po.User;
 import com.investdata.mail.MailSendWrapper;
 import com.investdata.utils.Coder;
 import com.investdata.utils.PropertiesUtils;
+import com.investdata.utils.StringUtils;
 import com.investdata.utils.ThreeDes;
 
 /**
- * 重设密码
+ * 与密码有关的操作类
+ * 1、重置密码
+ * 2、修改密码
+ * @author HaiLong.Guo
+ * 
  */
-public class PasswordOperAction extends BaseAction {
+public class PasswordOperAction extends BaseAction implements RequestAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	Logger _log = Logger.getLogger(PasswordOperAction.class);
 	
 	private String email;
 	private String userName;
+	private String resetPwdLink;
+	private Map<String,Object> request;
 	private SimpleMailMessage mailMessage;
 
 	public String execute() throws Exception {
@@ -28,7 +38,12 @@ public class PasswordOperAction extends BaseAction {
 		return RESET_PWD_INPUT;
 	}
 	
-	public String sendResetMail() throws Exception{
+	/**
+	 * 发送重置密码邮件
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendResetPwdMail() throws Exception{
 		TUserDao userDao = DaoFactory.getTUserDao();
 		User user = new User();
 		user.setEmail(email);
@@ -54,7 +69,42 @@ public class PasswordOperAction extends BaseAction {
 		//发送邮件
 		MailSendWrapper.SendMailNoPic(mailMessage);
 		
-		return INPUT;
+		return RESET_PWD_SUCC;
+	}
+	
+	/**
+	 * 重置密码
+	 * 1、随机生成新6位数密码
+	 * 2、密码加密
+	 * 3、更新数据库
+	 * @return
+	 * @throws Exception
+	 */
+	public String resetPwd() throws Exception {
+		String[] resetParmas = resetPwdLink.split("&");
+		if (resetParmas.length != 2) {
+			_log.info(String.format("重设密码链接参数异常resetPwdLink=[%s]", resetPwdLink));
+			//激活失败
+			return ACTIVE_FAIL;
+		}
+		
+		String userNameParam = resetParmas[0];
+		String emailParam = resetParmas[1];
+		String newPassword = StringUtils.getRandomString(6); //生成6位随机字符串作为重置后的密码
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
+		String encPwdStr = Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), newPassword.getBytes())); //密码加密
+		
+		User user = new User();
+		user.setUserName(userNameParam);
+		user.setPassword(encPwdStr);
+		user.setEmail(emailParam);
+		
+		TUserDao userDao = DaoFactory.getTUserDao();
+		userDao.update(user);
+		
+		request.put("newPwd", newPassword); //新生成的密码在界面提供给用户
+		
+		return null;
 	}
 
 	private String genResetPwdMailText(String userName, String resetpwdLink) {
@@ -67,6 +117,14 @@ public class PasswordOperAction extends BaseAction {
 		return mailText;
 	}
 	
+	//解密邮件中加密数据
+	public void setResetPwdLink(String resetPwdLink) throws Exception {
+		resetPwdLink = resetPwdLink.replace(" ", "+");
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密密钥
+		String desresetPwdLink = new String (ThreeDes.decryptMode(encKey.getBytes(), Coder.decryptBASE64(resetPwdLink))); //解密
+		this.resetPwdLink = desresetPwdLink;
+	}
+	
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
@@ -77,6 +135,10 @@ public class PasswordOperAction extends BaseAction {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
 	}
 
 }

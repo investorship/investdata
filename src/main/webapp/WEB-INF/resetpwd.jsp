@@ -56,7 +56,7 @@
                 <div class="ui-tab-content ui-tab-content-current">
                     <div class="step1">
                         <p class="go-login-pwd">找回密码</p>
-                        <form id="resetPwdForm" class="ui-form left" method="post" action="login/login!sendResetMail.action" >
+                        <form id="resetPwdForm" class="ui-form left" method="post" action="login/passwordOperAction!sendResetPwdMail.action" >
                             <fieldset>
                                 <div class="ui-form-item">
                                     <label class="ui-label"><span class="ui-form-required">*</span>电子邮箱</label>

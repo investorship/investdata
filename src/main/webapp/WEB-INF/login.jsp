@@ -150,7 +150,7 @@
 							<div class="ui-form-item text-center ui-form-item-no-name">
 								<p class="go-reg">
 									没有账号？ <a href="reg/reg.action">免费注册</a> <a class="findpsw"
-										href="login/resetPwd.action">忘记密码</a>
+										href="login/passwordOperAction.action">忘记密码</a>
 								</p>
 							</div>
 						</fieldset>
