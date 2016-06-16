@@ -104,8 +104,7 @@
 		<c:choose>
 			<c:when test="${user == null}">
 				<div class="wbyLinks fn-right">
-					<span><a href="login/login.action">登录</a> <a target="_blank"
-						href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span>
+					<span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span>
 				</div>
 			</c:when>
 			<c:otherwise>

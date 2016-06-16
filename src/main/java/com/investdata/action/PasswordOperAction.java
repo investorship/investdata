@@ -29,13 +29,21 @@ public class PasswordOperAction extends BaseAction implements RequestAware {
 	
 	private String email;
 	private String userName;
+	private String pwdOperFlag; //1:修改密码  2：重置密码
 	private String resetPwdLink;
 	private Map<String,Object> request;
 	private SimpleMailMessage mailMessage;
 
 	public String execute() throws Exception {
-		_log.info("进入重设登录密码流程");
-		return RESET_PWD_INPUT;
+		_log.info(String.format("密码操作pwdOperFlag=[%s]", pwdOperFlag));
+		
+		if (UPDATE_PWD_OPERATION_FLAG.equals(pwdOperFlag)) {
+			return UPDATE_PWD_INPUT;
+		} else if (RESET_PWD_OPERATION_FLAG.equals(pwdOperFlag)) {
+			return RESET_PWD_INPUT;			
+		} else {
+			return ERROR;
+		}
 	}
 	
 	/**
@@ -52,7 +60,7 @@ public class PasswordOperAction extends BaseAction implements RequestAware {
 		if (userObj == null) { //该用户不存在
 			//跳转到全局excepiton视图
 		}
-		userName = user.getUserName();
+		userName = userObj.getUserName();
 		String resetPwdParams = "userName="+userName + "&email=" + email;
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
 		byte[] encResetpwdParamsByte = ThreeDes.encryptMode(encKey.getBytes(),resetPwdParams.getBytes());
@@ -69,7 +77,10 @@ public class PasswordOperAction extends BaseAction implements RequestAware {
 		//发送邮件
 		MailSendWrapper.SendMailNoPic(mailMessage);
 		
-		return RESET_PWD_SUCC;
+		request.put("userName", userName);
+		request.put("email", email);
+		
+		return RESET_PWD_MAIL;
 	}
 	
 	/**
@@ -88,23 +99,23 @@ public class PasswordOperAction extends BaseAction implements RequestAware {
 			return ACTIVE_FAIL;
 		}
 		
-		String userNameParam = resetParmas[0];
-		String emailParam = resetParmas[1];
+		String userNameParam = resetParmas[0]; //userName=abcd
+		userName = userNameParam.substring(userNameParam.indexOf("=") + 1);
 		String newPassword = StringUtils.getRandomString(6); //生成6位随机字符串作为重置后的密码
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
 		String encPwdStr = Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), newPassword.getBytes())); //密码加密
 		
 		User user = new User();
-		user.setUserName(userNameParam);
+		user.setUserName(userName);
 		user.setPassword(encPwdStr);
-		user.setEmail(emailParam);
 		
 		TUserDao userDao = DaoFactory.getTUserDao();
 		userDao.update(user);
 		
+		request.put("userName", userName); //新生成的密码在界面提供给用户
 		request.put("newPwd", newPassword); //新生成的密码在界面提供给用户
 		
-		return null;
+		return RESET_PWD_SUCC;
 	}
 
 	private String genResetPwdMailText(String userName, String resetpwdLink) {
@@ -139,6 +150,10 @@ public class PasswordOperAction extends BaseAction implements RequestAware {
 
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
+	}
+	
+	public void setPwdOperFlag(String pwdOperFlag) {
+		this.pwdOperFlag = pwdOperFlag;
 	}
 
 }

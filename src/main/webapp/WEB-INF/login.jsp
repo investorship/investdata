@@ -93,7 +93,7 @@
 		<c:choose>
 			<c:when test="${user == null}">
 				<div class="wbyLinks fn-right">
-					<span><a target="_blank" href="login/login.action">登录</a> <a
+					<span><a href="login/login.action">登录</a> <a
 						href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span>
 				</div>
 			</c:when>
@@ -150,7 +150,7 @@
 							<div class="ui-form-item text-center ui-form-item-no-name">
 								<p class="go-reg">
 									没有账号？ <a href="reg/reg.action">免费注册</a> <a class="findpsw"
-										href="login/passwordOperAction.action">忘记密码</a>
+										href="login/passwordOperAction.action?pwdOperFlag=2">忘记密码</a>
 								</p>
 							</div>
 						</fieldset>

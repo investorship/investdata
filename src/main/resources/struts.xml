@@ -32,7 +32,8 @@
 		<!-- 密码操作 -->
 		<action name="passwordOperAction" class="passwordOperAction" >
 			<result name="reset_pwd_input">/WEB-INF/resetpwd.jsp</result>
-			<result name="reset_pwd_succ">/WEB-INF/resetpwd_sendMail_succ.jsp.jsp</result>
+			<result name="reset_pwd_mail">/WEB-INF/resetpwd_sendMail.jsp</result>
+			<result name="reset_pwd_succ">/WEB-INF/resetpwd_succ.jsp</result>
 		</action>
 	</package>
 

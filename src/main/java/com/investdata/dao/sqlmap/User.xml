@@ -17,8 +17,21 @@
 		<parameter property="inTime" />
 	</parameterMap>
 	
-	<update id="updateFlag" parameterClass="com.investdata.dao.po.User">
-		update t_user set flag = #flag#  where username = #userName#
+	<update id="update" parameterClass="com.investdata.dao.po.User">
+		update t_user
+		<dynamic prepend=" SET ">
+			<isNotEmpty property="userName" prepend=","><![CDATA[ username = #userName# ]]></isNotEmpty>
+			<isNotEmpty property="password" prepend=","><![CDATA[ password = #password# ]]></isNotEmpty>
+			<isNotEmpty property="email" prepend=","><![CDATA[ email = #email# ]]></isNotEmpty>
+			<isNotEmpty property="activeCode" prepend=","><![CDATA[ activecode = #activeCode# ]]></isNotEmpty>
+			<isNotEmpty property="isPayer" prepend=","><![CDATA[ ispayer = #isPayer# ]]></isNotEmpty>
+			<isNotEmpty property="payDate" prepend=","><![CDATA[ paydate = #payDate# ]]></isNotEmpty>
+			<isNotEmpty property="flag" prepend=","><![CDATA[ flag = #flag# ]]></isNotEmpty>
+			<isNotEmpty property="endDate" prepend=","><![CDATA[ endDate = #endDate# ]]></isNotEmpty>
+			<isNotEmpty property="inTime" prepend=","><![CDATA[ intime = #inTime# ]]></isNotEmpty>
+			where username = #userName#
+		</dynamic>
+		
 	</update>
 	
 	<sql id="select_what">

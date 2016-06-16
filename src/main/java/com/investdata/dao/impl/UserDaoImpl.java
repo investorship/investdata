@@ -18,7 +18,7 @@ public class UserDaoImpl extends BaseDao implements TUserDao {
 	}
 
 	public int update(User user) throws Exception {
-		return dao.update("user.updateFlag",user);
+		return dao.update("user.update",user);
 	}
 	
 	public List<User> getUsers(Map map) throws Exception {

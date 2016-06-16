@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8"/>
     <base href="<%=basePath%>">
-    <title>投资数据网 - 邮箱注册成功</title>
+    <title>投资数据网 - 密码重置成功</title>
     <meta name="viewport" content="width=1010"/>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="wbyTop fn-clear">
-    <div class="wbyLinks fn-right"><span><a target="_blank" href="">登陆</a> <a target="_blank" href="">注册</a>|<a href="">关于我们</a></span>
+    <div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span>
     </div>
 </div>
 <!-- header start -->
@@ -35,21 +35,11 @@
         <div class="uccontainer01">
             <ul>
                 <li style="border-bottom:1px solid #EEEEEE !important">
-
-                    <h5 class="blue">${userName}: 恭喜注册完成！<br><br>
-                    		激活信息已寄至您的${email}邮箱,请查邮箱并激活账号</h5>
-                    <br>
-                </li>
-                <li style="padding-top:30px; padding-bottom:40px;color:#333">
-                    <dl>
-                        <dt>还没有收到确认邮件怎么办?</dt>
-                        <dd>1.看看是否在邮箱垃圾箱里</dd>
-                        <!-- 
-                        <dd>2.如您想修改注册邮箱，请您联系QQ客服 : 123456789</dd> -->
-                        <dd>
-                            <span>2.如果您还没有收到激活的邮件，请试着<a href="javascript:void(0)" class="again blue">重发激活邮件</a></span>
-                            <span class="msg2 s_again_msg"></span></dd>
-                    </dl>
+                    <h5 class="blue">${userName}:<br><br>
+                    		您的登录密码已重置为${newPwd},请使用新密码登录并尽快修改密码!</h5>
+                    <br><br>
+                     <a href="login/login.action" class="again blue">登录</a>
+               		 <br><br></br><br><br></br>
                 </li>
                 <ul>
                 </ul>
