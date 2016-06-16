@@ -34,9 +34,10 @@
 			<result name="reset_pwd_input">/WEB-INF/resetpwd.jsp</result>
 			<result name="update_pwd_input">/WEB-INF/updatepwd.jsp</result>
 			<result name="update_pwd_nologin_fail" type="redirect">login/login.action</result>
-			<result name="update_pwd_succ" type="redirect">login/login.action</result>
+			<result name="update_pwd_succ">/WEB-INF/updatepwd_succ.jsp</result>
 			<result name="reset_pwd_mail">/WEB-INF/resetpwd_sendMail.jsp</result>
 			<result name="reset_pwd_succ">/WEB-INF/resetpwd_succ.jsp</result>
+			<result name="ajax" type="json"></result>
 		</action>
 	</package>
 

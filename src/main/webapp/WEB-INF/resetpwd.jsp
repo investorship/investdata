@@ -18,18 +18,21 @@
     <link href="css/list.css" type="text/css" rel="stylesheet"/>
     <link href="css/basic.css" type="text/css" rel="stylesheet"/>
     <link href="css/login.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <jsp:include page="jquery_validate.jsp" />
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#resetPwdForm").validate({
 			rules : {
 				email : {
+					mailExistCheck : true,
 					required : true,
 					email : true
 				}
 			},
 			messages : {
 				email : {
+					mailExistCheck : "该邮箱不存在，请确认",
 					required : "邮箱不能为空",
 					email : "邮箱地址格式错误"
 				}

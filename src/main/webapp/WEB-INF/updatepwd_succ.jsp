@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8"/>
     <base href="<%=basePath%>">
-    <title>投资数据网 - 密码重置成功</title>
+    <title>投资数据网 - 密码修改成功</title>
     <meta name="viewport" content="width=1010"/>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
@@ -35,11 +35,9 @@
         <div class="uccontainer01">
             <ul>
                 <li style="border-bottom:1px solid #EEEEEE !important">
-                    <h5 class="blue">${userName}:<br><br>
-                    		您的登录密码已重置为${newPwd},请使用新密码登录并尽快修改密码!</h5>
+                    <h5 class="blue"><br><br>
+                    		密码修改成功!</h5>
                     <br><br>
-                     <a href="login/login.action" class="again blue">登录</a>
-               		 <br><br></br><br><br></br>
                 </li>
                 <ul>
                 </ul>

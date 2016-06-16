@@ -18,20 +18,33 @@
     <link href="css/list.css" type="text/css" rel="stylesheet"/>
     <link href="css/basic.css" type="text/css" rel="stylesheet"/>
     <link href="css/login.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <jsp:include page="jquery_validate.jsp" />
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$("#resetPwdForm").validate({
+		$("#updatePwdForm").validate({
 			rules : {
-				email : {
+				oldPwd : {
+					required : true
+				},
+				newPwd: {
+					required : true
+				},
+				reNewPwd: {
 					required : true,
-					email : true
+					equalTo : "#newPwd"
 				}
 			},
 			messages : {
-				email : {
-					required : "邮箱不能为空",
-					email : "邮箱地址格式错误"
+				oldPwd : {
+					required : "原密码不能为空"
+				},
+				newPwd: {
+					required : "新密码不能为空"
+				},
+				reNewPwd: {
+					required : "确认新密码不能为空",
+					equalTo : "新密码与确认新密码必须一致"
 				}
 			}
 		});

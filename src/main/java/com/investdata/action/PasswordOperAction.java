@@ -1,5 +1,7 @@
 package com.investdata.action;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -34,6 +36,7 @@ public class PasswordOperAction extends BaseAction implements RequestAware, Sess
 	private String newPwd;
 	private String reNewPwd;
 	private String pwdOperFlag; //1:修改密码  2：重置密码
+	private String ajaxResult;
 	private String resetPwdLink;
 	private Map<String,Object> request;
 	private Map<String,Object> session;
@@ -148,6 +151,31 @@ public class PasswordOperAction extends BaseAction implements RequestAware, Sess
 		
 		return UPDATE_PWD_SUCC;
 	}
+	
+	/**
+	 * Ajax方法调用，用于验证在找回密码界面输入的邮箱是否存在
+	 * @return
+	 * @throws Exception
+	 */
+	public String checkMailExist() throws Exception {
+		
+		if (StringUtils.isEmpty(email)) {
+			return ERROR;
+		}
+		
+		TUserDao userDao = DaoFactory.getTUserDao();
+		User user = new User();
+		user.setEmail(email);
+		User userObj = userDao.getUser(user);
+		
+		if (userObj == null) {
+			ajaxResult = "false";
+		} else {
+			ajaxResult = "true";
+		}
+		
+		return AJAX;
+	}
 
 	private String genResetPwdMailText(String userName, String resetpwdLink) {
 		String mailText = "尊敬的用户:" + userName + "\n";
@@ -197,6 +225,10 @@ public class PasswordOperAction extends BaseAction implements RequestAware, Sess
 
 	public void setReNewPwd(String reNewPwd) {
 		this.reNewPwd = reNewPwd;
+	}
+	
+	public String getAjaxResult() {
+		return ajaxResult;
 	}
 
 	@Override
