@@ -7,6 +7,8 @@ public class BaseAction extends ActionSupport {
 	public static final String INPUT = "input";
 	public static final String RESET_PWD_INPUT = "reset_pwd_input";
 	public static final String UPDATE_PWD_INPUT = "update_pwd_input";
+	public static final String UPDATE_PWD_SUCC = "update_pwd_succ";
+	public static final String UPDATE_PWD_NOLOGIN_FAIL = "update_pwd_nologin_fail";
 	public static final String RESET_PWD_SUCC = "reset_pwd_succ";
 	public static final String RESET_PWD_MAIL = "reset_pwd_mail";
 	public static final String FAIL = "fail";

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.mail.SimpleMailMessage;
 
 import com.investdata.common.BaseAction;
@@ -23,15 +24,19 @@ import com.investdata.utils.ThreeDes;
  * @author HaiLong.Guo
  * 
  */
-public class PasswordOperAction extends BaseAction implements RequestAware {
+public class PasswordOperAction extends BaseAction implements RequestAware, SessionAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	Logger _log = Logger.getLogger(PasswordOperAction.class);
 	
 	private String email;
 	private String userName;
+	private String oldPwd;
+	private String newPwd;
+	private String reNewPwd;
 	private String pwdOperFlag; //1:修改密码  2：重置密码
 	private String resetPwdLink;
 	private Map<String,Object> request;
+	private Map<String,Object> session;
 	private SimpleMailMessage mailMessage;
 
 	public String execute() throws Exception {
@@ -117,6 +122,32 @@ public class PasswordOperAction extends BaseAction implements RequestAware {
 		
 		return RESET_PWD_SUCC;
 	}
+	
+	/**
+	 * 用户修改密码
+	 */
+	public String updatePwd() throws Exception {
+		User sessionUser = (User)session.get("user");
+		
+		if (sessionUser == null) { //未登录用户修改密码，直接跳转到登录界面
+			return UPDATE_PWD_NOLOGIN_FAIL;
+		}
+		
+		userName = sessionUser.getUserName();
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
+		String encPwdStr = Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), newPwd.getBytes()));
+		
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassword(encPwdStr);
+		
+		TUserDao userDao = DaoFactory.getTUserDao();
+		userDao.update(user);
+		
+		_log.info(String.format("用户[%s]修改密码完成", userName));
+		
+		return UPDATE_PWD_SUCC;
+	}
 
 	private String genResetPwdMailText(String userName, String resetpwdLink) {
 		String mailText = "尊敬的用户:" + userName + "\n";
@@ -154,6 +185,23 @@ public class PasswordOperAction extends BaseAction implements RequestAware {
 	
 	public void setPwdOperFlag(String pwdOperFlag) {
 		this.pwdOperFlag = pwdOperFlag;
+	}
+	
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
+	}
+
+	public void setNewPwd(String newPwd) {
+		this.newPwd = newPwd;
+	}
+
+	public void setReNewPwd(String reNewPwd) {
+		this.reNewPwd = reNewPwd;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 
 }
