@@ -209,3 +209,73 @@ function updatePwdFormValid() {
 		});
 	});
 }
+
+/** 管理员登录验证 **/
+function checkAdminLogin() {
+	var userName = $("#userName").val();
+	var password = $("#password").val();
+	
+	var resultVal = "";
+	$.ajax({
+        type: "post",
+        async: false,
+        url: "login/login!checkAdminLogin.action?userName=" + userName + "&password=" + password,
+        //方法传参的写法一定要对，与后台一致，区分大小写，不能为数组等，str1为形参的名字,str2为第二个形参的名字 
+        data: "{}",
+       // contentType: "application/json; charset=utf-8",
+       	dataType: "json",
+        success: function(data) {
+           resultVal = data.ajaxResult;
+        },
+        error: function(err) { //如果出现异常，不做界面提示
+        	resultVal = false;
+        }
+        
+    });
+	
+		if ('true' == resultVal) {
+			return true;
+		} else {
+			$("#loginFail").attr("color","#FF0000");
+			$("#loginFail").text("用户名或密码错误！");
+			return false;
+		}
+}
+
+/**管理员登录表单验证**/
+function adminLoginFormValid() {
+	$(document).ready(function() {
+		$("#adminLoginForm").validate({
+			rules : {
+				userName : {
+					required : true
+				},
+				password : {
+					availChar : true,
+					required : true,
+					minlength : 6,
+					maxlength : 25
+				},
+				randCode : {
+					randCodeCheck: true,
+					required : true,
+					rangelength : [ 6, 6 ]
+				},
+			},
+			messages : {
+				userName : {
+					required : "用户名不能为空"
+				},
+				password : {
+					required : "密码不能为空"
+				},
+				randCode : {
+					randCodeCheck: "您输入的验证码不正确",
+					required : "验证码不能为空",
+					rangelength : "验证码位数错误"
+				}
+			}
+		});
+	});
+}
+

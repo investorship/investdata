@@ -101,6 +101,11 @@ public class LoginAction extends BaseAction implements SessionAware {
 	 * @return
 	 */
 	public String checkAdminLogin() throws Exception {
+		if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
+			_log.error(String.format("管理员登录字段校验 用户名或密码为空", userName,password));
+			return ERROR;
+		}
+		
 		AdminUser admUser = new AdminUser();
 		admUser.setUserName(userName);
 		
