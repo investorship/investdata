@@ -45,14 +45,13 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 	public String reg() throws Exception {
 		//加密用户密码
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
-		String encPwdStr = new String(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())); //密码加密
 		
 		String activeCode = String.valueOf(rand.nextInt(100000000)); //生成账户激活码
 		String activeCodeMd5 = String.valueOf(Coder.getMD5Code(activeCode));
 		
 		User user = new User();
 		user.setUserName(userName);
-		user.setPassword(Coder.encryptBASE64(encPwdStr.getBytes()));
+		user.setPassword(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())));
 		user.setEmail(email);
 		user.setActiveCode(activeCodeMd5);
 		user.setIsPayer(0);

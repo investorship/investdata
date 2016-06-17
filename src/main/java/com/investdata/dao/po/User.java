@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import org.json.JSONObject;
 
+import com.investdata.utils.StringUtils;
+
 public class User {
 	private String userName;
 	private String password;
@@ -62,6 +64,7 @@ public class User {
 
 	public void setPassword(String password) {
 		if (password != null) {
+			//trim()会去掉字符中的换行
 			password = password.trim();
 		} else {
 			password = "";
@@ -118,6 +121,11 @@ public class User {
 		jsonUser.put("flag", this.flag);
 		jsonUser.put("inTime", this.inTime);
 		return jsonUser;
+	}
+	
+	public static void main(String[] args) {
+		String str = "abcd\n";
+		System.err.println("|" + StringUtils.trim(str) + "|");
 	}
 
 }

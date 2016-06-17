@@ -1,7 +1,5 @@
 package com.investdata.action;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -18,6 +16,8 @@ import com.investdata.utils.Coder;
 import com.investdata.utils.PropertiesUtils;
 import com.investdata.utils.StringUtils;
 import com.investdata.utils.ThreeDes;
+
+import freemarker.template.utility.StringUtil;
 
 /**
  * 与密码有关的操作类
@@ -130,8 +130,25 @@ public class PasswordOperAction extends BaseAction implements RequestAware, Sess
 	 * 用户修改密码
 	 */
 	public String updatePwd() throws Exception {
-		User sessionUser = (User)session.get("user");
+		// 非空校验
+		if (StringUtils.isEmpty(oldPwd) || StringUtils.isEmpty(newPwd) || StringUtils.isEmpty(reNewPwd)) {
+			_log.error("修改密码->参数非空校验失败!");
+			return ERROR;
+		}
 		
+		//两次输入的密码不一致
+		if (!newPwd.equals(reNewPwd)) {
+			_log.error("修改密码->两次输入的密码不一致!");
+			return ERROR;
+		}
+		
+		//新老用户一样 不更新数据库，直接跳转到修改成功界面
+		if (oldPwd.equals(newPwd)) {
+			_log.error("修改密码->新老密码一致->跳转到成功界面!");
+			return UPDATE_PWD_SUCC;
+		}
+		
+		User sessionUser = (User)session.get("user");
 		if (sessionUser == null) { //未登录用户修改密码，直接跳转到登录界面
 			return UPDATE_PWD_NOLOGIN_FAIL;
 		}
@@ -174,6 +191,25 @@ public class PasswordOperAction extends BaseAction implements RequestAware, Sess
 			ajaxResult = "true";
 		}
 		
+		return AJAX;
+	}
+	
+	/** 校验密码是否正确 **/
+	public String checkPwdIsCorrect() throws Exception {
+		User sessionUser = (User)session.get("user");
+		if (sessionUser == null) { //未登录用户修改密码，直接跳转到登录界面
+			return UPDATE_PWD_NOLOGIN_FAIL;
+		}
+		
+		String password = sessionUser.getPassword();
+		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
+		String encPwdStr = StringUtils.trim(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), oldPwd.getBytes()))); //加密用户输入的（原密码）
+		
+		if(password.equals(encPwdStr)) {
+			ajaxResult = "true";
+		} else {
+			ajaxResult = "false";
+		}
 		return AJAX;
 	}
 

@@ -19,74 +19,7 @@
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <jsp:include page="autocomplete.jsp" />
 <jsp:include page="jquery_validate.jsp" />
-<script type="text/javascript">
-		$(document).ready(function(){
-		    $("#loginForm").validate({
-		        rules: {
-		        	userName:{
-		        		availChar: true,
-		                required: true,
-		                minlength: 3,
-		                maxlength: 25
-		            },
-		            password:{
-		            	availChar: true,
-		                required: true,
-		                minlength: 6,
-		                maxlength: 25
-		            }
-		            
-		        },
-		        messages:{
-		        	userName:{
-		        		availChar: "只能由数字、字母或下划线组成",
-		                required: "用户名不能为空",
-		                minlength: "用户名的最小长度为3",
-		                maxlength: "用户名的最大长度为25"
-		            },
-		            password:{
-		            	availChar: "只能由数字、字母或下划线组成",
-		                required: "密码不能为空",
-		                minlength: "密码长度不能少于6个字符",
-		                maxlength: "密码长度不能超过30个字符"
-		            }
-		        }
-		    });
-		});
-</script>
-<script type="text/javascript">
-	function checkLogin() {
-		var userName = $("#userName").val();
-		var password = $("#password").val();
-		var resultVal = "";
-		$.ajax({
-	        type: "post",
-	        async: false,
-	        url: "login/login!checkLogin.action?userName=" + userName + "&password=" + password,
-	        //方法传参的写法一定要对，与后台一致，区分大小写，不能为数组等，str1为形参的名字,str2为第二个形参的名字 
-	        data: "{}",
-	       // contentType: "application/json; charset=utf-8",
-	       	dataType: "json",
-	        success: function(data) {
-	           resultVal = data.ajaxResult;
-	        },
-	        error: function(err) { //如果出现异常，不做界面提示
-	        	resultVal = false;
-	        }
-	        
-	    });
-		
-			if ('true' == resultVal) {
-				return true;
-			} else {
-				$("#loginFail").attr("color","#FF0000");
-				$("#loginFail").text("用户名或密码错误！");
-				return false;
-			}
-	}
-</script>
-
-
+<script type="text/javascript" src="js/form_valid.js"></script>
 </head>
 <body>
 	<div class="wbyTop fn-clear">
@@ -145,7 +78,7 @@
 									placeholder="请输入您的密码">
 							</div>
 							<div class="ui-form-item text-center">
-								<input type="submit" class="login-btn" value="立即登录">
+								<input type="submit" class="login-btn" onclick="javascript:loginFormValid()" value="立即登录">
 							</div>
 							<div class="ui-form-item text-center ui-form-item-no-name">
 								<p class="go-reg">

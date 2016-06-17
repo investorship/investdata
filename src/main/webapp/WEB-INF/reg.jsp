@@ -19,85 +19,7 @@
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <jsp:include page="autocomplete.jsp" />
 <jsp:include page="jquery_validate.jsp" />
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#regForm").validate({
-			rules : {
-				userName : {
-					userNameRepet: true,
-					availChar : true,
-					required : true,
-					minlength : 3,
-					maxlength : 25
-				},
-				password : {
-					availChar : true,
-					required : true,
-					minlength : 6,
-					maxlength : 25
-				},
-				repassword : {
-					required : true,
-					equalTo : "#password"
-				},
-				email : {
-					emailRepet : true,
-					required : true,
-					email : true
-				},
-				randCode : {
-					randCodeCheck: true,
-					required : true,
-					rangelength : [ 6, 6 ]
-				},
-				agreee : {
-					required : true
-				}
-
-			},
-			messages : {
-				userName : {
-					userNameRepet: "该用户名已经被注册",
-					availChar : "只能由数字、字母或下划线组成",
-					required : "用户名不能为空",
-					minlength : "用户名的最小长度为3",
-					maxlength : "用户名的最大长度为25"
-				},
-				password : {
-					availChar : "只能由数字、字母或下划线组成",
-					required : "密码不能为空",
-					minlength : "密码长度不能少于6个字符",
-					maxlength : "密码长度不能超过30个字符"
-				},
-				repassword : {
-					required : "确认密码不能为空",
-					equalTo : "确认密码和密码不一致"
-				},
-				email : {
-					emailRepet: "该邮件已被注册",
-					required : "邮箱不能为空",
-					email : "邮箱地址格式错误"
-				},
-				randCode : {
-					randCodeCheck: "您输入的验证码不正确",
-					required : "验证码不能为空",
-					rangelength : "验证码位数错误"
-				},
-				agreee : {
-					required : "请同意我们的协议"
-				}
-			}
-		});
-	});
-	
-</script>
-<script type="text/javascript">
-	//更换验证码 防止缓存，使用时间戳
-	function changeImageAuth() {
-		$("#imageAuth").attr("src",
-				"imageAuth/imageAuth.action?timestamp=" + new Date().getTime());
-	}
-</script>
+<script type="text/javascript" src="js/form_valid.js"></script>
 </head>
 <body>
 	<div class="wbyTop fn-clear">
@@ -110,7 +32,7 @@
 			<c:otherwise>
 				<div class="wbyLinks fn-right">
 					[${user.userName}]<span><a href="login/login!logout.action">退出</a>|<a
-						href="">关于我们</a></span>
+						href="about_us.html">关于我们</a></span>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -189,7 +111,7 @@
 										<div>
 											<input type="submit"
 												class="ui-button-register ui-button-orange ui-button-register-1"
-												value="注 册">
+												value="注 册" onclick="javascript:regFormValid()" >
 										</div>
 									</div>
 								</fieldset>

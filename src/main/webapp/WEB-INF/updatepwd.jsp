@@ -20,41 +20,18 @@
     <link href="css/login.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="js/jquery.js"></script>
     <jsp:include page="jquery_validate.jsp" />
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$("#updatePwdForm").validate({
-			rules : {
-				oldPwd : {
-					required : true
-				},
-				newPwd: {
-					required : true
-				},
-				reNewPwd: {
-					required : true,
-					equalTo : "#newPwd"
-				}
-			},
-			messages : {
-				oldPwd : {
-					required : "原密码不能为空"
-				},
-				newPwd: {
-					required : "新密码不能为空"
-				},
-				reNewPwd: {
-					required : "确认新密码不能为空",
-					equalTo : "新密码与确认新密码必须一致"
-				}
-			}
-		});
-	});
-	
-	</script>
+	<script type="text/javascript" src="js/form_valid.js"></script>
 </head>
 <body>
 <div class="wbyTop fn-clear">
-    <div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span>
+    <c:choose>
+		<c:when test="${user == null}">
+			<div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span></div>
+		</c:when>
+		<c:otherwise>
+			<div class="wbyLinks fn-right">${user.userName}<span><a href="login/login!logout.action">退出</a>|<a href="about_us.html">关于我们</a></span></div>
+		</c:otherwise>
+	</c:choose>
 </div>
 <!-- header start -->
 <div class="header">
@@ -86,7 +63,7 @@
                                
                                 <div class="ui-form-item" style="padding-bottom:65px">
                                     <div>
-                                        <input type="submit"  class="ui-button-register ui-button-orange ui-button-register-1" value="确 认">
+                                        <input type="submit"  onclick="javascript:updatePwdFormValid()" class="ui-button-register ui-button-orange ui-button-register-1" value="确 认">
                                     </div>
                                 </div>
                             </fieldset>
