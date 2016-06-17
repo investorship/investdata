@@ -60,18 +60,29 @@
 	                          [1, "asc"]
 	                 ],
 	                "columnDefs":[
+									{
+										"targets": [2], // 目标列位置，下标从0开始
+									    "data": "flag", // 数据列名
+									    "render": function(data, type, full) { // 返回自定义内容
+									  	  			if (data == 0)  return "否";
+									    			if (data == 1) return "是";
+									  		 
+									     }
+									},
 	                              {
 	                            	  "targets": [5], // 目标列位置，下标从0开始
 	                                  "data": "flag", // 数据列名
 	                                  "render": function(data, type, full) { // 返回自定义内容
-	                                		  return "停用";
-	                                	  }
+	                                	  		if (data == 0)  return "停用";
+	                                  			if (data == 1) return "启用";
+	                                		 
+	                                   }
 	                              },
 	                              {
 	                                  "targets": [7], // //增加一列,目标列位置，下标从0开始
 	                                  "data": "userName", // 数据列名
 	                                  "render": function(data, type, full) { // 返回自定义内容
-	                                      return "<a href=‘/update?userName=" + data + "‘>编辑</a>";
+	                                      return "<a href=‘/update?userName=" + data + "‘>注销</a>&nbsp;<a href=‘/update?userName=" + data + "‘>启用</a>";
 	                              		}
 	                              }
 	                ]

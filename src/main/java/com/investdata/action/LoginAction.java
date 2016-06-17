@@ -160,7 +160,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 			session.put("jsonMenus", menusJsonBuilders);
 			return INPUT;
 		} else {
-			return FAIL;
+			return ERROR;
 		}
 	}
 

@@ -116,8 +116,8 @@ public class User {
 		jsonUser.put("email", this.email);
 		jsonUser.put("activeCode", this.activeCode);
 		jsonUser.put("isPayer", this.isPayer);
-		jsonUser.put("payDate", this.payDate);
-		jsonUser.put("endDate", this.endDate);
+		jsonUser.put("payDate", StringUtils.trim(this.payDate));
+		jsonUser.put("endDate", StringUtils.trim(this.endDate));
 		jsonUser.put("flag", this.flag);
 		jsonUser.put("inTime", this.inTime);
 		return jsonUser;
