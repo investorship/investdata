@@ -3,6 +3,7 @@ package com.investdata.action;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 import org.json.JSONObject;
@@ -24,7 +25,7 @@ import com.investdata.utils.ThreeDes;
  */
 public class LoginAction extends BaseAction implements SessionAware {
 	private static final long serialVersionUID = -4003526420872337090L;
-	private Logger logger = Logger.getLogger(LoginAction.class);	
+	private Logger _log = Logger.getLogger(LoginAction.class);	
 	private Map<String,Object> session;
 	private String userName;
 	private String password;
@@ -32,7 +33,7 @@ public class LoginAction extends BaseAction implements SessionAware {
 	private boolean loginFlag; //登录验证标识
 
 	public String execute() throws Exception {
-		logger.info("进入登录流程..");
+		_log.info("进入登录流程..");
 		return INPUT;
 	}
 	
@@ -53,6 +54,12 @@ public class LoginAction extends BaseAction implements SessionAware {
 	 * @throws Exception
 	 */
 	public String checkLogin() throws Exception {
+		//必须字段校验
+		if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
+			_log.error("登录字段验证为空！");
+			return ERROR;
+		}
+		
 		User user = new User();
 		int index = userName.indexOf("@");
 		if (index != -1 ) { //用邮箱当做用户名

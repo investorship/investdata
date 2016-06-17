@@ -43,9 +43,39 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 	 * @throws Exception
 	 */
 	public String reg() throws Exception {
+		if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password) || StringUtils.isEmpty(repassword)
+				|| StringUtils.isEmpty(email) || StringUtils.isEmpty(randCode)) {
+			_log.error("注册界面字段校验为通过");
+			return ERROR;
+		}
+		
+		if (!password.equals(repassword)) {
+			_log.error(String.format("注册界面字段验证密码与确认密码指不一致password=[%s],repassword", password,repassword));
+			return ERROR;
+		}
+		
+		checkUserName(); //用户是否被注册
+		if("false".equals(ajaxResult)) {
+			_log.error(String.format("注册界面字段校验--用户名[%s]已经被注册", userName));
+			return ERROR;
+		}
+		
+		ajaxResult = ""; 
+		checkEmail(); //邮箱是否被注册
+		if ("false".equals(ajaxResult)) {
+			_log.error(String.format("注册界面字段校验--邮箱[%s]已经被注册", email));
+			return ERROR;
+		}
+		
+		ajaxResult = ""; 
+		checkRandCode(); //图片验证码是否正确
+		if ("false".equals(ajaxResult)) {
+			_log.error(String.format("注册界面字段校验--图片验证码错误-->服务器端[%s],界面传值[%s]",(String)session.get("authImage"),randCode));
+			return ERROR;
+		}
+		
 		//加密用户密码
 		String encKey = PropertiesUtils.getPropsValue("enc3desKey",""); //获取加密串
-		
 		String activeCode = String.valueOf(rand.nextInt(100000000)); //生成账户激活码
 		String activeCodeMd5 = String.valueOf(Coder.getMD5Code(activeCode));
 		

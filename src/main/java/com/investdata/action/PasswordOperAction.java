@@ -60,6 +60,11 @@ public class PasswordOperAction extends BaseAction implements RequestAware, Sess
 	 * @throws Exception
 	 */
 	public String sendResetPwdMail() throws Exception{
+		
+		if (StringUtils.isEmpty(email)) {
+			return ERROR;
+		}
+		
 		TUserDao userDao = DaoFactory.getTUserDao();
 		User user = new User();
 		user.setEmail(email);
@@ -104,7 +109,7 @@ public class PasswordOperAction extends BaseAction implements RequestAware, Sess
 		if (resetParmas.length != 2) {
 			_log.info(String.format("重设密码链接参数异常resetPwdLink=[%s]", resetPwdLink));
 			//激活失败
-			return ACTIVE_FAIL;
+			return ERROR;
 		}
 		
 		String userNameParam = resetParmas[0]; //userName=abcd
