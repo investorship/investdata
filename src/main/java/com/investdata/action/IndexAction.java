@@ -79,12 +79,18 @@ public class IndexAction extends BaseAction implements ApplicationAware {
 		if (application.get("parentsIndexList") == null) {
 			TFinanceIndexInfoDao financeIndexInfoDao = DaoFactory.getTFinanceIndexInfoDao();
 			//获取父级财务指标
-			List<FinanceIndexInfo> parentsIndexList = financeIndexInfoDao.getParentFinanceIndexInfo(0);
+			FinanceIndexInfo finIndexInfo = new FinanceIndexInfo();
+			finIndexInfo.setPid(0); //获取根节点的所有子节点
+			finIndexInfo.setFlag(1);
+			List<FinanceIndexInfo> parentsIndexList = financeIndexInfoDao.getFinanceIndexInfos(finIndexInfo);
 			
 			for (FinanceIndexInfo indexInfo : parentsIndexList) {
 				int pid = indexInfo.getId();
+				FinanceIndexInfo subFinIndexInfos = new FinanceIndexInfo();
+				subFinIndexInfos.setPid(pid);
+				subFinIndexInfos.setFlag(1);
 				//获取子类指标
-				List<FinanceIndexInfo> childsFinanceIndexInfoList = financeIndexInfoDao.getParentFinanceIndexInfo(pid);
+				List<FinanceIndexInfo> childsFinanceIndexInfoList = financeIndexInfoDao.getFinanceIndexInfos(subFinIndexInfos);
 				indexInfo.setChildsFinanceIndexInfoList(childsFinanceIndexInfoList);
 			}	
 			application.put("parentsIndexList", parentsIndexList);

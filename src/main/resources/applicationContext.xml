@@ -19,11 +19,14 @@
 	</bean>
 	<bean id="stockAction" class="com.investdata.action.StockAction" />
 	<bean id="imageAuthAction" class="com.investdata.action.AuthImageAction" />
-	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" />
-	<bean id="passwordOperAction" class="com.investdata.action.PasswordOperAction">
+	<bean id="passwordOperAction" class="com.investdata.action.PasswordOperAction" scope="prototype">
 		<property name="mailMessage" ref="mailMessage" />
 	</bean>
-	<bean id="userMgrAction" class="com.investdata.action.admin.UserMgrAction" />
+	
+	<!-- 后台管理相关 action -->
+	<bean id="userMgrAction" class="com.investdata.action.admin.UserMgrAction" scope="prototype"/>
+	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" scope="prototype"/>
+	<bean id="financeIndexMgrAction" class="com.investdata.action.admin.FinanceIndexMgrAction" scope="prototype"/>
 
 
 	<bean id="propertyConfigurer"

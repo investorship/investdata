@@ -37,7 +37,7 @@ create table t_user_admin
    username             char(30) not null comment '用户名',
    password             char(50) not null comment '密码',
    email                char(30) not null comment '邮箱',
-   perm_level           int not null comment '权限等级 1-录入员 2-审核员',
+   permlevel           int not null comment '权限等级 1-录入员 2-审核员',
    flag                 int not null comment '标志位 0-停用 1-启用',
    intime               timestamp not null DEFAULT now() comment '入库时间',
    primary key (username)

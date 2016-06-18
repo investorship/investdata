@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>注册用户管理</title>
+<title>财务指标查询</title>
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="dataTables/css/dataTables.jqueryui.css" />
 <script src="js/jquery-2.2.3.min.js" type="text/javascript"></script>
@@ -43,15 +43,14 @@
 	                "processing": true, //开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好
 	                "serverSide": true, //开启服务器模式，使用服务器端处理配置datatable
 	                "ajax":{
-	                	"url":"userMgr/userMgr!query.action",
+	                	"url":"financeIndexMgr/financeIndexMgr!query.action",
 	                	"dataType": 'json'
 	                }, 
 	                "columns": [ //这个属性下的设置会应用到所有列，按顺序没有是空
-	                               {"data": 'userName'}, //data 表示发请求时候本列的列名，返回的数据中相同下标名字的数据会填充到这一列
-	                               {"data": 'email'},
-	                               {"data": 'isPayer'},
-	                               {"data": 'payDate'},
-	                               {"data": 'endDate'},
+	                               {"data": 'id'}, //data 表示发请求时候本列的列名，返回的数据中相同下标名字的数据会填充到这一列
+	                               {"data": 'name'},
+	                               {"data": 'pid'},
+	                               {"data": 'action'},
 	                               {"data": 'flag'},
 	                               {"data": 'inTime'}
 	                ],
@@ -60,17 +59,9 @@
 	                          [1, "asc"]
 	                 ],
 	                "columnDefs":[
-									{
-										"targets": [2], // 目标列位置，下标从0开始
-									    "data": "flag", // 数据列名
-									    "render": function(data, type, full) { // 返回自定义内容
-									  	  			if (data == 0)  return "否";
-									    			if (data == 1) return "是";
-									  		 
-									     }
-									},
+									
 	                              {
-	                            	  "targets": [5], // 目标列位置，下标从0开始
+	                            	  "targets": [4], // 目标列位置，下标从0开始
 	                                  "data": "flag", // 数据列名
 	                                  "render": function(data, type, full) { // 返回自定义内容
 	                                	  		if (data == 0)  return "停用";
@@ -79,7 +70,7 @@
 	                                   }
 	                              },
 	                              {
-	                                  "targets": [7], // //增加一列,目标列位置，下标从0开始
+	                                  "targets": [6], // //增加一列,目标列位置，下标从0开始
 	                                  "data": "userName", // 数据列名
 	                                  "render": function(data, type, full) { // 返回自定义内容
 	                                	  	
@@ -102,16 +93,15 @@
 </head>
 <body>
 	<span style="font-weight:bold;">
-			管理菜单 >> 注册用户管理  >> 注册用户信息查询
+			管理菜单 >> 财务指标管理  >> 财务指标查询
 	</span>
 	<div><br>
 		<table id="table_id" class="display">
 		    <thead>
-		    	<th>用户名</th>
-		    	<th>邮箱</th>
-		    	<th>是否付费用户</th>
-		    	<th>付费日期</th>
-		    	<th>截止日期</th>
+		    	<th>ID</th>
+		    	<th>名称</th>
+		    	<th>父节点ID</th>
+		    	<th>请求地址</th>
 		    	<th>状态</th>
 		    	<th>注册时间</th>
 		    	<th>操作</th>

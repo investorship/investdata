@@ -70,18 +70,31 @@
 		</action>
 	</package>
 	
-	<!-- 后台管理菜单 -->
-	<package name="menuMgr" namespace="/menuMgr" extends="struts-default,json-default">
-		<action name="adminUserMgr" class="adminUserMgrAction">
-			<result name="input">/WEB-INF/admin/userMgr/adminUserQuery.jsp</result>
+	<!-- 后台管理菜单 -财务指标管理-->
+	<package name="financeIndexMgr" namespace="/financeIndexMgr" extends="struts-default,json-default">
+		<action name="financeIndexMgr" class="financeIndexMgrAction">
+			<result name="input">/WEB-INF/admin/financeIndexMgr/financeIndexList.jsp</result>
 			<result name="ajax" type="json"></result>
 		</action>
 	</package>
 	
-	<!-- 后台管理菜单 -->
+	<!-- 后台管理菜单 -管理员用户管理-->
+	<package name="adminUserMgr" namespace="/adminUserMgr" extends="struts-default,json-default">
+		<action name="adminUserMgr" class="adminUserMgrAction">
+			<result name="input">/WEB-INF/admin/userMgr/adminUserList.jsp</result>
+			<result name="ajax" type="json"></result>
+		</action>
+	</package>
+	
+	<!-- 后台管理菜单-注册用户管理 -->
 	<package name="userMgr" namespace="/userMgr" extends="struts-default,json-default">
 		<action name="userMgr" class="userMgrAction">
 			<result name="input">/WEB-INF/admin/userMgr/userList.jsp</result>
+			<result name="success" type="chain">
+				<param name="method">query</param> 
+				<param name="actionName">userMgr</param>
+           		<param name="namespace">/userMgr</param>
+			</result>
 			<result name="ajax" type="json"></result>
 		</action>
 	</package>

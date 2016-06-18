@@ -3,6 +3,10 @@ package com.investdata.dao.po;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.json.JSONObject;
+
+import com.investdata.utils.StringUtils;
+
 //财务指标信息类
 public class FinanceIndexInfo {
 	private Integer id;
@@ -56,6 +60,17 @@ public class FinanceIndexInfo {
 	}
 	public void setInTime(Timestamp inTime) {
 		this.inTime = inTime;
+	}
+	
+	public JSONObject toJson() throws Exception {
+		JSONObject jsonIndexInfo = new JSONObject();
+		jsonIndexInfo.put("id", id);
+		jsonIndexInfo.put("name", name);
+		jsonIndexInfo.put("pid", pid);
+		jsonIndexInfo.put("action", action);
+		jsonIndexInfo.put("flag", this.flag);
+		jsonIndexInfo.put("inTime", this.inTime);
+		return jsonIndexInfo;
 	}
 	
 }

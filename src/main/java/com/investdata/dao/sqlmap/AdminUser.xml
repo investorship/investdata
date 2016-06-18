@@ -12,10 +12,10 @@
 		<parameter property="permLevel" />
 		<parameter property="flag" />
 		<parameter property="inTime" />
-	</parameterMap>
+	</parameterMap>	
 	
 	<sql id="select_what">
-		select username,password,email,perm_level,flag,intime from t_user_admin
+		select username,password,email,permlevel,flag,intime from t_user_admin
 	</sql>
 	
 	
@@ -33,7 +33,7 @@
 				#email#
 			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="permLevel">
-				perm_level =
+				permlevel =
 				#permLevel#
 			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="flag">
@@ -50,6 +50,18 @@
 	<statement id="getAdminUser" parameterClass="com.investdata.dao.po.AdminUser" resultClass="adminUser">
 		<include refid="select_what" />
 		<include refid="where_conditions" />
+	</statement>
+	
+	<!-- 分页查询 -->
+	<statement id="FindByPage" parameterClass="java.util.HashMap" resultClass="adminUser">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+		limit #start#,#length#
+	</statement>
+	
+	<!-- 查询总记录数 -->
+	<statement id="getTotalCount" resultClass="int">
+		select count(*) from t_user_admin
 	</statement>
 	
 </sqlMap>
