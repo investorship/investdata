@@ -82,8 +82,16 @@
 	                                  "targets": [7], // //增加一列,目标列位置，下标从0开始
 	                                  "data": "userName", // 数据列名
 	                                  "render": function(data, type, full) { // 返回自定义内容
-	                                      return "<a href=‘/update?userName=" + data + "‘>注销</a>&nbsp;<a href=‘/update?userName=" + data + "‘>启用</a>";
-	                              		}
+		                                  	  var flag = full["flag"];
+		                                  	  if (0 == flag) {
+		                                  		return "<a href=‘/update?userName=" + data + "'>启用</a>";
+		                                  	  }
+		                                  	  
+		                                  	  if (1 == flag) {
+		                                  		return "<a href=‘/update?userName=" + data + "'>停用</a>";
+		                                  	  }
+		                                  	  
+	                              	 }
 	                              }
 	                ]
 	    		}
