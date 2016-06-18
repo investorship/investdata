@@ -11,6 +11,7 @@
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>股票信息查询</title>
+
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="dataTables/css/dataTables.jqueryui.css" />
 <script src="js/jquery-2.2.3.min.js" type="text/javascript"></script>
@@ -21,8 +22,12 @@
 	    $('#table_id').DataTable(
 	    		{
 	    			"sPaginationType": "full_numbers", //分页风格，full_number会把所有页码显示出来
-	    			"iDisplayLength": 6,//每页显示10条数据
-	                "bAutoWidth": false,//宽度是否自动，感觉不好使的时候关掉试试
+	    			"iDisplayLength": 10,//每页显示10条数据
+	    			"bScrollCollapse": true,
+	    			"sScrollX": "100%",
+	    			"sScrollXInner": "110%",
+	    			"sScrollY": "400px",
+	                "bAutoWidth": true,//宽度是否自动，感觉不好使的时候关掉试试
 	                "oLanguage": {//下面是一些汉语翻译
 	                    "sSearch": "模糊查询",
 	                    "sLengthMenu": "每页显示 _MENU_ 条记录",
@@ -104,7 +109,7 @@
 	<div><br>
 		<table id="table_id" class="display">
 		    <thead>
-		    	<th>股票代码</th>
+		    	<th width="70px">股票代码</th>
 		    	<th>股票名称</th>
 		    	<th>字母简写</th>
 		    	<th>所属市场</th>
