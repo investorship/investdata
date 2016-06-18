@@ -29,7 +29,9 @@ public class IndexAction extends BaseAction implements ApplicationAware {
 		_log.info("进入主页加载股票列表数据流程");
 		if (application.get("stocksItems") == null) { //股票列表未被初始化.
 			TStockDao stockDao = DaoFactory.getTStockDao();
-			List<Stock> stocks = stockDao.getStocks(new Stock());
+			Stock stockParam = new Stock();
+			stockParam.setFlag(1);
+			List<Stock> stocks = stockDao.getStocks(stockParam);
 			if (stocks != null && stocks.size() > 0) {
 				_log.info(String.format("股票列表数据加载完毕stocks.size=[%s]", stocks.size()));
 				StringBuilder stockSelKey = new StringBuilder();

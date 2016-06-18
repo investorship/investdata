@@ -6,11 +6,13 @@
 	<typeAlias alias="stock" type="com.investdata.dao.po.Stock"/>
 	
 	
-	<select id="getStocks" parameterClass="com.investdata.dao.po.Stock" resultClass="stock">
-		select code,name,shortname,market from t_stocks
-	</select>
-<!-- 	<select id="getStocks" parameterClass="com.investdata.dao.po.Stock" resultClass="stock">
-		select code,name,shortname,market from t_stocks where
+	<sql id="select_what">
+		select code,name,shortname,market,ipotime,ipostocks,category,issuedPE,issuedPrice,address,compyWebsite,
+		reportaddress,phone,legaler,flag,intime from t_stocks
+	</sql>
+	
+	<sql id="where_conditions">
+		<dynamic prepend=" where ">
 			<isNotEmpty property="code"  >
 				code = #code#
 			</isNotEmpty>
@@ -18,13 +20,68 @@
 				name = #name#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="shortName" >
-				shortName = #shortName#
+				shortname = #shortName#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="market" >
+				market = #market#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="ipoTime" >
+				ipotime = #ipoTime#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="ipoStocks" >
+				ipostocks = #ipoStocks#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="category" >
 				category = #category#
 			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="issuedPE" >
+				issuedPE = #issuedPE#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="issuedPrice" >
+				issuedprice = #issuedPrice#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="address" >
+				address = #address#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="compyWebsite" >
+				compywebsite = #compyWebsite#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="reportAddress" >
+				reportaddress = #reportAddress#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="phone" >
+				phone = #phone#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="legaler" >
+				legaler = #legaler#
+			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="flag" >
 				flag = #flag#
 			</isNotEmpty>
-	</select> -->
+			<isNotEmpty prepend=" AND " property="inTime">
+				intime =
+				#inTime#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!-- 引用的 select_what 和 where_conditons 必须在上面，否则报找不到 -->
+	<statement id="getStocks" parameterClass="com.investdata.dao.po.Stock" resultClass="stock">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+	</statement>
+	
+	
+	<!-- 查询总记录数 -->
+	<statement id="getTotalCount" resultClass="int">
+		select count(*) from t_stocks
+	</statement>
+	
+	<!-- 分页查询 -->
+	<statement id="FindByPage" parameterClass="java.util.HashMap" resultClass="stock">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+		limit #start#,#length#
+	</statement>
+	
 </sqlMap>

@@ -70,6 +70,14 @@
 		</action>
 	</package>
 	
+	<!-- 后台管理菜单 -股票信息管理-->
+	<package name="stocksMgr" namespace="/stocksMgr" extends="struts-default,json-default">
+		<action name="stocksMgr" class="stocksMgrAction">
+			<result name="input">/WEB-INF/admin/stocksMgr/stocksList.jsp</result>
+			<result name="ajax" type="json"></result>
+		</action>
+	</package>
+	
 	<!-- 后台管理菜单 -财务指标管理-->
 	<package name="financeIndexMgr" namespace="/financeIndexMgr" extends="struts-default,json-default">
 		<action name="financeIndexMgr" class="financeIndexMgrAction">

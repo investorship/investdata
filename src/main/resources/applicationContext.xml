@@ -27,6 +27,7 @@
 	<bean id="userMgrAction" class="com.investdata.action.admin.UserMgrAction" scope="prototype"/>
 	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" scope="prototype"/>
 	<bean id="financeIndexMgrAction" class="com.investdata.action.admin.FinanceIndexMgrAction" scope="prototype"/>
+	<bean id="stocksMgrAction" class="com.investdata.action.admin.StocksMgrAction" scope="prototype"/>
 
 
 	<bean id="propertyConfigurer"
