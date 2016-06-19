@@ -32,7 +32,7 @@ public class UserMgrAction extends BaseAction implements RequestAware,SessionAwa
 	private Map<String,Object> session;
 	private JSONObject jsonUser;
 	private int flag; //用户状态 0-停用  1-启用
-	
+	private User user;
 
 	private String userName;
 
@@ -93,16 +93,7 @@ public class UserMgrAction extends BaseAction implements RequestAware,SessionAwa
 		}
 		JSONArray jsonArray = new JSONArray(userJsonList); 
 		jsonUser.put("data", jsonArray);
-		
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		out.print(jsonUser);
-		
-		out.close();
+		sendOutMsg(jsonUser);
 		
 		return AJAX;
 	}
@@ -139,6 +130,10 @@ public class UserMgrAction extends BaseAction implements RequestAware,SessionAwa
 	
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
