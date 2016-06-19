@@ -105,6 +105,7 @@
 			管理菜单 >> 注册用户管理  >> 注册用户信息查询
 	</span>
 	<div><br>
+	<font size="2">
 		<table id="table_id" class="display">
 		    <thead>
 		    	<th>用户名</th>
@@ -117,6 +118,7 @@
 		    	<th>操作</th>
 		    </thead>
 		</table>
+		</font>
 	</div>
 </body>
 </html>

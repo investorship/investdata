@@ -22,7 +22,8 @@
 	    		{
 	    			"sPaginationType": "full_numbers", //分页风格，full_number会把所有页码显示出来
 	    			"iDisplayLength": 10,//每页显示10条数据
-	                "bAutoWidth": false,//宽度是否自动，感觉不好使的时候关掉试试
+	                "bAutoWidth": true,//宽度是否自动，感觉不好使的时候关掉试试
+	          
 	                "oLanguage": {//下面是一些汉语翻译
 	                    "sSearch": "模糊查询",
 	                    "sLengthMenu": "每页显示 _MENU_ 条记录",
@@ -96,6 +97,7 @@
 			管理菜单 >> 财务指标管理  >> 财务指标查询
 	</span>
 	<div><br>
+	<font size="2">
 		<table id="table_id" class="display">
 		    <thead>
 		    	<th>ID</th>
@@ -107,6 +109,7 @@
 		    	<th>操作</th>
 		    </thead>
 		</table>
+		</font>
 	</div>
 </body>
 </html>

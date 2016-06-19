@@ -21,7 +21,7 @@
 	    $('#table_id').DataTable(
 	    		{
 	    			"sPaginationType": "full_numbers", //分页风格，full_number会把所有页码显示出来
-	    			"iDisplayLength": 2,//每页显示10条数据
+	    			"iDisplayLength": 10,//每页显示10条数据
 	                "bAutoWidth": false,//宽度是否自动，感觉不好使的时候关掉试试
 	                "oLanguage": {//下面是一些汉语翻译
 	                    "sSearch": "模糊查询",
@@ -82,19 +82,22 @@
 </script>
 </head>
 <body>
-	<span style="font-weight:bold;">
+	<span style="font-weight:bold;font-size:7px">
 			管理菜单 >> 管理员用户管理   >> 管理员用户查询
 	</span>
 	<div><br>
+		<font size="2">
 		<table id="table_id" class="display">
 		    <thead>
-		    	<th>用户名</th>
+		    	<th >用户名</th>
 		    	<th>邮箱</th>
 		    	<th>权限等级</th>
 		    	<th>状态</th>
 		    	<th>注册时间</th>
 		    </thead>
 		</table>
+		</font>
 	</div>
+		</span>
 </body>
 </html>

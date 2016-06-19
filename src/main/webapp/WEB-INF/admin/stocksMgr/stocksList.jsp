@@ -26,7 +26,7 @@
 	    			"bScrollCollapse": true,
 	    			"sScrollX": "100%",
 	    			"sScrollXInner": "110%",
-	    			"sScrollY": "400px",
+	    			"sScrollY": "450px",
 	                "bAutoWidth": true,//宽度是否自动，感觉不好使的时候关掉试试
 	                "oLanguage": {//下面是一些汉语翻译
 	                    "sSearch": "模糊查询",
@@ -107,20 +107,21 @@
 			管理菜单 >> 财务指标管理  >> 财务指标查询
 	</span>
 	<div><br>
+	<font size="2">
 		<table id="table_id" class="display">
 		    <thead>
 		    	<th width="70px">股票代码</th>
-		    	<th>股票名称</th>
-		    	<th>字母简写</th>
-		    	<th>所属市场</th>
-		    	<th>上市时间</th>
-		    	<th>发行数量</th>
-		    	<th>所属行业</th>
-		    	<th>发行市盈率</th>
-		    	<th>发行价格</th>
-		    	<th>公司地址</th>
-		    	<th>公司网站</th>
-		    	<th>报告地址</th>
+		    	<th width="70px">股票名称</th>
+		    	<th width="70px">字母简写</th>
+		    	<th width="70px">所属市场</th>
+		    	<th width="70px">上市时间</th>
+		    	<th width="70px">发行数量</th>
+		    	<th width="70px">所属行业</th>
+		    	<th width="80px">发行市盈率</th>
+		    	<th width="70px">发行价格</th>
+		    	<th width="70px">公司地址</th>
+		    	<th >公司网站</th>
+		    	<th >报告地址</th>
 		    	<th>联系电话</th>
 		    	<th>企业法人</th>
 		    	<th>标志位</th>
@@ -128,6 +129,7 @@
 		    	<th>操作</th>
 		    </thead>
 		</table>
+		</font>
 	</div>
 </body>
 </html>

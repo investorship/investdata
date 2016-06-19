@@ -281,6 +281,7 @@ table.dataTable td {
   border-radius: 2px;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  font-size:15pt;
   color: #333 !important;
   border: 1px solid #979797;
   background-color: white;
