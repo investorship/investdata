@@ -1,5 +1,13 @@
 package com.investdata.common;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.json.JSONObject;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BaseAction extends ActionSupport {
@@ -24,5 +32,24 @@ public class BaseAction extends ActionSupport {
 	
 	public static final String UPDATE_PWD_OPERATION_FLAG = "1";
 	public static final String RESET_PWD_OPERATION_FLAG = "2";
+	
+	/**
+	 * 公用往前台打印JSON数据
+	 * @param jsonObject
+	 */
+	public void sendOutMsg(JSONObject jsonObject) {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/json, charset=utf-8");
+		
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		out.print(jsonObject);
+		out.close();
+	}
 	
 }
