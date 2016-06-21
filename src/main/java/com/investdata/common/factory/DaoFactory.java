@@ -5,12 +5,14 @@ import java.util.Map;
 
 import com.investdata.dao.TAdminUserDao;
 import com.investdata.dao.TFinanceIndexInfoDao;
+import com.investdata.dao.TIndustryCategoryDao;
 import com.investdata.dao.TMgrMenuDao;
 import com.investdata.dao.TStockDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.impl.AdminUserDaoImpl;
 import com.investdata.dao.impl.BaseDao;
 import com.investdata.dao.impl.FinanceIndexInfoDaoImpl;
+import com.investdata.dao.impl.IndustryCategoryDaoImpl;
 import com.investdata.dao.impl.MgrMenuDaoImpl;
 import com.investdata.dao.impl.StockDaoImpl;
 import com.investdata.dao.impl.UserDaoImpl;
@@ -56,5 +58,13 @@ public class DaoFactory {
 			daoMap.put(key, new MgrMenuDaoImpl());
 		}
 		return (TMgrMenuDao) daoMap.get(key);
+	}
+	
+	public static TIndustryCategoryDao getTIndustryCategoryDao() {
+		String key = "TIndustryCategoryDao";
+		if (!daoMap.containsKey(key)) {
+			daoMap.put(key, new IndustryCategoryDaoImpl());
+		}
+		return (TIndustryCategoryDao) daoMap.get(key);
 	}
 }

@@ -62,11 +62,11 @@
             </ul>
             <ul>
                 <li><span>企业法人：</span>${stock.issuedPrice}</li>
-                <li><span>所属行业：</span>家用电器</li>
+                <li><span>所属行业：</span>${stock.category }</li>
                 <li><span>公司网址：</span>${stock.compyWebsite}</li>
             </ul>
             <ul>
-                <li><span>注册资本：</span>4920222（元）</li>
+                <li><span>公司地址：</span>${stock.address }</li>
                 <li><span>电话：</span>${stock.phone }</li>
                 <li><span>公告查询：</span>${stock.reportAddress }</li>
             </ul>

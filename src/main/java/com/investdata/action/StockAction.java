@@ -9,7 +9,9 @@ import org.apache.struts2.interceptor.RequestAware;
 
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TIndustryCategoryDao;
 import com.investdata.dao.TStockDao;
+import com.investdata.dao.po.IndustryCategory;
 import com.investdata.dao.po.Stock;
 import com.investdata.utils.StringUtils;
 
@@ -39,14 +41,26 @@ public class StockAction extends BaseAction  implements RequestAware,Application
 		stockParam.setCode(keyword);
 		
 		List<Stock> stocks =  stockDao.getStocks(stockParam);
-		
+		Stock stock = null;
 		if (stocks != null) {
-			Stock stock = stocks.get(0);
-			request.put("stock", stock);
+			stock = stocks.get(0);
 		} else {
 			return ERROR;
 		}
 		
+		TIndustryCategoryDao icDao = DaoFactory.getTIndustryCategoryDao();
+		
+		IndustryCategory ic = new IndustryCategory();
+		ic.setId(Integer.parseInt(stock.getCategory()));
+		ic.setFlag(1);
+		
+		List<IndustryCategory> icList = icDao.getIndustryCategorys(ic);
+		if (icList != null) {
+			IndustryCategory icResult = icList.get(0);
+			stock.setCategory(icResult.getName());
+		}
+		
+		request.put("stock", stock);
 		
 		return INPUT;
 	}
