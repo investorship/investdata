@@ -21,6 +21,29 @@
 <meta name="document-state" content="dynamic"/>
 <link href="css/i.css" type="text/css" rel="stylesheet" />
 <jsp:include page="autocomplete.jsp" />
+<script type="text/javascript">
+	function checkSubmit() {
+		var keyword = $("#keyword").val();
+		keyword = trim(keyword);
+		if (isEmpty(keyword)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function trim(str){
+	    return str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'');
+	}
+	
+	function isEmpty(str){  
+	    if(str == null || typeof str == "undefined" ||   
+	            str == ""){  
+	        return true;  
+	    }  
+	    return false;  
+	};
+</script>
 </head>
 <body id="home">
 <div class="wbyTop fn-clear">
@@ -42,8 +65,8 @@
     <h1 id="logo"><img src="images/logo.png" height="80px" alt="投资数据网"/></h1>
     <div id="sbox">
       <form id="search_f" action="stock/stock.action">
-        <input type="text" baiduSug="2" autocomplete="off" placeholder="输入股票代码,名称或拼音首字母" id="keyword" name="q" class="stbox"/>
-        <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton"/>
+        <input type="text" baiduSug="2" autocomplete="off" placeholder="输入股票代码,名称或拼音首字母" id="keyword" name="keyword" class="stbox"/>
+        <input type="submit" onmouseout="this.className=''" onmousedown="this.className='mousedown'" onmouseover="this.className='hover'" value="搜索" id="sbutton" onclick="return checkSubmit()"/>
       </form>
     </div>
     <div id="index_ad_top"></div>

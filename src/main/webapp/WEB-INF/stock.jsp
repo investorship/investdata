@@ -38,7 +38,7 @@
         <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="" title=""/></a></div>
         <div class="search" data-sudaclick="topsearch" >
             <form action="stock/stock.action" method="get" target="_blank" id="search_f">
-                <input type="text" name="k" class="search_k" value="请输入您要查找的股票代码"
+                <input type="text" name="keyword" class="search_k" value="请输入您要查找的股票代码"
                        onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}"
                        onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="keyword"/>
                 <input type="submit" class="search_smt" value="快速查找"/>
@@ -50,25 +50,25 @@
 <div class="content">
     <div class="hotcities">
         <h2>
-            <a href="javascript:void(0)">000651 格力电器</a>
+            <a href="javascript:void(0)">${stock.code } ${stock.name} </a>
         </h2>
 
         <div class="headInf">
             <ul>
-                <li><span>上市时间：</span>2008-09-12</li>
-                <li><span>发行量：</span>2000000（股）</li>
-                <li><span>发行市盈率：</span>59</li>
-                <li><span>发行价格：</span>23.59</li>
+                <li><span>上市时间：</span>${stock.ipoTime }</li>
+                <li><span>发行量：</span>${stock.ipoStocks}（股）</li>
+                <li><span>发行市盈率：</span>${stock.issuedPE }</li>
+                <li><span>发行价格：</span>${stock.issuedPrice }</li>
             </ul>
             <ul>
-                <li><span>企业法人：</span>董明珠</li>
+                <li><span>企业法人：</span>${stock.issuedPrice}</li>
                 <li><span>所属行业：</span>家用电器</li>
-                <li><span>公司网址：</span>http://www.gree.com.cn </li>
+                <li><span>公司网址：</span>${stock.compyWebsite}</li>
             </ul>
             <ul>
                 <li><span>注册资本：</span>4920222（元）</li>
-                <li><span>电话：</span>0546-6834345</li>
-                <li><span>公告查询：</span>http://www.jcsx.cn</li>
+                <li><span>电话：</span>${stock.phone }</li>
+                <li><span>公告查询：</span>${stock.reportAddress }</li>
             </ul>
         </div>
     </div>

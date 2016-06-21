@@ -51,7 +51,7 @@
 					<input type="text" class="search_k" placeholder="请输入您要查找的股票代码"
 						onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}"
 						onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}"
-						id="keyword" /> <input type="submit" class="search_smt"
+						id="keyword"  name="keyword"/> <input type="submit" class="search_smt"
 						value="快速查找" />
 				</form>
 			</div>

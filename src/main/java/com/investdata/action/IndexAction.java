@@ -1,5 +1,6 @@
 package com.investdata.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ public class IndexAction extends BaseAction implements ApplicationAware {
 		if (application.get("stocksItems") == null) { //股票列表未被初始化.
 			TStockDao stockDao = DaoFactory.getTStockDao();
 			Stock stockParam = new Stock();
+			Map<String,String> stockCodeMapping = new HashMap<String,String>(); //股票代码与股票名称的对应关系
 			stockParam.setFlag(1);
 			List<Stock> stocks = stockDao.getStocks(stockParam);
 			if (stocks != null && stocks.size() > 0) {
@@ -42,6 +44,9 @@ public class IndexAction extends BaseAction implements ApplicationAware {
 					String name = stock.getName();
 					String shrotName = stock.getShortName();
 					String market = stock.getMarket();
+					
+					stockCodeMapping.put(code, name);
+					
 					/**
 					 * 最终格式
 					 * [
@@ -74,6 +79,7 @@ public class IndexAction extends BaseAction implements ApplicationAware {
 			}
 			_log.info(String.format("stocksList=[%s]\n", stocksItems.toString()));			
 			application.put("stocksItems", stocksItems.toString());
+			application.put("stockCodeMapping", stockCodeMapping); 
 		}
 		
 		//加载财务指标

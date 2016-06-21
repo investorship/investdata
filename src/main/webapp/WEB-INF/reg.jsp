@@ -46,7 +46,7 @@
 			<div class="search" data-sudaclick="topsearch">
 				<form action="stock/stock.action" method="get" target="_blank"
 					id="search_f">
-					<input type="text" name="k" class="search_k"
+					<input type="text" name="keyword" class="search_k"
 						placeholder="输入股票代码,名称或拼音首字母"
 						onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}"
 						onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}"

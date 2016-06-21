@@ -7,7 +7,7 @@ import org.json.JSONObject;
 public class Stock {
 	private String code;	//股票代码
 	private String name;	//股票名称
-	private String shortName; //字母检查
+	private String shortName; //字母简写
 	private String market; //所属市场
 	private String ipoTime;	//上市时间
 	private Double ipoStocks; //发行数量
