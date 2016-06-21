@@ -300,7 +300,7 @@ create table t_stocks
    issuedprice          decimal(10,2) comment '发行价格',
    address              char(50) comment '公司地址',
    compywebsite         char(50) comment '公司网址',
-   reportaddress        char(50) comment '公告地址-可以链接巨潮资讯或沪深交易所网站',
+   reportaddress        char(200) comment '公告地址-可以链接巨潮资讯或沪深交易所网站',
    phone                char(25) comment '公司电话',
    legaler              char(20) comment '企业法人',
    flag                 int not null comment '标志位 0-停用 1-启用',
