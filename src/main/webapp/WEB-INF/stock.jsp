@@ -68,7 +68,7 @@
             <ul>
                 <li><span>公司地址：</span>${stock.address }</li>
                 <li><span>电话：</span>${stock.phone }</li>
-                <li><span>公告查询：</span>${stock.reportAddress }</li>
+                <li><span>公告查询：</span><a href="${stock.reportAddress}${stock.code}">巨潮资讯直达</a></li>
             </ul>
         </div>
     </div>

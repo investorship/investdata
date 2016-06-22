@@ -108,6 +108,15 @@
 	</package>
 	
 	
+	<!-- 图表展示相关处理action -->
+	<!-- 每股指标 -->
+	<package name="perShare" namespace="/perShare" extends="struts-default,json-default">
+		<action name="perShare" class="perShareAction">
+			<result name="eps">/WEB-INF/perShare/eps.jsp</result>
+		</action>
+	</package>
+	
+	
 
 	<!-- Add packages here <include file="example.xml"/> -->
 </struts>

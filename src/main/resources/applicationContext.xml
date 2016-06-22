@@ -28,7 +28,10 @@
 	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" scope="prototype"/>
 	<bean id="financeIndexMgrAction" class="com.investdata.action.admin.FinanceIndexMgrAction" scope="prototype"/>
 	<bean id="stocksMgrAction" class="com.investdata.action.admin.StocksMgrAction" scope="prototype"/>
-
+	
+	<!-- 图表展示相关处理action Bean -->
+	<!-- 每股指标 -->
+	<bean id="perShareAction" class="com.investdata.action.pershare.PerShareAction" scope="prototype"/>
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
