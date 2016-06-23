@@ -215,7 +215,7 @@ drop table if exists t_gendata_sheet;
 /*==============================================================*/
 create table t_gendata_sheet
 (
-   cdoe                 char(10) not null comment '股票代码',
+   code                 char(10) not null comment '股票代码',
    year                 int not null comment '年份',
    total_stocks         decimal(14) comment '总股本',
    roe_wa               decimal(10,2) comment '加权平均净资产收益率',
