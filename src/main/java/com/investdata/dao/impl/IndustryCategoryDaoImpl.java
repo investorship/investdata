@@ -9,7 +9,7 @@ public class IndustryCategoryDaoImpl extends BaseDao implements TIndustryCategor
 
 	@Override
 	public List<IndustryCategory> getIndustryCategorys(IndustryCategory ic) throws Exception {
-		return dao.queryForList("industryCategory.getGendataSheet", ic);
+		return dao.queryForList("industryCategory.getIndustryCategorys", ic);
 	}
 
 	

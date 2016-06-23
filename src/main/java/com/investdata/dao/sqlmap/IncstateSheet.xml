@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="incstateSheet">
+	
+	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
+	<typeAlias alias="incstateSheet" type="com.investdata.dao.po.IncstateSheet"/>
+	
+	<resultMap id="incstateSheetResultMap" class="com.investdata.dao.po.IncstateSheet" >
+		<result property="year" column="year"/>
+		<result property="code" column="code"/>
+		<result property="totalStocks" column="total_stocks"/>
+		<result property="roeWa" column="roe_wa"/>
+		<result property="roeWaKf" column="roe_wa_kf"/>
+		<result property="eps" column="eps"/>
+		<result property="epsDiluted" column="eps_diluted"/>
+		<result property="flag" column="flag"/>
+		<result property="inTime" column="intime"/>
+		<result property="modUser" column="moduser"/>
+	</resultMap>
+	
+	<sql id="select_what">
+		select year,code,total_stocks,roe_wa,roe_wa_kf,dividen_pay_sum,eps,eps_diluted,flag,intime,moduser from t_gendata_sheet
+	</sql>
+	
+	<sql id="where_conditions">
+		<dynamic prepend=" where ">
+			<isNotEmpty property="year" >
+				year = #year#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="code"  >
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalStocks" >
+				total_stocks = #totalStocks#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="roeWa" >
+				roe_wa = #roeWa#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="roeWaKf" >
+				roe_wa_kf = #roeWaKf#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="dividenPaySum" >
+				dividen_pay_sum = #dividenPaySum#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="eps" >
+				eps = #eps#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="epsDiluted" >
+				eps_diluted = #epsDiluted#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="inTime">
+				intime = #inTime#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="modUser">
+				moduser = #modUser#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!-- 引用的 select_what 和 where_conditons 必须在上面，否则报找不到 -->
+	<statement id="getGendataSheet" parameterClass="com.investdata.dao.po.GendataSheet" resultClass="gendataSheet" resultMap="gendataSheetResultMap">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+	</statement>
+	
+</sqlMap>

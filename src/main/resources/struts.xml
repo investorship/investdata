@@ -125,7 +125,8 @@
 	<!-- 每股指标 -->
 	<package name="perShare" namespace="/perShare" extends="struts_basic">
 		<action name="perShare" class="perShareAction">
-			<result name="eps">/WEB-INF/perShare/eps.jsp</result>
+			<result name="EPS">/WEB-INF/perShare/eps.jsp</result>
+			<result name="dilutEPS">/WEB-INF/perShare/dilutEPS.jsp</result>
 		</action>
 	</package>
 	

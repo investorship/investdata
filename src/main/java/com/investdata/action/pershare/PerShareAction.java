@@ -13,13 +13,15 @@ import com.investdata.dao.TGendataSheetDao;
 import com.investdata.dao.po.Chart;
 import com.investdata.dao.po.GendataSheet;
 import com.investdata.utils.StringUtils;
+import com.opensymphony.xwork2.ActionContext;
 
 public class PerShareAction extends BaseAction implements RequestAware {
 	private static final long serialVersionUID = -4003526420872337090L;
 	private Logger _log = Logger.getLogger(PerShareAction.class);
 	private Map<String, Object> request;
 	private String code;
-
+	
+	//每股收益
 	public String EPS() throws Exception {
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
@@ -35,12 +37,14 @@ public class PerShareAction extends BaseAction implements RequestAware {
 		
 		for (GendataSheet gs : genDataList) {
 			epsData.append(gs.getEps()).append(",");
-			yearData.append(gs.getYear());
+			yearData.append(gs.getYear()).append(",");
 		}
 		
-		//去掉最后一个,
-		epsData.deleteCharAt(epsData.length() -1);
-		yearData.deleteCharAt(yearData.length() -1);
+		//去掉最后一个逗号
+		if (genDataList != null && genDataList.size() > 1) {
+			epsData.deleteCharAt(epsData.length() -1);
+			yearData.deleteCharAt(yearData.length() -1);			
+		}
 		
 		Chart chart = new Chart();
 		chart.setxAxis(yearData.toString());
@@ -51,9 +55,56 @@ public class PerShareAction extends BaseAction implements RequestAware {
 		
 		request.put("chart", chart);
 		
-//		String methodName = (String)ActionContext.getContext().get("methodName");
+		String methodName = (String)ActionContext.getContext().get("methodName");
 		
-		return "eps";
+		return methodName;
+	}
+	
+	//稀释每股收益
+	public String dilutEPS() throws Exception {
+		if (StringUtils.isEmpty(code)) {
+			return ERROR;
+		}
+		
+		TGendataSheetDao genSheetDao = DaoFactory.getTGendataSheetDao();
+		GendataSheet genSheet = new GendataSheet();
+		genSheet.setCode(code);
+		List<GendataSheet> genDataList = genSheetDao.getGendataSheet(genSheet);
+		
+		StringBuilder epsData = new StringBuilder();
+		StringBuilder yearData = new StringBuilder();
+		
+		for (GendataSheet gs : genDataList) {
+			epsData.append(gs.getEpsDiluted()).append(",");
+			yearData.append(gs.getYear()).append(",");
+		}
+		
+		//去掉最后一个逗号
+		if (genDataList != null && genDataList.size() > 1) {
+			epsData.deleteCharAt(epsData.length() -1);
+			yearData.deleteCharAt(yearData.length() -1);			
+		}
+		
+		Chart chart = new Chart();
+		chart.setxAxis(yearData.toString());
+	
+		List<String> dataList = new ArrayList<String>();
+		dataList.add(epsData.toString());
+		chart.setDataList(dataList);
+		
+		request.put("chart", chart);
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		return methodName;
+	}
+	
+	//每股营业收入
+	public String mincmPS() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		
+		
+		return methodName;
 	}
 
 	@Override

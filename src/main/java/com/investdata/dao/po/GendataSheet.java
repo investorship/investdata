@@ -2,6 +2,11 @@ package com.investdata.dao.po;
 
 import java.sql.Timestamp;
 
+/**
+ * 综合数据项表 po
+ * @author hailong
+ *
+ */
 public class GendataSheet {
 	private String year;
 	private String code;

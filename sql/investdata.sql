@@ -142,7 +142,7 @@ alter table t_balance_sheet comment '资产负债表';
 
 
 /**利润表 **/
-drop table if exists t_incstate_sheets;
+drop table if exists t_incstate_sheet;
 
 /*==============================================================*/
 /* Table: t_incstate_sheets                                     */
@@ -183,7 +183,7 @@ create table t_incstate_sheets
    primary key (code, year)
 );
 
-alter table t_incstate_sheets comment '利润表';
+alter table t_incstate_sheet comment '利润表';
 
 
 /** 现金流量表**/
