@@ -226,7 +226,7 @@ create table t_gendata_sheet
    flag                 int comment '标志位',
    intime               timestamp comment '入库时间',
    moduser              char(30) comment '修改人',
-   primary key (cdoe, year)
+   primary key (code, year)
 );
 
 alter table t_gendata_sheet comment '综合数据项表';
