@@ -8,16 +8,16 @@
 	<constant name="struts.action.extension" value="action" />
 	<constant name="struts.objectFactory" value="spring" />
 	
+	<!-- 基础配置包[拦截器]，所有包继承该包 -->
 	<package name="struts_basic" extends="struts-default,json-default">
-	<!-- 拦截器与拦截器栈配置 -->
-	<interceptors>
-		<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
-		<interceptor-stack name="investInterceptor">
-			<interceptor-ref name="defaultStack" ></interceptor-ref>
-			<interceptor-ref name="methodInterceptor"></interceptor-ref>
-		</interceptor-stack>
-	</interceptors>
-	<default-interceptor-ref name="investInterceptor"></default-interceptor-ref>
+		<interceptors>
+			<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
+			<interceptor-stack name="investInterceptor">
+				<interceptor-ref name="defaultStack" ></interceptor-ref>
+				<interceptor-ref name="methodInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="investInterceptor"></default-interceptor-ref>
 	</package>
 	
 	
