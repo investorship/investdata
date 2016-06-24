@@ -37,4 +37,8 @@ public class PropertiesUtils {
 			return retVal;
 		}
 	}
+	
+	public static void main(String[] args) {
+		System.err.println(getPropsValue("enc3desKey",""));
+	}
 }

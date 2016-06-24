@@ -1,12 +1,13 @@
 package com.investdata.dao.po;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import org.json.JSONObject;
 
 import com.investdata.utils.StringUtils;
 
-public class User {
+public class User implements Serializable{
 	private String userName;
 	private String password;
 	private String email;
