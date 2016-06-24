@@ -147,7 +147,7 @@ drop table if exists t_incstate_sheet;
 /*==============================================================*/
 /* Table: t_incstate_sheets                                     */
 /*==============================================================*/
-create table t_incstate_sheets
+create table t_incstate_sheet
 (
    code                 char(10) not null comment '股票代码',
    year                 int not null comment '年份',
