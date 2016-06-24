@@ -10,8 +10,10 @@ import org.apache.struts2.interceptor.RequestAware;
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
 import com.investdata.dao.TGendataSheetDao;
+import com.investdata.dao.TIncstateSheetDao;
 import com.investdata.dao.po.Chart;
 import com.investdata.dao.po.GendataSheet;
+import com.investdata.dao.po.IncstateSheet;
 import com.investdata.utils.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -101,6 +103,14 @@ public class PerShareAction extends BaseAction implements RequestAware {
 	//每股营业收入
 	public String mincmPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
+		TIncstateSheetDao isd =  DaoFactory.getTIncstateSheetDao();
+		IncstateSheet is = new IncstateSheet();
+		is.setCode(code);
+		
+		List<IncstateSheet> inSheetList =  isd.getIncstateSheet(is);
+		
+		
+		
 		
 		
 		

@@ -8,18 +8,41 @@
 	<resultMap id="incstateSheetResultMap" class="com.investdata.dao.po.IncstateSheet" >
 		<result property="year" column="year"/>
 		<result property="code" column="code"/>
-		<result property="totalStocks" column="total_stocks"/>
-		<result property="roeWa" column="roe_wa"/>
-		<result property="roeWaKf" column="roe_wa_kf"/>
-		<result property="eps" column="eps"/>
-		<result property="epsDiluted" column="eps_diluted"/>
+		<result property="busiIncomeThis" column="busi_income_this"/>
+		<result property="busiIncomeLast" column="busi_income_last"/>
+		<result property="operaProfitsThis" column="opera_profits_this"/>
+		<result property="operaProfitsLast" column="opera_profits_last"/>
+		<result property="incomeTax" column="income_tax"/>
+		<result property="fixedAssDepre" column="fixed_ass_depre"/>
+		<result property="longPreAmort" column="long_pre_amort"/>
+		<result property="totalProfitStart" column="total_profit_start"/>
+		<result property="totalProfitEnd" column="total_profit_end"/>
+		<result property="marketConstsThis" column="market_consts_this"/>
+		<result property="marketConstsLast" column="market_consts_last"/>
+		<result property="financeConstsThis" column="finance_consts_this"/>
+		<result property="financeConstsLast" column="finance_consts_last"/>
+		<result property="mgrConstsThis" column="mgr_consts_this"/>
+		<result property="mgrConstsLast" column="mgr_consts_last"/>
+		<result property="busiTaxSurcharge" column="busi_tax_surcharge"/>
+		<result property="netProfitsThis" column="net_profits_this"/>
+		<result property="netProfitsLast" column="net_profits_last"/>
+		<result property="netProfitsKfThis" column="net_profits_kf_this"/>
+		<result property="netProfitsKfLast" column="net_profits_kf_last"/>
+		<result property="operatCost" column="operat_cost"/>
+		<result property="busiIncomeKf" column="busi_income_kf"/>
+		<result property="fairValChange" column="fair_val_change"/>
+		<result property="investIncome" column="invest_income"/>
+		<result property="nonOperaIncome" column="non_opera_income"/>
+		<result property="nonOperaOutcome" column="non_opera_outcome"/>
 		<result property="flag" column="flag"/>
 		<result property="inTime" column="intime"/>
 		<result property="modUser" column="moduser"/>
 	</resultMap>
 	
 	<sql id="select_what">
-		select year,code,total_stocks,roe_wa,roe_wa_kf,dividen_pay_sum,eps,eps_diluted,flag,intime,moduser from t_gendata_sheet
+		select year,code,busi_income_this,busi_income_last,opera_profits_this,opera_profits_last,income_tax,fixed_ass_depre,long_pre_amort,total_profit_start,
+		total_profit_end,market_consts_this,market_consts_last,finance_consts_this,finance_consts_last,mgr_consts_this,mgr_consts_last, busi_tax_surcharge,
+		net_profits_this,net_profits_last, net_profits_kf_this,net_profits_kf_last,operat_cost,busi_income_kf,fair_val_change,invest_income,flag,non_opera_income,intime,non_opera_outcome, moduser from t_incstate_sheet
 	</sql>
 	
 	<sql id="where_conditions">
@@ -30,23 +53,83 @@
 			<isNotEmpty prepend=" and " property="code"  >
 				code = #code#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="totalStocks" >
-				total_stocks = #totalStocks#
+			<isNotEmpty prepend=" and " property="busiIncomeThis" >
+				busi_income_this = #busiIncomeThis#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="roeWa" >
-				roe_wa = #roeWa#
+			<isNotEmpty prepend=" and " property="busiIncomeLast" >
+				busi_income_last = #busiIncomeLast#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="roeWaKf" >
-				roe_wa_kf = #roeWaKf#
+			<isNotEmpty prepend=" and " property="operaProfitsThis" >
+				opera_profits_this = #operaProfitsThis#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="dividenPaySum" >
-				dividen_pay_sum = #dividenPaySum#
+			<isNotEmpty prepend=" and " property="operaProfitsLast" >
+				opera_profits_last = #operaProfitsLast#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="eps" >
-				eps = #eps#
+			<isNotEmpty prepend=" and " property="incomeTax" >
+				income_tax = #incomeTax#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="epsDiluted" >
-				eps_diluted = #epsDiluted#
+			<isNotEmpty prepend=" and " property="fixedAssDepre" >
+				fixed_ass_depre = #fixedAssDepre#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="longPreAmort" >
+				long_pre_amort = #longPreAmort#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalProfitStart" >
+				total_profit_start = #totalProfitStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalProfitEnd" >
+				total_profit_end = #totalProfitEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="marketConstsThis" >
+				market_consts_this = #marketConstsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="marketConstsLast" >
+				market_consts_last = #marketConstsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="financeConstsThis" >
+				finance_consts_this = #financeConstsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="financeConstsLast" >
+				finance_consts_last = #financeConstsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="mgrConstsThis" >
+				mgr_consts_this = #mgrConstsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="mgrConstsLast" >
+				mgr_consts_last = #mgrConstsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="busiTaxSurcharge" >
+				busi_tax_surcharge = #busiTaxSurcharge#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="netProfitsThis" >
+				net_profits_this = #netProfitsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="netProfitsLast" >
+				net_profits_last = #netProfitsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="netProfitsKfThis" >
+				net_profits_kf_this = #netProfitsKfThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="netProfitsKfLast" >
+				net_profits_kf_last = #netProfitsKfLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="operatCost" >
+				operat_cost = #operatCost#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="busiIncomeKf" >
+				busi_income_kf = #busiIncomeKf#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="fairValChange" >
+				fair_val_change = #fairValChange#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="investIncome" >
+				invest_income = #investIncome#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="nonOperaIncome" >
+				non_opera_income = #nonOperaIncome#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="nonOperaOutcome" >
+				non_opera_outcome = #nonOperaOutcome#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="flag" >
 				flag = #flag#
@@ -61,7 +144,7 @@
 	</sql>
 	
 	<!-- 引用的 select_what 和 where_conditons 必须在上面，否则报找不到 -->
-	<statement id="getGendataSheet" parameterClass="com.investdata.dao.po.GendataSheet" resultClass="gendataSheet" resultMap="gendataSheetResultMap">
+	<statement id="getIncstateSheet" parameterClass="com.investdata.dao.po.IncstateSheet" resultClass="incstateSheet" resultMap="incstateSheetResultMap">
 		<include refid="select_what" />
 		<include refid="where_conditions" />
 	</statement>

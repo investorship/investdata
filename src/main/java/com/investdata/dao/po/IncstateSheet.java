@@ -27,6 +27,7 @@ public class IncstateSheet {
 	private String netProfitsThis;
 	private String netProfitsLast;
 	private String netProfitsKfThis;
+	private String netProfitsKfLast;
 	private String operatCost;
 	private String busiIncomeKf;
 	private String fairValChange;
@@ -162,6 +163,12 @@ public class IncstateSheet {
 	}
 	public void setNetProfitsKfThis(String netProfitsKfThis) {
 		this.netProfitsKfThis = netProfitsKfThis;
+	}
+	public String getNetProfitsKfLast() {
+		return netProfitsKfLast;
+	}
+	public void setNetProfitsKfLast(String netProfitsKfLast) {
+		this.netProfitsKfLast = netProfitsKfLast;
 	}
 	public String getOperatCost() {
 		return operatCost;

@@ -1,0 +1,5 @@
+配置redis(使用版本3.2)
+1、tar xvf  redis-3.2.1.tar.gz    --解压
+2、make --编译
+3、cd src    redis-server  --启动
+
