@@ -1,10 +1,11 @@
 package com.investdata.dao.po;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import org.json.JSONObject;
 
-public class Stock {
+public class Stock implements Serializable{
 	private String code;	//股票代码
 	private String name;	//股票名称
 	private String shortName; //字母简写

@@ -8,7 +8,7 @@ import com.investdata.dao.po.GendataSheet;
 public class GendataSheetDaoImpl extends BaseDao implements TGendataSheetDao {
 
 	@Override
-	public List<GendataSheet> getGendataSheet(GendataSheet gs) throws Exception {
+	public List<GendataSheet> getGendataSheets(GendataSheet gs) throws Exception {
 		return dao.queryForList("gendataSheet.getGendataSheet", gs);
 	}
 

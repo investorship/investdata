@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.investdata.dao.TAdminUserDao;
+import com.investdata.dao.TCashFlowSheetDao;
 import com.investdata.dao.TFinanceIndexInfoDao;
 import com.investdata.dao.TGendataSheetDao;
 import com.investdata.dao.TIncstateSheetDao;
@@ -13,6 +14,7 @@ import com.investdata.dao.TStockDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.impl.AdminUserDaoImpl;
 import com.investdata.dao.impl.BaseDao;
+import com.investdata.dao.impl.CashFlowSheetDaoImpl;
 import com.investdata.dao.impl.FinanceIndexInfoDaoImpl;
 import com.investdata.dao.impl.GendataSheetDaoImpl;
 import com.investdata.dao.impl.IncstateSheetDaoImpl;
@@ -86,5 +88,13 @@ public class DaoFactory {
 			daoMap.put(key, new IncstateSheetDaoImpl());
 		}
 		return (TIncstateSheetDao) daoMap.get(key);
+	}
+	
+	public static TCashFlowSheetDao getTCashFlowSheetDao() {
+		String key = "TCashFlowSheetDao";
+		if (!daoMap.containsKey(key)) {
+			daoMap.put(key, new CashFlowSheetDaoImpl());
+		}
+		return (TCashFlowSheetDao) daoMap.get(key);
 	}
 }

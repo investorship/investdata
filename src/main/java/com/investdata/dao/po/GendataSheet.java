@@ -1,5 +1,6 @@
 package com.investdata.dao.po;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -7,7 +8,7 @@ import java.sql.Timestamp;
  * @author hailong
  *
  */
-public class GendataSheet {
+public class GendataSheet implements Serializable {
 	private String year;
 	private String code;
 	private String totalStocks;

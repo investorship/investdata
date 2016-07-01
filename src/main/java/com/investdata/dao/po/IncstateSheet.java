@@ -1,11 +1,13 @@
 package com.investdata.dao.po;
 
+import java.io.Serializable;
+
 /**
  * 利润表 po
  * @author hailong
  *
  */
-public class IncstateSheet {
+public class IncstateSheet implements Serializable{
 	private String code;
 	private String year;
 	private String busiIncomeThis;

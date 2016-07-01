@@ -1,5 +1,6 @@
 package com.investdata.dao.po;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import org.json.JSONObject;
 import com.investdata.utils.StringUtils;
 
 //财务指标信息类
-public class FinanceIndexInfo {
+public class FinanceIndexInfo implements Serializable {
 	private Integer id;
 	private String name;
 	private Integer pid; 

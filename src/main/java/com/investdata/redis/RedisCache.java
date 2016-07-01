@@ -1,7 +1,8 @@
 package com.investdata.redis;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -9,7 +10,6 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-import com.investdata.dao.po.User;
 import com.investdata.utils.PropertiesUtils;
 
 public class RedisCache {
@@ -45,7 +45,18 @@ public class RedisCache {
 	
 	public static void main(String[] args) {
 		Jedis jedis = getJedis();
-		User user = new User();
+		
+		Map<String,String> map = new HashMap<String,String>();
+		
+		map.put("userName", "zhangsan");
+		map.put("password", "123");
+		
+		jedis.hmset("key", map);
+		
+		List<String> list = jedis.hmget("key", "userName");
+		
+		
+		/*User user = new User();
 		user.setUserName("zhangsan");
 		user.setPassword("nihao");
 		
@@ -64,6 +75,6 @@ public class RedisCache {
 		List<User> list = ObjectsTranscoder.deserialize(in);    
         for(User u : list){  
             System.out.println("testSetElements user name is:" + u.getUserName() + "-----" + u.getPassword());  
-        }  
+        }  */
 	}
 }

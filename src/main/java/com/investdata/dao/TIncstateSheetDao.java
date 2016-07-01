@@ -6,6 +6,6 @@ import com.investdata.dao.po.IncstateSheet;
 
 
 public interface TIncstateSheetDao {
-	public List<IncstateSheet> getIncstateSheet(IncstateSheet is) throws Exception;
+	public List<IncstateSheet> getIncstateSheets(IncstateSheet is) throws Exception;
 	
 }

@@ -31,6 +31,11 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- 自定义监听器 -->
+	<listener>
+		<listener-class>com.investdata.common.listener.WebAppListener</listener-class>
+	</listener>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
