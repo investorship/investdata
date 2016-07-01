@@ -15,11 +15,13 @@ import redis.clients.jedis.Jedis;
 
 import com.investdata.common.Const;
 import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TBalanceSheetDao;
 import com.investdata.dao.TCashFlowSheetDao;
 import com.investdata.dao.TFinanceIndexInfoDao;
 import com.investdata.dao.TGendataSheetDao;
 import com.investdata.dao.TIncstateSheetDao;
 import com.investdata.dao.TStockDao;
+import com.investdata.dao.po.BalanceSheet;
 import com.investdata.dao.po.CashFlowSheet;
 import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.GendataSheet;
@@ -61,7 +63,7 @@ public class WebAppListener implements ServletContextListener {
 			initGendataSheet();  // 初始化综合数据表项数据.
 			initIncstateSheet(); //初始化利润表数数据
 			initCashFlowSheet(); //初始化现金流量表数据
-			initBalanceSheet();  //初始化资产负债表数据
+//			initBalanceSheet();  //初始化资产负债表数据
 		} catch (Exception e) {
 			_log.error("监听器初始化数据错误:" + e.getMessage(), e);
 		}
@@ -249,9 +251,34 @@ public class WebAppListener implements ServletContextListener {
 	public void initBalanceSheet() throws Exception {
 		_log.info("############监听器step6-start:准备初始化资产负债表数据########");
 		
+		TBalanceSheetDao tsd = DaoFactory.getTBalanceSheetDao();
+		BalanceSheet bst = new BalanceSheet();
+		List<BalanceSheet> bsList = tsd.getBalanceSheets(bst);
+		
+		if (bsList != null && bsList.size() > 0) {
+			
+			Map<String, List<BalanceSheet>> BalanceSheetListMap = new HashMap<String, List<BalanceSheet>>();
+			
+			// 建立股票代码与该股票各年份数据对象之间的对应关系。
+			for (BalanceSheet bs : bsList) {
+				String code = bs.getCode();
+				if (BalanceSheetListMap.containsKey(code)) {
+					BalanceSheetListMap.get(code).add(bs);
+				} else {
+					List<BalanceSheet> cfList = new ArrayList<BalanceSheet>();
+					cfList.add(bs);
+					BalanceSheetListMap.put(code, cfList);
+				}
+			}
+			
+			Set<String> keys = BalanceSheetListMap.keySet();
+			for (String key : keys) {
+				String compxKey = key + "#" + Const.BALANCEDATA_KEY;
+				jedis.set(compxKey.getBytes(), ObjectsTranscoder.serialize(BalanceSheetListMap.get(key)));
+			}
+		}
 		
 		_log.info("############监听器step6-end:初始化资产负债表数据结束##########");
-
 	}
 
 }

@@ -9,7 +9,7 @@ public class IncstateSheetDaoImpl extends BaseDao implements TIncstateSheetDao {
 
 	@Override
 	public List<IncstateSheet> getIncstateSheets(IncstateSheet is) throws Exception {
-		return dao.queryForList("incstateSheet.getIncstateSheet", is);
+		return dao.queryForList("incstateSheet.getIncstateSheets", is);
 	}
 
 	

@@ -9,7 +9,7 @@ public class CashFlowSheetDaoImpl extends BaseDao implements TCashFlowSheetDao {
 	
 	@Override
 	public List<CashFlowSheet> getCashFlowSheets(CashFlowSheet cs) throws Exception {
-		return dao.queryForList("cashFlowSheet.getCashFlowSheet", cs);
+		return dao.queryForList("cashFlowSheet.getCashFlowSheets", cs);
 	}
 
 	

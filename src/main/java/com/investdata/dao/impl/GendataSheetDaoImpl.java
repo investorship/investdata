@@ -9,7 +9,7 @@ public class GendataSheetDaoImpl extends BaseDao implements TGendataSheetDao {
 
 	@Override
 	public List<GendataSheet> getGendataSheets(GendataSheet gs) throws Exception {
-		return dao.queryForList("gendataSheet.getGendataSheet", gs);
+		return dao.queryForList("gendataSheet.getGendataSheets", gs);
 	}
 
 	

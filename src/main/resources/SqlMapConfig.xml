@@ -27,4 +27,6 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 		<sqlMap resource="com/investdata/dao/sqlmap/IndustryCategory.xml"/>
 		<sqlMap resource="com/investdata/dao/sqlmap/GendataSheet.xml"/>
 		<sqlMap resource="com/investdata/dao/sqlmap/IncstateSheet.xml"/>
+		<sqlMap resource="com/investdata/dao/sqlmap/CashFlowSheet.xml"/>
+		
 </sqlMapConfig>
