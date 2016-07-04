@@ -63,7 +63,7 @@ public class WebAppListener implements ServletContextListener {
 			initGendataSheet();  // 初始化综合数据表项数据.
 			initIncstateSheet(); //初始化利润表数数据
 			initCashFlowSheet(); //初始化现金流量表数据
-//			initBalanceSheet();  //初始化资产负债表数据
+			initBalanceSheet();  //初始化资产负债表数据
 		} catch (Exception e) {
 			_log.error("监听器初始化数据错误:" + e.getMessage(), e);
 		}

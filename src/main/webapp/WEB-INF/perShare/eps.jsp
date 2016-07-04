@@ -71,8 +71,8 @@
 var myChart = echarts.init(document.getElementById('main'));
 option = {
 	    title : {
-	        text: '某地区蒸发量',
-	        subtext: '纯属虚构',
+	        text: '${chart.text}',
+	        subtext: '${chart.subtext}',
 	        textStyle: {
 	        	color:'#33CCFF'
 	        }
@@ -81,7 +81,7 @@ option = {
 	        trigger: 'axis'
 	    },
 	    legend: {
-	        data:['蒸发量','降水量']
+	        data:['${chart.legendData}']
 	    },
 	    toolbox: {
 	        show : true,
@@ -119,8 +119,9 @@ option = {
 		} ],
 		series : [
 				{
-					name : '蒸发量',
+					name : '${chart.legendData}',
 					type : 'bar',
+					barWidth: 36, //柱状图的宽度
 					//data : [ 2.0, 4.9, 711.0, 23.2, 125.6, 61.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3 ],
 					data : [ ${chart.dataList[0]}],
 					markPoint : {

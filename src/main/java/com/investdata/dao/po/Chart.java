@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class Chart {
 	private String xAxis;
+	private String text; //主标题
+	private String subtext; //子标题
+	private String legendData;
 	private List<String> dataList;
 	public List<String> getDataList() {
 		return dataList;
@@ -22,7 +25,23 @@ public class Chart {
 	public void setxAxis(String xAxis) {
 		this.xAxis = xAxis;
 	}
-	
-	
-	
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public String getSubtext() {
+		return subtext;
+	}
+	public void setSubtext(String subtext) {
+		this.subtext = subtext;
+	}
+	public String getLegendData() {
+		return legendData;
+	}
+	public void setLegendData(String legendData) {
+		this.legendData = legendData;
+	}
+
 }

@@ -147,6 +147,7 @@
 	<statement id="getIncstateSheets" parameterClass="com.investdata.dao.po.IncstateSheet" resultClass="incstateSheet" resultMap="incstateSheetResultMap">
 		<include refid="select_what" />
 		<include refid="where_conditions" />
+		order by year asc
 	</statement>
 	
 </sqlMap>

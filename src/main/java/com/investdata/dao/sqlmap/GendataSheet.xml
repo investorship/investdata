@@ -64,6 +64,7 @@
 	<statement id="getGendataSheets" parameterClass="com.investdata.dao.po.GendataSheet" resultClass="gendataSheet" resultMap="gendataSheetResultMap">
 		<include refid="select_what" />
 		<include refid="where_conditions" />
+		order by year asc
 	</statement>
 	
 </sqlMap>

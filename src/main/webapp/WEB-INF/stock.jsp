@@ -10,7 +10,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
     <base href="<%=basePath%>">
     <title>投资数据网 - 信息列表</title>
     <meta name="viewport" content="width=1010"/>
@@ -101,7 +100,7 @@
             <li class="city-list"><span class="arrow"></span><span class="letter">${parentsIndex.name}</span>
                 <ul class="cities">
                 	<c:forEach items="${parentsIndex.childsFinanceIndexInfoList }" var="childFinanceIndexInfo">
-	                    <li><a href="${childFinanceIndexInfo.action }?code=${stock.code }" target="_blank">${childFinanceIndexInfo.name }</a></li>
+	                    <li><a href="${childFinanceIndexInfo.action }?code=${stock.code }&indexName=${childFinanceIndexInfo.name}" target="_blank">${childFinanceIndexInfo.name }</a></li>
                     </c:forEach>
                 </ul>
             </li>

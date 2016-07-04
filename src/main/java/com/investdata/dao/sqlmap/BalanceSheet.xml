@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="balanceSheet">
+	
+	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
+	<typeAlias alias="balanceSheet" type="com.investdata.dao.po.BalanceSheet"/>
+	
+	<resultMap id="balanceSheetResultMap" class="com.investdata.dao.po.BalanceSheet" >
+		<result property="year" column="year"/>
+		<result property="code" column="code"/>
+		<result property="noteRecable" column="note_recable"/>
+		<result property="advCustomers" column="adv_customers"/>
+		<result property="accPayable" column="acc_payable"/>
+		<result property="constrInPro" column="constr_in_pro"/>
+		<result property="lntangAssets" column="lntang_assets"/>
+		<result property="goodWill" column="goodwill"/>
+		<result property="shortTermLoans" column="short_term_loans"/>
+		<result property="notePayable" column="note_payable"/>
+		<result property="debitWithinYear" column="debit_within_year"/>
+		<result property="longTermLoans" column="long_term_loans"/>
+		<result property="boundsPayable" column="bounds_payable"/>
+		<result property="liquidAssetsStart" column="liquid_assets_start"/>
+		<result property="liquidAssetsEnd" column="liquid_assets_end"/>
+		<result property="currLiab" column="curr_liab"/>
+		<result property="currLiabNon" column="curr_liab_non"/>
+		<result property="goodsStart" column="goods_start"/>
+		<result property="goodsEnd" column="goods_end"/>
+		<result property="cash" column="cash"/>
+		<result property="tradAssets" column="trad_assets"/>
+		<result property="totalLiab" column="total_liab"/>
+		<result property="totalAssStart" column="total_ass_start"/>
+		<result property="totalAssEnd" column="total_ass_end"/>
+		<result property="shareHolderStart" column="share_holder_start"/>
+		<result property="shareHolderEnd" column="share_holder_end"/>
+		<result property="fixedAssetsStart" column="fixed_assets_start"/>
+		<result property="fixedAssetsEnd" column="fixed_assets_end"/>
+		<result property="retainEarnings" column="retain_earnings"/>
+		<result property="accRecableStart" column="acc_recable_start"/>
+		<result property="accRecableEnd" column="acc_recable_end"/>
+		<result property="capitalSurplus" column="capital_surplus"/>
+		<result property="surplusReserve" column="surplus_reserve"/>
+		<result property="flag" column="flag"/>
+		<result property="inTime" column="intime"/>
+		<result property="modUser" column="moduser"/>
+	</resultMap>
+	
+	<sql id="select_what">
+		select year,code,note_recable,adv_customers,acc_payable,constr_in_pro, lntang_assets,goodwill,short_term_loans,note_payable,note_payable,
+		debit_within_year,long_term_loans,bounds_payable,liquid_assets_start,liquid_assets_end,curr_liab,curr_liab_non,goods_start,
+		goods_end,cash,trad_assets,total_liab,total_ass_start,total_ass_end,share_holder_start,share_holder_end,fixed_assets_start,
+		fixed_assets_end,retain_earnings,acc_recable_start,acc_recable_end,capital_surplus,surplus_reserve,flag,inTime,modUser from t_balance_sheet
+	</sql>
+	
+	<sql id="where_conditions">
+		<dynamic prepend=" where ">
+			<isNotEmpty property="year" >
+				year = #year#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="code"  >
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="noteRecable" >
+				note_recable = #noteRecable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="noteRecable" >
+				adv_customers = #noteRecable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accPayable" >
+				acc_payable = #accPayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="constrInPro" >
+				constr_in_pro = #constrInPro#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="lntangAssets" >
+				lntang_assets = #lntangAssets#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="goodWill" >
+				goodwill = #goodWill#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="shortTermLoans" >
+				short_term_loans = #shortTermLoans#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="notePayable" >
+				note_payable = #notePayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="debitWithinYear" >
+				debit_within_year = #debitWithinYear#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="longTermLoans" >
+				long_term_loans = #longTermLoans#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="boundsPayable" >
+				bounds_payable = #boundsPayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="liquidAssetsStart" >
+				liquid_assets_start = #liquidAssetsStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="liquidAssetsEnd" >
+				liquid_assets_end = #liquidAssetsEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="currLiab" >
+				curr_liab = #currLiab#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="currLiabNon" >
+				curr_liab_non = #currLiabNon#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="goodsStart" >
+				goods_start = #goodsStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="goodsEnd" >
+				goods_end = #goodsEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="cash" >
+				cash = #cash#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="tradAssets" >
+				trad_assets = #tradAssets#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalLiab" >
+				total_liab = #totalLiab#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalAssStart" >
+				total_ass_start = #totalAssStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalAssEnd" >
+				total_ass_end = #totalAssEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="shareHolderStart" >
+				share_holder_start = #shareHolderStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="shareHolderEnd" >
+				share_holder_end = #shareHolderEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="fixedAssetsStart" >
+				fixed_assets_start = #fixedAssetsStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="fixedAssetsEnd" >
+				fixed_assets_end = #fixedAssetsEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="retainEarnings" >
+				retain_earnings = #retainEarnings#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accRecableStart" >
+				acc_recable_start = #accRecableStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accRecableEnd" >
+				acc_recable_end = #accRecableEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accRecableEnd" >
+				acc_recable_end = #accRecableEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="capitalSurplus" >
+				capital_surplus = #capitalSurplus#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="surplusReserve" >
+				surplusReserve = #surplusReserve#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="inTime">
+				intime = #inTime#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="modUser">
+				moduser = #modUser#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!-- 引用的 select_what 和 where_conditons 必须在上面，否则报找不到 -->
+	<statement id="getBalanceSheets" parameterClass="com.investdata.dao.po.BalanceSheet" resultClass="balanceSheet" resultMap="balanceSheetResultMap">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+		order by year asc
+	</statement>
+	
+</sqlMap>

@@ -11,9 +11,11 @@
 	<!-- 基础配置包[拦截器]，所有包继承该包 -->
 	<package name="struts_basic" extends="struts-default,json-default">
 		<interceptors>
+			<interceptor name="encodingInterceptor" class="com.investdata.common.interceptor.EncodingInterceptor"></interceptor>
 			<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
 			<interceptor-stack name="investInterceptor">
 				<interceptor-ref name="defaultStack" ></interceptor-ref>
+				<interceptor-ref name="encodingInterceptor" ></interceptor-ref>
 				<interceptor-ref name="methodInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
