@@ -176,3 +176,13 @@ mark {
 #search_f{
     background:#fcfcfc;
 }
+
+
+.tag { 
+ width: 1160px;
+ height: 90px;
+ position: relative;
+ border: 2px solid #fdd304;
+ margin: 10 auto;
+ padding: 10px;
+}

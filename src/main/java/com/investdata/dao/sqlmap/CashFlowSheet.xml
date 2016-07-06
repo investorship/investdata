@@ -16,7 +16,7 @@
 	</resultMap>
 	
 	<sql id="select_what">
-		select year,code,opera_active_cash,cash_and_cashequ from t_cashflow_sheet
+		select year,code,opera_active_cash,cash_and_cashequ,flag,intime,moduser from t_cashflow_sheet
 	</sql>
 	
 	<sql id="where_conditions">

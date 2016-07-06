@@ -23,6 +23,7 @@
 		<result property="financeConstsLast" column="finance_consts_last"/>
 		<result property="mgrConstsThis" column="mgr_consts_this"/>
 		<result property="mgrConstsLast" column="mgr_consts_last"/>
+		<result property="interExpense" column="inter_expense"/>
 		<result property="busiTaxSurcharge" column="busi_tax_surcharge"/>
 		<result property="netProfitsThis" column="net_profits_this"/>
 		<result property="netProfitsLast" column="net_profits_last"/>
@@ -41,7 +42,7 @@
 	
 	<sql id="select_what">
 		select year,code,busi_income_this,busi_income_last,opera_profits_this,opera_profits_last,income_tax,fixed_ass_depre,long_pre_amort,total_profit_start,
-		total_profit_end,market_consts_this,market_consts_last,finance_consts_this,finance_consts_last,mgr_consts_this,mgr_consts_last, busi_tax_surcharge,
+		total_profit_end,market_consts_this,market_consts_last,finance_consts_this,finance_consts_last,mgr_consts_this,mgr_consts_last,inter_expense, busi_tax_surcharge,
 		net_profits_this,net_profits_last, net_profits_kf_this,net_profits_kf_last,operat_cost,busi_income_kf,fair_val_change,invest_income,flag,non_opera_income,intime,non_opera_outcome, moduser from t_incstate_sheet
 	</sql>
 	
@@ -97,6 +98,9 @@
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="mgrConstsLast" >
 				mgr_consts_last = #mgrConstsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="interExpense" >
+				inter_expense = #interExpense#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="busiTaxSurcharge" >
 				busi_tax_surcharge = #busiTaxSurcharge#

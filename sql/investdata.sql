@@ -166,6 +166,7 @@ create table t_incstate_sheet
    finance_consts_last  decimal(16,2) comment '上期财务费用',
    mgr_consts_this      decimal(16,2) comment '本期管理费用',
    mgr_consts_last      decimal(16,2) comment '上期管理费用',
+   inter_expense        decimal(16,2) comment '财务费用-利息支出',
    busi_tax_surcharge   decimal(16,2) comment '营业税金及附加',
    net_profits_this     decimal(16,2) comment '本期净利润',
    net_profits_last     decimal(16,2) comment '上期净利润',

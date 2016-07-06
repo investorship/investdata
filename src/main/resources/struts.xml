@@ -132,6 +132,15 @@
 			<result name="dilutEPS">/WEB-INF/perShare/dilutEPS.jsp</result>
 			<result name="mincmPS">/WEB-INF/perShare/mincmPS.jsp</result>
 			<result name="opeprfPS">/WEB-INF/perShare/opeprfPS.jsp</result>
+			<result name="capsurfdPS">/WEB-INF/perShare/capsurfdPS.jsp</result>
+			<result name="surrefdPS">/WEB-INF/perShare/surrefdPS.jsp</result>
+			<result name="accumfdPS">/WEB-INF/perShare/accumfdPS.jsp</result>
+			<result name="undivprfPS">/WEB-INF/perShare/undivprfPS.jsp</result>
+			<result name="retearPS">/WEB-INF/perShare/retearPS.jsp</result>
+			<result name="opeCFPS">/WEB-INF/perShare/opeCFPS.jsp</result>
+			<result name="CFPS">/WEB-INF/perShare/CFPS.jsp</result>
+			<result name="NAPS">/WEB-INF/perShare/NAPS.jsp</result>
+			<result name="EBITPS">/WEB-INF/perShare/EBITPS.jsp</result>
 		</action>
 	</package>
 	

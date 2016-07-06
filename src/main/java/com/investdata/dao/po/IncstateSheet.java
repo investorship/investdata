@@ -25,6 +25,7 @@ public class IncstateSheet implements Serializable{
 	private String financeConstsLast;
 	private String mgrConstsThis;
 	private String mgrConstsLast;
+	private String interExpense;
 	private String busiTaxSurcharge;
 	private String netProfitsThis;
 	private String netProfitsLast;
@@ -117,6 +118,13 @@ public class IncstateSheet implements Serializable{
 	}
 	public void setMarketConstsLast(String marketConstsLast) {
 		this.marketConstsLast = marketConstsLast;
+	}
+	
+	public String getInterExpense() {
+		return interExpense;
+	}
+	public void setInterExpense(String interExpense) {
+		this.interExpense = interExpense;
 	}
 	public String getFinanceConstsThis() {
 		return financeConstsThis;
