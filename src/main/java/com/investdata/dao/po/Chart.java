@@ -12,12 +12,12 @@ public class Chart {
 	private String text; //主标题
 	private String subtext; //子标题
 	private String legendData;
-	private List<String> dataList;
-	public List<String> getDataList() {
-		return dataList;
+	private String data;
+	public String getData() {
+		return data;
 	}
-	public void setDataList(List<String> dataList) {
-		this.dataList = dataList;
+	public void setData(String data) {
+		this.data = data;
 	}
 	public String getxAxis() {
 		return xAxis;

@@ -7,6 +7,7 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<constant name="struts.action.extension" value="action" />
 	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant> 
 	
 	<!-- 基础配置包[拦截器]，所有包继承该包 -->
 	<package name="struts_basic" extends="struts-default,json-default">
@@ -15,7 +16,7 @@
 			<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
 			<interceptor-stack name="investInterceptor">
 				<interceptor-ref name="defaultStack" ></interceptor-ref>
-				<interceptor-ref name="encodingInterceptor" ></interceptor-ref>
+				<!--<interceptor-ref name="encodingInterceptor" ></interceptor-ref>  -->
 				<interceptor-ref name="methodInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
@@ -129,6 +130,8 @@
 		<action name="perShare" class="perShareAction">
 			<result name="EPS">/WEB-INF/perShare/eps.jsp</result>
 			<result name="dilutEPS">/WEB-INF/perShare/dilutEPS.jsp</result>
+			<result name="mincmPS">/WEB-INF/perShare/mincmPS.jsp</result>
+			<result name="opeprfPS">/WEB-INF/perShare/opeprfPS.jsp</result>
 		</action>
 	</package>
 	

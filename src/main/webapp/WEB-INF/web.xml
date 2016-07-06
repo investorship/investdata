@@ -12,6 +12,27 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
+	
+	<filter>
+		<filter-name>
+			encodingFilter
+		</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
 
 	<!-- Struts2 核心拦截器 -->
 	<filter>
@@ -23,31 +44,6 @@
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.action</url-pattern>
-	</filter-mapping>
-
-	<filter>
-		<filter-name>
-			encodingFilter
-		</filter-name>
-		<filter-class>
-			com.investdata.common.filter.CharacterEncodingFilter
-        </filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>utf-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>gbkEncodingUrl</param-name>
-			<param-value>ipsPostPay.htm</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 	
 	

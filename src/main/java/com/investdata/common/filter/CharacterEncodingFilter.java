@@ -93,32 +93,13 @@ public class CharacterEncodingFilter extends OncePerRequestFilter {
 			HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
-		if (this.encoding != null && (this.forceEncoding || request.getCharacterEncoding() == null)) {
-			String servletPathTmp = request.getServletPath();
-			log.debug(String.format("servletPathTmp=%s",servletPathTmp));
-			String servletPath = servletPathTmp.substring(servletPathTmp.lastIndexOf("/")+1);
-			log.debug(String.format("servletPath=%s",servletPath));
-			log.debug(String.format("gbkEncodingUrl=%s",gbkEncodingUrl));
-			if(gbkEncodingUrl.indexOf(servletPath) >= 0){
-				request.setCharacterEncoding("GBK");
-			}else{
-				request.setCharacterEncoding(this.encoding);
-			}
-			if (this.forceEncoding && setCharacterEncodingAvailable) {
-				response.setCharacterEncoding(this.encoding);
-			}
-		}
-		
-		 Cookie[] cookies=request.getCookies();
-		 if(null!=cookies&&cookies.length>0){
-			 for(int i=0;i<cookies.length;i++){
-				 cookies[i].setSecure(true);
-				 response.addCookie(cookies[0]);
-			 }
-		 }
-		 response.addHeader("Strict-Transport-Security", "Strict-Transport-Security");
-		 
-		filterChain.doFilter(request, response);
+		if (this.encoding != null && (this.forceEncoding || request.getCharacterEncoding() == null)) {  
+            request.setCharacterEncoding(this.encoding);//设置字符集编码  
+            if (this.forceEncoding) {  
+                response.setCharacterEncoding(this.encoding);  
+            }  
+        }  
+        filterChain.doFilter(request, response);//激活下一个过滤器  
 		
 		/*
 		if (this.encoding != null && (this.forceEncoding || request.getCharacterEncoding() == null)) {

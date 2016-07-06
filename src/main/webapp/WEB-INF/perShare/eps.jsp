@@ -123,7 +123,7 @@ option = {
 					type : 'bar',
 					barWidth: 36, //柱状图的宽度
 					//data : [ 2.0, 4.9, 711.0, 23.2, 125.6, 61.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3 ],
-					data : [ ${chart.dataList[0]}],
+					data : [ ${chart.data}],
 					markPoint : {
 						data : [ {
 							type : 'max',

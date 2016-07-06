@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8" />
 <base href="<%=basePath%>">
-<title>投资数据网 - 稀释每股收益</title>
+<title>投资数据网 - 每股营业收入</title>
 <meta name="viewport" content="width=1010" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -59,9 +59,8 @@
 		</div>
 	</div>
 	<div class="tag">
-		稀释每股收益：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;稀释每股收益是以基本每股收益为基础，假设企业所有发行在外的稀释性潜在普通股均已转换为普通股，从而分别调整归属于普通股股东的当期净利润以及发行在外普通股的加权平均数计算而得的每股收益。
-		从字面理解：在基本每股收益的基础上，潜在普通股（如公司发行的可转债）转换为普通股后，使普通股总数增加，重新计算每股收益，导致每股收益被稀释。
+		每股营业收入：<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;每股营业收入= 当期营业收入 / 总股本
 	</div>
 	<!-- 图标展示区 -->
 	<div id="main" style="width: 1300px; height: 500px;">
@@ -122,7 +121,6 @@ option = {
 					name : '${chart.legendData}',
 					type : 'bar',
 					barWidth: 36, //柱状图的宽度
-					//data : [ 2.0, 4.9, 711.0, 23.2, 125.6, 61.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3 ],
 					data : [ ${chart.data}],
 					markPoint : {
 						data : [ {
