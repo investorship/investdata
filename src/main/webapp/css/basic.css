@@ -186,3 +186,14 @@ mark {
  margin: 10 auto;
  padding: 10px;
 }
+
+.report_main {
+	width: 1302px; 
+	height: 500px; 
+	min-height: 620px;
+	-webkit-tap-highlight-color: transparent; 
+	-webkit-user-select: none; 
+	position: relative; 
+	background-color: transparent;
+	margin: 0 auto;
+}

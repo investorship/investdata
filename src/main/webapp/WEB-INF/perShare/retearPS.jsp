@@ -17,7 +17,15 @@
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
-.tag{ width:1500px; height:90px;position:relative; border:5px solid #09F;}
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
+}
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
@@ -58,14 +66,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag">
-		每股留存收益：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;每股留存收益= 未分配利润 + 盈余公积 / 期末总股本
-	 留存收益包括企业的盈余公积和未分配利润两个部分，其中盈余公积是有特定用途的累积盈余，未分配利润是没有指定用途的累积盈余。每股未分利润可以用分现金和送股的形势分配给股东和持有此股票的投资者
+
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>每股留存收益<br>
+		<span style="font-weight:bold;">计算公式：</span>(未分配利润 + 盈余公积) / 期末总股本<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 留存收益包括企业的盈余公积和未分配利润两个部分，其中盈余公积是有特定用途的累积盈余，未分配利润是没有指定用途的累积盈余。每股未分利润可以用分现金和送股的形势分配给股东和持有此股票的投资者。
 	</div>
 	<!-- 图标展示区 -->
-	<div id="main" style="width: 1300px; height: 500px;">
+	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">
 	</div>
+	
 	<script type="text/javascript">
 //基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));

@@ -17,7 +17,14 @@
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
-.tag{ width:1500px; height:90px;position:relative; border:5px solid #09F;}
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
@@ -58,14 +65,15 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag">
-		每股净现金流量：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;每股净现金流量	现金及现金等价物净增加额 / 期末总股本
-	  	现金流量根据业务活动的划分，通常分为经营活动、投资活动和筹资活动。在这三类活动中，经营活动现金流量最为重要，因为它反映了公司通过实际经营活动，运用公司资源创造现金的能力。
-	  	每股经营活动现金净流量反映了公司运用每股资本创造现金的大小，它具有可持续的特点，也就是说在其他情形不变的情况下经营活动的持续所带来的稳定创现能力
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>每股净现金流量<br>
+		<span style="font-weight:bold;">计算公式：</span>现金及现金等价物净增加额 / 期末总股本<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现金流量根据业务活动的划分，通常分为经营活动、投资活动和筹资活动。在这三类活动中，经营活动现金流量最为重要，因为它反映了公司通过实际经营活动，运用公司资源创造现金的能力。
+	  	每股经营活动现金净流量反映了公司运用每股资本创造现金的大小，它具有可持续的特点，也就是说在其他情形不变的情况下经营活动的持续所带来的稳定创现能力。
 	</div>
 	<!-- 图标展示区 -->
-	<div id="main" style="width: 1300px; height: 500px;">
+	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">
 	</div>
 	<script type="text/javascript">
 //基于准备好的dom，初始化echarts实例

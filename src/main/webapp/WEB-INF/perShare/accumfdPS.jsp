@@ -17,7 +17,15 @@
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
-.tag{ width:1500px; height:90px;position:relative; border:5px solid #09F;}
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
+}
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
@@ -58,12 +66,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag">
-		每股盈余公积：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;公积金是公司的“最后储备”，它既是公司未来扩张的物质基础，也可以是股东未来转赠红股的希望之所在
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>每股公积金<br>
+		<span style="font-weight:bold;">计算公式：</span>(盈余公积 + 资本公积) / 总股本<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公积金是公司的“最后储备”，它既是公司未来扩张的物质基础，也可以是股东未来转赠红股的希望之所在
 	</div>
 	<!-- 图标展示区 -->
-	<div id="main" style="width: 1300px; height: 500px;">
+	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">
 	</div>
 	<script type="text/javascript">
 //基于准备好的dom，初始化echarts实例

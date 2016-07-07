@@ -17,7 +17,15 @@
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
-.tag{ width:1500px; height:90px;position:relative; border:5px solid #09F;}
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
+}
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
@@ -58,15 +66,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag">
-		每股净资产：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;每股净资产 = 	净资产/期末普通股股数	
-	  	这一指标反映每股股票所拥有的资产现值。每股净资产越高，股东拥有的资产现值越多；每股净资产越少，股东拥有的资产现值越少。通常每股净资产越高越好。
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>每股净资产<br>
+		<span style="font-weight:bold;">计算公式：</span>净资产/ 总股本<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这一指标反映每股股票所拥有的资产现值。每股净资产越高，股东拥有的资产现值越多；每股净资产越少，股东拥有的资产现值越少。通常每股净资产越高越好。
 		在基本分析（Fundamental Analysis ）的各种指标中，每股净资产是判断企业内在价值最重要的参考指标之一。
 	</div>
 	<!-- 图标展示区 -->
-	<div id="main" style="width: 1300px; height: 500px;">
+	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">
 	</div>
+	
 	<script type="text/javascript">
 //基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));

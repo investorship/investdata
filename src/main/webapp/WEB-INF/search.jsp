@@ -57,9 +57,11 @@
 	</c:choose>
   
 </div>
+<!-- 根据配置动态展示
 <div class="note">
     尊敬的用户：目前股票财务数据正在维护中，请您随时关注我们，给您带来的不便敬请谅解。
 </div>
+ -->
 <div id="wrapper" style="margin-bottom:0;">
   <div id="header">
     <h1 id="logo"><img src="images/logo.png" height="80px" alt="投资数据网"/></h1>

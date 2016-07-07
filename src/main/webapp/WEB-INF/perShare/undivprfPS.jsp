@@ -17,7 +17,14 @@
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
-.tag{ width:1500px; height:90px;position:relative; border:5px solid #09F;}
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
@@ -58,14 +65,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag">
-		每股未分配利润：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;每股未分配利润=企业当期未分配利润总额/总股本
-	 未分配利润是企业留待以后年度进行分配的结存利润，未分配利润有两个方面的含义：一是留待以后年度分配的利润；二是尚未指定特定用途的利润。资产负债表中的未分配利润项目反映了企业期末在历年结存的尚未分配的利润数额，若为负数则为尚未弥补的亏损。
+	
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>每股未分配利润<br>
+		<span style="font-weight:bold;">计算公式：</span>未分配利润总额/总股本<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未分配利润是企业留待以后年度进行分配的结存利润，未分配利润有两个方面的含义：一是留待以后年度分配的利润；二是尚未指定特定用途的利润。资产负债表中的未分配利润项目反映了企业期末在历年结存的尚未分配的利润数额，若为负数则为尚未弥补的亏损。
 	</div>
 	<!-- 图标展示区 -->
-	<div id="main" style="width: 1300px; height: 500px;">
+	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">
 	</div>
+	
 	<script type="text/javascript">
 //基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));

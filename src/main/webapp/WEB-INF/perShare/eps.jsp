@@ -16,6 +16,17 @@
 <link href="css/basic.css" type="text/css" rel="stylesheet" />
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
+}
+</style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
 </head>
@@ -55,9 +66,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag" style="width:1300px; height:90px;position:relative;border:2px solid #fdd304; margin:10 auto; padding:10px;">
-		每股收益：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;EPS(每股盈余)=盈余/总股本，传统的每股收益指标计算公式为：每股收益=期末净利润÷期末总股本。EPS为公司获利能力的最后结果。每股盈余高代表着公司每单位资本额的获利能力高,这表示公司具有某种较佳的能力——产品行销、技术能力、管理能力等等,使得公司可以用较少的资源创造出较高的获利。 
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>每股收益<br>
+		<span style="font-weight:bold;">计算公式：</span>直接取自财报披露数据<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EPS为公司获利能力的最后结果。每股盈余高代表着公司每单位资本额的获利能力高,这表示公司具有某种较佳的能力——产品行销、技术能力、管理能力等等,使得公司可以用较少的资源创造出较高的获利。 
 		企业的每股获利,通常也代表着该年度所能配发的股利。如果以股利收入的角度来选股,则可以eps作为替代变数。
 	</div>
 	<!-- 图标展示区 -->

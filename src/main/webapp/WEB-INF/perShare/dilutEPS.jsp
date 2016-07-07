@@ -17,7 +17,15 @@
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
-.tag{ width:1500px; height:90px;position:relative; border:5px solid #09F;}
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
+}
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
@@ -58,9 +66,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag">
-		稀释每股收益：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;稀释每股收益是以基本每股收益为基础，假设企业所有发行在外的稀释性潜在普通股均已转换为普通股，从而分别调整归属于普通股股东的当期净利润以及发行在外普通股的加权平均数计算而得的每股收益。
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>稀释每股收益<br>
+		<span style="font-weight:bold;">计算公式：</span>直接取自财报披露数据<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;稀释每股收益是以基本每股收益为基础，假设企业所有发行在外的稀释性潜在普通股均已转换为普通股，从而分别调整归属于普通股股东的当期净利润以及发行在外普通股的加权平均数计算而得的每股收益。
 		从字面理解：在基本每股收益的基础上，潜在普通股（如公司发行的可转债）转换为普通股后，使普通股总数增加，重新计算每股收益，导致每股收益被稀释。
 	</div>
 	<!-- 图标展示区 -->

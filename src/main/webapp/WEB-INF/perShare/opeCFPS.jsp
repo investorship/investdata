@@ -17,7 +17,15 @@
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
-.tag{ width:1500px; height:90px;position:relative; border:5px solid #09F;}
+.report_tip {
+	width:1300px; 
+	height:95px;
+	position:relative;
+	border:2px solid #FFBB00; 
+	margin:10 auto; 
+	padding:10px; 
+	background-color: #FFFF77
+}
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
@@ -58,13 +66,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="tag">
-		每股经营活动现金流量：<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;每股经营活动产生的现金流量净额（每股经营现金流）=经营活动产生现金流量净额/年度末普通股总股本。
-	  每股经营现金流是最具实质的财务指标，其用来反映该公司的经营流入的现金的多少，如果一个公司的每股收益很高 或者每股未分配利润也很高，如果现金流差的话，意味该上市公司没有足够的现金来保障股利的分红派息，那只是报表上的数字而已没有实际的意义
+	<div class="report_tip">
+		<span style="font-weight:bold;">指标名称：</span>每股经营活动现金流量<br>
+		<span style="font-weight:bold;">计算公式：</span>经营活动产生现金流量净额/年度末普通股总股本<br>
+		<span style="font-weight:bold;">说明：</span><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每股经营现金流是最具实质的财务指标，其用来反映该公司的经营流入的现金的多少，如果一个公司的每股收益很高 或者每股未分配利润也很高，如果现金流差的话，意味该上市公司没有足够的现金来保障股利的分红派息，那只是报表上的数字而已没有实际的意义。
 	</div>
 	<!-- 图标展示区 -->
-	<div id="main" style="width: 1300px; height: 500px;">
+	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">
 	</div>
 	<script type="text/javascript">
 //基于准备好的dom，初始化echarts实例
