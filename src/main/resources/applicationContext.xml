@@ -33,6 +33,11 @@
 	<!-- 每股指标 -->
 	<bean id="perShareAction" class="com.investdata.action.pershare.PerShareAction" scope="prototype"/>
 
+	<!-- 偿债能力 -->
+	<bean id="solventAction" class="com.investdata.action.solvent.SolventAction" scope="prototype"/>
+	
+
+
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">

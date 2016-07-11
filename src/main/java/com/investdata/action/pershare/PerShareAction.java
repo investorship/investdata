@@ -1,7 +1,5 @@
 package com.investdata.action.pershare;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +21,13 @@ import com.investdata.redis.RedisCache;
 import com.investdata.utils.MathUtils;
 import com.investdata.utils.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
+
+/**
+ * 每股指标计算
+ * @author HaiLong.Guo
+ * @since 2016-07-11
+ *
+ */
 
 public class PerShareAction extends BaseAction implements RequestAware,ApplicationAware {
 	private static final long serialVersionUID = -4003526420872337090L;
