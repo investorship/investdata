@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8" />
 <base href="<%=basePath%>">
-<title>投资数据网 - 流动比率</title>
+<title>投资数据网 - 息税前利润(EBIT)</title>
 <meta name="viewport" content="width=1010" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -67,11 +67,10 @@
 		</div>
 	</div>
 	<div class="report_tip">
-		<span style="font-weight:bold;">指标名称：</span>流动比率<br>
-		<span style="font-weight:bold;">计算公式：</span>流动资产/流动负债 * 100%<br>
+		<span style="font-weight:bold;">指标名称：</span>息税前利润(EBIT)<br>
+		<span style="font-weight:bold;">计算公式：</span>企业的净利润+企业支付的利息费用(取财务费用中的利息支出项)+企业支付的所得税 * 100%<br>
 		<span style="font-weight:bold;">说明：</span><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;流动比率是流动资产对流动负债的比率，用来衡量企业流动资产在短期债务到期以前，可以变为现金用于偿还负债的能力。
-		一般说来，比率越高，说明企业资产的变现能力越强，短期偿债能力亦越强；反之则弱。一般认为流动比率应在2：1以上，流动比率2：1，表示流动资产是流动负债的两倍，即使流动资产有一半在短期内不能变现，也能保证全部的流动负债得到偿还。
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通俗地说就是不扣除利息也不扣除所得税的利润，也就是在不考虑利息的情况下在交所得税前的利润，也可以称为息前税前利润。息税前利润，顾名思义，是指不支付利息和所得税之前的利润。
 	</div>
 	<!-- 图标展示区 -->
 	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">
@@ -80,60 +79,76 @@
 		//基于准备好的dom，初始化echarts实例
 		var myChart = echarts.init(document.getElementById('main'));
 		option = {
-			    title: {
-			    	 text: '${chart.text}',
-				        subtext: '${chart.subtext}',
-				        textStyle: {
-				        	color:'#33CCFF'
-				        }
+			    title : {
+			        text: '${chart.text}',
+			        subtext: '${chart.subtext}',
+			        textStyle: {
+			        	color:'#33CCFF'
+			        }
 			    },
-			    tooltip: {
+			    tooltip : {
 			        trigger: 'axis'
 			    },
 			    legend: {
 			        data:['${chart.legendData}']
 			    },
 			    toolbox: {
-			        show: true,
-			        feature: {
-			            dataZoom: {
-			                yAxisIndex: 'none'
-			            },
-			            dataView: {readOnly: false},
-			            magicType: {type: ['line', 'bar']},
-			            restore: {},
-			            saveAsImage: {}
-			        }
-			    },
-			    xAxis:  {
-			        type: 'category',
-			        boundaryGap: false,
-			        data: [${chart.xAxis}]
-			    },
-			    yAxis: {
-			        type: 'value',
-			        axisLabel: {
-			            formatter: '{value}'
-			        }
-			    },
-			    series: [
-			        {
-			            name:'${chart.legendData}',
-			            type:'line',
-			            data:[${chart.data}],
-			            markPoint: {
-			                data: [
-			                    {type: 'max', name: '最大值'},
-			                    {type: 'min', name: '最小值'}
-			                ]
-			            },
-			            markLine: {
-			                data: [
-			                    {type: 'average', name: '平均值'}
-			                ]
-			            }
-			        }
-			    ]
+			        show : true,
+			        feature : {
+			            dataView : {show: true, readOnly: true
+						},
+						magicType : {
+							show : true,
+							type : [ 'line', 'bar' ]
+						},
+						restore : {
+							show : true
+						},
+						saveAsImage : {
+							show : true
+						}
+					}
+				},
+				calculable : true,
+				xAxis : [ {
+					type : 'category',
+//					data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月','10月', '11月', '12月' ],
+					data : [${chart.xAxis}],
+					nameTextStyle: {
+						color:'#33CCFF'
+					},
+					axisLabel: {
+						textStyle: {
+							color: '#888888'
+						}
+					}
+				} ],
+				yAxis : [ {
+					type : 'value'
+				} ],
+				series : [
+						{
+							name : '${chart.legendData}',
+							type : 'bar',
+							barWidth: 36, //柱状图的宽度
+							data : [ ${chart.data}],
+							markPoint : {
+								data : [ {
+									type : 'max',
+									name : '最大值'
+								}, {
+									type : 'min',
+									name : '最小值'
+								} ]
+							},
+							markLine : {
+								data : [ {
+									type : 'average',
+									name : '平均值'
+								} ]
+							}
+						}
+						]
 			};
 			
 			// 使用刚指定的配置项和数据显示图表。

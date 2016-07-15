@@ -148,6 +148,12 @@
 	<package name="solvent" namespace="/solvent" extends="struts_basic">
 		<action name="solvent" class="solventAction">
 			<result name="currt">/WEB-INF/solvent/currt.jsp</result>
+			<result name="qckrt">/WEB-INF/solvent/qckrt.jsp</result>
+			<result name="cash">/WEB-INF/solvent/cash.jsp</result>
+			<result name="cashFlow">/WEB-INF/solvent/cashFlow.jsp</result>
+			<result name="dbequrt">/WEB-INF/solvent/dbequrt.jsp</result>
+			<result name="debtEnsure">/WEB-INF/solvent/debtEnsure.jsp</result>
+			<result name="EBIT">/WEB-INF/solvent/EBIT.jsp</result>
 		</action>
 	</package>
 	

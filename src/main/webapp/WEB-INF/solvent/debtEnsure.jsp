@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8" />
 <base href="<%=basePath%>">
-<title>投资数据网 - 流动比率</title>
+<title>投资数据网 - 偿债保障比率</title>
 <meta name="viewport" content="width=1010" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -67,11 +67,10 @@
 		</div>
 	</div>
 	<div class="report_tip">
-		<span style="font-weight:bold;">指标名称：</span>流动比率<br>
-		<span style="font-weight:bold;">计算公式：</span>流动资产/流动负债 * 100%<br>
+		<span style="font-weight:bold;">指标名称：</span>偿债保障比率<br>
+		<span style="font-weight:bold;">计算公式：</span>负债总额  / 经营活动产生的现金流量净额 * 100%<br>
 		<span style="font-weight:bold;">说明：</span><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;流动比率是流动资产对流动负债的比率，用来衡量企业流动资产在短期债务到期以前，可以变为现金用于偿还负债的能力。
-		一般说来，比率越高，说明企业资产的变现能力越强，短期偿债能力亦越强；反之则弱。一般认为流动比率应在2：1以上，流动比率2：1，表示流动资产是流动负债的两倍，即使流动资产有一半在短期内不能变现，也能保证全部的流动负债得到偿还。
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;偿债保障比率是负债总额与经营活动现金净流量的比率。一般认为，该比率越低，企业偿还债务的能力越强。偿债保障比率与国内企业经常用到的已获利息倍数有所区别，已获利息倍数是企业息税前利润与利息费用的比率，是用来衡量企业偿付借款利息的能力，偿债保障比率不仅衡量企业偿付借款利息的能力，而且衡量企业偿付本金的能力。
 	</div>
 	<!-- 图标展示区 -->
 	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">

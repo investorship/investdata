@@ -588,7 +588,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				//现金及现金等价物净增加额
 				double cashAndCashequ = Double.valueOf(canshFlowSheet.getCashAndCashequ());
 				
-				//每股净现金流量	现金及现金等价物净增加额 / 期末总股本
+				//每股净现金流量	现金及现金等价物净增加额  / 期末总股本
 				String CFPS = MathUtils.format2DecPoint(cashAndCashequ / totoalStocks);
 				
 				yearBuilder.append(canshFlowSheet.getYear()).append(",");
