@@ -11,6 +11,7 @@ public class BalanceSheet implements Serializable {
 	private String accPayable;
 	private String constrInPro;
 	private String lntangAssets;
+	private String lntangAssetsAmortize;
 	private String goodWill;
 	private String shortTermLoans;
 	private String notePayable;
@@ -81,6 +82,14 @@ public class BalanceSheet implements Serializable {
 	}
 	public void setLntangAssets(String lntangAssets) {
 		this.lntangAssets = lntangAssets;
+	}
+	
+	
+	public String getLntangAssetsAmortize() {
+		return lntangAssetsAmortize;
+	}
+	public void setLntangAssetsAmortize(String lntangAssetsAmortize) {
+		this.lntangAssetsAmortize = lntangAssetsAmortize;
 	}
 	public String getGoodWill() {
 		return goodWill;

@@ -154,6 +154,7 @@
 			<result name="dbequrt">/WEB-INF/solvent/dbequrt.jsp</result>
 			<result name="debtEnsure">/WEB-INF/solvent/debtEnsure.jsp</result>
 			<result name="EBIT">/WEB-INF/solvent/EBIT.jsp</result>
+			<result name="EBITDA">/WEB-INF/solvent/EBITDA.jsp</result>
 		</action>
 	</package>
 	

@@ -105,6 +105,7 @@ create table t_balance_sheet
    acc_payable          decimal(16,2) comment '应付账款',
    constr_in_pro        decimal(16,2) comment '在建工程',
    lntang_assets        decimal(16,2) comment '无形资产',
+   lntang_assets_amortize decimal(16,2) comment '无形资产摊销',
    goodwill             decimal(16,2) comment '商誉',
    short_term_loans     decimal(16,2) comment '短期借款',
    note_payable         decimal(16,2) comment '应付票据',

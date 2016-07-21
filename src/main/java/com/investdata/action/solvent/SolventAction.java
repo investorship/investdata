@@ -382,18 +382,18 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		
 		String compxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
-		List<IncstateSheet> IncstateSheetList = ObjectsTranscoder.deserialize(in);  
+		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
 		
 		Chart chart = new Chart();
 		
 		//要求两张表年份数据必须一致，界面才给予显示
-		if (IncstateSheetList != null && IncstateSheetList.size() > 0) {
+		if (incstateSheetList != null && incstateSheetList.size() > 0) {
 			//保留两位小数
 			StringBuilder dataBuilder = new StringBuilder();
 			StringBuilder yearBuilder = new StringBuilder();
 			
-			for (int i=0; i< IncstateSheetList.size(); i++) {
-				IncstateSheet incstateSheet = IncstateSheetList.get(i);
+			for (int i=0; i< incstateSheetList.size(); i++) {
+				IncstateSheet incstateSheet = incstateSheetList.get(i);
 				
 				//利润总额
 				double totalLiab = Double.valueOf(incstateSheet.getTotalProfitEnd());
@@ -434,29 +434,39 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		
 		String compxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
-		List<IncstateSheet> IncstateSheetList = ObjectsTranscoder.deserialize(in);  
+		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
+		
+		String key = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] inBal = jedis.get(key.getBytes());
+		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
 		
 		Chart chart = new Chart();
 		
 		//要求两张表年份数据必须一致，界面才给予显示
-		if (IncstateSheetList != null && IncstateSheetList.size() > 0) {
+		if (incstateSheetList != null && balanceSheetsList != null  && incstateSheetList.size() > 0 &&  incstateSheetList.size() == balanceSheetsList.size() ) {
 			//保留两位小数
 			StringBuilder dataBuilder = new StringBuilder();
 			StringBuilder yearBuilder = new StringBuilder();
 			
-			for (int i=0; i< IncstateSheetList.size(); i++) {
-				IncstateSheet incstateSheet = IncstateSheetList.get(i);
+			for (int i=0; i< incstateSheetList.size(); i++) {
+				IncstateSheet incstateSheet = incstateSheetList.get(i);
+				BalanceSheet balanceSheet = balanceSheetsList.get(i);
 				
-				//利润总额
+				//利润总额(净利润 + 所得税)
 				double totalLiab = Double.valueOf(incstateSheet.getTotalProfitEnd());
 				//利息费用
 				double interExpense = Double.valueOf(incstateSheet.getInterExpense());
-				
-				//息税前利润(EBIT) = 利润总额  + 利息费用
-				String dbequrt = MathUtils.format2DecPoint(totalLiab + interExpense);
+				// 固定资产折旧
+				double fixedAssDepre = Double.valueOf(incstateSheet.getFixedAssDepre());
+				//无形资产摊销
+				double lntangAssetsAmortize = Double.valueOf(balanceSheet.getLntangAssetsAmortize());
+				//长期待摊费用摊销
+				double longPreAmort = Double.valueOf(incstateSheet.getLongPreAmort());
+				//税息折旧及摊销前利润(EBITDA) = 净利润+所得税+固定资产折旧+无形资产摊销+长期待摊费用摊销+偿付利息所支付的现金	
+				String EBITDA = MathUtils.format2DecPoint(totalLiab + interExpense + fixedAssDepre + lntangAssetsAmortize + longPreAmort);
 				
 				yearBuilder.append(incstateSheet.getYear()).append(",");
-				dataBuilder.append(dbequrt).append(",");
+				dataBuilder.append(EBITDA).append(",");
 			}
 			
 			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
@@ -467,7 +477,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			
 			chart.setxAxis(yearBuilder.toString());
 			chart.setData(dataBuilder.toString());
-			chart.setLegendData("息税前利润(EBIT)");
+			chart.setLegendData("税息折旧及摊销前利润(EBITDA)");
 			chart.setText(code + " " + stockName);
 		}
 		
