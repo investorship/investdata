@@ -487,6 +487,331 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 	}
 	
 	
+	//利息保障倍数
+	public String intcvr() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		if (StringUtils.isEmpty(code)) {
+			return ERROR;
+		}
+		
+		String compxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(compxKey.getBytes());
+		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
+		
+		Chart chart = new Chart();
+		
+		//要求两张表年份数据必须一致，界面才给予显示
+		if (incstateSheetList != null && incstateSheetList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i< incstateSheetList.size(); i++) {
+				IncstateSheet incstateSheet = incstateSheetList.get(i);
+				
+				//利润总额
+				double totalLiab = Double.valueOf(incstateSheet.getTotalProfitEnd());
+				//利息费用
+				double interExpense = Double.valueOf(incstateSheet.getInterExpense());
+				
+				//利息保障倍数 = 税息前利润 /（利息费用　＋　资本化利息支出) 
+				//由于资本化利息支出数据不在财报中体现具体数据，所以只取值财务报表中的-利息费用
+				String intcvr = MathUtils.format2DecPoint((totalLiab + interExpense) / interExpense);
+				
+				yearBuilder.append(incstateSheet.getYear()).append(",");
+				dataBuilder.append(intcvr).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("利息保障倍数");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//短期有息负债
+	public String shortInterestDebt() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		if (StringUtils.isEmpty(code)) {
+			return ERROR;
+		}
+		
+		String key = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] inBal = jedis.get(key.getBytes());
+		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		
+		Chart chart = new Chart();
+		
+		if (balanceSheetsList != null && balanceSheetsList.size() > 0) {
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			for (int i=0; i<balanceSheetsList.size(); i++) {
+				BalanceSheet balanceSheet = balanceSheetsList.get(i);
+				
+				//短期借款
+				double shortTermLoans = Double.valueOf(balanceSheet.getShortTermLoans());
+				//应付票据
+				double notePayable = Double.valueOf(balanceSheet.getNotePayable());
+				//一年内到期的非流动负债
+				double debitWithinYear = Double.valueOf(balanceSheet.getDebitWithinYear());
+				
+				//短期有息负债 = 短期借款+应付票据+一年内到期的长期借款(一年内到期的非流动负债)
+				String shortInterestDebt = MathUtils.format2DecPoint((shortTermLoans + notePayable + debitWithinYear));
+				
+				yearBuilder.append(balanceSheet.getYear()).append(",");
+				dataBuilder.append(shortInterestDebt).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("短期有息负债");
+			chart.setText(code + " " + stockName);
+		}
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	
+	//长期有息负债
+	public String longInterestDebt() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		if (StringUtils.isEmpty(code)) {
+			return ERROR;
+		}
+		
+		String key = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] inBal = jedis.get(key.getBytes());
+		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		
+		Chart chart = new Chart();
+		
+		if (balanceSheetsList != null && balanceSheetsList.size() > 0) {
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			for (int i=0; i<balanceSheetsList.size(); i++) {
+				BalanceSheet balanceSheet = balanceSheetsList.get(i);
+				
+				//长期借款
+				double longTermLoans = Double.valueOf(balanceSheet.getLongTermLoans());
+				//应付债券
+				double boundsPayAble = Double.valueOf(balanceSheet.getBoundsPayable());
+							
+				//长期有息负债 = 长期借款 + 应付债券
+				String longInterestDebt = MathUtils.format2DecPoint(longTermLoans + boundsPayAble);
+				
+				yearBuilder.append(balanceSheet.getYear()).append(",");
+				dataBuilder.append(longInterestDebt).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("长期有息负债");
+			chart.setText(code + " " + stockName);
+		}
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	
+	//有息负债
+	public String interestDebt() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		if (StringUtils.isEmpty(code)) {
+			return ERROR;
+		}
+		
+		String key = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] inBal = jedis.get(key.getBytes());
+		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		
+		Chart chart = new Chart();
+		
+		if (balanceSheetsList != null && balanceSheetsList.size() > 0) {
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			for (int i=0; i<balanceSheetsList.size(); i++) {
+				BalanceSheet balanceSheet = balanceSheetsList.get(i);
+				
+				//长期借款
+				double longTermLoans = Double.valueOf(balanceSheet.getLongTermLoans());
+				//应付债券
+				double boundsPayAble = Double.valueOf(balanceSheet.getBoundsPayable());
+				
+				//短期借款
+				double shortTermLoans = Double.valueOf(balanceSheet.getShortTermLoans());
+				//应付票据
+				double notePayable = Double.valueOf(balanceSheet.getNotePayable());
+				//一年内到期的非流动负债
+				double debitWithinYear = Double.valueOf(balanceSheet.getDebitWithinYear());
+							
+				//有息负债 = 长期有息负债 + 短期有息负债
+				String interestDebt = MathUtils.format2DecPoint(longTermLoans + boundsPayAble + shortTermLoans + notePayable + debitWithinYear);
+				
+				yearBuilder.append(balanceSheet.getYear()).append(",");
+				dataBuilder.append(interestDebt).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("有息负债");
+			chart.setText(code + " " + stockName);
+		}
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//有息负债比率
+	public String interestDebtRatio() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		if (StringUtils.isEmpty(code)) {
+			return ERROR;
+		}
+		
+		String key = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] inBal = jedis.get(key.getBytes());
+		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		
+		Chart chart = new Chart();
+		
+		if (balanceSheetsList != null && balanceSheetsList.size() > 0) {
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			for (int i=0; i<balanceSheetsList.size(); i++) {
+				BalanceSheet balanceSheet = balanceSheetsList.get(i);
+				
+				//长期借款
+				double longTermLoans = Double.valueOf(balanceSheet.getLongTermLoans());
+				//应付债券
+				double boundsPayAble = Double.valueOf(balanceSheet.getBoundsPayable());
+				
+				//短期借款
+				double shortTermLoans = Double.valueOf(balanceSheet.getShortTermLoans());
+				//应付票据
+				double notePayable = Double.valueOf(balanceSheet.getNotePayable());
+				//一年内到期的非流动负债
+				double debitWithinYear = Double.valueOf(balanceSheet.getDebitWithinYear());
+				
+				//负债总额
+				double totalLiab = Double.valueOf(balanceSheet.getTotalLiab());
+				
+				//有息负债 = 长期有息负债 + 短期有息负债
+				double interestDebt = longTermLoans + boundsPayAble + shortTermLoans + notePayable + debitWithinYear;
+				
+				//有息负债比率 = 带息负债总额/负债总额	
+				String interestDebtRatio = MathUtils.format2DecPoint(interestDebt / totalLiab);
+				
+				yearBuilder.append(balanceSheet.getYear()).append(",");
+				dataBuilder.append(interestDebtRatio).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("有息负债比率");
+			chart.setText(code + " " + stockName);
+		}
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//有形净值债务比率
+	public String dbtaneQurt() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		if (StringUtils.isEmpty(code)) {
+			return ERROR;
+		}
+		
+		String key = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] inBal = jedis.get(key.getBytes());
+		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		
+		Chart chart = new Chart();
+		
+		if (balanceSheetsList != null && balanceSheetsList.size() > 0) {
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			for (int i=0; i<balanceSheetsList.size(); i++) {
+				BalanceSheet balanceSheet = balanceSheetsList.get(i);
+				
+				//负债总额
+				double totalLiab = Double.valueOf(balanceSheet.getTotalLiab());
+				
+				//股东权益(期末)
+				double shareHolderEnd = Double.valueOf(balanceSheet.getShareHolderEnd());
+				
+				//无形资产
+				double lntangAssets = Double.valueOf(balanceSheet.getLntangAssets()); 
+				
+				//商誉
+				double goodWill = Double.valueOf(balanceSheet.getGoodWill());
+				
+				//有形净值债务比率 = 负债总额 /( 股东权益 - 无形资产净值 - 商誉 )		
+				String dbtaneQurt = MathUtils.format2DecPoint(totalLiab /(shareHolderEnd - lntangAssets - goodWill));
+				
+				yearBuilder.append(balanceSheet.getYear()).append(",");
+				dataBuilder.append(dbtaneQurt).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("有形净值债务比率");
+			chart.setText(code + " " + stockName);
+		}
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	
 	
 
 	@Override
