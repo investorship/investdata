@@ -164,6 +164,14 @@
 		</action>
 	</package>
 	
+	<!-- 盈利能力 -->
+	<package name="profitability" namespace="/profitability" extends="struts_basic">
+		<action name="profitability" class="profitabilityAction">
+			<result name="ROE">/WEB-INF/profitability/ROE.jsp</result>
+			<result name="ROEcut">/WEB-INF/profitability/ROEcut.jsp</result>
+		</action>
+	</package>
+	
 	
 
 	<!-- Add packages here <include file="example.xml"/> -->

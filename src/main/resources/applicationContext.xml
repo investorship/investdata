@@ -36,6 +36,9 @@
 	<!-- 偿债能力 -->
 	<bean id="solventAction" class="com.investdata.action.solvent.SolventAction" scope="prototype"/>
 	
+	<!-- 盈利能力 -->
+	<bean id="profitabilityAction" class="com.investdata.action.profitability.ProfitabilityAction" scope="prototype"/>
+	
 
 
 	<bean id="propertyConfigurer"
