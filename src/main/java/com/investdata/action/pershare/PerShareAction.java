@@ -640,8 +640,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				int totoalStocks = Integer.valueOf(genSheet.getTotalStocks());
 				//期末资产总额
 				double totalAssEnd = Double.valueOf(balanceSheet.getTotalAssEnd());
-				//负债总额
-				double totalLiab = Double.valueOf(balanceSheet.getTotalLiab());
+				//期末负债总额
+				double totalLiab = Double.valueOf(balanceSheet.getTotalLiabEnd());
 				//净资产 = 资产总额 - 负债总额
 				double  netAss = totalAssEnd - totalLiab;
 				

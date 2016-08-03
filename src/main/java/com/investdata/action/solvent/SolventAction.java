@@ -281,8 +281,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			
 			for (int i=0; i<balanceSheetsList.size(); i++) {
 				BalanceSheet balanceSheet = balanceSheetsList.get(i);
-				//负债总额
-				double totalLiab = Double.valueOf(balanceSheet.getTotalLiab());
+				//期末负债总额
+				double totalLiab = Double.valueOf(balanceSheet.getTotalLiabEnd());
 				
 				//期末股东权益 
 				double shareHolderEnd = Double.valueOf(balanceSheet.getShareHolderEnd());
@@ -341,8 +341,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				BalanceSheet balanceSheet = balanceSheetsList.get(i);
 				CashFlowSheet cashFlowSheet = cashFlowSheetsList.get(i);
 				
-				//流动负债
-				double totalLiab = Double.valueOf(balanceSheet.getTotalLiab());
+				//期末负债总额
+				double totalLiab = Double.valueOf(balanceSheet.getTotalLiabEnd());
 				
 				//经营活动产生的现金流量净额
 				double operaActiveCash = Double.valueOf(cashFlowSheet.getOperaActiveCash());
@@ -727,8 +727,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//一年内到期的非流动负债
 				double debitWithinYear = Double.valueOf(balanceSheet.getDebitWithinYear());
 				
-				//负债总额
-				double totalLiab = Double.valueOf(balanceSheet.getTotalLiab());
+				//期末负债总额
+				double totalLiab = Double.valueOf(balanceSheet.getTotalLiabEnd());
 				
 				//有息负债 = 长期有息负债 + 短期有息负债
 				double interestDebt = longTermLoans + boundsPayAble + shortTermLoans + notePayable + debitWithinYear;
@@ -776,8 +776,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			for (int i=0; i<balanceSheetsList.size(); i++) {
 				BalanceSheet balanceSheet = balanceSheetsList.get(i);
 				
-				//负债总额
-				double totalLiab = Double.valueOf(balanceSheet.getTotalLiab());
+				//期末负债总额
+				double totalLiab = Double.valueOf(balanceSheet.getTotalLiabEnd());
 				
 				//股东权益(期末)
 				double shareHolderEnd = Double.valueOf(balanceSheet.getShareHolderEnd());

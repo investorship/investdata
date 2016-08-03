@@ -12,6 +12,8 @@ public class IncstateSheet implements Serializable{
 	private String year;
 	private String busiIncomeThis;
 	private String busiIncomeLast;
+	private String totalBusiIncThis;
+	private String totalBusiIncLast;
 	private String operaProfitsThis;
 	private String operaProfitsLast;
 	private String incomeTax;
@@ -64,6 +66,19 @@ public class IncstateSheet implements Serializable{
 	}
 	public void setBusiIncomeLast(String busiIncomeLast) {
 		this.busiIncomeLast = busiIncomeLast;
+	}
+	
+	public String getTotalBusiIncThis() {
+		return totalBusiIncThis;
+	}
+	public void setTotalBusiIncThis(String totalBusiIncThis) {
+		this.totalBusiIncThis = totalBusiIncThis;
+	}
+	public String getTotalBusiIncLast() {
+		return totalBusiIncLast;
+	}
+	public void setTotalBusiIncLast(String totalBusiIncLast) {
+		this.totalBusiIncLast = totalBusiIncLast;
 	}
 	public String getOperaProfitsThis() {
 		return operaProfitsThis;

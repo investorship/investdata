@@ -181,6 +181,20 @@
 		</action>
 	</package>
 	
+	<!-- 成长能力 -->
+	<package name="growthCapab" namespace="/growthCapab" extends="struts_basic">
+		<action name="growthCapab" class="growthCapabAction">
+			<result name="netprfgrrt">/WEB-INF/growthCapab/netprfgrrt.jsp</result>
+			<result name="netprfgrrtKF">/WEB-INF/growthCapab/netprfgrrtKF.jsp</result>
+			<result name="opeprfgrrt">/WEB-INF/growthCapab/opeprfgrrt.jsp</result>
+			<result name="totprfgrrt">/WEB-INF/growthCapab/totprfgrrt.jsp</result>
+			<result name="opeincmgrrt">/WEB-INF/growthCapab/opeincmgrrt.jsp</result>
+			<result name="netassgrrt">/WEB-INF/growthCapab/netassgrrt.jsp</result>
+			<result name="totassgrrt">/WEB-INF/growthCapab/totassgrrt.jsp</result>
+			<result name="shareHolderEquity">/WEB-INF/growthCapab/shareHolderEquity.jsp</result>
+		</action>
+	</package>
+	
 	
 
 	<!-- Add packages here <include file="example.xml"/> -->

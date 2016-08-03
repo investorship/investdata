@@ -10,6 +10,8 @@
 		<result property="code" column="code"/>
 		<result property="busiIncomeThis" column="busi_income_this"/>
 		<result property="busiIncomeLast" column="busi_income_last"/>
+		<result property="totalBusiIncThis" column="total_busi_inc_this"/>
+		<result property="totalBusiIncLast" column="total_busi_inc_last"/>
 		<result property="operaProfitsThis" column="opera_profits_this"/>
 		<result property="operaProfitsLast" column="opera_profits_last"/>
 		<result property="incomeTax" column="income_tax"/>
@@ -41,7 +43,7 @@
 	</resultMap>
 	
 	<sql id="select_what">
-		select year,code,busi_income_this,busi_income_last,opera_profits_this,opera_profits_last,income_tax,fixed_ass_depre,long_pre_amort,total_profit_start,
+		select year,code,busi_income_this,busi_income_last,total_busi_inc_this,total_busi_inc_last,opera_profits_this,opera_profits_last,income_tax,fixed_ass_depre,long_pre_amort,total_profit_start,
 		total_profit_end,market_consts_this,market_consts_last,finance_consts_this,finance_consts_last,mgr_consts_this,mgr_consts_last,inter_expense, busi_tax_surcharge,
 		net_profits_this,net_profits_last, net_profits_kf_this,net_profits_kf_last,operat_cost,busi_income_kf,fair_val_change,invest_income,flag,non_opera_income,intime,non_opera_outcome, moduser from t_incstate_sheet
 	</sql>
@@ -60,6 +62,14 @@
 			<isNotEmpty prepend=" and " property="busiIncomeLast" >
 				busi_income_last = #busiIncomeLast#
 			</isNotEmpty>
+			
+			<isNotEmpty prepend=" and " property="busiIncomeThis" >
+				total_busi_inc_this = #totalBusiIncThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="busiIncomeLast" >
+				total_busi_inc_last = #totalBusiIncLast#
+			</isNotEmpty>
+			
 			<isNotEmpty prepend=" and " property="operaProfitsThis" >
 				opera_profits_this = #operaProfitsThis#
 			</isNotEmpty>

@@ -120,7 +120,8 @@ create table t_balance_sheet
    goods_end            decimal(16,2) comment '期末存货',
    cash                 decimal(16,2) comment '货币资金',
    trad_assets          decimal(16,2) comment '交易性金融资产',
-   total_liab           decimal(16,2) comment '负债总额',
+   total_liab_start     decimal(16,2) comment '期初负债总额',
+   total_liab_end       decimal(16,2) comment '期末负债总额',
    total_ass_start      decimal(16,2) comment '期初资产总额',
    total_ass_end        decimal(16,2) comment '期末资产总额',
    share_holder_start   decimal(16,2) comment '期初股东权益',
@@ -154,6 +155,8 @@ create table t_incstate_sheet
    year                 int not null comment '年份',
    busi_income_this     decimal(16,2) comment '本期营业收入',
    busi_income_last     decimal(16,2) comment '上期营业收入',
+   total_busi_inc_this  decimal(16,2) comment '本期营业总收入',
+   total_busi_inc_last  decimal(16,2) comment '上期营业总收入',
    opera_profits_this   decimal(16,2) comment '本期营业利润',
    opera_profits_last   decimal(16,2) comment '上期营业利润',
    income_tax           decimal(16,2) comment '所得税',
@@ -3272,13 +3275,13 @@ insert into t_finance_index_info(name,pid,action,flag,intime) values ('成本费
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产息税前利润率',3,'profitability/profitability!ebitRatio.action',1,now());
 
 /**成长能力指标**/
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率',3,'profitability/profitability!netprfgrrt.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率(扣非)',3,'profitability/profitability!netprfgrrtKF.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率',4,'growthCapab/growthCapab!netprfgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净利润增长率(扣非)',4,'growthCapab/growthCapab!netprfgrrtKF.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业利润增长率',4,'growthCapab/growthCapab!opeprfgrrt.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('利润总额增长率',4,'growthCapab/growthCapab!totprfgrrt.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业收入增长率',4,'profitability/profitability!opeincmgrrt.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('净资产增长率',4,'profitability/profitability!netassgrrt.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产增长率',4,'profitability/profitability!totassgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('营业收入增长率',4,'growthCapab/growthCapab!opeincmgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('净资产增长率',4,'growthCapab/growthCapab!netassgrrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产增长率',4,'growthCapab/growthCapab!totassgrrt.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('股东权益相对年初增长率',4,'growthCapab/growthCapab!shareHolderEquity.action',1,now());
 
 /**资本结构指标**/

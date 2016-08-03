@@ -26,7 +26,8 @@ public class BalanceSheet implements Serializable {
 	private String goodsEnd;
 	private String cash;
 	private String tradAssets;
-	private String totalLiab;
+	private String totalLiabStart;
+	private String totalLiabEnd;
 	private String totalAssStart;
 	private String totalAssEnd;
 	private String shareHolderStart;
@@ -175,11 +176,18 @@ public class BalanceSheet implements Serializable {
 	public void setTradAssets(String tradAssets) {
 		this.tradAssets = tradAssets;
 	}
-	public String getTotalLiab() {
-		return totalLiab;
+	
+	public String getTotalLiabStart() {
+		return totalLiabStart;
 	}
-	public void setTotalLiab(String totalLiab) {
-		this.totalLiab = totalLiab;
+	public void setTotalLiabStart(String totalLiabStart) {
+		this.totalLiabStart = totalLiabStart;
+	}
+	public String getTotalLiabEnd() {
+		return totalLiabEnd;
+	}
+	public void setTotalLiabEnd(String totalLiabEnd) {
+		this.totalLiabEnd = totalLiabEnd;
 	}
 	public String getTotalAssStart() {
 		return totalAssStart;

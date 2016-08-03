@@ -28,7 +28,8 @@
 		<result property="goodsEnd" column="goods_end"/>
 		<result property="cash" column="cash"/>
 		<result property="tradAssets" column="trad_assets"/>
-		<result property="totalLiab" column="total_liab"/>
+		<result property="totalLiabStart" column="total_liab_start"/>
+		<result property="totalLiabEnd" column="total_liab_end"/>
 		<result property="totalAssStart" column="total_ass_start"/>
 		<result property="totalAssEnd" column="total_ass_end"/>
 		<result property="shareHolderStart" column="share_holder_start"/>
@@ -48,7 +49,7 @@
 	<sql id="select_what">
 		select year,code,note_recable,adv_customers,acc_payable,constr_in_pro, lntang_assets,lntang_assets_amortize,goodwill,short_term_loans,note_payable,note_payable,
 		debit_within_year,long_term_loans,bounds_payable,liquid_assets_start,liquid_assets_end,curr_liab,curr_liab_non,goods_start,
-		goods_end,cash,trad_assets,total_liab,total_ass_start,total_ass_end,share_holder_start,share_holder_end,fixed_assets_start,
+		goods_end,cash,trad_assets,total_liab_start,total_liab_end,total_ass_start,total_ass_end,share_holder_start,share_holder_end,fixed_assets_start,
 		fixed_assets_end,retain_earnings,acc_recable_start,acc_recable_end,capital_surplus,surplus_reserve,flag,inTime,modUser from t_balance_sheet
 	</sql>
 	
@@ -120,9 +121,13 @@
 			<isNotEmpty prepend=" and " property="tradAssets" >
 				trad_assets = #tradAssets#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="totalLiab" >
-				total_liab = #totalLiab#
+			<isNotEmpty prepend=" and " property="totalLiabStart" >
+				total_liab_start = #totalLiabStart#
 			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalLiabEnd" >
+				total_liab_end = #totalLiabEnd#
+			</isNotEmpty>
+			
 			<isNotEmpty prepend=" and " property="totalAssStart" >
 				total_ass_start = #totalAssStart#
 			</isNotEmpty>

@@ -39,7 +39,9 @@
 	<!-- 盈利能力 -->
 	<bean id="profitabilityAction" class="com.investdata.action.profitability.ProfitabilityAction" scope="prototype"/>
 	
-
+	<!-- 成长能力 -->
+	<bean id="growthCapabAction" class="com.investdata.action.growthCapab.GrowthCapabAction" scope="prototype"/>
+	
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
