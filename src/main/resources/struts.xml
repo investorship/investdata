@@ -169,6 +169,15 @@
 		<action name="profitability" class="profitabilityAction">
 			<result name="ROE">/WEB-INF/profitability/ROE.jsp</result>
 			<result name="ROEcut">/WEB-INF/profitability/ROEcut.jsp</result>
+			<result name="ROA">/WEB-INF/profitability/ROA.jsp</result>
+			<result name="assetsProRatio">/WEB-INF/profitability/assetsProRatio.jsp</result>
+			<result name="grossProfit">/WEB-INF/profitability/grossProfit.jsp</result>
+			<result name="splashes">/WEB-INF/profitability/splashes.jsp</result>
+			<result name="splashesKF">/WEB-INF/profitability/splashesKF.jsp</result>
+			<result name="costExpProRatio">/WEB-INF/profitability/costExpProRatio.jsp</result>
+			<result name="ebitRatio">/WEB-INF/profitability/ebitRatio.jsp</result>
+			<result name="netprfgrrt">/WEB-INF/profitability/netprfgrrt.jsp</result>
+			<result name="netprfgrrtKF">/WEB-INF/profitability/netprfgrrtKF.jsp</result>
 		</action>
 	</package>
 	

@@ -14,6 +14,7 @@ import com.investdata.common.Const;
 import com.investdata.dao.po.BalanceSheet;
 import com.investdata.dao.po.Chart;
 import com.investdata.dao.po.GendataSheet;
+import com.investdata.dao.po.IncstateSheet;
 import com.investdata.redis.ObjectsTranscoder;
 import com.investdata.redis.RedisCache;
 import com.investdata.utils.MathUtils;
@@ -109,6 +110,474 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 			chart.setxAxis(yearBuilder.toString());
 			chart.setData(dataBuilder.toString());
 			chart.setLegendData("加权平均净资产收益率(扣非)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//资产净利率
+	public String ROA() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		
+		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] balIn = jedis.get(balCompxKey.getBytes());
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(balIn);  	
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0 && balSheetsList !=null && incstSheetsList.size() == balSheetsList.size() ) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				BalanceSheet balSheet = balSheetsList.get(i);
+				
+				//期初资产总额
+				double totalAssStart = Double.parseDouble(balSheet.getTotalAssStart());
+				//期末资产总额
+				double totalAssEnd = Double.parseDouble(balSheet.getTotalAssEnd());
+				
+				//平均资产总额
+				double avgAssEnd = (totalAssEnd + totalAssStart) / 2 ;
+				
+				//本期净利润
+				double profit = Double.parseDouble(incstSheet.getNetProfitsThis());
+				
+				String ROA = MathUtils.format2DecPoint((profit / avgAssEnd) * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(ROA).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("资产净利率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	
+	//资产利润率
+	public String assetsProRatio() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		
+		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] balIn = jedis.get(balCompxKey.getBytes());
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(balIn);  	
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0 && balSheetsList !=null && incstSheetsList.size() == balSheetsList.size() ) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				BalanceSheet balSheet = balSheetsList.get(i);
+				
+				//期初资产总额
+				double totalAssStart = Double.parseDouble(balSheet.getTotalAssStart());
+				//期末资产总额
+				double totalAssEnd = Double.parseDouble(balSheet.getTotalAssEnd());
+				
+				//平均资产总额
+				double avgAssEnd = (totalAssEnd + totalAssStart) / 2 ;
+				
+				//本期利润总额
+				double totalProfitEnd = Double.parseDouble(incstSheet.getTotalProfitEnd());
+				
+				String assetsProRatio = MathUtils.format2DecPoint((totalProfitEnd / avgAssEnd) * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(assetsProRatio).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("资产利润率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//毛利率
+	public String grossProfit() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				
+				//本期营业收入
+				double busiInComeThis = Double.parseDouble(incstSheet.getBusiIncomeThis());
+				//营业成本
+				double operatCost = Double.parseDouble(incstSheet.getOperatCost());
+				
+				//（营业收入-营业成本）/营业收入*100%	
+				String grossProfit = MathUtils.format2DecPoint((busiInComeThis - operatCost ) / busiInComeThis * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(grossProfit).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("毛利率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//净利率
+	public String splashes() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				
+				//本期营业收入
+				double busiInComeThis = Double.parseDouble(incstSheet.getBusiIncomeThis());
+				//净利润
+				double netProfitsThis = Double.parseDouble(incstSheet.getNetProfitsThis());
+				
+				//净利润/营业收入 *100%	
+				String grossProfit = MathUtils.format2DecPoint(netProfitsThis / busiInComeThis * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(grossProfit).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("净利率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//净利率(扣非)
+	public String splashesKF() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				
+				//本期营业收入
+				double busiInComeThis = Double.parseDouble(incstSheet.getBusiIncomeThis());
+				//净利润(扣非)
+				double netProfitsThis = Double.parseDouble(incstSheet.getNetProfitsKfThis());
+				
+				//净利润(扣非) /营业收入 *100%	
+				String grossProfit = MathUtils.format2DecPoint(netProfitsThis / busiInComeThis * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(grossProfit).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("净利率(扣非)(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//成本费用净利率
+	public String costExpProRatio() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				//营业成本
+				double operatCost = Double.parseDouble(incstSheet.getOperatCost());
+				//营业税金及附加
+				double busiTaxSurcharge = Double.parseDouble(incstSheet.getBusiTaxSurcharge());
+				//管理费用
+				double mgrConstsThis = Double.parseDouble(incstSheet.getMgrConstsThis());
+				//本期财务费用
+				double finConstsThis = Double.parseDouble(incstSheet.getFinanceConstsThis());
+				//本期销售费用
+				double marketConstsThis = Double.parseDouble(incstSheet.getMarketConstsThis());
+				//净利润
+				double netProfitsThis = Double.parseDouble(incstSheet.getNetProfitsThis());
+				//成本费用总额=营业成本+营业税金及附加+管理费用+财务费用 +销售费用
+				double totalConsts = operatCost + busiTaxSurcharge + mgrConstsThis + finConstsThis + marketConstsThis;
+				
+				//成本费用净利率 = 净利润/成本费用总额		
+				String costExpProRatio = MathUtils.format2DecPoint(netProfitsThis / totalConsts * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(costExpProRatio).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("成本费用净利率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	
+	//资产息税前利润率
+	public String ebitRatio() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] balIn = jedis.get(balCompxKey.getBytes());
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(balIn);  
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0 && balSheetsList != null && incstSheetsList.size() == balSheetsList.size()) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				BalanceSheet balSheet = balSheetsList.get(i);
+				
+				//利润总额
+				double totalProfitEnd = Double.parseDouble(incstSheet.getTotalProfitEnd());
+				//利息费用
+				double interExpense = Double.valueOf(incstSheet.getInterExpense());
+				
+				//期初资产总额
+				double totalAssStart = Double.parseDouble(balSheet.getTotalAssStart());
+				//期末资产总额
+				double totalAssEnd = Double.parseDouble(balSheet.getTotalAssEnd());
+				
+				//平均资产总额
+				double avgAssEnd = (totalAssEnd + totalAssStart) / 2 ;
+				
+				//资产息税前利润率 = 息税前利润/资产平均总额	
+				String costExpProRatio = MathUtils.format2DecPoint((totalProfitEnd + interExpense) / avgAssEnd * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(costExpProRatio).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("资产息税前利润率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	
+	//净利润增长率
+	public String netprfgrrt() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				
+				//上期净利润
+				double netprofitsLast = Double.parseDouble(incstSheet.getNetProfitsLast());
+				//当期净利润
+				double netprofitsThis = Double.parseDouble(incstSheet.getNetProfitsThis());
+				//净利润增长率 = (当期净利润-上期净利润) /上期净利润  *  100%
+				String costExpProRatio = MathUtils.format2DecPoint((netprofitsThis - netprofitsLast) / netprofitsLast  * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(costExpProRatio).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("净利润增长率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	
+	//净利润增长率(扣非)
+	public String netprfgrrtKF() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		
+		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
+		byte[] in = jedis.get(incstCompxKey.getBytes());
+		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (incstSheetsList != null && incstSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<incstSheetsList.size();  i++) {
+				IncstateSheet incstSheet = incstSheetsList.get(i);
+				//上期净利润
+				double netprofitsKfLast = Double.parseDouble(incstSheet.getNetProfitsKfLast());
+				//当期净利润
+				double netprofitsKfThis = Double.parseDouble(incstSheet.getNetProfitsKfThis());
+				//净利润增长率 = (当期净利润-上期净利润) /上期净利润  *  100%
+				String costExpProRatio = MathUtils.format2DecPoint((netprofitsKfThis - netprofitsKfLast) / netprofitsKfLast  * 100);
+						
+				yearBuilder.append(incstSheet.getYear()).append(",");
+				dataBuilder.append(costExpProRatio).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("净利润增长率(扣非)(%)");
 			chart.setText(code + " " + stockName);
 		}
 		
