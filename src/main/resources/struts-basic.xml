@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.action.extension" value="action" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant> 
+	
+	<!-- 基础配置包[拦截器]，所有包继承该包 -->
+	<package name="struts_basic" extends="struts-default,json-default">
+		<interceptors>
+			<interceptor name="encodingInterceptor" class="com.investdata.common.interceptor.EncodingInterceptor"></interceptor>
+			<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
+			<interceptor-stack name="investInterceptor">
+				<interceptor-ref name="defaultStack" ></interceptor-ref>
+				<!--<interceptor-ref name="encodingInterceptor" ></interceptor-ref>  -->
+				<interceptor-ref name="methodInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="investInterceptor"></default-interceptor-ref>
+	</package>
+	
+	
+	<!-- 首页 -->
+	<package name="index" namespace="/" extends="struts_basic">
+		<action name="index" class="indexAction">
+			<result name="input">/WEB-INF/search.jsp</result>
+		</action>
+	</package>
+
+	<!-- 登录 -->
+	<package name="login" namespace="/login" extends="struts_basic">
+		<action name="login" class="loginAction">
+			<result name="input">/WEB-INF/login.jsp</result>
+			<result name="login_succ">/WEB-INF/search.jsp</result>
+			<result name="logout" type="redirect">/index.jsp</result>
+			<result name="adminLogout" type="redirect">/admin.jsp</result>
+			<result name="ajax" type="json"></result>
+			<result name="ajax_admin" type="json"></result>
+		</action>
+		<action name="adminLogin" class="loginAction">
+			<result name="input">/WEB-INF/admin/main.jsp</result>
+		</action>
+		
+		<!-- 密码操作 -->
+		<action name="passwordOperAction" class="passwordOperAction" >
+			<result name="reset_pwd_input">/WEB-INF/resetpwd.jsp</result>
+			<result name="update_pwd_input">/WEB-INF/updatepwd.jsp</result>
+			<result name="update_pwd_nologin_fail" type="redirect">login/login.action</result>
+			<result name="update_pwd_succ">/WEB-INF/updatepwd_succ.jsp</result>
+			<result name="reset_pwd_mail">/WEB-INF/resetpwd_sendMail.jsp</result>
+			<result name="reset_pwd_succ">/WEB-INF/resetpwd_succ.jsp</result>
+			<result name="ajax" type="json"></result>
+		</action>
+	</package>
+
+	<!-- 注册 -->
+	<package name="reg" namespace="/reg" extends="struts_basic">
+		<action name="reg" class="regAction">
+			<result name="input">/WEB-INF/reg.jsp</result>
+			<result name="reg_succ">/WEB-INF/reg_succ.jsp</result>
+			<result name="active_succ">/WEB-INF/active_succ.jsp</result>
+			<result name="active_fail">/WEB-INF/active_fail.jsp</result>
+			<result name="ajax" type="json"></result>
+		</action>
+	</package>
+
+	<!-- 股票明细 -->
+	<package name="stock" namespace="/stock" extends="struts_basic">
+		<action name="stock" class="stockAction">
+			<result name="input">/WEB-INF/stock.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 图片验证码 -->
+	<package name="imageAuth" namespace="/imageAuth" extends="struts_basic">
+		<action name="imageAuth" class="imageAuthAction">
+			<result name="input" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+	</package>
+</struts>

@@ -11,6 +11,7 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
+
 	<!-- struts2 中 action 对象 -->
 	<bean id="indexAction" class="com.investdata.action.IndexAction" />
 	<bean id="loginAction" class="com.investdata.action.LoginAction" scope="prototype"/>
@@ -41,6 +42,9 @@
 	
 	<!-- 成长能力 -->
 	<bean id="growthCapabAction" class="com.investdata.action.growthCapab.GrowthCapabAction" scope="prototype"/>
+	
+	<!-- 资本结构 -->
+	<bean id="capitalEnsembleAction" class="com.investdata.action.capitalEnsemble.CapitalEnsembleAction" scope="prototype"/>
 	
 
 	<bean id="propertyConfigurer"

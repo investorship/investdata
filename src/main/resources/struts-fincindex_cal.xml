@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 图表展示相关处理action -->
+	<!-- 每股指标 -->
+	<package name="perShare" namespace="/perShare" extends="struts_basic">
+		<action name="perShare" class="perShareAction">
+			<result name="EPS">/WEB-INF/perShare/eps.jsp</result>
+			<result name="dilutEPS">/WEB-INF/perShare/dilutEPS.jsp</result>
+			<result name="mincmPS">/WEB-INF/perShare/mincmPS.jsp</result>
+			<result name="opeprfPS">/WEB-INF/perShare/opeprfPS.jsp</result>
+			<result name="capsurfdPS">/WEB-INF/perShare/capsurfdPS.jsp</result>
+			<result name="surrefdPS">/WEB-INF/perShare/surrefdPS.jsp</result>
+			<result name="accumfdPS">/WEB-INF/perShare/accumfdPS.jsp</result>
+			<result name="undivprfPS">/WEB-INF/perShare/undivprfPS.jsp</result>
+			<result name="retearPS">/WEB-INF/perShare/retearPS.jsp</result>
+			<result name="opeCFPS">/WEB-INF/perShare/opeCFPS.jsp</result>
+			<result name="CFPS">/WEB-INF/perShare/CFPS.jsp</result>
+			<result name="NAPS">/WEB-INF/perShare/NAPS.jsp</result>
+			<result name="EBITPS">/WEB-INF/perShare/EBITPS.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 偿债能力 -->
+	<package name="solvent" namespace="/solvent" extends="struts_basic">
+		<action name="solvent" class="solventAction">
+			<result name="currt">/WEB-INF/solvent/currt.jsp</result>
+			<result name="qckrt">/WEB-INF/solvent/qckrt.jsp</result>
+			<result name="cash">/WEB-INF/solvent/cash.jsp</result>
+			<result name="cashFlow">/WEB-INF/solvent/cashFlow.jsp</result>
+			<result name="dbequrt">/WEB-INF/solvent/dbequrt.jsp</result>
+			<result name="debtEnsure">/WEB-INF/solvent/debtEnsure.jsp</result>
+			<result name="EBIT">/WEB-INF/solvent/EBIT.jsp</result>
+			<result name="EBITDA">/WEB-INF/solvent/EBITDA.jsp</result>
+			<result name="intcvr">/WEB-INF/solvent/intcvr.jsp</result>
+			<result name="shortInterestDebt">/WEB-INF/solvent/shortInterestDebt.jsp</result>
+			<result name="longInterestDebt">/WEB-INF/solvent/longInterestDebt.jsp</result>
+			<result name="interestDebt">/WEB-INF/solvent/interestDebt.jsp</result>
+			<result name="interestDebtRatio">/WEB-INF/solvent/interestDebtRatio.jsp</result>
+			<result name="dbtaneQurt">/WEB-INF/solvent/dbtaneQurt.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 盈利能力 -->
+	<package name="profitability" namespace="/profitability" extends="struts_basic">
+		<action name="profitability" class="profitabilityAction">
+			<result name="ROE">/WEB-INF/profitability/ROE.jsp</result>
+			<result name="ROEcut">/WEB-INF/profitability/ROEcut.jsp</result>
+			<result name="ROA">/WEB-INF/profitability/ROA.jsp</result>
+			<result name="assetsProRatio">/WEB-INF/profitability/assetsProRatio.jsp</result>
+			<result name="grossProfit">/WEB-INF/profitability/grossProfit.jsp</result>
+			<result name="splashes">/WEB-INF/profitability/splashes.jsp</result>
+			<result name="splashesKF">/WEB-INF/profitability/splashesKF.jsp</result>
+			<result name="costExpProRatio">/WEB-INF/profitability/costExpProRatio.jsp</result>
+			<result name="ebitRatio">/WEB-INF/profitability/ebitRatio.jsp</result>
+			<result name="netprfgrrt">/WEB-INF/profitability/netprfgrrt.jsp</result>
+			<result name="netprfgrrtKF">/WEB-INF/profitability/netprfgrrtKF.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 成长能力 -->
+	<package name="growthCapab" namespace="/growthCapab" extends="struts_basic">
+		<action name="growthCapab" class="growthCapabAction">
+			<result name="netprfgrrt">/WEB-INF/growthCapab/netprfgrrt.jsp</result>
+			<result name="netprfgrrtKF">/WEB-INF/growthCapab/netprfgrrtKF.jsp</result>
+			<result name="opeprfgrrt">/WEB-INF/growthCapab/opeprfgrrt.jsp</result>
+			<result name="totprfgrrt">/WEB-INF/growthCapab/totprfgrrt.jsp</result>
+			<result name="opeincmgrrt">/WEB-INF/growthCapab/opeincmgrrt.jsp</result>
+			<result name="netassgrrt">/WEB-INF/growthCapab/netassgrrt.jsp</result>
+			<result name="totassgrrt">/WEB-INF/growthCapab/totassgrrt.jsp</result>
+			<result name="shareHolderEquity">/WEB-INF/growthCapab/shareHolderEquity.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 资本结构 -->
+	<package name="capitalEnsemble" namespace="/capitalEnsemble" extends="struts_basic">
+		<action name="capitalEnsemble" class="capitalEnsembleAction">
+			<result name="dbastrt">/WEB-INF/capitalEnsemble/dbastrt.jsp</result>
+			<result name="equmul">/WEB-INF/capitalEnsemble/equmul.jsp</result>
+			<result name="fixassrt">/WEB-INF/capitalEnsemble/fixassrt.jsp</result>
+			<result name="intanassrt">/WEB-INF/capitalEnsemble/intanassrt.jsp</result>
+			<result name="goodwill">/WEB-INF/capitalEnsemble/goodwill.jsp</result>
+			<result name="equass">/WEB-INF/capitalEnsemble/equass.jsp</result>
+		</action>
+	</package>
+	
+	
+	
+	
+	
+	
+</struts>

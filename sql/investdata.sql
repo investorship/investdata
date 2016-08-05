@@ -3285,11 +3285,11 @@ insert into t_finance_index_info(name,pid,action,flag,intime) values ('总资产
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('股东权益相对年初增长率',4,'growthCapab/growthCapab!shareHolderEquity.action',1,now());
 
 /**资本结构指标**/
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产负债率',5,'solvent/solvent!dbastrt.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('权益乘数',5,'solvent/solvent!equmul.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('资产负债率',5,'capitalEnsemble/capitalEnsemble!dbastrt.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('权益乘数',5,'capitalEnsemble/capitalEnsemble!equmul.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('固定资产比率',5,'capitalEnsemble/capitalEnsemble!fixassrt.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('无形资产比率',5,'capitalEnsemble/capitalEnsemble!intanassrt.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('商誉占比',5,'capitalEnsemble/capitalEnsemble!goodwill.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('商誉占净资产比率',5,'capitalEnsemble/capitalEnsemble!goodwill.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('股东权益比率',5,'capitalEnsemble/capitalEnsemble!equass.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('负债结构比率',5,'capitalEnsemble/capitalEnsemble!debtEnsemble.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('长期负债权益比率',5,'capitalEnsemble/capitalEnsemble!longDebtRatio.action',1,now());
