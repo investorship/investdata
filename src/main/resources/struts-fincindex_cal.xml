@@ -84,6 +84,9 @@
 			<result name="intanassrt">/WEB-INF/capitalEnsemble/intanassrt.jsp</result>
 			<result name="goodwill">/WEB-INF/capitalEnsemble/goodwill.jsp</result>
 			<result name="equass">/WEB-INF/capitalEnsemble/equass.jsp</result>
+			<result name="debtEnsemble">/WEB-INF/capitalEnsemble/debtEnsemble.jsp</result>
+			<result name="longDebtRatio">/WEB-INF/capitalEnsemble/longDebtRatio.jsp</result>
+			<result name="wrkcap">/WEB-INF/capitalEnsemble/wrkcap.jsp</result>
 		</action>
 	</package>
 	

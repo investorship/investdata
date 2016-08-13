@@ -112,6 +112,7 @@ create table t_balance_sheet
    debit_within_year    decimal(16,2) comment '一年内到期的非流动负债',
    long_term_loans      decimal(16,2) comment '长期借款',
    bounds_payable       decimal(16,2) comment '应付债券',
+   long_acc_payable		decimal(16,2) comment '长期应付款',
    liquid_assets_start  decimal(16,2) comment '期初流动资产',
    liquid_assets_end    decimal(16,2) comment '期末流动资产',
    curr_liab            decimal(16,2) comment '流动负债',

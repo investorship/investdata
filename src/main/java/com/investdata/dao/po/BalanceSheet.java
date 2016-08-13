@@ -18,6 +18,7 @@ public class BalanceSheet implements Serializable {
 	private String debitWithinYear;
 	private String longTermLoans;
 	private String boundsPayable;
+	private String longAccPayable;
 	private String liquidAssetsStart;
 	private String liquidAssetsEnd;
 	private String currLiab;
@@ -127,6 +128,13 @@ public class BalanceSheet implements Serializable {
 	}
 	public void setBoundsPayable(String boundsPayable) {
 		this.boundsPayable = boundsPayable;
+	}
+	
+	public String getLongAccPayable() {
+		return longAccPayable;
+	}
+	public void setLongAccPayable(String longAccPayable) {
+		this.longAccPayable = longAccPayable;
 	}
 	public String getLiquidAssetsStart() {
 		return liquidAssetsStart;

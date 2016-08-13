@@ -20,6 +20,7 @@
 		<result property="debitWithinYear" column="debit_within_year"/>
 		<result property="longTermLoans" column="long_term_loans"/>
 		<result property="boundsPayable" column="bounds_payable"/>
+		<result property="longAccPayable" column="long_acc_payable"/>
 		<result property="liquidAssetsStart" column="liquid_assets_start"/>
 		<result property="liquidAssetsEnd" column="liquid_assets_end"/>
 		<result property="currLiab" column="curr_liab"/>
@@ -48,7 +49,7 @@
 	
 	<sql id="select_what">
 		select year,code,note_recable,adv_customers,acc_payable,constr_in_pro, lntang_assets,lntang_assets_amortize,goodwill,short_term_loans,note_payable,note_payable,
-		debit_within_year,long_term_loans,bounds_payable,liquid_assets_start,liquid_assets_end,curr_liab,curr_liab_non,goods_start,
+		debit_within_year,long_term_loans,bounds_payable,long_acc_payable,liquid_assets_start,liquid_assets_end,curr_liab,curr_liab_non,goods_start,
 		goods_end,cash,trad_assets,total_liab_start,total_liab_end,total_ass_start,total_ass_end,share_holder_start,share_holder_end,fixed_assets_start,
 		fixed_assets_end,retain_earnings,acc_recable_start,acc_recable_end,capital_surplus,surplus_reserve,flag,inTime,modUser from t_balance_sheet
 	</sql>
@@ -96,6 +97,9 @@
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="boundsPayable" >
 				bounds_payable = #boundsPayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="longAccPayable" >
+				long_acc_payable = #longAccPayable#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="liquidAssetsStart" >
 				liquid_assets_start = #liquidAssetsStart#

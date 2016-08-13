@@ -299,7 +299,6 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//期末股东权益
 				double shareHolderEnd= Double.parseDouble(balSheet.getShareHolderEnd());
 				
-				
 				//股东权益比率= 股东权益 / 资产总额  * 100%
 				String equass = MathUtils.format2DecPoint(shareHolderEnd / totalAssEnd * 100);
 						
@@ -316,6 +315,159 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 			chart.setxAxis(yearBuilder.toString());
 			chart.setData(dataBuilder.toString());
 			chart.setLegendData("股东权益比率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//负债结构比率
+	public String debtEnsemble() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] in = jedis.get(balCompxKey.getBytes());
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (balSheetsList != null && balSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<balSheetsList.size();  i++) {
+				BalanceSheet balSheet = balSheetsList.get(i);
+				
+				//流动负债
+				double currLiab = Double.parseDouble(balSheet.getCurrLiab());
+				
+				//长期借款
+				double longTermLoans= Double.parseDouble(balSheet.getLongTermLoans());
+				
+				//应付债券
+				double boundsPayAable= Double.parseDouble(balSheet.getBoundsPayable());
+				
+				//长期应付款
+				double longAccPayable= Double.parseDouble(balSheet.getLongAccPayable());
+				
+				//负债结构比率= 流动负债 / 长期负债（长期负债=长期借款  + 应付债券 + 长期应付款） * 100%
+				String debtEnsemble = MathUtils.format2DecPoint(currLiab / (longTermLoans + boundsPayAable + longAccPayable) * 100);
+						
+				yearBuilder.append(balSheet.getYear()).append(",");
+				dataBuilder.append(debtEnsemble).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("负债结构比率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//长期负债权益比率
+	public String longDebtRatio() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] in = jedis.get(balCompxKey.getBytes());
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (balSheetsList != null && balSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<balSheetsList.size();  i++) {
+				BalanceSheet balSheet = balSheetsList.get(i);
+				
+				//期末股东权益
+				double shareHolderEnd = Double.parseDouble(balSheet.getShareHolderEnd());
+				
+				//长期借款
+				double longTermLoans= Double.parseDouble(balSheet.getLongTermLoans());
+				
+				//应付债券
+				double boundsPayAable= Double.parseDouble(balSheet.getBoundsPayable());
+				
+				//长期应付款
+				double longAccPayable= Double.parseDouble(balSheet.getLongAccPayable());
+				
+				//长期负债权益比率= 长期负债（长期负债=长期借款  + 应付债券 + 长期应付款）/所有者权益  * 100%
+				String longDebtRatio = MathUtils.format2DecPoint((longTermLoans + boundsPayAable + longAccPayable) / shareHolderEnd * 100);
+						
+				yearBuilder.append(balSheet.getYear()).append(",");
+				dataBuilder.append(longDebtRatio).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("长期负债权益比率(%)");
+			chart.setText(code + " " + stockName);
+		}
+		
+		request.put("chart", chart);
+		
+		return methodName;
+	}
+	
+	//营运资金
+	public String wrkcap() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
+		byte[] in = jedis.get(balCompxKey.getBytes());
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		
+		Chart chart = new Chart();
+		
+		if (balSheetsList != null && balSheetsList.size() > 0) {
+			//保留两位小数
+			StringBuilder dataBuilder = new StringBuilder();
+			StringBuilder yearBuilder = new StringBuilder();
+			
+			for (int i=0; i<balSheetsList.size();  i++) {
+				BalanceSheet balSheet = balSheetsList.get(i);
+				
+				//流动负债
+				double currLiab = Double.parseDouble(balSheet.getCurrLiab());
+				
+				//期末流动资产
+				double longAccPayable= Double.parseDouble(balSheet.getLiquidAssetsEnd());
+				
+				//营运资金 = 流动资产 - 流动负债
+				String wrkcap = MathUtils.format2DecPoint(currLiab - longAccPayable);
+						
+				yearBuilder.append(balSheet.getYear()).append(",");
+				dataBuilder.append(wrkcap).append(",");
+			}
+			
+			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+			String stockName = stockCodeMapping.get(code);
+			
+			chart.setxAxis(yearBuilder.toString());
+			chart.setData(dataBuilder.toString());
+			chart.setLegendData("营运资金");
 			chart.setText(code + " " + stockName);
 		}
 		
