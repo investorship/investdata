@@ -90,7 +90,14 @@
 		</action>
 	</package>
 	
-	
+	<!-- 核心业务收益质量 -->
+	<package name="coreBusiQuality" namespace="/coreBusiQuality" extends="struts_basic">
+		<action name="coreBusiQuality" class="coreBusiQualityAction">
+			<result name="investProfitRatio">/WEB-INF/coreBusiQuality/investProfitRatio.jsp</result>
+			<result name="fairValueRatio">/WEB-INF/coreBusiQuality/fairValueRatio.jsp</result>
+			<result name="noNBusiProRatio">/WEB-INF/coreBusiQuality/noNBusiProRatio.jsp</result>
+		</action>
+	</package>
 	
 	
 	

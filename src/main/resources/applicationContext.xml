@@ -46,6 +46,9 @@
 	<!-- 资本结构 -->
 	<bean id="capitalEnsembleAction" class="com.investdata.action.capitalEnsemble.CapitalEnsembleAction" scope="prototype"/>
 	
+	<!-- 核心业务收益质量 -->
+	<bean id="coreBusiQualityAction" class="com.investdata.action.coreBusiQuality.CoreBusiQualityAction" scope="prototype"/>
+	
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
