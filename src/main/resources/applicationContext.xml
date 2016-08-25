@@ -49,6 +49,9 @@
 	<!-- 核心业务收益质量 -->
 	<bean id="coreBusiQualityAction" class="com.investdata.action.coreBusiQuality.CoreBusiQualityAction" scope="prototype"/>
 	
+	<!-- 营运能力 -->
+	<bean id="operaCapacityAction" class="com.investdata.action.operaCapacity.OperaCapacityAction" scope="prototype"/>
+	
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

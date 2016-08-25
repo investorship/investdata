@@ -99,6 +99,19 @@
 		</action>
 	</package>
 	
+		<!-- 应收账款周转率-->
+	<package name="operaCapacity" namespace="/operaCapacity" extends="struts_basic">
+		<action name="operaCapacity" class="operaCapacityAction">
+			<result name="aRTrat">/WEB-INF/operaCapacity/aRTrat.jsp</result>
+			<result name="invtrtrrat">/WEB-INF/operaCapacity/invtrtrrat.jsp</result>
+			<result name="invtrtrday">/WEB-INF/operaCapacity/invtrtrday.jsp</result>
+			<result name="aRTday">/WEB-INF/operaCapacity/aRTday.jsp</result>
+			<result name="currat">/WEB-INF/operaCapacity/currat.jsp</result>
+			<result name="fixassrat">/WEB-INF/operaCapacity/fixassrat.jsp</result>
+			<result name="totassrat">/WEB-INF/operaCapacity/totassrat.jsp</result>
+		</action>
+	</package>
+	
 	
 	
 	
