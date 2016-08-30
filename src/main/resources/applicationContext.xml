@@ -52,6 +52,10 @@
 	<!-- 营运能力 -->
 	<bean id="operaCapacityAction" class="com.investdata.action.operaCapacity.OperaCapacityAction" scope="prototype"/>
 	
+	<!-- 现金流量 -->
+	<bean id="cashFlowAction" class="com.investdata.action.cashFlow.CashFlowAction" scope="prototype"/>
+	
+	
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

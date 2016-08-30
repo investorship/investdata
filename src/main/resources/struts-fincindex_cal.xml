@@ -99,7 +99,7 @@
 		</action>
 	</package>
 	
-		<!-- 应收账款周转率-->
+		<!-- 营运能力-->
 	<package name="operaCapacity" namespace="/operaCapacity" extends="struts_basic">
 		<action name="operaCapacity" class="operaCapacityAction">
 			<result name="aRTrat">/WEB-INF/operaCapacity/aRTrat.jsp</result>
@@ -109,6 +109,17 @@
 			<result name="currat">/WEB-INF/operaCapacity/currat.jsp</result>
 			<result name="fixassrat">/WEB-INF/operaCapacity/fixassrat.jsp</result>
 			<result name="totassrat">/WEB-INF/operaCapacity/totassrat.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 现金流量-->
+	<package name="cashFlow" namespace="/cashFlow" extends="struts_basic">
+		<action name="cashFlow" class="cashFlowAction">
+			<result name="operBusiCashRatio">/WEB-INF/cashFlow/operBusiCashRatio.jsp</result>
+			<result name="cashFlowProfits">/WEB-INF/cashFlow/cashFlowProfits.jsp</result>
+			<result name="coreBusiCashRatio">/WEB-INF/cashFlow/coreBusiCashRatio.jsp</result>
+			<result name="cashFlowInc">/WEB-INF/cashFlow/cashFlowInc.jsp</result>
+			<result name="cashAndAssetRatio">/WEB-INF/cashFlow/cashAndAssetRatio.jsp</result>
 		</action>
 	</package>
 	
