@@ -77,27 +77,20 @@
     <div class="main">
     <div class="hotwords">
         <div class="hwtit">
-          <h4>股票  & 财务指标  <font color="#FF0000">热搜榜!</font></h4>
+          <h4>股票  <font color="#FF0000">搜索排行榜!</font></h4>
           <span><a href="" title="今日热搜"></a></span></div>
         	<ul class="hwentry">       
-   
-          <li><a class="HotKey" href="" target="_blank">格力电器</a></li>
-          <li><a class="HotKey" href="" target="_blank">贵州茅台</a></li>
-          <li><a class="HotKey" href="" target="_blank">福耀玻璃</a></li>
-          <li><a class="HotKey" href="" target="_blank">宇通客车</a></li>
-          <li><a class="HotKey" href="" target="_blank">兴业银行</a></li>
-          <li><a class="HotKey" href="" target="_blank">中国平安</a></li>
-          <li><a class="HotKey" href="" target="_blank">保利地产</a></li>
-          <li><a class="HotKey" href="" target="_blank">海立美达</a></li>
-          <li><a class="HotKey" href="" target="_blank">每股收益</a></li>
-          <li><a class="HotKey" href="" target="_blank">稀释每股收益</a></li>
-          <li><a class="HotKey" href="" target="_blank">流动比率</a></li>
-          <li><a class="HotKey" href="" target="_blank">速动比率</a></li>
-          <li><a class="HotKey" href="" target="_blank">现金比率</a></li>
-          <li><a class="HotKey" href="" target="_blank">产权比率</a></li>
-          <li><a class="HotKey" href="" target="_blank">扣非净利润</a></li>
-          <li><a class="HotKey" href="" target="_blank">固定资产比率</a></li>
-         
+		   	<c:forEach items="${searchIndexList }" var="searchIndex">
+		   		<c:choose>
+		   			<c:when test="${searchIndex.code == null }">
+		   				<li><a class="HotKey" href="#">${searchIndex.name }</a></li>
+		   			</c:when>
+		   			<c:otherwise>
+		   				<li><a class="HotKey" href="stock/stock.action?keyword=${searchIndex.code }" target="_blank">${searchIndex.name }</a></li>
+		   			</c:otherwise>
+		   		</c:choose>
+		   		
+		   	</c:forEach>
         </ul>
       </div>
     	

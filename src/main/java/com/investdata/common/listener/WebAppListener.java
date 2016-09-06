@@ -26,9 +26,11 @@ import com.investdata.dao.po.CashFlowSheet;
 import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.GendataSheet;
 import com.investdata.dao.po.IncstateSheet;
+import com.investdata.dao.po.SearchIndex;
 import com.investdata.dao.po.Stock;
 import com.investdata.redis.ObjectsTranscoder;
 import com.investdata.redis.RedisCache;
+import com.investdata.utils.PropertiesUtils;
 import com.investdata.utils.StringUtils;
 
 /**
@@ -64,6 +66,7 @@ public class WebAppListener implements ServletContextListener {
 			initIncstateSheet(); //初始化利润表数数据
 			initCashFlowSheet(); //初始化现金流量表数据
 			initBalanceSheet();  //初始化资产负债表数据
+			initSearchIndex(); //初始化首页搜索指数
 		} catch (Exception e) {
 			_log.error("监听器初始化数据错误:" + e.getMessage(), e);
 		}
@@ -279,6 +282,37 @@ public class WebAppListener implements ServletContextListener {
 		}
 		
 		_log.info("############监听器step6-end:初始化资产负债表数据结束##########");
+	}
+	
+	private void initSearchIndex() {
+		_log.info("############监听器step7-start:准备初始化首页搜索指数列表########");
+		
+		Set<String> mappingKeys  = jedis.hkeys(Const.STOCK_CODE_MAPPING);
+		Map<String,String> stockCodeMapping = new HashMap<String,String>();
+		//股票代码与名称的对应关系
+		for (String key : mappingKeys) {
+			List<String> value = jedis.hmget(Const.STOCK_CODE_MAPPING, key);
+			stockCodeMapping.put(key, value.get(0));
+		}
+		
+		List<SearchIndex> searchIndexList = new ArrayList<SearchIndex>();
+		
+		String defaultStockIndex = PropertiesUtils.getPropsValue("stockIndex.default","");
+		String[] stockArray = defaultStockIndex.split(",");
+		
+		for (int i =0 ; i<stockArray.length; i++) {
+			SearchIndex si = new SearchIndex();
+			si.setCode(stockArray[i]);
+			si.setName(stockCodeMapping.get(stockArray[i]));
+			si.setCount(0); //默认访问次数为0
+			
+			searchIndexList.add(si);
+			
+		}
+		
+		jedis.set(Const.SEARCHINDEX_KEY.getBytes(), ObjectsTranscoder.serialize(searchIndexList));
+		
+		_log.info("############监听器step7-end:初始化首页搜索指数列表结束##########");
 	}
 
 }

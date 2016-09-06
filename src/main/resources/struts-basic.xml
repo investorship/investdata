@@ -12,15 +12,24 @@
 	<!-- 基础配置包[拦截器]，所有包继承该包 -->
 	<package name="struts_basic" extends="struts-default,json-default">
 		<interceptors>
+			<interceptor name="loginInterceptor" class="com.investdata.common.interceptor.LoginInterceptor"></interceptor>
 			<interceptor name="encodingInterceptor" class="com.investdata.common.interceptor.EncodingInterceptor"></interceptor>
 			<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
+			<interceptor name="searchIndexInterceptor" class="com.investdata.common.interceptor.SearchIndexInterceptor"></interceptor>
 			<interceptor-stack name="investInterceptor">
 				<interceptor-ref name="defaultStack" ></interceptor-ref>
+				<interceptor-ref name="searchIndexInterceptor" ></interceptor-ref>
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
 				<!--<interceptor-ref name="encodingInterceptor" ></interceptor-ref>  -->
 				<interceptor-ref name="methodInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="investInterceptor"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="login" type="redirect">/login/login.action</result>
+		</global-results>
+		
 	</package>
 	
 	
@@ -35,7 +44,7 @@
 	<package name="login" namespace="/login" extends="struts_basic">
 		<action name="login" class="loginAction">
 			<result name="input">/WEB-INF/login.jsp</result>
-			<result name="login_succ">/WEB-INF/search.jsp</result>
+			<result name="login_succ" type="redirect">/index.action</result>
 			<result name="logout" type="redirect">/index.jsp</result>
 			<result name="adminLogout" type="redirect">/admin.jsp</result>
 			<result name="ajax" type="json"></result>
