@@ -26,13 +26,13 @@
 		<c:choose>
 			<c:when test="${user == null}">
 				<div class="wbyLinks fn-right">
-					<span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span>
+					<span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.jsp">关于我们</a></span>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="wbyLinks fn-right">
 					[${user.userName}]<span><a href="login/login!logout.action">退出</a>|<a
-						href="about_us.html">关于我们</a></span>
+						href="about_us.jsp">关于我们</a></span>
 				</div>
 			</c:otherwise>
 		</c:choose>

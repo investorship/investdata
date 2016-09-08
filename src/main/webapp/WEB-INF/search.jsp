@@ -49,10 +49,10 @@
 <div class="wbyTop fn-clear">
 	<c:choose>
 		<c:when test="${user == null}">
-			<div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.html">关于我们</a></span></div>
+			<div class="wbyLinks fn-right"><span><a href="login/login.action">登录</a> <a href="reg/reg.action">注册</a>|<a href="about_us.jsp">关于我们</a></span></div>
 		</c:when>
 		<c:otherwise>
-			<div class="wbyLinks fn-right">[${user.userName}]<span><a href="login/passwordOperAction.action?pwdOperFlag=1">修改密码</a><a href="login/login!logout.action">退出</a>|<a href="about_us.html">关于我们</a></span></div>
+			<div class="wbyLinks fn-right">[${user.userName}]<span><a href="login/passwordOperAction.action?pwdOperFlag=1">修改密码</a><a href="login/login!logout.action">退出</a>|<a href="about_us.jsp">关于我们</a></span></div>
 		</c:otherwise>
 	</c:choose>
   

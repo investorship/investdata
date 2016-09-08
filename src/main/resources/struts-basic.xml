@@ -19,8 +19,9 @@
 			<interceptor-stack name="investInterceptor">
 				<interceptor-ref name="defaultStack" ></interceptor-ref>
 				<interceptor-ref name="searchIndexInterceptor" ></interceptor-ref>
+				<!--
 				<interceptor-ref name="loginInterceptor"></interceptor-ref>
-				<!--<interceptor-ref name="encodingInterceptor" ></interceptor-ref>  -->
+				<interceptor-ref name="encodingInterceptor" ></interceptor-ref>  -->
 				<interceptor-ref name="methodInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
