@@ -105,7 +105,7 @@
 									</div>
 									<div class="ui-form-item" style="height: 50px">
 										<input type="checkbox" name="agreee"> 我已阅读并同意<a
-											href="service_agreement.html" target="_blank">《投资数据网注册服务协议》</a>
+											href="service_agreement.jsp" target="_blank">《投资数据网注册服务协议》</a>
 									</div>
 									<div class="ui-form-item" style="padding-bottom: 65px">
 										<div>
@@ -122,12 +122,5 @@
 			</div>
 		</div>
 	</div>
-	<div id="footer">
-		<p>
-			Copyright © 2016 投资数据网 &nbsp;京ICP证160506号&nbsp;<a href="" title="雪球"
-				target="_blank">雪球</a> &nbsp; <a href="" title="巨潮资讯网"
-				target="_blank">巨潮资讯网</a> <br> <span class="lianxi"></span>
-		</p>
-	</div>
-</body>
+<jsp:include page="/bottom.html" /></body>
 </html>

@@ -70,13 +70,6 @@
         </div>
     </div>
 </div>
-
-<div id="footer">
-    <p>Copyright © 2016 投资数据网 &nbsp;京ICP证160506号&nbsp;
-        <a href="" title="雪球" target="_blank">雪球</a> &nbsp;
-        <a href="" title="巨潮资讯网" target="_blank">巨潮资讯网</a>
-        <br>
-        <span class="lianxi"></span></p>
-</div>
+<jsp:include page="/bottom.html" />
 </body>
 </html>
