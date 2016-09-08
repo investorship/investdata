@@ -3323,7 +3323,7 @@ insert into t_finance_index_info(name,pid,action,flag,intime) values ('销售费
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('管理费用率',9,'otherConcerns/otherConcerns!mgrExpRatio.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('财务费用率',9,'otherConcerns/otherConcerns!financeExpRatio.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('应收 / 营业收入',9,'otherConcerns/otherConcerns!recAcctBusiRatio.action',1,now());
-insert into t_finance_index_info(name,pid,action,flag,intime) values ('预收 / 营业收入',9,'otherConcerns/otherConcerns!AdvanceAcctBusiRatio.action',1,now());
+insert into t_finance_index_info(name,pid,action,flag,intime) values ('预收 / 营业收入',9,'otherConcerns/otherConcerns!advanceAcctBusiRatio.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('应付 / 存货',9,'otherConcerns/otherConcerns!dueAcctStock.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('存货 / 流动资产',9,'otherConcerns/otherConcerns!stockLiquid.action',1,now());
 insert into t_finance_index_info(name,pid,action,flag,intime) values ('固定资产 + 在建工程',9,'otherConcerns/otherConcerns!fixedAndunderCons.action',1,now());

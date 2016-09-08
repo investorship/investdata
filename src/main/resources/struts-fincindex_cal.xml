@@ -123,6 +123,22 @@
 		</action>
 	</package>
 	
+	<!-- 其他关注点-->
+	<package name="otherConcerns" namespace="/otherConcerns" extends="struts_basic">
+		<action name="otherConcerns" class="otherConcernsAction">
+			<result name="threeExpRatio">/WEB-INF/otherConcerns/threeExpRatio.jsp</result>
+			<result name="salExpRatio">/WEB-INF/otherConcerns/salExpRatio.jsp</result>
+			<result name="mgrExpRatio">/WEB-INF/otherConcerns/mgrExpRatio.jsp</result>
+			<result name="financeExpRatio">/WEB-INF/otherConcerns/financeExpRatio.jsp</result>
+			<result name="recAcctBusiRatio">/WEB-INF/otherConcerns/recAcctBusiRatio.jsp</result>
+			<result name="advanceAcctBusiRatio">/WEB-INF/otherConcerns/advanceAcctBusiRatio.jsp</result>
+			<result name="dueAcctStock">/WEB-INF/otherConcerns/dueAcctStock.jsp</result>
+			<result name="stockLiquid">/WEB-INF/otherConcerns/stockLiquid.jsp</result>
+			<result name="fixedAndunderCons">/WEB-INF/otherConcerns/fixedAndunderCons.jsp</result>
+			<result name="fixedConsNetAsset">/WEB-INF/otherConcerns/fixedConsNetAsset.jsp</result>
+		</action>
+	</package>
+	
 	
 	
 	

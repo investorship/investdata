@@ -55,6 +55,8 @@
 	<!-- 现金流量 -->
 	<bean id="cashFlowAction" class="com.investdata.action.cashFlow.CashFlowAction" scope="prototype"/>
 	
+	<!-- 其他关注点 -->
+	<bean id="otherConcernsAction" class="com.investdata.action.otherConcerns.OtherConcernsAction" scope="prototype"/>
 	
 
 	<bean id="propertyConfigurer"
