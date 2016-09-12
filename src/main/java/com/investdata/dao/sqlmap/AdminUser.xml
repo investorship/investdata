@@ -5,14 +5,23 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="adminUser" type="com.investdata.dao.po.AdminUser" />
 
-	<parameterMap class="adminUser" id="adminUserParam">
+	<!-- <parameterMap class="adminUser" id="adminUserParam">
 		<parameter property="userName" />
 		<parameter property="password" />
 		<parameter property="email" />
 		<parameter property="permLevel" />
 		<parameter property="flag" />
 		<parameter property="inTime" />
-	</parameterMap>	
+	</parameterMap>	 -->
+	
+	<resultMap class="adminUser" id="adminUserResult">
+		<result property="userName" column="username"/>
+		<result property="password" column="password"/>
+		<result property="email" column="email"/>
+		<result property="permLevel" column="perm_level"/>
+		<result property="flag" column="flag"/>
+		<result property="inTime" column="intime"/>
+	</resultMap>
 	
 	<sql id="select_what">
 		select username,password,email,perm_level,flag,intime from t_user_admin
@@ -53,7 +62,7 @@
 	</statement>
 	
 	<!-- 分页查询 -->
-	<statement id="FindByPage" parameterClass="java.util.HashMap" resultClass="adminUser">
+	<statement id="FindByPage" parameterClass="java.util.HashMap" resultMap="adminUserResult">
 		<include refid="select_what" />
 		<include refid="where_conditions" />
 		limit #start#,#length#
