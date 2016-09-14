@@ -29,6 +29,7 @@
 	<bean id="adminUserMgrAction" class="com.investdata.action.admin.AdminUserMgrAction" scope="prototype"/>
 	<bean id="financeIndexMgrAction" class="com.investdata.action.admin.FinanceIndexMgrAction" scope="prototype"/>
 	<bean id="stocksMgrAction" class="com.investdata.action.admin.StocksMgrAction" scope="prototype"/>
+	<bean id="cacheMgrAction" class="com.investdata.action.admin.CacheMgrAction" scope="prototype"/>
 	
 	<!-- 图表展示相关处理action Bean -->
 	<!-- 每股指标 -->

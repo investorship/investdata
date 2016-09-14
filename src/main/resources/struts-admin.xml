@@ -41,4 +41,11 @@
 		</action>
 	</package>
 	
+	<!-- 后台管理菜单-注册用户管理 -->
+	<package name="cacheMgr" namespace="/cacheMgr" extends="struts_basic">
+		<action name="cacheMgr" class="cacheMgrAction">
+			<result name="input">/WEB-INF/admin/cacheReloadMgr/cacheReloadResult.jsp</result>
+		</action>
+	</package>
+	
 </struts>
