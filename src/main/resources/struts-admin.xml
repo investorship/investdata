@@ -7,7 +7,9 @@
 	<!-- 后台管理菜单 -股票信息管理-->
 	<package name="stocksMgr" namespace="/stocksMgr" extends="struts_basic">
 		<action name="stocksMgr" class="stocksMgrAction">
-			<result name="input">/WEB-INF/admin/stocksMgr/stocksList.jsp</result>
+			<result name="stock_list">/WEB-INF/admin/stocksMgr/stocksList.jsp</result>
+			<result name="update_stock_input">/WEB-INF/admin/stocksMgr/stockUpdate.jsp</result>
+			<result name="add_stock">/WEB-INF/admin/stocksMgr/stockAdd.jsp</result>
 			<result name="ajax" type="json"></result>
 		</action>
 	</package>
@@ -16,6 +18,8 @@
 	<package name="financeIndexMgr" namespace="/financeIndexMgr" extends="struts_basic">
 		<action name="financeIndexMgr" class="financeIndexMgrAction">
 			<result name="input">/WEB-INF/admin/financeIndexMgr/financeIndexList.jsp</result>
+			<result name="update">/WEB-INF/admin/financeIndexMgr/financeIndexUpdate.jsp</result>
+			<result name="add">/WEB-INF/admin/financeIndexMgr/financeIndexAdd.jsp</result>
 			<result name="ajax" type="json"></result>
 		</action>
 	</package>
@@ -41,10 +45,21 @@
 		</action>
 	</package>
 	
-	<!-- 后台管理菜单-注册用户管理 -->
+	<!-- 后台管理菜单-缓存管理 -->
 	<package name="cacheMgr" namespace="/cacheMgr" extends="struts_basic">
 		<action name="cacheMgr" class="cacheMgrAction">
 			<result name="input">/WEB-INF/admin/cacheReloadMgr/cacheReloadResult.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 后台管理菜单-缓存管理 -->
+	<package name="financeDataMgr" namespace="/financeDataMgr" extends="struts_basic">
+		<action name="financeDataMgr" class="financeDataMgrAction">
+			<result name="input_bal">/WEB-INF/admin/financeDataMgr/balanceSheetAdd.jsp</result>
+			<result name="update_bal_input">/WEB-INF/admin/financeDataMgr/balanceSheetUpdate.jsp</result>
+			<result name="input_cashFlow">/WEB-INF/admin/financeDataMgr/cashFlowAdd.jsp</result>
+			<result name="update_cashFlow_input">/WEB-INF/admin/financeDataMgr/cashFlowUpdate.jsp</result>
+			
 		</action>
 	</package>
 	

@@ -104,7 +104,7 @@
 </head>
 <body>
 	<span style="font-weight:bold;">
-			管理菜单 >> 财务指标管理  >> 财务指标查询
+			管理菜单 >> 股票信息管理  >> 股票信息查询
 	</span>
 	<div><br>
 	<font size="2">

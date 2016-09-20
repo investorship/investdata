@@ -26,12 +26,19 @@ import com.investdata.dao.po.User;
 import com.investdata.utils.StringUtils;
 
 /**
- * 财务指标Action
+ * 财务数据Action
  */
-public class FinanceIndexMgrAction extends BaseAction implements RequestAware,SessionAware {
+public class FinanceDataMgrAction extends BaseAction implements RequestAware,SessionAware {
 	
 	private static String UPDATE = "update";
 	private static String ADD = "add";
+	private static String INPUT_BAL = "input_bal"; 
+	private static String UPDATE_BAL_INPUT = "update_bal_input"; 
+	private static String INPUT_CASHFLOW = "input_cashFlow"; 
+	private static String UPDATE_CASHFLOW_INPUT = "update_cashFlow_input"; 
+	private static String INPUT_GENDATA = "input_genData"; 
+	private static String UPDATE_GENDATA_INPUT = "update_genData_input"; 
+
 	
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -39,10 +46,31 @@ public class FinanceIndexMgrAction extends BaseAction implements RequestAware,Se
 	private JSONObject jsonUser;
 	private int flag; //用户状态 0-停用  1-启用
 	private String userName;
-
-	public String execute() throws Exception {
-		return INPUT;
+	
+	public String inputBal() throws Exception {
+		return INPUT_BAL;
 	}
+	
+	public String updateBalInput() throws Exception {
+		return UPDATE_BAL_INPUT;
+	}
+	
+	public String inputCashFlow() throws Exception {
+		return INPUT_CASHFLOW;
+	}
+	
+	public String updateCashFlowInput() throws Exception {
+		return UPDATE_CASHFLOW_INPUT;
+	}
+	
+	public String inputGendate() throws Exception {
+		return INPUT_GENDATA;
+	}
+	
+	public String updateGendateInput() throws Exception {
+		return UPDATE_GENDATA_INPUT;
+	}
+	
 	
 	/**
 	 * 分页查询

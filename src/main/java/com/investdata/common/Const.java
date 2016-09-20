@@ -9,4 +9,5 @@ public class Const {
 	public static String CASHFLOWDATA_KEY = "cashFlowDatakey";
 	public static String BALANCEDATA_KEY = "balanceDatakey";
 	public static String SEARCHINDEX_KEY = "searchIndexKey";
+	
 }

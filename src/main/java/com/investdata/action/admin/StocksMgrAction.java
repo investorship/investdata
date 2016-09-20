@@ -21,7 +21,6 @@ import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
 import com.investdata.dao.TStockDao;
 import com.investdata.dao.TUserDao;
-import com.investdata.dao.po.AdminUser;
 import com.investdata.dao.po.Stock;
 import com.investdata.dao.po.User;
 import com.investdata.utils.StringUtils;
@@ -30,6 +29,9 @@ import com.investdata.utils.StringUtils;
  * 股票管理Action
  */
 public class StocksMgrAction extends BaseAction implements RequestAware,SessionAware {
+	private static String UPDATE_STOCK_INPUT = "update_stock_input";
+	private static String STOCK_LIST = "stock_list";
+	private static String ADD_STOCK = "add_stock";
 	
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -41,7 +43,7 @@ public class StocksMgrAction extends BaseAction implements RequestAware,SessionA
 	private String userName;
 
 	public String execute() throws Exception {
-		return INPUT;
+		return STOCK_LIST;
 	}
 	
 	/**
@@ -121,6 +123,16 @@ public class StocksMgrAction extends BaseAction implements RequestAware,SessionA
 		
 		return SUCCESS;
 	}
+	
+	public String updateStock() throws Exception {
+		
+		return UPDATE_STOCK_INPUT;
+	}
+	
+	public String addStock() throws Exception {
+		return ADD_STOCK;
+	}
+	
 
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
