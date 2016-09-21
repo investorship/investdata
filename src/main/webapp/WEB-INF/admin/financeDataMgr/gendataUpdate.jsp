@@ -1,42 +1,49 @@
-<%@ page contentType="text/html; charset=gb2312" language="java"
-	import="java.sql.*" errorPage=""%>
+<%@ page language="java" pageEncoding="UTF-8"
+	contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>ÎÞ±êÌâÎÄµµ</title>
+<title>æ— æ ‡é¢˜æ–‡æ¡£</title>
 </head>
 
 <body>
 	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
-		¹ÜÀí²Ëµ¥ >> ²ÆÎñÊý¾Ý¹ÜÀí >> ×ÛºÏÊý¾Ý±í >> ×ÛºÏÊý¾Ý±íÊý¾ÝÐÞ¸Ä </span>
+		ç®¡ç†èœå• >> è´¢åŠ¡æ•°æ®ç®¡ç† >> ç»¼åˆæ•°æ®è¡¨ >> ç»¼åˆæ•°æ®è¡¨æ•°æ®ä¿®æ”¹ </span>
 	<hr />
 	<br />
 	<form id="gendataForm" name="gendataForm" method="post" action="">
-		<label>¹ÉÆ±´úÂë <input type="text" name="textfield" /> <input
-			type="submit" name="Submit2" value="¼ÓÔØ" />
-		</label> <label>Êý¾ÝÄê·Ý <input type="text" name="textfield2" />
-		</label> <label>×Ü¹É±¾ <input type="text" name="textfield3" />
+		<label>è‚¡ç¥¨ä»£ç  <input type="text" name="textfield" /> <input
+			type="submit" name="Submit2" value="åŠ è½½" />
+		</label> <label>æ•°æ®å¹´ä»½ <input type="text" name="textfield2" />
+		</label> <label>æ€»è‚¡æœ¬ <input type="text" name="textfield3" />
 		</label>
 		<p>
-			<label>¼ÓÈ¨Æ½¾ù¾»×Ê²úÊÕÒæÂÊ <input type="text" name="textfield4" />
-			</label> <label></label> ¼ÓÈ¨Æ½¾ù¾»×Ê²úÊÕÒæÂÊ(¿Û·Ç) <input type="text" name="textfield8" />
-			<label>±¾Äê¶È·¢·ÅµÄÏÖ½ð¹ÉÀû×ÜºÍ <input type="text" name="textfield6" />
+			<label>åŠ æƒå¹³å‡å‡€èµ„äº§æ”¶ç›ŠçŽ‡ <input type="text" name="textfield4" />
+			</label> <label></label> åŠ æƒå¹³å‡å‡€èµ„äº§æ”¶ç›ŠçŽ‡(æ‰£éž) <input type="text" name="textfield8" />
+			<label>æœ¬å¹´åº¦å‘æ”¾çš„çŽ°é‡‘è‚¡åˆ©æ€»å’Œ <input type="text" name="textfield6" />
 			</label>
 		</p>
 		<p>
-			<label> ×´Ì¬ <input type="radio" name="radiobutton"
-				value="radiobutton" /> ÆôÓÃ <input type="radio" name="radiobutton"
-				value="radiobutton" /> Í£ÓÃ
-			</label> <label>»ù±¾Ã¿¹ÉÊÕÒæ <input type="text" name="textfield7" />
-			</label> <label></label> Ï¡ÊÍÃ¿¹ÉÊÕÒæ <input type="text" name="textfield5" />
+			<label> çŠ¶æ€ <input type="radio" name="radiobutton"
+				value="radiobutton" /> å¯ç”¨ <input type="radio" name="radiobutton"
+				value="radiobutton" /> åœç”¨
+			</label> <label>åŸºæœ¬æ¯è‚¡æ”¶ç›Š <input type="text" name="textfield7" />
+			</label> <label></label> ç¨€é‡Šæ¯è‚¡æ”¶ç›Š <input type="text" name="textfield5" />
 		</p>
 		<p>&nbsp;</p>
 		<p>
 			<label>
 				<div align="center">
 					<div align="center">
-						<input type="submit" name="Submit" value="Ìá½»" />
+						<input type="submit" name="Submit" value="æäº¤" />
 					</div>
 			</label>
 	</form>

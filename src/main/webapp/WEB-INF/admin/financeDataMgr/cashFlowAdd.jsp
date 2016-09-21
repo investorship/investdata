@@ -1,43 +1,51 @@
-<%@ page contentType="text/html; charset=gb2312" language="java" import="java.sql.*" errorPage="" %>
+<%@ page language="java" pageEncoding="UTF-8"
+	contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>ÎÞ±êÌâÎÄµµ</title>
+<title>æ— æ ‡é¢˜æ–‡æ¡£</title>
 </head>
 
 <body>
 	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
-		¹ÜÀí²Ëµ¥ >> ²ÆÎñÊý¾Ý¹ÜÀí >> ÏÖ½ðÁ÷Á¿±í >> ÏÖ½ðÁ÷Á¿±íÊý¾ÝÐÂÔö </span>
+		ç®¡ç†èœå• >> è´¢åŠ¡æ•°æ®ç®¡ç† >> çŽ°é‡‘æµé‡è¡¨ >> çŽ°é‡‘æµé‡è¡¨æ•°æ®æ–°å¢ž </span>
 	<hr />
 	<br />
 <form id="cashFlowForm" name="cashFlowForm" method="post" action="">
-  <label>¹ÉÆ±´úÂë
+  <label>è‚¡ç¥¨ä»£ç 
   <input name="code" type="text" id="code" />
   </label>
-  <label>Êý¾ÝÄê·Ý
+  <label>æ•°æ®å¹´ä»½
   <input name="year" type="text" id="year" />
   </label>
   <p>
-    <label>¾­Óª»î¶¯²úÉúµÄÏÖ½ðÁ÷Á¿¾»¶î
+    <label>ç»è¥æ´»åŠ¨äº§ç”Ÿçš„çŽ°é‡‘æµé‡å‡€é¢
     <input name="operaActiveCash" type="text" id="operaActiveCash" />
     </label>
-    <label>ÏÖ½ð¼°ÏÖ½ðµÈ¼ÛÎïÔö¼Ó¶î
+    <label>çŽ°é‡‘åŠçŽ°é‡‘ç­‰ä»·ç‰©å¢žåŠ é¢
     <input name="cashAndCashequ" type="text" id="cashAndCashequ" />
     </label>
   </p>
-  <p>×´Ì¬ 
+  <p>çŠ¶æ€ 
     <label>
     <input name="flag" type="radio" value="1" checked="checked" />
-    ÆôÓÃ</label>
+    å¯ç”¨</label>
     <label>
     <input type="radio" name="flag" value="0" />
-    Í£ÓÃ</label>
+    åœç”¨</label>
   </p>
   <p>
     <label>
     <div align="center">
-      <input type="submit" name="Submit" value="Ìá½»" />
+      <input type="submit" name="Submit" value="æäº¤" />
     </div>
     </label>
   </p>

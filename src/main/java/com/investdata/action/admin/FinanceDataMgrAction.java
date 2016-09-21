@@ -38,6 +38,9 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private static String UPDATE_CASHFLOW_INPUT = "update_cashFlow_input"; 
 	private static String ADD_GENDATA_INPUT = "add_genData_input"; 
 	private static String UPDATE_GENDATA_INPUT = "update_genData_input"; 
+	private static String ADD_INCSTATE_INPUT = "add_incstate_input"; 
+	private static String UPDATE_INCSTATE_INPUT = "update_incstate_input"; 
+
 
 	
 	Logger _log = Logger.getLogger(UserMgrAction.class);
@@ -69,6 +72,14 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	
 	public String updateGendataInput() throws Exception {
 		return UPDATE_GENDATA_INPUT;
+	}
+	
+	public String addIncstateInput() throws Exception {
+		return ADD_INCSTATE_INPUT;
+	}
+	
+	public String updateIncstateInput() throws Exception {
+		return UPDATE_INCSTATE_INPUT;
 	}
 	
 	
