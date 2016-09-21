@@ -32,11 +32,11 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	
 	private static String UPDATE = "update";
 	private static String ADD = "add";
-	private static String INPUT_BAL = "input_bal"; 
-	private static String UPDATE_BAL_INPUT = "update_bal_input"; 
-	private static String INPUT_CASHFLOW = "input_cashFlow"; 
+	private static String ADD_BALANCE_INPUT = "add_balance_input"; 
+	private static String UPDATE_BALANCE_INPUT = "update_balance_input"; 
+	private static String ADD_CASHFLOW_INPUT = "add_cashFlow_input"; 
 	private static String UPDATE_CASHFLOW_INPUT = "update_cashFlow_input"; 
-	private static String INPUT_GENDATA = "input_genData"; 
+	private static String ADD_GENDATA_INPUT = "add_genData_input"; 
 	private static String UPDATE_GENDATA_INPUT = "update_genData_input"; 
 
 	
@@ -47,27 +47,27 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private int flag; //用户状态 0-停用  1-启用
 	private String userName;
 	
-	public String inputBal() throws Exception {
-		return INPUT_BAL;
+	public String addBalanceInput() throws Exception {
+		return ADD_BALANCE_INPUT;
 	}
 	
-	public String updateBalInput() throws Exception {
-		return UPDATE_BAL_INPUT;
+	public String updateBalanceInput() throws Exception {
+		return UPDATE_BALANCE_INPUT;
 	}
 	
-	public String inputCashFlow() throws Exception {
-		return INPUT_CASHFLOW;
+	public String addCashFlowInput() throws Exception {
+		return ADD_CASHFLOW_INPUT;
 	}
 	
 	public String updateCashFlowInput() throws Exception {
 		return UPDATE_CASHFLOW_INPUT;
 	}
 	
-	public String inputGendate() throws Exception {
-		return INPUT_GENDATA;
+	public String addGendataInput() throws Exception {
+		return ADD_GENDATA_INPUT;
 	}
 	
-	public String updateGendateInput() throws Exception {
+	public String updateGendataInput() throws Exception {
 		return UPDATE_GENDATA_INPUT;
 	}
 	

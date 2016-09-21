@@ -55,10 +55,12 @@
 	<!-- 后台管理菜单-缓存管理 -->
 	<package name="financeDataMgr" namespace="/financeDataMgr" extends="struts_basic">
 		<action name="financeDataMgr" class="financeDataMgrAction">
-			<result name="input_bal">/WEB-INF/admin/financeDataMgr/balanceSheetAdd.jsp</result>
-			<result name="update_bal_input">/WEB-INF/admin/financeDataMgr/balanceSheetUpdate.jsp</result>
-			<result name="input_cashFlow">/WEB-INF/admin/financeDataMgr/cashFlowAdd.jsp</result>
+			<result name="add_balance_input">/WEB-INF/admin/financeDataMgr/balanceSheetAdd.jsp</result>
+			<result name="update_balance_input">/WEB-INF/admin/financeDataMgr/balanceSheetUpdate.jsp</result>
+			<result name="add_cashFlow_input">/WEB-INF/admin/financeDataMgr/cashFlowAdd.jsp</result>
 			<result name="update_cashFlow_input">/WEB-INF/admin/financeDataMgr/cashFlowUpdate.jsp</result>
+			<result name="add_genData_input">/WEB-INF/admin/financeDataMgr/gendataAdd.jsp</result>
+			<result name="update_genData_input">/WEB-INF/admin/financeDataMgr/gendataUpdate.jsp</result>
 			
 		</action>
 	</package>

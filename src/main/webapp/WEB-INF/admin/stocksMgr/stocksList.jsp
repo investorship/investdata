@@ -103,7 +103,7 @@
 </script>
 </head>
 <body>
-	<span style="font-weight:bold;">
+	<span style="font-weight:bold;font-size:7px;color:#ff0000">
 			管理菜单 >> 股票信息管理  >> 股票信息查询
 	</span>
 	<div><br>

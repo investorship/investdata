@@ -7,6 +7,10 @@
 </head>
 
 <body>
+	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+		管理菜单 >> 财务数据管理 >> 现金流量表 >> 现金流量表数据新增 </span>
+	<hr />
+	<br />
 <form id="cashFlowForm" name="cashFlowForm" method="post" action="">
   <label>股票代码
   <input name="code" type="text" id="code" />

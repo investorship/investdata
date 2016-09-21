@@ -18,6 +18,10 @@
 </head>
 
 <body>
+	<span style="font-weight:bold;font-size:7px;color:#ff0000">
+			管理菜单 >> 财务指标管理   >> 财务指标新增
+	</span>
+	<hr /><br />
 <form id="form1" name="form1" method="post" action="">
   <label>指标名称
   <input name="name" type="text" id="name" />

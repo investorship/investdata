@@ -101,7 +101,7 @@
 </script>
 </head>
 <body>
-	<span style="font-weight:bold;">
+	<span style="font-weight:bold;font-size:7px;color:#ff0000">
 			管理菜单 >> 注册用户管理  >> 注册用户信息查询
 	</span>
 	<div><br>

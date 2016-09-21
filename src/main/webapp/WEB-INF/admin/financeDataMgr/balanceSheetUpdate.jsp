@@ -15,12 +15,14 @@
 </head>
 
 <body>
+	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+		管理菜单 >> 财务数据管理 >> 资产负债表 >> 资产负债表数据修改 </span>
+	<hr />
+	<br />
 	<form id="balForm" name="balForm" method="post" action="">
 		<label>股票代码 <input name="code" type="text" id="code" size="25" />
-		</label>
-			<label> <input name="load" type="button" id="load" value="加载" />
-		</label> 
-		<label>数据年份 <input name="year" type="text" id="year"
+		</label> <label> <input name="load" type="button" id="load" value="加载" />
+		</label> <label>数据年份 <input name="year" type="text" id="year"
 			size="25" />
 		</label> <label>应收票据 <input name="noteRecable" type="text"
 			id="noteRecable" size="25" />

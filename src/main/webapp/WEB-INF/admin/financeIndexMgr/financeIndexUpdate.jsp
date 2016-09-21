@@ -18,10 +18,16 @@
 </head>
 
 <body>
+<span style="font-weight:bold;font-size:7px;color:#ff0000">
+			管理菜单 >> 财务指标管理   >> 财务指标修改
+	</span>
+	<hr /><br />
 <form id="form1" name="form1" method="post" action="">
   <label>指标名称
   <input name="name" type="text" id="name" />
   </label>
+  <label> <input name="load" type="button" id="load" value="加载" />
+  </label> 
   <label>所属父节点
   <input name="pid" type="text" id="pid" />
   </label>

@@ -14,7 +14,10 @@
 </head>
 
 <body>
-	<h3>股票信息修改</h3>
+	<span style="font-weight:bold;font-size:7px;color:#ff0000">
+			管理菜单 >> 股票信息管理   >> 股票信息修改
+	</span>
+	<hr /><br />
 <form id="form1" name="form1" method="post" action="">
   <label>股票代码
   <input name="code" type="text" id="code" />
