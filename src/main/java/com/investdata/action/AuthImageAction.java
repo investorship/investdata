@@ -39,7 +39,7 @@ public class AuthImageAction extends BaseAction implements SessionAware, Servlet
 		// 表明生成的响应是图片
 		response.setContentType("image/jpeg");
 
-		int width = 112, height = 42;
+		int width = 70, height = 42;
 		BufferedImage image = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_RGB);
 
@@ -73,7 +73,7 @@ public class AuthImageAction extends BaseAction implements SessionAware, Servlet
 
 		//随机生成字母和数字 6位
 		String sRand = "";
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 4; i++) {
 			g.setColor(new Color(20 + random.nextInt(110), 20 + random
 					.nextInt(110), 20 + random.nextInt(110)));
 			if(i % 2 ==0) {
