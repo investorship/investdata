@@ -29,7 +29,7 @@ function regFormValid() {
 				randCode : {
 					randCodeCheck : true,
 					required : true,
-					rangelength : [ 6, 6 ]
+					rangelength : [ 4, 4 ]
 				},
 				agreee : {
 					required : true
@@ -259,7 +259,7 @@ function adminLoginFormValid() {
 				randCode : {
 					randCodeCheck: true,
 					required : true,
-					rangelength : [ 6, 6 ]
+					rangelength : [ 4, 4 ]
 				},
 			},
 			messages : {

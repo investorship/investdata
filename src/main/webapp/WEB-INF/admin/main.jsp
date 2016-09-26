@@ -13,6 +13,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <base href="<%=basePath%>">
+<!-- 禁止网页被搜索引擎抓取 -->
+<meta name="robots" content="none" />
 <title>后台管理系统</title>
 <link href="css/admin/frame.css" rel="Stylesheet" type="text/css" />
 <link href="css/admin/menu.css" rel="Stylesheet" type="text/css" />

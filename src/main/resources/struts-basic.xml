@@ -16,11 +16,12 @@
 			<interceptor name="encodingInterceptor" class="com.investdata.common.interceptor.EncodingInterceptor"></interceptor>
 			<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
 			<interceptor name="searchIndexInterceptor" class="com.investdata.common.interceptor.SearchIndexInterceptor"></interceptor>
+			<interceptor name="adminUrlMacValidInterceptor" class="com.investdata.common.interceptor.AdminUrlMacValidInterceptor"></interceptor>
 			<interceptor-stack name="investInterceptor">
 				<interceptor-ref name="defaultStack" ></interceptor-ref>
 				<interceptor-ref name="searchIndexInterceptor" ></interceptor-ref>
-				<!--
-				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="adminUrlMacValidInterceptor"></interceptor-ref><!--
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>	
 				<interceptor-ref name="encodingInterceptor" ></interceptor-ref>  -->
 				<interceptor-ref name="methodInterceptor"></interceptor-ref>
 			</interceptor-stack>

@@ -27,8 +27,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 
 	@Override
 	public String intercept(ActionInvocation arg0) throws Exception {
-		// TODO Auto-generated method stub
-
+		
 		ActionContext actionContext = arg0.getInvocationContext();
 		HttpServletRequest request = (HttpServletRequest) actionContext.get(StrutsStatics.HTTP_REQUEST);
 		HttpSession session =  request.getSession();

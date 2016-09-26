@@ -10,11 +10,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<!-- TemplateBeginEditable name="doctitle" -->
-<title>无标题文档</title>
-<!-- TemplateEndEditable -->
-<!-- TemplateBeginEditable name="head" -->
-<!-- TemplateEndEditable -->
+<!-- 禁止网页被搜索引擎抓取 -->
+<meta name="robots" content="none" />
+<title>财务指标新增</title>
 </head>
 
 <body>

@@ -8,6 +8,8 @@
 <HTML>
 <HEAD>
 <base href="<%=basePath%>">
+<!-- 禁止网页被搜索引擎抓取 -->
+<meta name="robots" content="none" />
 <TITLE>ZTREE DEMO - Standard Data</TITLE>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/admin/tree.css" type="text/css">

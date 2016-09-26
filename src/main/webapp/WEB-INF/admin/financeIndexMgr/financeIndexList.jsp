@@ -10,6 +10,8 @@
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 禁止网页被搜索引擎抓取 -->
+<meta name="robots" content="none" />
 <title>财务指标查询</title>
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="dataTables/css/dataTables.jqueryui.css" />

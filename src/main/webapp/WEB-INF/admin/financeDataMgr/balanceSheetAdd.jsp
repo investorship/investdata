@@ -11,7 +11,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>无标题文档</title>
+<!-- 禁止网页被搜索引擎抓取 -->
+<meta name="robots" content="none" />
+<title>新增资产负责数据</title>
 </head>
 
 <body>

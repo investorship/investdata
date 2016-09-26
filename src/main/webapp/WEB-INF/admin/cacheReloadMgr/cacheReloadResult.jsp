@@ -9,6 +9,8 @@
 <html>
 <head>
 <base href="<%=basePath%>">
+<!-- 禁止网页被搜索引擎抓取 -->
+<meta name="robots" content="none" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>缓存加载结果</title>
 
