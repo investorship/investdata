@@ -2,6 +2,7 @@ package com.investdata.action.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,16 +21,20 @@ import org.json.JSONObject;
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
 import com.investdata.dao.TFinanceIndexInfoDao;
+import com.investdata.dao.TGendataSheetDao;
 import com.investdata.dao.TUserDao;
+import com.investdata.dao.po.AdminUser;
 import com.investdata.dao.po.FinanceIndexInfo;
+import com.investdata.dao.po.GendataSheet;
 import com.investdata.dao.po.User;
 import com.investdata.utils.StringUtils;
+import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 财务数据Action
  */
 public class FinanceDataMgrAction extends BaseAction implements RequestAware,SessionAware {
-	
+	//跳转标志符
 	private static String UPDATE = "update";
 	private static String ADD = "add";
 	private static String ADD_BALANCE_INPUT = "add_balance_input"; 
@@ -37,18 +42,37 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private static String ADD_CASHFLOW_INPUT = "add_cashFlow_input"; 
 	private static String UPDATE_CASHFLOW_INPUT = "update_cashFlow_input"; 
 	private static String ADD_GENDATA_INPUT = "add_genData_input"; 
+	private static String DATA_ADD_RESULT = "data_add_result"; 
 	private static String UPDATE_GENDATA_INPUT = "update_genData_input"; 
 	private static String ADD_INCSTATE_INPUT = "add_incstate_input"; 
 	private static String UPDATE_INCSTATE_INPUT = "update_incstate_input"; 
-
-
 	
+	private GendataSheet genDataSheet = new GendataSheet();
+
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
 	private Map<String,Object> session;
 	private JSONObject jsonUser;
 	private int flag; //用户状态 0-停用  1-启用
 	private String userName;
+	
+	//添加通用数据表项
+	public String addGendata() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			genDataSheet.setModUser(admUser.getUserName());
+			genDataSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TGendataSheetDao gendataDao = DaoFactory.getTGendataSheetDao();
+			gendataDao.addGendataSheet(genDataSheet);
+			
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_ADD_RESULT;
+		} else {
+			return null; 
+		}
+	}
 	
 	public String addBalanceInput() throws Exception {
 		return ADD_BALANCE_INPUT;
@@ -189,6 +213,14 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+	
+	public GendataSheet getGenDataSheet() {
+		return genDataSheet;
+	}
+
+	public void setGenDataSheet(GendataSheet genDataSheet) {
+		this.genDataSheet = genDataSheet;
 	}
 
 }

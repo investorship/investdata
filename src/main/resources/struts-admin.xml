@@ -52,7 +52,7 @@
 		</action>
 	</package>
 	
-	<!-- 后台管理菜单-缓存管理 -->
+	<!-- 后台管理菜单-财务数据管理 -->
 	<package name="financeDataMgr" namespace="/financeDataMgr" extends="struts_basic">
 		<action name="financeDataMgr" class="financeDataMgrAction">
 			<result name="add_balance_input">/WEB-INF/admin/financeDataMgr/balanceSheetAdd.jsp</result>
@@ -63,6 +63,8 @@
 			<result name="update_genData_input">/WEB-INF/admin/financeDataMgr/gendataUpdate.jsp</result>
 			<result name="add_incstate_input">/WEB-INF/admin/financeDataMgr/incstateAdd.jsp</result>
 			<result name="update_incstate_input">/WEB-INF/admin/financeDataMgr/incstateUpdate.jsp</result>
+			
+			<result name="data_add_result">/WEB-INF/admin/financeDataMgr/dataAddResult.jsp</result>
 			
 		</action>
 	</package>

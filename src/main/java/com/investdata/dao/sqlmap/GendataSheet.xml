@@ -2,8 +2,22 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="gendataSheet">
 	
-	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
+	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用gendataSheet代替 包名 + 类名的写法 -->
 	<typeAlias alias="gendataSheet" type="com.investdata.dao.po.GendataSheet"/>
+	
+	<parameterMap  class="gendataSheet" id="gendataParam">
+		<parameter property="code"/>
+		<parameter property="year" />
+		<parameter property="totalStocks"/>
+		<parameter property="roeWa"/>
+		<parameter property="roeWaKf"/>
+		<parameter property="dividenPaySum"/>
+		<parameter property="eps"/>
+		<parameter property="epsDiluted"/>
+		<parameter property="flag"/>
+		<parameter property="inTime"/>
+		<parameter property="modUser"/>
+	</parameterMap>
 	
 	<resultMap id="gendataSheetResultMap" class="com.investdata.dao.po.GendataSheet" >
 		<result property="year" column="year"/>
@@ -11,6 +25,7 @@
 		<result property="totalStocks" column="total_stocks"/>
 		<result property="roeWa" column="roe_wa"/>
 		<result property="roeWaKf" column="roe_wa_kf"/>
+		<result property="dividenPaySum" column="dividen_pay_sum"/>
 		<result property="eps" column="eps"/>
 		<result property="epsDiluted" column="eps_diluted"/>
 		<result property="flag" column="flag"/>
@@ -66,5 +81,23 @@
 		<include refid="where_conditions" />
 		order by year asc
 	</statement>
+	
+	<insert id="addGendata" parameterMap="gendataParam">
+		insert into t_gendata_sheet(
+			code,
+			year,
+			total_stocks,
+			roe_wa,
+			roe_wa_kf,
+			dividen_pay_sum,
+			eps,
+			eps_diluted,
+			flag,
+			intime,
+			moduser
+		) values (
+			?,?,?,?,?,?,?,?,?,?,?
+		)
+	</insert>
 	
 </sqlMap>

@@ -113,6 +113,8 @@ public class LoginAction extends BaseAction implements SessionAware {
 		admUser.setPassword(Coder.encryptBASE64(ThreeDes.encryptMode(encKey.getBytes(), password.getBytes())));
 		admUser.setFlag(1);
 		
+		session.put("admUser", admUser); //管理员信息存入session
+		
 		TAdminUserDao admUserDao = DaoFactory.getTAdminUserDao();
 		List<AdminUser> adminUsers = admUserDao.getAdminUsers(admUser);
 		if (adminUsers != null && adminUsers.size() == 1) {

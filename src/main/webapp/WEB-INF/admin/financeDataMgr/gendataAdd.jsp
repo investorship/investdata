@@ -18,26 +18,26 @@
 
 <body>
 	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
-		管理菜单 >> 财务数据管理 >> 综合数据表 >> 综合数据表数据新增  </span>
+		管理菜单 >> 财务数据管理 >> 综合数据表 >> 综合数据表数据新增 </span>
 	<hr />
 	<br />
-	<form id="gendataForm" name="gendataForm" method="post" action="">
-		<label>股票代码 <input type="text" name="textfield" />
-		</label> <label>数据年份 <input type="text" name="textfield2" />
-		</label> <label>总股本 <input type="text" name="textfield3" />
+	<form id="gendataForm" name="gendataForm" method="post" action="financeDataMgr/financeDataMgr!addGendata.action">
+		<label>股票代码 <input type="text" name="genDataSheet.code" />
+		</label> <label>数据年份 <input type="text" name="genDataSheet.year" />
+		</label> <label>总股本 <input type="text" name="genDataSheet.totalStocks" />
 		</label>
 		<p>
-			<label>加权平均净资产收益率 <input type="text" name="textfield4" />
-			</label> <label></label> 加权平均净资产收益率(扣非) <input type="text" name="textfield8" />
-			<label>本年度发放的现金股利总和 <input type="text" name="textfield6" />
+			<label>加权平均净资产收益率 <input type="text" name="genDataSheet.roeWa" />
+			</label> <label></label> 加权平均净资产收益率(扣非) <input type="text" name="genDataSheet.roeWaKf" />
+			<label>本年度发放的现金股利总和 <input type="text" name="genDataSheet.dividenPaySum" />
 			</label>
 		</p>
 		<p>
-			<label> 状态 <input type="radio" name="radiobutton"
-				value="radiobutton" /> 启用 <input type="radio" name="radiobutton"
-				value="radiobutton" /> 停用
-			</label> <label>基本每股收益 <input type="text" name="textfield7" />
-			</label> <label></label> 稀释每股收益 <input type="text" name="textfield5" />
+			<label> 状态 <input type="radio" name="genDataSheet.flag"
+				value="1" checked="checked" /> 启用 <input type="radio" name="genDataSheet.flag"
+				value="0" /> 停用
+			</label> <label>基本每股收益 <input type="text" name="genDataSheet.eps" />
+			</label> <label></label> 稀释每股收益 <input type="text" name="genDataSheet.epsDiluted" />
 		</p>
 		<p>&nbsp;</p>
 		<p>
