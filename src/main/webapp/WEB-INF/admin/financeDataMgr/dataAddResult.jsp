@@ -32,6 +32,14 @@
 			<br />
 				添加现金流量数据成功 <a href="financeDataMgr/financeDataMgr!addCashFlowInput.action">继续添加</a>
 		</c:when>
+		
+		<c:when test="${operMethod == 'addIncstate'}">
+			<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+				管理菜单 >> 财务数据管理 >> 利润表 >> 数据新增结果 </span>
+			<hr />
+			<br />
+				添加利润表数据成功 <a href="financeDataMgr/financeDataMgr!addIncstateInput.action">继续添加</a>
+		</c:when>
 	</c:choose>
 
 

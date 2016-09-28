@@ -23,11 +23,13 @@ import com.investdata.common.factory.DaoFactory;
 import com.investdata.dao.TCashFlowSheetDao;
 import com.investdata.dao.TFinanceIndexInfoDao;
 import com.investdata.dao.TGendataSheetDao;
+import com.investdata.dao.TIncstateSheetDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.po.AdminUser;
 import com.investdata.dao.po.CashFlowSheet;
 import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.GendataSheet;
+import com.investdata.dao.po.IncstateSheet;
 import com.investdata.dao.po.User;
 import com.investdata.utils.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
@@ -52,6 +54,7 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	
 	private GendataSheet  genDataSheet = new GendataSheet();
 	private CashFlowSheet cashFlowSheet = new CashFlowSheet();
+	private IncstateSheet incstateSheet = new IncstateSheet();
 
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -132,6 +135,27 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
 			
 			return DATA_UPDATE_RESULT;
+		} else {
+			return null; 
+		}
+	}
+	
+	//新增利润表数据
+	public String addIncstate() throws Exception {
+		if (StringUtils.isEmpty(incstateSheet.getCode()) || StringUtils.isEmpty(incstateSheet.getYear())) {
+			return null;
+		}
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			incstateSheet.setModUser(admUser.getUserName());
+			incstateSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TIncstateSheetDao incStateSheetDao = DaoFactory.getTIncstateSheetDao();
+			incStateSheetDao.addIncstateSheet(incstateSheet);
+			
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_ADD_RESULT;
 		} else {
 			return null; 
 		}
@@ -239,8 +263,6 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	
 	public String updateState() throws Exception {
 		
-		
-		
 		TUserDao userDao = DaoFactory.getTUserDao();
 		User user = new User();
 		user.setUserName(userName);
@@ -293,5 +315,13 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	public void setCashFlowSheet(CashFlowSheet cashFlowSheet) {
 		this.cashFlowSheet = cashFlowSheet;
 	}
+	
+	public IncstateSheet getIncstateSheet() {
+		return incstateSheet;
+	}
 
+	public void setIncstateSheet(IncstateSheet incstateSheet) {
+		this.incstateSheet = incstateSheet;
+	}
+	
 }

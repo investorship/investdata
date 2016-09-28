@@ -12,6 +12,11 @@ public class IncstateSheetDaoImpl extends BaseDao implements TIncstateSheetDao {
 		return dao.queryForList("incstateSheet.getIncstateSheets", is);
 	}
 
+	@Override
+	public void addIncstateSheet(IncstateSheet is) throws Exception {
+		dao.insert("incstateSheet.addIncstateSheet", is);
+	}
+
 	
 
 }

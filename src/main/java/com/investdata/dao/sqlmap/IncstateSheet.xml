@@ -5,6 +5,44 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="incstateSheet" type="com.investdata.dao.po.IncstateSheet"/>
 	
+	<!-- 新增数据使用，与id=addGendata语句 字段必须一一对应，其余使用若不符请重新定义paramMap -->
+	<parameterMap  class="incstateSheet" id="insert-incstateParam">
+		<parameter property="code"/>
+		<parameter property="year" />
+		<parameter property="busiIncomeThis"/>
+		<parameter property="busiIncomeLast"/>
+		<parameter property="totalBusiIncThis"/>
+		<parameter property="totalBusiIncLast"/>
+		<parameter property="operaProfitsThis"/>
+		<parameter property="operaProfitsLast"/>
+		<parameter property="incomeTax"/>
+		<parameter property="fixedAssDepre"/>
+		<parameter property="longPreAmort"/>
+		<parameter property="totalProfitStart"/>
+		<parameter property="totalProfitEnd"/>
+		<parameter property="marketConstsThis"/>
+		<parameter property="marketConstsLast"/>
+		<parameter property="financeConstsThis"/>
+		<parameter property="financeConstsLast"/>
+		<parameter property="mgrConstsThis"/>
+		<parameter property="mgrConstsLast"/>
+		<parameter property="interExpense"/>
+		<parameter property="busiTaxSurcharge"/>
+		<parameter property="netProfitsThis"/>
+		<parameter property="netProfitsLast"/>
+		<parameter property="netProfitsKfThis"/> 
+		<parameter property="netProfitsKfLast"/> 
+		<parameter property="operatCost"/> 
+		<parameter property="busiIncomeKf"/>
+		<parameter property="fairValChange"/>
+		<parameter property="investIncome"/>
+		<parameter property="nonOperaIncome"/>
+		<parameter property="nonOperaOutcome"/>
+		<parameter property="flag"/>
+		<parameter property="inTime"/>
+		<parameter property="modUser"/>
+	</parameterMap>
+	
 	<resultMap id="incstateSheetResultMap" class="com.investdata.dao.po.IncstateSheet" >
 		<result property="year" column="year"/>
 		<result property="code" column="code"/>
@@ -163,5 +201,48 @@
 		<include refid="where_conditions" />
 		order by year asc
 	</statement>
+	
+	
+	<insert id="addIncstateSheet" parameterMap="insert-incstateParam">
+		insert into t_incstate_sheet (
+			code,
+			year,
+			busi_income_this,
+			busi_income_last,
+			total_busi_inc_this,
+			total_busi_inc_last,
+			opera_profits_this,
+			opera_profits_last,
+			income_tax,
+			fixed_ass_depre,
+			long_pre_amort,
+			total_profit_start,
+			total_profit_end,
+			market_consts_this,
+			market_consts_last,
+			finance_consts_this,
+			finance_consts_last,
+			mgr_consts_this,
+			mgr_consts_last,
+			inter_expense,
+			busi_tax_surcharge,
+			net_profits_this,
+			net_profits_last,
+			net_profits_kf_last,
+			net_profits_kf_this,
+			operat_cost,
+			busi_income_kf,
+			fair_val_change,
+			invest_income,
+			non_opera_income,
+			non_opera_outcome,
+			flag,
+			intime,
+			moduser
+		) values (
+			?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</insert>
+	
 	
 </sqlMap>

@@ -1,6 +1,7 @@
 package com.investdata.dao.po;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * 利润表 po
@@ -10,38 +11,45 @@ import java.io.Serializable;
 public class IncstateSheet implements Serializable{
 	private String code;
 	private String year;
-	private String busiIncomeThis;
-	private String busiIncomeLast;
-	private String totalBusiIncThis;
-	private String totalBusiIncLast;
-	private String operaProfitsThis;
-	private String operaProfitsLast;
-	private String incomeTax;
-	private String fixedAssDepre;
-	private String longPreAmort;
-	private String totalProfitStart;
-	private String totalProfitEnd;
-	private String marketConstsThis;
-	private String marketConstsLast;
-	private String financeConstsThis;
-	private String financeConstsLast;
-	private String mgrConstsThis;
-	private String mgrConstsLast;
-	private String interExpense;
-	private String busiTaxSurcharge;
-	private String netProfitsThis;
-	private String netProfitsLast;
-	private String netProfitsKfThis;
-	private String netProfitsKfLast;
-	private String operatCost;
-	private String busiIncomeKf;
-	private String fairValChange;
-	private String investIncome;
-	private String nonOperaIncome;
-	private String nonOperaOutcome;
+	private String busiIncomeThis; //本期营业收入
+	private String busiIncomeLast; //上期营业收入
+	private String totalBusiIncThis;//本期营业总收入
+	private String totalBusiIncLast;//上期营业总收入
+	private String operaProfitsThis;//本期营业利润
+	private String operaProfitsLast;//上期营业利润
+	private String incomeTax; //所得税
+	private String fixedAssDepre; //固定资产折旧
+	private String longPreAmort; //长期待摊费用摊销--
+	private String totalProfitStart; //期初利润总额
+	private String totalProfitEnd; //期末利润总额
+	private String marketConstsThis; //本期销售费用
+	private String marketConstsLast;//上期销售费用
+	private String financeConstsThis; //本期财务费用
+	private String financeConstsLast;//上期财务费用
+	private String mgrConstsThis; //本期管理费用
+	private String mgrConstsLast; //上期管理费用
+	private String interExpense; //财务费用-利息支出
+	private String busiTaxSurcharge; //营业税金及附加
+	private String netProfitsThis; //本期净利润
+	private String netProfitsLast; //上期净利润
+	private String netProfitsKfThis; //本期净利润（扣非）
+	private String netProfitsKfLast;//上期净利润（扣非）
+	private String operatCost; //营业成本
+	private String busiIncomeKf; //营业收入(扣非)
+	private String fairValChange; //公允价值变动
+	private String investIncome; //投资收益
+	private String nonOperaIncome; //营业外收入
+	private String nonOperaOutcome; //营业外支出
 	private String flag;
-	private String inTime;
+	private Timestamp inTime;
 	private String modUser;
+	
+	public Timestamp getInTime() {
+		return inTime;
+	}
+	public void setInTime(Timestamp inTime) {
+		this.inTime = inTime;
+	}
 	
 	public String getCode() {
 		return code;
@@ -237,12 +245,7 @@ public class IncstateSheet implements Serializable{
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	public String getInTime() {
-		return inTime;
-	}
-	public void setInTime(String inTime) {
-		this.inTime = inTime;
-	}
+	
 	public String getModUser() {
 		return modUser;
 	}
