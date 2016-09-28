@@ -17,6 +17,11 @@ public class GendataSheetDaoImpl extends BaseDao implements TGendataSheetDao {
 		dao.insert("gendataSheet.addGendata", gs);
 	}
 
+	@Override
+	public void updateGendataSheet(GendataSheet gs) throws Exception {
+		dao.update("gendataSheet.updateGendata", gs);
+	}
+
 	
 
 }

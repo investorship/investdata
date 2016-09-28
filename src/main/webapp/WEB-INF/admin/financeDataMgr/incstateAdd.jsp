@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
 		管理菜单 >> 财务数据管理 >> 利润表 >> 利润表数据新增 </span>
 	<hr />
 	<br />

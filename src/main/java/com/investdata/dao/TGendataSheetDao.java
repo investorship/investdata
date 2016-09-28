@@ -9,4 +9,7 @@ public interface TGendataSheetDao {
 	public List<GendataSheet> getGendataSheets(GendataSheet gs) throws Exception;
 	
 	public void addGendataSheet(GendataSheet gs) throws Exception;
+	
+	public void updateGendataSheet(GendataSheet gs) throws Exception;
+	
 }

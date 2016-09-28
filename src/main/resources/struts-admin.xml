@@ -65,6 +65,7 @@
 			<result name="update_incstate_input">/WEB-INF/admin/financeDataMgr/incstateUpdate.jsp</result>
 			
 			<result name="data_add_result">/WEB-INF/admin/financeDataMgr/dataAddResult.jsp</result>
+			<result name="data_update_result">/WEB-INF/admin/financeDataMgr/dataUpdateResult.jsp</result>
 			
 		</action>
 	</package>

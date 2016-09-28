@@ -14,6 +14,9 @@
 <!-- 禁止网页被搜索引擎抓取 -->
 <meta name="robots" content="none" />
 <title>综合数据表数据新增</title>
+
+<jsp:include page="../autocomplete_admin.jsp" />
+
 </head>
 
 <body>
@@ -22,8 +25,11 @@
 	<hr />
 	<br />
 	<form id="gendataForm" name="gendataForm" method="post" action="financeDataMgr/financeDataMgr!addGendata.action">
-		<label>股票代码 <input type="text" name="genDataSheet.code" />
-		</label> <label>数据年份 <input type="text" name="genDataSheet.year" />
+		<label>股票代码 <input type="text" name="genDataSheet.code" id="code"/>
+		</label> 
+		<label>股票名称 <input type="text" disabled="disabled" />
+		</label> 
+		<label>数据年份 <input type="text" name="genDataSheet.year" />
 		</label> <label>总股本 <input type="text" name="genDataSheet.totalStocks" />
 		</label>
 		<p>

@@ -14,6 +14,8 @@
 <!-- 禁止网页被搜索引擎抓取 -->
 <meta name="robots" content="none" />
 <title>现金流量表数据修改</title>
+<jsp:include page="../autocomplete_admin.jsp" />
+
 </head>
 
 <body>
@@ -21,22 +23,23 @@
 		管理菜单 >> 财务数据管理 >> 现金流量表 >> 现金流量表数据修改 </span>
 	<hr />
 	<br />
-	<form id="cashFlowForm" name="cashFlowForm" method="post" action="">
-		<label>股票代码 <input name="code" type="text" id="code" />
+	<form id="cashFlowForm" name="cashFlowForm" method="post" action="financeDataMgr/financeDataMgr!updateCashFlow.action">
+		<label>股票代码 <input name="cashFlowSheet.code" type="text" id="code" />
+		</label> <label>股票名称 <input type="text" disabled="disabled" />
 		</label> <label> <input type="submit" name="Submit2" value="加载" />
-			数据年份 <input name="year" type="text" id="year" />
+			数据年份 <input name="cashFlowSheet.year" type="text" id="year" />
 		</label>
 		<p>
-			<label>经营活动产生的现金流量净额 <input name="operaActiveCash"
+			<label>经营活动产生的现金流量净额 <input name="cashFlowSheet.operaActiveCash"
 				type="text" id="operaActiveCash" />
-			</label> <label>现金及现金等价物增加额 <input name="cashAndCashequ" type="text"
+			</label> <label>现金及现金等价物增加额 <input name="cashFlowSheet.cashAndCashequ" type="text"
 				id="cashAndCashequ" />
 			</label>
 		</p>
 		<p>
-			状态 <label> <input name="flag" type="radio" value="1"
+			状态 <label> <input name="cashFlowSheet.flag" type="radio" value="1"
 				checked="checked" /> 启用
-			</label> <label> <input type="radio" name="flag" value="0" /> 停用
+			</label> <label> <input type="radio" name="cashFlowSheet.flag" value="0" /> 停用
 			</label>
 		</p>
 		<p>

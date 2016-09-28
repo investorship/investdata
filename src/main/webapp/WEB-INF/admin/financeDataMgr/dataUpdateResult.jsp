@@ -18,19 +18,20 @@
 
 <body>
 	<c:choose>
-		<c:when test="${operMethod == 'addGendata'}">
+		<c:when test="${operMethod == 'updateGendata'}">
 			<span style="font-weight: bold; font-size: 7px; color: #ff0000">
-				管理菜单 >> 财务数据管理 >> 综合数据表 >> 数据新增结果 </span>
+				管理菜单 >> 财务数据管理 >> 综合数据表 >> 数据修改结果 </span>
 			<hr />
 			<br />
-				添加综合数据表数据成功 <a href="financeDataMgr/financeDataMgr!addGendataInput.action">继续添加</a>
+				修改综合数据表数据成功 <a href="financeDataMgr/financeDataMgr!updateGendataInput.action">继续修改</a>
 		</c:when>
-		<c:when test="${operMethod == 'addCashFlow'}">
+		
+		<c:when test="${operMethod == 'updateCashFlow'}">
 			<span style="font-weight: bold; font-size: 7px; color: #ff0000">
-				管理菜单 >> 财务数据管理 >> 现金流量表 >> 数据新增结果 </span>
+				管理菜单 >> 财务数据管理 >> 现金流量表 >> 数据修改结果 </span>
 			<hr />
 			<br />
-				添加现金流量数据成功 <a href="financeDataMgr/financeDataMgr!addCashFlowInput.action">继续添加</a>
+				修改现金流量表数据成功 <a href="financeDataMgr/financeDataMgr!updateCashFlowInput.action">继续修改</a>
 		</c:when>
 	</c:choose>
 

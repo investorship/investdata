@@ -12,6 +12,16 @@ public class CashFlowSheetDaoImpl extends BaseDao implements TCashFlowSheetDao {
 		return dao.queryForList("cashFlowSheet.getCashFlowSheets", cs);
 	}
 
+	@Override
+	public void addCashFlowSheet(CashFlowSheet cs) throws Exception {
+		dao.insert("cashFlowSheet.addCashFlowSheet", cs);
+	}
+
+	@Override
+	public void updateCashFlowSheet(CashFlowSheet cs) throws Exception {
+		dao.update("cashFlowSheet.updateCashFlowSheet", cs);
+	}
+
 	
 
 }

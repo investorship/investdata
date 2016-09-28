@@ -5,6 +5,18 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="cashFlowSheet" type="com.investdata.dao.po.CashFlowSheet"/>
 	
+	<!-- 新增数据使用，与id=addCashFlowSheet语句 字段必须一一对应，其余使用若不符请重新定义paramMap -->
+	<parameterMap  class="cashFlowSheet" id="insert-gendataParam">
+		<parameter property="code"/>
+		<parameter property="year" />
+		<parameter property="operaActiveCash"/>
+		<parameter property="cashAndCashequ"/>
+		<parameter property="flag"/>
+		<parameter property="inTime"/>
+		<parameter property="modUser"/>
+	</parameterMap>
+	
+	
 	<resultMap id="cashFlowSheetResultMap" class="com.investdata.dao.po.CashFlowSheet" >
 		<result property="year" column="year"/>
 		<result property="code" column="code"/>
@@ -51,5 +63,45 @@
 		<include refid="where_conditions" />
 		order by year asc
 	</statement>
+	
+	<insert id="addCashFlowSheet" parameterMap="insert-gendataParam">
+		insert into t_cashflow_sheet(
+			code,
+			year,
+			opera_active_cash,
+			cash_and_cashequ,
+			flag,
+			intime,
+			moduser
+		) values (
+			?,?,?,?,?,?,?
+		)
+	</insert>
+	
+	<update id="updateCashFlowSheet" parameterClass="cashFlowSheet">
+		update t_cashflow_sheet
+				set code = #code#
+			
+			<isNotEmpty  prepend=" , " property="year" >
+				year = #year#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="operaActiveCash" >
+				opera_active_cash = #operaActiveCash#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="cashAndCashequ" >
+				cash_and_cashequ = #cashAndCashequ#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="inTime">
+				intime = #inTime#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="modUser">
+				moduser = #modUser#
+			</isNotEmpty>
+			
+			where code=#code# and year=#year#
+	</update>
 	
 </sqlMap>

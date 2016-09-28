@@ -5,6 +5,7 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用gendataSheet代替 包名 + 类名的写法 -->
 	<typeAlias alias="gendataSheet" type="com.investdata.dao.po.GendataSheet"/>
 	
+	<!-- 新增数据使用，与id=addGendata语句 字段必须一一对应，其余使用若不符请重新定义paramMap -->
 	<parameterMap  class="gendataSheet" id="gendataParam">
 		<parameter property="code"/>
 		<parameter property="year" />
@@ -100,4 +101,41 @@
 		)
 	</insert>
 	
+	<update id="updateGendata" parameterClass="gendataSheet">
+		update t_gendata_sheet
+				set code = #code#
+			
+			<isNotEmpty  prepend=" , " property="year" >
+				year = #year#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="totalStocks" >
+				total_stocks = #totalStocks#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="roeWa" >
+				roe_wa = #roeWa#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="roeWaKf" >
+				roe_wa_kf = #roeWaKf#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="dividenPaySum" >
+				dividen_pay_sum = #dividenPaySum#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="eps" >
+				eps = #eps#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="epsDiluted" >
+				eps_diluted = #epsDiluted#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="inTime">
+				intime = #inTime#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="modUser">
+				moduser = #modUser#
+			</isNotEmpty>
+			
+			where code=#code# and year=#year#
+	</update>
 </sqlMap>

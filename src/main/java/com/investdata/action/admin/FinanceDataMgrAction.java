@@ -20,10 +20,12 @@ import org.json.JSONObject;
 
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TCashFlowSheetDao;
 import com.investdata.dao.TFinanceIndexInfoDao;
 import com.investdata.dao.TGendataSheetDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.po.AdminUser;
+import com.investdata.dao.po.CashFlowSheet;
 import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.GendataSheet;
 import com.investdata.dao.po.User;
@@ -43,11 +45,13 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private static String UPDATE_CASHFLOW_INPUT = "update_cashFlow_input"; 
 	private static String ADD_GENDATA_INPUT = "add_genData_input"; 
 	private static String DATA_ADD_RESULT = "data_add_result"; 
+	private static String DATA_UPDATE_RESULT = "data_update_result"; 
 	private static String UPDATE_GENDATA_INPUT = "update_genData_input"; 
 	private static String ADD_INCSTATE_INPUT = "add_incstate_input"; 
 	private static String UPDATE_INCSTATE_INPUT = "update_incstate_input"; 
 	
-	private GendataSheet genDataSheet = new GendataSheet();
+	private GendataSheet  genDataSheet = new GendataSheet();
+	private CashFlowSheet cashFlowSheet = new CashFlowSheet();
 
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -69,6 +73,65 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
 			
 			return DATA_ADD_RESULT;
+		} else {
+			return null; 
+		}
+	}
+	
+	//修改综合表项
+	public String updateGendata() throws Exception {
+		if (StringUtils.isEmpty(genDataSheet.getCode()) || StringUtils.isEmpty(genDataSheet.getYear())) {
+			return null;
+		}
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			genDataSheet.setModUser(admUser.getUserName());
+			genDataSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TGendataSheetDao gendataDao = DaoFactory.getTGendataSheetDao();
+			gendataDao.updateGendataSheet(genDataSheet);
+			
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_UPDATE_RESULT;
+		} else {
+			return null; 
+		}
+	}
+	
+	//现金流量表数据新增
+	public String addCashFlow() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			cashFlowSheet.setModUser(admUser.getUserName());
+			cashFlowSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TCashFlowSheetDao cashFlowSheetDao = DaoFactory.getTCashFlowSheetDao();
+			cashFlowSheetDao.addCashFlowSheet(cashFlowSheet);
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_ADD_RESULT;
+		} else {
+			return null; 
+		}
+	}
+	
+	//修改现金流量表
+	public String updateCashFlow() throws Exception {
+		if (StringUtils.isEmpty(cashFlowSheet.getCode()) || StringUtils.isEmpty(cashFlowSheet.getYear())) {
+			return null;
+		}
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			cashFlowSheet.setModUser(admUser.getUserName());
+			cashFlowSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TCashFlowSheetDao cashFlowSheetDao = DaoFactory.getTCashFlowSheetDao();
+			cashFlowSheetDao.updateCashFlowSheet(cashFlowSheet);
+			
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_UPDATE_RESULT;
 		} else {
 			return null; 
 		}
@@ -221,6 +284,14 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 
 	public void setGenDataSheet(GendataSheet genDataSheet) {
 		this.genDataSheet = genDataSheet;
+	}
+	
+	public CashFlowSheet getCashFlowSheet() {
+		return cashFlowSheet;
+	}
+
+	public void setCashFlowSheet(CashFlowSheet cashFlowSheet) {
+		this.cashFlowSheet = cashFlowSheet;
 	}
 
 }
