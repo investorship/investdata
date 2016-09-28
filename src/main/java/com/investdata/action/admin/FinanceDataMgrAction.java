@@ -161,6 +161,65 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 		}
 	}
 	
+	
+	//修改利润表数据
+	public String updateIncstate() throws Exception {
+		if (StringUtils.isEmpty(incstateSheet.getCode()) || StringUtils.isEmpty(incstateSheet.getYear())) {
+			return null;
+		}
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			incstateSheet.setModUser(admUser.getUserName());
+			incstateSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TIncstateSheetDao incStateSheetDao = DaoFactory.getTIncstateSheetDao();
+			incStateSheetDao.updateIncstateSheet(incstateSheet);
+			
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_UPDATE_RESULT;
+		} else {
+			return null; 
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String addBalanceInput() throws Exception {
 		return ADD_BALANCE_INPUT;
 	}

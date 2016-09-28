@@ -245,4 +245,113 @@
 	</insert>
 	
 	
+	<update id="updateIncstateSheet" parameterClass="incstateSheet">
+		update t_incstate_sheet
+				set code = #code#
+				
+			<isNotEmpty  prepend=" , " property="year" >
+				year = #year#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="busiIncomeThis" >
+				busi_income_this = #busiIncomeThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="busiIncomeLast" >
+				busi_income_last = #busiIncomeLast#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend=" , " property="busiIncomeThis" >
+				total_busi_inc_this = #totalBusiIncThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="busiIncomeLast" >
+				total_busi_inc_last = #totalBusiIncLast#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend=" , " property="operaProfitsThis" >
+				opera_profits_this = #operaProfitsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="operaProfitsLast" >
+				opera_profits_last = #operaProfitsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="incomeTax" >
+				income_tax = #incomeTax#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="fixedAssDepre" >
+				fixed_ass_depre = #fixedAssDepre#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="longPreAmort" >
+				long_pre_amort = #longPreAmort#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="totalProfitStart" >
+				total_profit_start = #totalProfitStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="totalProfitEnd" >
+				total_profit_end = #totalProfitEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="marketConstsThis" >
+				market_consts_this = #marketConstsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="marketConstsLast" >
+				market_consts_last = #marketConstsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="financeConstsThis" >
+				finance_consts_this = #financeConstsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="financeConstsLast" >
+				finance_consts_last = #financeConstsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="mgrConstsThis" >
+				mgr_consts_this = #mgrConstsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="mgrConstsLast" >
+				mgr_consts_last = #mgrConstsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="interExpense" >
+				inter_expense = #interExpense#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="busiTaxSurcharge" >
+				busi_tax_surcharge = #busiTaxSurcharge#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="netProfitsThis" >
+				net_profits_this = #netProfitsThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="netProfitsLast" >
+				net_profits_last = #netProfitsLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="netProfitsKfThis" >
+				net_profits_kf_this = #netProfitsKfThis#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="netProfitsKfLast" >
+				net_profits_kf_last = #netProfitsKfLast#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="operatCost" >
+				operat_cost = #operatCost#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="busiIncomeKf" >
+				busi_income_kf = #busiIncomeKf#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="fairValChange" >
+				fair_val_change = #fairValChange#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="investIncome" >
+				invest_income = #investIncome#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="nonOperaIncome" >
+				non_opera_income = #nonOperaIncome#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="nonOperaOutcome" >
+				non_opera_outcome = #nonOperaOutcome#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="inTime">
+				intime = #inTime#
+			</isNotEmpty>
+			<isNotEmpty prepend=" , " property="modUser">
+				moduser = #modUser#
+			</isNotEmpty>
+			
+			where code=#code# and year=#year#
+	</update>
+	
 </sqlMap>

@@ -33,6 +33,14 @@
 			<br />
 				修改现金流量表数据成功 <a href="financeDataMgr/financeDataMgr!updateCashFlowInput.action">继续修改</a>
 		</c:when>
+		
+		<c:when test="${operMethod == 'updateIncstate'}">
+			<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+				管理菜单 >> 财务数据管理 >> 利润表 >> 数据修改结果 </span>
+			<hr />
+			<br />
+				修改利润表数据成功 <a href="financeDataMgr/financeDataMgr!updateIncstateInput.action">继续修改</a>
+		</c:when>
 	</c:choose>
 
 

@@ -17,6 +17,11 @@ public class IncstateSheetDaoImpl extends BaseDao implements TIncstateSheetDao {
 		dao.insert("incstateSheet.addIncstateSheet", is);
 	}
 
+	@Override
+	public void updateIncstateSheet(IncstateSheet is) throws Exception {
+		dao.update("incstateSheet.updateIncstateSheet", is);
+	}
+
 	
 
 }
