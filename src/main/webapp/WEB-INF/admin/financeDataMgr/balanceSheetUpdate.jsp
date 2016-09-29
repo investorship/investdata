@@ -24,7 +24,7 @@
 		管理菜单 >> 财务数据管理 >> 资产负债表 >> 资产负债表数据修改 </span>
 	<hr />
 	<br />
-	<form id="balForm" name="balForm" method="post" action="financeDataMgr/financeDataMgr!addBalance.action">
+	<form id="balForm" name="balForm" method="post" action="financeDataMgr/financeDataMgr!updateBalance.action">
 		<label>股票代码 <input name="balanceSheet.code" type="text" id="code" size="25" />
 		</label> <label>数据年份 <input name="balanceSheet.year" type="text" id="year"
 			size="25" />

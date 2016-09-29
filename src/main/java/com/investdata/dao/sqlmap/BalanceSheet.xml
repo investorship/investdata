@@ -107,8 +107,8 @@
 			<isNotEmpty prepend=" and " property="noteRecable" >
 				note_recable = #noteRecable#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="noteRecable" >
-				adv_customers = #noteRecable#
+			<isNotEmpty prepend=" and " property="advCustomers" >
+				adv_customers = #advCustomers#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="accPayable" >
 				acc_payable = #accPayable#
@@ -208,7 +208,7 @@
 				capital_surplus = #capitalSurplus#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="surplusReserve" >
-				surplusReserve = #surplusReserve#
+				surplus_reserve = #surplusReserve#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="flag" >
 				flag = #flag#
@@ -277,125 +277,125 @@
 	
 	
 	<update id="updateBalanceSheet" parameterClass="balanceSheet">
-		update t_incstate_sheet
+		update t_balance_sheet
 				set code = #code#
 				
 			<isNotEmpty  prepend=" , " property="year" >
 				year = #year#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="noteRecable" >
+			<isNotEmpty prepend=" , " property="noteRecable" >
 				note_recable = #noteRecable#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="noteRecable" >
-				adv_customers = #noteRecable#
+			<isNotEmpty prepend=" , " property="advCustomers" >
+				adv_customers = #advCustomers#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="accPayable" >
+			<isNotEmpty prepend=" , " property="accPayable" >
 				acc_payable = #accPayable#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="constrInPro" >
+			<isNotEmpty prepend=" , " property="constrInPro" >
 				constr_in_pro = #constrInPro#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="lntangAssets" >
+			<isNotEmpty prepend=" , " property="lntangAssets" >
 				lntang_assets = #lntangAssets#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="lntangAssetsAmortize" >
+			<isNotEmpty prepend=" , " property="lntangAssetsAmortize" >
 				lntang_assets_amortize = #lntangAssetsAmortize#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="goodWill" >
+			<isNotEmpty prepend=" , " property="goodWill" >
 				goodwill = #goodWill#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="shortTermLoans" >
+			<isNotEmpty prepend=" , " property="shortTermLoans" >
 				short_term_loans = #shortTermLoans#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="notePayable" >
+			<isNotEmpty prepend=" , " property="notePayable" >
 				note_payable = #notePayable#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="debitWithinYear" >
+			<isNotEmpty prepend=" , " property="debitWithinYear" >
 				debit_within_year = #debitWithinYear#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="longTermLoans" >
+			<isNotEmpty prepend=" , " property="longTermLoans" >
 				long_term_loans = #longTermLoans#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="boundsPayable" >
+			<isNotEmpty prepend=" , " property="boundsPayable" >
 				bounds_payable = #boundsPayable#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="longAccPayable" >
+			<isNotEmpty prepend=" , " property="longAccPayable" >
 				long_acc_payable = #longAccPayable#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="liquidAssetsStart" >
+			<isNotEmpty prepend=" , " property="liquidAssetsStart" >
 				liquid_assets_start = #liquidAssetsStart#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="liquidAssetsEnd" >
+			<isNotEmpty prepend=" , " property="liquidAssetsEnd" >
 				liquid_assets_end = #liquidAssetsEnd#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="currLiab" >
+			<isNotEmpty prepend=" , " property="currLiab" >
 				curr_liab = #currLiab#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="currLiabNon" >
+			<isNotEmpty prepend=" , " property="currLiabNon" >
 				curr_liab_non = #currLiabNon#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="goodsStart" >
+			<isNotEmpty prepend=" , " property="goodsStart" >
 				goods_start = #goodsStart#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="goodsEnd" >
+			<isNotEmpty prepend=" , " property="goodsEnd" >
 				goods_end = #goodsEnd#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="cash" >
+			<isNotEmpty prepend=" , " property="cash" >
 				cash = #cash#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="tradAssets" >
+			<isNotEmpty prepend=" , " property="tradAssets" >
 				trad_assets = #tradAssets#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="totalLiabStart" >
+			<isNotEmpty prepend=" , " property="totalLiabStart" >
 				total_liab_start = #totalLiabStart#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="totalLiabEnd" >
+			<isNotEmpty prepend=" , " property="totalLiabEnd" >
 				total_liab_end = #totalLiabEnd#
 			</isNotEmpty>
 			
-			<isNotEmpty prepend=" and " property="totalAssStart" >
+			<isNotEmpty prepend=" , " property="totalAssStart" >
 				total_ass_start = #totalAssStart#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="totalAssEnd" >
+			<isNotEmpty prepend=" , " property="totalAssEnd" >
 				total_ass_end = #totalAssEnd#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="shareHolderStart" >
+			<isNotEmpty prepend=" , " property="shareHolderStart" >
 				share_holder_start = #shareHolderStart#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="shareHolderEnd" >
+			<isNotEmpty prepend=" , " property="shareHolderEnd" >
 				share_holder_end = #shareHolderEnd#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="fixedAssetsStart" >
+			<isNotEmpty prepend=" , " property="fixedAssetsStart" >
 				fixed_assets_start = #fixedAssetsStart#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="fixedAssetsEnd" >
+			<isNotEmpty prepend=" , " property="fixedAssetsEnd" >
 				fixed_assets_end = #fixedAssetsEnd#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="retainEarnings" >
+			<isNotEmpty prepend=" , " property="retainEarnings" >
 				retain_earnings = #retainEarnings#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="accRecableStart" >
+			<isNotEmpty prepend=" , " property="accRecableStart" >
 				acc_recable_start = #accRecableStart#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="accRecableEnd" >
+			<isNotEmpty prepend=" , " property="accRecableEnd" >
 				acc_recable_end = #accRecableEnd#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="accRecableEnd" >
+			<isNotEmpty prepend=" , " property="accRecableEnd" >
 				acc_recable_end = #accRecableEnd#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="capitalSurplus" >
+			<isNotEmpty prepend=" , " property="capitalSurplus" >
 				capital_surplus = #capitalSurplus#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="surplusReserve" >
-				surplusReserve = #surplusReserve#
+			<isNotEmpty prepend=" , " property="surplusReserve" >
+				surplus_reserve = #surplusReserve#
 			</isNotEmpty>
-			<isNotEmpty prepend=" and " property="flag" >
+			<isNotEmpty prepend=" , " property="flag" >
 				flag = #flag#
 			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="inTime">
+			<isNotEmpty prepend=" , " property="inTime">
 				intime = #inTime#
 			</isNotEmpty>
-			<isNotEmpty prepend=" AND " property="modUser">
+			<isNotEmpty prepend=" , " property="modUser">
 				moduser = #modUser#
 			</isNotEmpty>
 			
