@@ -20,12 +20,14 @@ import org.json.JSONObject;
 
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TBalanceSheetDao;
 import com.investdata.dao.TCashFlowSheetDao;
 import com.investdata.dao.TFinanceIndexInfoDao;
 import com.investdata.dao.TGendataSheetDao;
 import com.investdata.dao.TIncstateSheetDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.po.AdminUser;
+import com.investdata.dao.po.BalanceSheet;
 import com.investdata.dao.po.CashFlowSheet;
 import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.GendataSheet;
@@ -55,6 +57,7 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private GendataSheet  genDataSheet = new GendataSheet();
 	private CashFlowSheet cashFlowSheet = new CashFlowSheet();
 	private IncstateSheet incstateSheet = new IncstateSheet();
+	private BalanceSheet  balanceSheet = new BalanceSheet();
 
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -183,8 +186,48 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 		}
 	}
 	
+	//添加资产负债表数据
+	public String addBalance() throws Exception {
+		if (StringUtils.isEmpty(balanceSheet.getCode()) || StringUtils.isEmpty(balanceSheet.getYear())) {
+			return null;
+		}
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			balanceSheet.setModUser(admUser.getUserName());
+			balanceSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TBalanceSheetDao balanceSheetDao = DaoFactory.getTBalanceSheetDao();
+			balanceSheetDao.addBalanceSheet(balanceSheet);
+			
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_ADD_RESULT;
+		} else {
+			return null; 
+		}
+	}
 	
 	
+	//修改利润表数据
+	public String updateBalance() throws Exception {
+		if (StringUtils.isEmpty(balanceSheet.getCode()) || StringUtils.isEmpty(balanceSheet.getYear())) {
+			return null;
+		}
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		AdminUser admUser = (AdminUser)session.get("admUser");
+		if (admUser != null ) {
+			balanceSheet.setModUser(admUser.getUserName());
+			balanceSheet.setInTime(new Timestamp(System.currentTimeMillis()));
+			TBalanceSheetDao balanceSheetDao = DaoFactory.getTBalanceSheetDao();
+			balanceSheetDao.updateBalanceSheet(balanceSheet);
+			
+			request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+			
+			return DATA_UPDATE_RESULT;
+		} else {
+			return null; 
+		}
+	}
 	
 	
 	
@@ -381,6 +424,14 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 
 	public void setIncstateSheet(IncstateSheet incstateSheet) {
 		this.incstateSheet = incstateSheet;
+	}
+	
+	public void setBalanceSheet(BalanceSheet balanceSheet) {
+		this.balanceSheet = balanceSheet;
+	}
+
+	public BalanceSheet getBalanceSheet() {
+		return balanceSheet;
 	}
 	
 }

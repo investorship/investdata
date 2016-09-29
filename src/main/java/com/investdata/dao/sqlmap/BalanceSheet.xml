@@ -5,6 +5,48 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="balanceSheet" type="com.investdata.dao.po.BalanceSheet"/>
 	
+	<parameterMap class="balanceSheet" id="insert-balanceParam">
+		<parameter property="code"/>
+		<parameter property="year" />
+		<parameter property="noteRecable" />
+		<parameter property="advCustomers"/>
+		<parameter property="accPayable"/>
+		<parameter property="constrInPro"/>
+		<parameter property="lntangAssets"/>
+		<parameter property="lntangAssetsAmortize"/>
+		<parameter property="goodWill"/>
+		<parameter property="shortTermLoans"/>
+		<parameter property="notePayable"/>
+		<parameter property="debitWithinYear"/>
+		<parameter property="longTermLoans"/>
+		<parameter property="boundsPayable"/>
+		<parameter property="longAccPayable"/>
+		<parameter property="liquidAssetsStart"/>
+		<parameter property="liquidAssetsEnd"/>
+		<parameter property="currLiab"/>
+		<parameter property="currLiabNon"/>
+		<parameter property="goodsStart"/>
+		<parameter property="goodsEnd"/>
+		<parameter property="cash"/>
+		<parameter property="tradAssets"/>
+		<parameter property="totalLiabStart"/> 
+		<parameter property="totalLiabEnd"/> 
+		<parameter property="totalAssStart"/> 
+		<parameter property="totalAssEnd"/>
+		<parameter property="shareHolderStart"/>
+		<parameter property="shareHolderEnd"/>
+		<parameter property="fixedAssetsStart"/>
+		<parameter property="fixedAssetsEnd"/>
+		<parameter property="retainEarnings"/>
+		<parameter property="accRecableStart"/>
+		<parameter property="accRecableEnd"/>
+		<parameter property="capitalSurplus"/>
+		<parameter property="surplusReserve"/>
+		<parameter property="flag"/>
+		<parameter property="inTime"/>
+		<parameter property="modUser"/>
+	</parameterMap>
+	
 	<resultMap id="balanceSheetResultMap" class="com.investdata.dao.po.BalanceSheet" >
 		<result property="year" column="year"/>
 		<result property="code" column="code"/>
@@ -186,5 +228,178 @@
 		<include refid="where_conditions" />
 		order by year asc
 	</statement>
+	
+	<insert id="addBalanceSheet" parameterMap="insert-balanceParam">
+		insert into t_balance_sheet (
+			code,
+			year,
+			note_recable,
+			adv_customers,
+			acc_payable,
+			constr_in_pro,
+			lntang_assets,
+			lntang_assets_amortize,
+			goodwill,
+			short_term_loans,
+			note_payable,
+			debit_within_year,
+			long_term_loans,
+			bounds_payable,
+			long_acc_payable,
+			liquid_assets_start,
+			liquid_assets_end,
+			curr_liab,
+			curr_liab_non,
+			goods_start,
+			goods_end,
+			cash,
+			trad_assets,
+			total_liab_start,
+			total_liab_end,
+			total_ass_start,
+			total_ass_end,
+			share_holder_start,
+			share_holder_end,
+			fixed_assets_start,
+			fixed_assets_end,
+			retain_earnings,
+			acc_recable_start,
+			acc_recable_end,
+			capital_surplus,
+			surplus_reserve,
+			flag,
+			intime,
+			moduser
+		) values (
+			?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</insert>
+	
+	
+	<update id="updateBalanceSheet" parameterClass="balanceSheet">
+		update t_incstate_sheet
+				set code = #code#
+				
+			<isNotEmpty  prepend=" , " property="year" >
+				year = #year#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="noteRecable" >
+				note_recable = #noteRecable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="noteRecable" >
+				adv_customers = #noteRecable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accPayable" >
+				acc_payable = #accPayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="constrInPro" >
+				constr_in_pro = #constrInPro#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="lntangAssets" >
+				lntang_assets = #lntangAssets#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="lntangAssetsAmortize" >
+				lntang_assets_amortize = #lntangAssetsAmortize#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="goodWill" >
+				goodwill = #goodWill#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="shortTermLoans" >
+				short_term_loans = #shortTermLoans#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="notePayable" >
+				note_payable = #notePayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="debitWithinYear" >
+				debit_within_year = #debitWithinYear#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="longTermLoans" >
+				long_term_loans = #longTermLoans#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="boundsPayable" >
+				bounds_payable = #boundsPayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="longAccPayable" >
+				long_acc_payable = #longAccPayable#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="liquidAssetsStart" >
+				liquid_assets_start = #liquidAssetsStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="liquidAssetsEnd" >
+				liquid_assets_end = #liquidAssetsEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="currLiab" >
+				curr_liab = #currLiab#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="currLiabNon" >
+				curr_liab_non = #currLiabNon#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="goodsStart" >
+				goods_start = #goodsStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="goodsEnd" >
+				goods_end = #goodsEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="cash" >
+				cash = #cash#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="tradAssets" >
+				trad_assets = #tradAssets#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalLiabStart" >
+				total_liab_start = #totalLiabStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalLiabEnd" >
+				total_liab_end = #totalLiabEnd#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend=" and " property="totalAssStart" >
+				total_ass_start = #totalAssStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="totalAssEnd" >
+				total_ass_end = #totalAssEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="shareHolderStart" >
+				share_holder_start = #shareHolderStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="shareHolderEnd" >
+				share_holder_end = #shareHolderEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="fixedAssetsStart" >
+				fixed_assets_start = #fixedAssetsStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="fixedAssetsEnd" >
+				fixed_assets_end = #fixedAssetsEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="retainEarnings" >
+				retain_earnings = #retainEarnings#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accRecableStart" >
+				acc_recable_start = #accRecableStart#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accRecableEnd" >
+				acc_recable_end = #accRecableEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="accRecableEnd" >
+				acc_recable_end = #accRecableEnd#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="capitalSurplus" >
+				capital_surplus = #capitalSurplus#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="surplusReserve" >
+				surplusReserve = #surplusReserve#
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="flag" >
+				flag = #flag#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="inTime">
+				intime = #inTime#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="modUser">
+				moduser = #modUser#
+			</isNotEmpty>
+			
+			where code=#code# and year=#year#
+	</update>
 	
 </sqlMap>

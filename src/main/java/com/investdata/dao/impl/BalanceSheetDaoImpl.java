@@ -11,5 +11,15 @@ public class BalanceSheetDaoImpl extends BaseDao implements TBalanceSheetDao {
 	public List<BalanceSheet> getBalanceSheets(BalanceSheet bs) throws Exception {
 		return dao.queryForList("balanceSheet.getBalanceSheets", bs);
 	}
+
+	@Override
+	public void addBalanceSheet(BalanceSheet bs) throws Exception {
+		dao.insert("balanceSheet.addBalanceSheet", bs);
+	}
+
+	@Override
+	public void updateBalanceSheet(BalanceSheet bs) throws Exception {
+		dao.update("balanceSheet.updateBalanceSheet", bs);
+	}
 	
 }

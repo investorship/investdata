@@ -1,47 +1,48 @@
 package com.investdata.dao.po;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 //资产负债表po
 public class BalanceSheet implements Serializable {
 	private String year;
 	private String code;
-	private String noteRecable;
-	private String advCustomers;
-	private String accPayable;
-	private String constrInPro;
-	private String lntangAssets;
-	private String lntangAssetsAmortize;
-	private String goodWill;
-	private String shortTermLoans;
-	private String notePayable;
-	private String debitWithinYear;
-	private String longTermLoans;
-	private String boundsPayable;
-	private String longAccPayable;
-	private String liquidAssetsStart;
-	private String liquidAssetsEnd;
-	private String currLiab;
-	private String currLiabNon;
-	private String goodsStart;
-	private String goodsEnd;
-	private String cash;
-	private String tradAssets;
-	private String totalLiabStart;
-	private String totalLiabEnd;
-	private String totalAssStart;
-	private String totalAssEnd;
-	private String shareHolderStart;
-	private String shareHolderEnd;
-	private String fixedAssetsStart;
-	private String fixedAssetsEnd;
-	private String retainEarnings;
-	private String accRecableStart;
-	private String accRecableEnd;
-	private String capitalSurplus;
-	private String surplusReserve;
+	private String noteRecable; //应收票据
+	private String advCustomers;//预收账款
+	private String accPayable;//应付账款
+	private String constrInPro;//在建工程
+	private String lntangAssets;//无形资产
+	private String lntangAssetsAmortize;//无形资产摊销
+	private String goodWill;//商誉
+	private String shortTermLoans;//短期借款
+	private String notePayable;//应付票据--
+	private String debitWithinYear;//一年内到期的非流动负债
+	private String longTermLoans;//长期借款
+	private String boundsPayable;//应付债券
+	private String longAccPayable;//长期应付款
+	private String liquidAssetsStart;//期初流动资产
+	private String liquidAssetsEnd;//期末流动资产
+	private String currLiab;//流动负债
+	private String currLiabNon;//非流动负债
+	private String goodsStart;//期初存货
+	private String goodsEnd;//期末存货
+	private String cash;//货币资金
+	private String tradAssets;//交易性金融资产
+	private String totalLiabStart;//期初负债总额
+	private String totalLiabEnd;//期末负债总额
+	private String totalAssStart;//期初资产总额
+	private String totalAssEnd;//期末资产总额
+	private String shareHolderStart;//期初股东权益
+	private String shareHolderEnd;//期末股东权益
+	private String fixedAssetsStart;//期初固定资产
+	private String fixedAssetsEnd;//期末固定资产
+	private String retainEarnings;//未分配利润
+	private String accRecableStart;//期初应收账款
+	private String accRecableEnd;//期末应收账款
+	private String capitalSurplus;//资本公积--
+	private String surplusReserve;//盈余公积--
 	private String flag;
-	private String inTime;
+	private Timestamp inTime;
 	private String modUser;
 	public String getYear() {
 		return year;
@@ -269,10 +270,11 @@ public class BalanceSheet implements Serializable {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	public String getInTime() {
+	
+	public Timestamp getInTime() {
 		return inTime;
 	}
-	public void setInTime(String inTime) {
+	public void setInTime(Timestamp inTime) {
 		this.inTime = inTime;
 	}
 	public String getModUser() {
