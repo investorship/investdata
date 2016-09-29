@@ -46,7 +46,7 @@
 				<a href=""><img src="images/logo2.png" alt="" title="" /></a>
 			</div>
 			<div class="search" data-sudaclick="topsearch">
-				<form action="stock/stock.action" method="get" target="_blank"
+				<form action="stock/stock.action" method="post" target="_blank"
 					id="search_f">
 					<input type="text" class="search_k" placeholder="请输入您要查找的股票代码"
 						onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}"

@@ -52,6 +52,8 @@ public class CacheManager {
 		TStockDao stockDao = DaoFactory.getTStockDao();
 		Stock stockParam = new Stock();
 		Map<String, String> stockCodeMapping = new HashMap<String, String>(); // 股票代码与股票名称的对应关系
+		Map<String, String> shortNameCodeMapping = new HashMap<String, String>(); //股票字母简称与股票代码对应关系
+		Map<String, String> hanziCodeMapping = new HashMap<String, String>(); //股票汉字与股票代码对应关系
 		stockParam.setFlag(1);
 		List<Stock> stocks = stockDao.getStocks(stockParam);
 		if (stocks != null && stocks.size() > 0) {
@@ -63,15 +65,18 @@ public class CacheManager {
 				Stock stock = stocks.get(i);
 				String code = stock.getCode();
 				String name = stock.getName();
-				String shrotName = stock.getShortName();
+				String shortName = stock.getShortName();
 				String market = stock.getMarket();
 
 				stockCodeMapping.put(code, name);
+				shortNameCodeMapping.put(shortName.toLowerCase(), code);				
+				hanziCodeMapping.put(name, code);
+				
 				/**
 				 * 最终格式 [ {label: "key1", value: "v1" }, {label: "key2", value:
 				 * "v2" }, ];
 				 */
-				stockSelKey.append("{label: \"").append(StringUtils.fillRSpace(shrotName, 13)).append(StringUtils.fillRSpace(code, 13)).append(StringUtils.fillRSpace(name, 13)).append(market).append("\",").append(" value: \"").append(code).append("\"").append(" },").append("\n");
+				stockSelKey.append("{label: \"").append(StringUtils.fillRSpace(shortName, 13)).append(StringUtils.fillRSpace(code, 13)).append(StringUtils.fillRSpace(name, 13)).append(market).append("\",").append(" value: \"").append(code).append("\"").append(" },").append("\n");
 
 				stocksItems.append(stockSelKey);
 				stockSelKey.setLength(0); // 清空
@@ -84,6 +89,8 @@ public class CacheManager {
 		}
 		application.setAttribute("stocksItems", stocksItems.toString());// 搜索框检索数据源
 		application.setAttribute("stockCodeMapping", stockCodeMapping);// 股票代码与名称的对应关系map
+		application.setAttribute("shortNameCodeMapping", shortNameCodeMapping);// 股票字母简称与股票代码对应关系
+		application.setAttribute("hanziCodeMapping", hanziCodeMapping);// 股票汉字与股票代码对应关系
 		
 //		jedis.set(Const.STOCK_SEARCH_LIST, stocksItems.toString()); 
 //		jedis.hmset(Const.STOCK_CODE_MAPPING, stockCodeMapping); 

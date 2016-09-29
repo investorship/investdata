@@ -44,7 +44,7 @@
 				<a href=""><img src="images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a>
 			</div>
 			<div class="search" data-sudaclick="topsearch">
-				<form action="stock/stock.action" method="get" target="_blank"
+				<form action="stock/stock.action" method="post" target="_blank"
 					id="search_f">
 					<input type="text" name="keyword" class="search_k"
 						placeholder="输入股票代码,名称或拼音首字母"

@@ -1,9 +1,7 @@
 package com.investdata.action;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -17,7 +15,6 @@ import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.SearchIndex;
 import com.investdata.redis.ObjectsTranscoder;
 import com.investdata.redis.RedisCache;
-import com.investdata.utils.StringUtils;
 
 /**
  * @author HaiLong.Guo

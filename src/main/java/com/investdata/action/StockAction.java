@@ -31,9 +31,29 @@ public class StockAction extends BaseAction  implements RequestAware,Application
 			return ERROR;
 		}
 		
-		Map<String,String>  stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
+		Map<String,String>  stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");	//股票代码-->股票名称
 		if (stockCodeMapping == null || !stockCodeMapping.containsKey(keyword)) {
-			return ERROR;
+			boolean matchFlag = false;
+			Map<String,String> shortNameCodeMapping = (Map<String,String>)application.get("shortNameCodeMapping"); //股票首字母简写--->股票代码
+			String shortNameMatch = shortNameCodeMapping.get(keyword.toLowerCase());
+			if (shortNameMatch != null) {
+				matchFlag = true;
+				keyword = shortNameMatch;
+			} else {
+				Map<String,String> hanziCodeMapping = (Map<String,String>)application.get("hanziCodeMapping"); //股票中文汉字 --->股票代码
+				String hanziMatch = hanziCodeMapping.get(keyword);
+				if (hanziMatch != null) {
+					matchFlag = true;
+					keyword = hanziMatch;
+				}
+			}
+			
+			//若三种方式都无法匹配，返回错误!
+			
+			if (!matchFlag) {
+				logger.error(String.format("用户输入的关键字keyword[%s] 无法匹配相关投资品种", keyword));
+				return ERROR;
+			}
 		}
 		
 		TStockDao stockDao = DaoFactory.getTStockDao();
