@@ -1,9 +1,13 @@
 package com.investdata.common.listener;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
 import org.apache.log4j.Logger;
+
 import redis.clients.jedis.Jedis;
+
 import com.investdata.redis.CacheManager;
 import com.investdata.redis.RedisCache;
 
@@ -31,10 +35,11 @@ public class WebAppListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		// ServletContext app = event.getServletContext(); //application 对象
 		_log.info("监听器webApplistener 准备初始化数据到redis...");
-
+		ServletContext application = event.getServletContext();
+		
 		try {
-			CacheManager.initStockData();  // 初始化页面检索数据
-			CacheManager.initFinanceIndexInfo(); // 初始化财务指标信息
+			CacheManager.initStockData(application);  // 初始化页面检索数据
+			CacheManager.initFinanceIndexInfo(application); // 初始化财务指标信息
 			CacheManager.initGendataSheet();  // 初始化综合数据表项数据.
 			CacheManager.initIncstateSheet(); //初始化利润表数数据
 			CacheManager.initCashFlowSheet(); //初始化现金流量表数据

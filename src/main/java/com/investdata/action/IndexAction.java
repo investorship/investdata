@@ -35,7 +35,10 @@ public class IndexAction extends BaseAction implements RequestAware,ApplicationA
 	private static Jedis jedis = RedisCache.getJedis();
 	
 	public String execute() throws Exception {
-		if (StringUtils.isEmpty(stocksItems) || stockCodeMapping == null || parentsIndexList == null) {
+		
+		//以下appliaction里的数据在启动阶段已经放入，目的是防止：如果不访问首页，数据就无法使用的情况
+		
+		/*if (StringUtils.isEmpty(stocksItems) || stockCodeMapping == null || parentsIndexList == null) {
 			//准备从缓存获取数据
 			stocksItems = jedis.get(Const.STOCK_SEARCH_LIST);
 			Set<String> mappingKeys  = jedis.hkeys(Const.STOCK_CODE_MAPPING);
@@ -52,7 +55,7 @@ public class IndexAction extends BaseAction implements RequestAware,ApplicationA
 			byte[] in = jedis.get(Const.FINANCEINDEXINFO_KEY.getBytes());
 			parentsIndexList = ObjectsTranscoder.deserialize(in);  
 			application.put("parentsIndexList", parentsIndexList);
-		}
+		}*/
 		
 		//首页的搜索指数
 		byte[] searchIndexIn = jedis.get(Const.SEARCHINDEX_KEY.getBytes());

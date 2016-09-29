@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+
 import org.apache.log4j.Logger;
 
 import redis.clients.jedis.Jedis;
@@ -44,7 +46,7 @@ public class CacheManager {
 	 * 
 	 * @throws Exception
 	 */
-	public static void initStockData() throws Exception {
+	public static void initStockData(ServletContext application) throws Exception {
 		_log.info("############监听器step1-begin:准备初始化股票检索与对应关系数据########");
 		StringBuilder stocksItems = new StringBuilder();
 		TStockDao stockDao = DaoFactory.getTStockDao();
@@ -80,8 +82,11 @@ public class CacheManager {
 		} else {
 			_log.info(String.format("未查询到股票数据"));
 		}
-		jedis.set(Const.STOCK_SEARCH_LIST, stocksItems.toString()); // 搜索框检索数据源
-		jedis.hmset(Const.STOCK_CODE_MAPPING, stockCodeMapping); // 股票代码与名称的对应关系map
+		application.setAttribute("stocksItems", stocksItems.toString());// 搜索框检索数据源
+		application.setAttribute("stockCodeMapping", stockCodeMapping);// 股票代码与名称的对应关系map
+		
+//		jedis.set(Const.STOCK_SEARCH_LIST, stocksItems.toString()); 
+//		jedis.hmset(Const.STOCK_CODE_MAPPING, stockCodeMapping); 
 
 		_log.info("############监听器step1-end:初始化股票检索与对应关系数据完成########");
 	}
@@ -91,7 +96,7 @@ public class CacheManager {
 	 * 
 	 * @throws Exception
 	 */
-	public static void initFinanceIndexInfo() throws Exception {
+	public static void initFinanceIndexInfo(ServletContext application) throws Exception {
 		_log.info("############监听器step2-start:准备初始化财务指标数据########");
 		TFinanceIndexInfoDao financeIndexInfoDao = DaoFactory.getTFinanceIndexInfoDao();
 		// 获取父级财务指标
@@ -110,7 +115,8 @@ public class CacheManager {
 				List<FinanceIndexInfo> childsFinanceIndexInfoList = financeIndexInfoDao.getFinanceIndexInfos(subFinIndexInfos);
 				indexInfo.setChildsFinanceIndexInfoList(childsFinanceIndexInfoList);
 			}			
-			jedis.set(Const.FINANCEINDEXINFO_KEY.getBytes(), ObjectsTranscoder.serialize(parentsIndexList));
+			application.setAttribute("parentsIndexList", parentsIndexList);
+//			jedis.set(Const.FINANCEINDEXINFO_KEY.getBytes(), ObjectsTranscoder.serialize(parentsIndexList));
 		}
 		
 
