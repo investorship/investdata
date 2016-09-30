@@ -53,17 +53,7 @@
 			<div class="logo" data-sudaclick="toplogo">
 				<a href=""><img src="images/logo2.png" alt="新浪网导航" title="新浪网导航" /></a>
 			</div>
-			<div class="search" data-sudaclick="topsearch">
-				<form action="stock/stock.action" method="get" target="_blank"
-					id="search_f">
-					<input type="text" name="keyword" class="search_k"
-						placeholder="输入股票代码,名称或拼音首字母"
-						onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}"
-						onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}"
-						id="keyword" /> <input type="submit" class="search_smt"
-						value="快速查找" />
-				</form>
-			</div>
+				<jsp:include page="../search_bar.jsp" />
 		</div>
 	</div>
 	<div class="report_tip">

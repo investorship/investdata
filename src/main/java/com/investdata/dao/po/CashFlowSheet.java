@@ -9,7 +9,7 @@ public class CashFlowSheet implements Serializable{
 	private String year;
 	private String operaActiveCash; //经营活动产生的现金流量净额
 	private String cashAndCashequ; //现金及现金等价物净增加额
-	private String flag;
+	private Integer flag;
 	private Timestamp inTime;
 	public Timestamp getInTime() {
 		return inTime;
@@ -42,13 +42,13 @@ public class CashFlowSheet implements Serializable{
 	public void setCashAndCashequ(String cashAndCashequ) {
 		this.cashAndCashequ = cashAndCashequ;
 	}
-	public String getFlag() {
+	
+	public Integer getFlag() {
 		return flag;
 	}
-	public void setFlag(String flag) {
+	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
-	
 	public String getModUser() {
 		return modUser;
 	}

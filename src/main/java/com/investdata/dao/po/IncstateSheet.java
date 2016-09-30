@@ -40,7 +40,7 @@ public class IncstateSheet implements Serializable{
 	private String investIncome; //投资收益
 	private String nonOperaIncome; //营业外收入
 	private String nonOperaOutcome; //营业外支出
-	private String flag;
+	private Integer flag;
 	private Timestamp inTime;
 	private String modUser;
 	
@@ -239,13 +239,14 @@ public class IncstateSheet implements Serializable{
 	public void setNonOperaOutcome(String nonOperaOutcome) {
 		this.nonOperaOutcome = nonOperaOutcome;
 	}
-	public String getFlag() {
+	
+	
+	public Integer getFlag() {
 		return flag;
 	}
-	public void setFlag(String flag) {
+	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
-	
 	public String getModUser() {
 		return modUser;
 	}

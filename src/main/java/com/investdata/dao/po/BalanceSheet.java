@@ -41,7 +41,7 @@ public class BalanceSheet implements Serializable {
 	private String accRecableEnd;//期末应收账款
 	private String capitalSurplus;//资本公积--
 	private String surplusReserve;//盈余公积--
-	private String flag;
+	private Integer flag;
 	private Timestamp inTime;
 	private String modUser;
 	public String getYear() {
@@ -264,13 +264,14 @@ public class BalanceSheet implements Serializable {
 	public void setSurplusReserve(String surplusReserve) {
 		this.surplusReserve = surplusReserve;
 	}
-	public String getFlag() {
+	
+	
+	public Integer getFlag() {
 		return flag;
 	}
-	public void setFlag(String flag) {
+	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
-	
 	public Timestamp getInTime() {
 		return inTime;
 	}

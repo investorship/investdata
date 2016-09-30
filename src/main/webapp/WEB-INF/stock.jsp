@@ -35,14 +35,7 @@
 <div class="header">
     <div class="wrap clearfix">
         <div class="logo" data-sudaclick="toplogo"><a href=""><img src="images/logo2.png" alt="" title=""/></a></div>
-        <div class="search" data-sudaclick="topsearch" >
-            <form action="stock/stock.action" method="post" target="_blank" id="search_f">
-                <input type="text" name="keyword" class="search_k" value="请输入您要查找的股票代码"
-                       onfocus="if(this.value === '请输入您要查找的股票代码'){this.value = '';}"
-                       onblur="if(this.value === ''){this.value = '请输入您要查找的股票代码';}" id="keyword"/>
-                <input type="submit" class="search_smt" value="快速查找"/>
-            </form>
-        </div>
+       	<jsp:include page="search_bar.jsp" />
     </div>
 </div>
 

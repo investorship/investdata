@@ -138,6 +138,7 @@ public class CacheManager {
 		_log.info("############监听器step3-begin:准备初始化综合数据项表数据########");
 		TGendataSheetDao genSheetDao = DaoFactory.getTGendataSheetDao();
 		GendataSheet genSheet = new GendataSheet();
+		genSheet.setFlag(1);
 		List<GendataSheet> genDataList = genSheetDao.getGendataSheets(genSheet);
 		
 		if (genDataList != null && genDataList.size() > 0) {
@@ -171,6 +172,7 @@ public class CacheManager {
 		
 		TIncstateSheetDao isd = DaoFactory.getTIncstateSheetDao();
 		IncstateSheet is = new IncstateSheet();
+		is.setFlag(1);
 		List<IncstateSheet> inSheetList = isd.getIncstateSheets(is);
 		
 		if (inSheetList != null && inSheetList.size() > 0) {
@@ -204,6 +206,7 @@ public class CacheManager {
 		_log.info("############监听器step5-start:准备初始化现金流量表数据########");
 		TCashFlowSheetDao tcs  = DaoFactory.getTCashFlowSheetDao();
 		CashFlowSheet cfs = new CashFlowSheet();
+		cfs.setFlag(1);
 		List<CashFlowSheet> cashFlowList = tcs.getCashFlowSheets(cfs);
 		
 		if (cashFlowList != null && cashFlowList.size() > 1) {
@@ -237,6 +240,7 @@ public class CacheManager {
 		
 		TBalanceSheetDao tsd = DaoFactory.getTBalanceSheetDao();
 		BalanceSheet bst = new BalanceSheet();
+		bst.setFlag(1);
 		List<BalanceSheet> bsList = tsd.getBalanceSheets(bst);
 		
 		if (bsList != null && bsList.size() > 0) {
