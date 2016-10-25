@@ -32,7 +32,7 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 	private String password;
 	private String repassword;
 	private String email;
-	private String randCode;
+	private String randCode; 
 	private String ajaxResult; //ajax调用结果返回值
 	private String activeLink;
 
@@ -238,22 +238,22 @@ public class RegAction extends BaseAction implements RequestAware,SessionAware {
 	}
 	
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.userName = StringUtils.illegalCharacterFilter(userName);
 	}
 
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = StringUtils.illegalCharacterFilter(password);
 	}
 
 
 	public void setRepassword(String repassword) {
-		this.repassword = repassword;
+		this.repassword = StringUtils.illegalCharacterFilter(repassword);
 	}
 
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = StringUtils.illegalCharacterFilter(email);
 	}
 
 

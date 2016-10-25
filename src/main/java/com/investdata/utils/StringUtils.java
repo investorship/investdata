@@ -81,6 +81,13 @@ public class StringUtils {
 		}
 		return sb.toString();
 	}
+	
+	public static String illegalCharacterFilter(String str) {
+		str = str.replaceAll("<", "&lt");
+		str = str.replaceAll(">", "&gt");
+		
+		return str;
+	}
 
 	public static void main(String[] args) {
 		System.err.println(getRandomString(7));

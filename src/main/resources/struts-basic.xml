@@ -12,6 +12,7 @@
 	<!-- 基础配置包[拦截器]，所有包继承该包 -->
 	<package name="struts_basic" extends="struts-default,json-default">
 		<interceptors>
+			<interceptor name="illegalCharacterInterceptor" class="com.investdata.common.interceptor.IllegalCharacterInterceptor"></interceptor>
 			<interceptor name="loginInterceptor" class="com.investdata.common.interceptor.LoginInterceptor"></interceptor>
 			<interceptor name="encodingInterceptor" class="com.investdata.common.interceptor.EncodingInterceptor"></interceptor>
 			<interceptor name="methodInterceptor" class="com.investdata.common.interceptor.MethodInterceptor"></interceptor>
@@ -20,10 +21,13 @@
 			<interceptor-stack name="investInterceptor">
 				<interceptor-ref name="defaultStack" ></interceptor-ref>
 				<interceptor-ref name="searchIndexInterceptor" ></interceptor-ref>
-				<interceptor-ref name="adminUrlMacValidInterceptor"></interceptor-ref><!--
+				<interceptor-ref name="adminUrlMacValidInterceptor"></interceptor-ref>
+				<interceptor-ref name="methodInterceptor"></interceptor-ref>
+				<!--
+				<interceptor-ref name="illegalCharacterInterceptor"></interceptor-ref>
+				
 				<interceptor-ref name="loginInterceptor"></interceptor-ref>	
 				<interceptor-ref name="encodingInterceptor" ></interceptor-ref>  -->
-				<interceptor-ref name="methodInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="investInterceptor"></default-interceptor-ref>
