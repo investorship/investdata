@@ -93,7 +93,7 @@ public class CacheManager {
 		application.setAttribute("hanziCodeMapping", hanziCodeMapping);// 股票汉字与股票代码对应关系
 		
 //		jedis.set(Const.STOCK_SEARCH_LIST, stocksItems.toString()); 
-//		jedis.hmset(Const.STOCK_CODE_MAPPING, stockCodeMapping); 
+		jedis.hmset(Const.STOCK_CODE_MAPPING, stockCodeMapping); 
 
 		_log.info("############监听器step1-end:初始化股票检索与对应关系数据完成########");
 	}
