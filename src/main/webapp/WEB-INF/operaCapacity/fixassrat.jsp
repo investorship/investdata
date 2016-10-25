@@ -9,10 +9,10 @@
 <head>
 <meta charset="utf-8" />
 <base href="<%=basePath%>">
-<title>投资数据网 - 流动资产周转率</title>
+<title>投资数据网 - 固定资产周转率</title>
 <meta name="viewport" content="width=1010" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta name="keywords" content="历史固定资产周转率，历年固定资产周转率查询" />
+<meta name="description" content="上市公司固定资产周转率，上市公司固定资产周转率走势图" />
 <link href="css/basic.css" type="text/css" rel="stylesheet" />
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
@@ -29,6 +29,7 @@
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
+<jsp:include page="/WEB-INF/baidu_statistics.jsp"/> <!-- 百度统计 -->
 </head>
 <body>
 	<div class="wbyTop fn-clear">
@@ -57,10 +58,10 @@
 		</div>
 	</div>
 	<div class="report_tip">
-		<span style="font-weight:bold;">指标名称：</span>流动资产周转率 <br>
-		<span style="font-weight:bold;">计算公式：</span> 营业收入/[（期初流动资产＋期末流动资产）/ 2 ] <br>
+		<span style="font-weight:bold;">指标名称：</span>固定资产周转率 <br>
+		<span style="font-weight:bold;">计算公式：</span> 营业收入/[（期初固定资产＋期末固定资产）/ 2 ] <br>
 		<span style="font-weight:bold;">说明：</span><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;流动资产周转率反映了企业流动资产的周转速度，是从企业全部资产中流动性最强的流动资产角度对企业资产的利用效率进行分析，以进一步揭示影响企业资产质量的主要因素。要实现该指标的良性变动，应以主营业务收入增幅高于流动资产增幅做保证。通过该指标的对比分析，可以促进企业加强内部管理，充分有效地利用流动资产，如降低成本、调动暂时闲置的货币资金用于短期投资创造收益等，还可以促进企业采取措施扩大销售，提高流动资产的综合使用效率。一般情况下，该指标越高，表明企业流动资产周转速度越快，利用越好。在较快的周转速度下，流动资产会相对节约，相当于流动资产投入的增加，在一定程度上增强了企业的盈利能力；而周转速度慢，则需要补充流动资金参加周转，会形成资金浪费，降低企业盈利能力。
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;固定资产周转率主要用于分析对厂房、设备等固定资产的利用效率，比率越高，说明利用率越高，管理水平越好。如果固定资产周转率与同行业平均水平相比偏低，则说明企业对固定资产的利用率较低，可能会影响企业的获利能力。它反应了企业资产的利用程度.
 	</div>
 	<!-- 图标展示区 -->
 	<div id="main" style="width: 1302px; height: 500px; min-height: 620px;-webkit-tap-highlight-color: transparent; -webkit-user-select: none; position: relative; background-color: transparent;margin: 0 auto;">

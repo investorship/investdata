@@ -9,10 +9,10 @@
 <head>
 <meta charset="utf-8" />
 <base href="<%=basePath%>">
-<title>投资数据网 - 有息负债比率</title>
+<title>投资数据网 - 历史有息负债比率走势图</title>
 <meta name="viewport" content="width=1010" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta name="keywords" content="历史有息负债比率，历年有息负债比率查询" />
+<meta name="description" content="上市公司有息负债比率，上市公司有息负债比率走势图" />
 <link href="css/basic.css" type="text/css" rel="stylesheet" />
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
@@ -29,6 +29,7 @@
 </style>
 <jsp:include page="/WEB-INF/autocomplete.jsp" />
 <script src="js/echarts.min.js"></script>
+<jsp:include page="/WEB-INF/baidu_statistics.jsp"/> <!-- 百度统计 -->
 </head>
 <body>
 	<div class="wbyTop fn-clear">
