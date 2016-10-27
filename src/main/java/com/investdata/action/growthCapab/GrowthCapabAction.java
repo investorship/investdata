@@ -61,7 +61,10 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				//当期净利润
 				double netprofitsThis = Double.parseDouble(incstSheet.getNetProfitsThis());
 				//净利润增长率 = (当期净利润-上期净利润) /上期净利润  *  100%
-				String netprfgrrt = MathUtils.format2DecPoint((netprofitsThis - netprofitsLast) / netprofitsLast  * 100);
+				String netprfgrrt = "0";
+				if (netprofitsLast != 0) {
+					netprfgrrt = MathUtils.format2DecPoint((netprofitsThis - netprofitsLast) / netprofitsLast  * 100);
+				}
 						
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(netprfgrrt).append(",");
@@ -107,7 +110,10 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				//当期净利润
 				double netprofitsKfThis = Double.parseDouble(incstSheet.getNetProfitsKfThis());
 				//净利润增长率 = (当期净利润-上期净利润) /上期净利润  *  100%
-				String netprfgrrtKF = MathUtils.format2DecPoint((netprofitsKfThis - netprofitsKfLast) / netprofitsKfLast  * 100);
+				String netprfgrrtKF = "0";
+				if (netprofitsKfLast != 0) {
+					netprfgrrtKF = MathUtils.format2DecPoint((netprofitsKfThis - netprofitsKfLast) / netprofitsKfLast  * 100);					
+				}
 						
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(netprfgrrtKF).append(",");
@@ -152,9 +158,14 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				double operaProfitsLast = Double.parseDouble(incstSheet.getOperaProfitsLast());
 				//当期营业利润
 				double operaProfitsThis = Double.parseDouble(incstSheet.getOperaProfitsThis());
-				//营业利润增长率 = (当期营业利润-上期营业利润) /上期营业利润  *  100%
-				String opeprfgrrt = MathUtils.format2DecPoint((operaProfitsThis - operaProfitsLast) / operaProfitsLast  * 100);
-						
+				
+				String opeprfgrrt = "0";
+				if (operaProfitsLast != 0) {
+					//营业利润增长率 = (当期营业利润-上期营业利润) /上期营业利润  *  100%
+					opeprfgrrt = MathUtils.format2DecPoint((operaProfitsThis - operaProfitsLast) / operaProfitsLast  * 100);
+					
+				}
+				
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(opeprfgrrt).append(",");
 			}
@@ -197,8 +208,13 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				double totalProfitStart = Double.parseDouble(incstSheet.getTotalProfitStart());
 				//当期利润总额
 				double totalProfitEnd = Double.parseDouble(incstSheet.getTotalProfitEnd());
-				//利润总额增长率 = (当期营业利润-上期营业利润) /上期营业利润  *  100%
-				String opeprfgrrt = MathUtils.format2DecPoint((totalProfitEnd - totalProfitStart) / totalProfitStart  * 100);
+				
+				String opeprfgrrt = "0";				
+				if (totalProfitStart != 0) {
+					//利润总额增长率 = (当期营业利润-上期营业利润) /上期营业利润  *  100%
+					opeprfgrrt = MathUtils.format2DecPoint((totalProfitEnd - totalProfitStart) / totalProfitStart  * 100);					
+				}
+				
 						
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(opeprfgrrt).append(",");
@@ -242,8 +258,11 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				double totalBusiIncLast = Double.parseDouble(incstSheet.getTotalBusiIncLast());
 				//当期营业总收入
 				double totalBusiIncThis = Double.parseDouble(incstSheet.getTotalBusiIncThis());
-				//营业收入增长率 = (当期营业总收入-上期营业总收入) /上期营业总收入  *  100%
-				String opeincmgrrt = MathUtils.format2DecPoint((totalBusiIncThis - totalBusiIncLast) / totalBusiIncLast  * 100);
+				String opeincmgrrt = "0";
+				if (totalBusiIncLast != 0) {
+					//营业收入增长率 = (当期营业总收入-上期营业总收入) /上期营业总收入  *  100%
+					opeincmgrrt = MathUtils.format2DecPoint((totalBusiIncThis - totalBusiIncLast) / totalBusiIncLast  * 100);					
+				}
 						
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(opeincmgrrt).append(",");
@@ -300,10 +319,14 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				
 				//期末净资产
 				double endNetassgrrt = totalAssEnd - totalLiabEnd;
-
-				//净资产增长率 = (期末净资产 - 期初净资产) / 期初净资产  *  100%
-				String netassgrrt = MathUtils.format2DecPoint((endNetassgrrt - startNetassgrrt) / startNetassgrrt  * 100);
-						
+				
+				String netassgrrt = "0";
+				
+				if (startNetassgrrt != 0) {
+					//净资产增长率 = (期末净资产 - 期初净资产) / 期初净资产  *  100%
+					netassgrrt = MathUtils.format2DecPoint((endNetassgrrt - startNetassgrrt) / startNetassgrrt  * 100);					
+				}
+				
 				yearBuilder.append(balSheet.getYear()).append(",");
 				dataBuilder.append(netassgrrt).append(",");
 			}
