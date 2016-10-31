@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html" />
 <!-- 禁止网页被搜索引擎抓取 -->
 <meta name="robots" content="none" />
-<title>数据新增结果</title>
+<title>数据修改结果</title>
 </head>
 
 <body>

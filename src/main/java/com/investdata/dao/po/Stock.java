@@ -12,7 +12,7 @@ public class Stock implements Serializable{
 	private String market; //所属市场
 	private String ipoTime;	//上市时间
 	private Double ipoStocks; //发行数量
-	private String category; //所属类别
+	private String category; //所属行业
 	private Double issuedPE; //发行市盈率
 	private Double issuedPrice; //发行价格
 	private String address; //公司地址

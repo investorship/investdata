@@ -1,7 +1,10 @@
 package com.investdata.action.admin;
 
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.json.JSONArray;
@@ -33,16 +37,20 @@ import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.GendataSheet;
 import com.investdata.dao.po.IncstateSheet;
 import com.investdata.dao.po.User;
+import com.investdata.redis.RedisCache;
+import com.investdata.utils.FunctionWrapper;
 import com.investdata.utils.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * 财务数据Action
  */
-public class FinanceDataMgrAction extends BaseAction implements RequestAware,SessionAware {
+public class FinanceDataMgrAction extends BaseAction implements RequestAware,SessionAware,ApplicationAware {
 	//跳转标志符
-	private static String UPDATE = "update";
-	private static String ADD = "add";
+	private static String UPDATE = "update"; 
+	private static String ADD = "add"; 
 	private static String ADD_BALANCE_INPUT = "add_balance_input"; 
 	private static String UPDATE_BALANCE_INPUT = "update_balance_input"; 
 	private static String ADD_CASHFLOW_INPUT = "add_cashFlow_input"; 
@@ -54,17 +62,25 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private static String ADD_INCSTATE_INPUT = "add_incstate_input"; 
 	private static String UPDATE_INCSTATE_INPUT = "update_incstate_input"; 
 	
+	private static Jedis jedis = RedisCache.getJedis();
+	
 	private GendataSheet  genDataSheet = new GendataSheet();
 	private CashFlowSheet cashFlowSheet = new CashFlowSheet();
 	private IncstateSheet incstateSheet = new IncstateSheet();
 	private BalanceSheet  balanceSheet = new BalanceSheet();
+	JSONObject jsonBalance = null;
 
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
 	private Map<String,Object> session;
+	private Map<String,Object> application;
 	private JSONObject jsonUser;
+	
 	private int flag; //用户状态 0-停用  1-启用
 	private String userName;
+	private String code;
+	private String year;
+	private int loadFlag; //0-仅加载股票名称 1-加载财务数据及和股票名称
 	
 	//添加通用数据表项
 	public String addGendata() throws Exception {
@@ -163,7 +179,7 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 			return null; 
 		}
 	}
-	
+	 
 	
 	//修改利润表数据
 	public String updateIncstate() throws Exception {
@@ -227,6 +243,48 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 		} else {
 			return null; 
 		}
+	}
+	
+	public String loadBalanceSheetData() throws Exception {
+		jsonBalance = new JSONObject();
+		HttpServletRequest httpRequest = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/json, charset=utf-8");
+		
+		if (loadFlag == 0) {
+			getStockName2Json(jsonBalance,code);
+		} else if (loadFlag == 1) {
+			Map<String,String> stockCodeMaping = (Map<String,String>)application.get("stockCodeMapping");
+			jsonBalance.put("stockName", stockCodeMaping.get(code));
+			
+			TBalanceSheetDao tsd = DaoFactory.getTBalanceSheetDao();
+			BalanceSheet bst = new BalanceSheet();
+			bst.setCode(code);
+			bst.setYear(year);
+			
+			List<BalanceSheet> bsList = tsd.getBalanceSheets(bst);
+			if (bsList != null && bsList.size() == 1) {
+				BalanceSheet bstRetVal = bsList.get(0);
+				FunctionWrapper.convertObj2Json(bstRetVal, jsonBalance);
+			}
+			getStockName2Json(jsonBalance,code);
+			
+		} else {
+			
+		}
+		
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		out.print(jsonBalance);
+		
+		out.close();
+		
+		return AJAX;
 	}
 	
 	
@@ -434,4 +492,52 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 		return balanceSheet;
 	}
 	
+	public Map<String, Object> getApplication() {
+		return application;
+	}
+	
+	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public int getLoadFlag() {
+		return loadFlag;
+	}
+
+	public void setLoadFlag(int loadFlag) {
+		this.loadFlag = loadFlag;
+	}
+
+	@Override
+	public void setApplication(Map<String, Object> application) {
+		this.application = application;
+	}
+
+	public JSONObject getJsonBalance() {
+		return jsonBalance;
+	}
+
+	public void setJsonBalance(JSONObject jsonBalance) {
+		this.jsonBalance = jsonBalance;
+	}
+	
+	//返回股票名称Json代码
+	public void getStockName2Json(JSONObject jsonObj, String code) throws Exception {
+		Map<String,String> stockCodeMaping = (Map<String,String>)application.get("stockCodeMapping");
+		jsonObj.put("stockName", stockCodeMaping.get(code));
+	}
 }

@@ -75,8 +75,8 @@ insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) 
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (6, 1, '注册用户管理', 0, 'javascript:void(0)', 1, '2016-06-07 10:12:16.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (7, 1, '管理员用户管理', 0, 'javascript:void(0)', 1, '2016-06-07 10:12:22.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (8, 2, '股票信息查询', 1, 'stocksMgr/stocksMgr.action', 1, '2016-06-07 10:26:25.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (9, 2, '股票信息修改', 1, 'stocksMgr/stocksMgr!updateStock.action', 1, '2016-06-07 10:26:52.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (10, 2, '股票信息新增', 1, 'stocksMgr/stocksMgr!addStock.action', 1, '2016-06-07 10:27:06.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (9, 2, '股票信息修改', 1, 'stocksMgr/stocksMgr!updateStockInput.action', 1, '2016-06-07 10:26:52.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (10, 2, '股票信息新增', 1, 'stocksMgr/stocksMgr!addStockInput.action', 1, '2016-06-07 10:27:06.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (11, 3, '财务指标查询', 1, 'financeIndexMgr/financeIndexMgr.action', 1, '2016-06-07 10:28:52.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (12, 3, '财务指标修改', 1, 'financeIndexMgr/financeIndexMgr!update.action', 1, '2016-06-07 10:29:07.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (13, 3, '财务指标新增', 1, 'financeIndexMgr/financeIndexMgr!add.action', 1, '2016-06-07 10:29:21.0');

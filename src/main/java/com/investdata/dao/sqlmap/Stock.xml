@@ -5,6 +5,24 @@
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="stock" type="com.investdata.dao.po.Stock"/>
 	
+	<parameterMap class="stock" id="addStock_params">
+		<parameter property="code"/>
+		<parameter property="name"/>
+		<parameter property="shortName"/>
+		<parameter property="market"/>
+		<parameter property="ipoTime"/>
+		<parameter property="ipoStocks"/>
+		<parameter property="category"/>
+		<parameter property="issuedPE"/>
+		<parameter property="issuedPrice"/>
+		<parameter property="address"/>
+		<parameter property="compyWebsite"/>
+		<parameter property="reportAddress"/>
+		<parameter property="phone"/>
+		<parameter property="legaler"/>
+		<parameter property="flag"/>
+		<parameter property="inTime"/>
+	</parameterMap>
 	
 	<sql id="select_what">
 		select code,name,shortname,market,ipotime,ipostocks,category,issuedPE,issuedPrice,address,compyWebsite,
@@ -83,5 +101,83 @@
 		<include refid="where_conditions" />
 		limit #start#,#length#
 	</statement>
+	
+	<insert id="addStock" parameterMap="addStock_params">
+		insert into t_stocks (
+			code,  
+			name,        
+			shortname,  
+			market,    
+			ipotime,     
+			ipostocks, 
+			category,
+			issuedPE,    
+			issuedprice,
+			address, 
+			compywebsite,
+			reportaddress,
+			phone,
+			legaler,      
+			flag,     
+			intime  
+		) values (
+			?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+		)
+	</insert>
+	
+	<update id="updateStock" parameterClass="stock">
+		update t_stocks 
+			set code = #code#
+			
+		<isNotEmpty  prepend=" , " property="year" >
+			year = #year#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="shortName" >
+			shortname = #shortName#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="market" >
+			market = #market#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="ipoTime" >
+			ipotime = #ipoTime#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="ipoStocks" >
+			ipostocks = #ipoStocks#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="category" >
+			category = #category#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="issuedPE" >
+			issuedPE = #issuedPE#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="issuedPrice" >
+			issuedprice = #issuedPrice#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="address" >
+			address = #address#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="compyWebsite" >
+			compywebsite = #compyWebsite#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="reportAddress" >
+			reportaddress = #reportAddress#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="phone" >
+			phone = #phone#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="legaler" >
+			legaler = #legaler#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" , " property="flag" >
+			flag = #flag#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="inTime">
+			intime = #inTime#
+		</isNotEmpty>
+		
+		where code=#code#
+		
+	</update>
 	
 </sqlMap>

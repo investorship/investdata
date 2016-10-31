@@ -10,6 +10,8 @@ public interface TStockDao {
 	
 	public void add(Stock stock) throws Exception;
 	
+	public void update(Stock stock)throws Exception;
+	
 	public List<Stock> getStocks(Stock stock) throws Exception;
 	
 	public int getTotalCount() throws Exception;

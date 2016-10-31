@@ -2,6 +2,7 @@ package com.investdata.action.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +20,15 @@ import org.json.JSONObject;
 
 import com.investdata.common.BaseAction;
 import com.investdata.common.factory.DaoFactory;
+import com.investdata.dao.TIndustryCategoryDao;
 import com.investdata.dao.TStockDao;
 import com.investdata.dao.TUserDao;
+import com.investdata.dao.po.IndustryCategory;
 import com.investdata.dao.po.Stock;
 import com.investdata.dao.po.User;
+import com.investdata.utils.FunctionWrapper;
 import com.investdata.utils.StringUtils;
+import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 股票管理Action
@@ -31,11 +36,15 @@ import com.investdata.utils.StringUtils;
 public class StocksMgrAction extends BaseAction implements RequestAware,SessionAware {
 	private static String UPDATE_STOCK_INPUT = "update_stock_input";
 	private static String STOCK_LIST = "stock_list";
-	private static String ADD_STOCK = "add_stock";
+	private static String ADD_STOCK_INPUT = "add_stock_input";
+	private static String DATA_ADD_RESULT = "data_add_result"; 
+	private static String DATA_UPDATE_RESULT = "data_update_result"; 
 	
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
 	private Map<String,Object> session;
+	private String code;
+	private Stock stock = new Stock();
 	private JSONObject jsonStock;
 	private int flag; //用户状态 0-停用  1-启用
 	
@@ -114,6 +123,22 @@ public class StocksMgrAction extends BaseAction implements RequestAware,SessionA
 		return AJAX;
 	}
 	
+	//加载股票基本信息
+	public String loadStockInfo() throws Exception {
+		TStockDao stockDao = DaoFactory.getTStockDao();
+		Stock queryStock = new Stock();
+		queryStock.setCode(code);
+		List<Stock> stocks = stockDao.getStocks(queryStock);
+		
+		if (stocks != null && stocks.size() ==1) {
+			Stock retValStock = stocks.get(0);
+			jsonStock = new JSONObject();
+			FunctionWrapper.convertObj2Json(retValStock, jsonStock);
+			sendOutMsg(jsonStock);
+		}
+		return AJAX;
+	}
+	
 	public String updateState() throws Exception {
 		TUserDao userDao = DaoFactory.getTUserDao();
 		User user = new User();
@@ -124,14 +149,49 @@ public class StocksMgrAction extends BaseAction implements RequestAware,SessionA
 		return SUCCESS;
 	}
 	
-	public String updateStock() throws Exception {
+	//--->股票添加界面
+	public String addStockInput() throws Exception {
+		List<IndustryCategory> industryCategorys = getIndustryCategory();
+		request.put("industryCategorys", industryCategorys);
+		return ADD_STOCK_INPUT;
+	}
+	
+	//新增股票信息
+	public String addStock() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		TStockDao stockDao = DaoFactory.getTStockDao();
+		stock.setInTime(new Timestamp(System.currentTimeMillis())); //入库时间-使用系统默认时间
+		stockDao.add(stock);
+		request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
 		
+		return DATA_ADD_RESULT;
+	}
+	
+	//获取行业信息
+	public List<IndustryCategory> getIndustryCategory() throws Exception {
+		TIndustryCategoryDao   industryDao = DaoFactory.getTIndustryCategoryDao();
+		IndustryCategory industryCategory = new IndustryCategory();
+		industryCategory.setFlag(1);
+		List<IndustryCategory> industryCategorys = industryDao.getIndustryCategorys(industryCategory);
+		return industryCategorys;
+	}
+	
+	//加载行业列表--下拉框
+	public String updateStockInput() throws Exception {
+		List<IndustryCategory> industryCategorys = getIndustryCategory();
+		request.put("industryCategorys", industryCategorys);
 		return UPDATE_STOCK_INPUT;
 	}
 	
-	public String addStock() throws Exception {
-		return ADD_STOCK;
+	public String updateStock() throws Exception {
+		TStockDao stockDao = DaoFactory.getTStockDao();
+		stockDao.update(stock);
+		return DATA_UPDATE_RESULT;
 	}
+	
+	
+	
+	
 	
 
 	public void setRequest(Map<String, Object> request) {
@@ -154,4 +214,19 @@ public class StocksMgrAction extends BaseAction implements RequestAware,SessionA
 		this.flag = flag;
 	}
 
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 }

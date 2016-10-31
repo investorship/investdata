@@ -18,13 +18,13 @@
 		<result property="userName" column="username"/>
 		<result property="password" column="password"/>
 		<result property="email" column="email"/>
-		<result property="permLevel" column="perm_level"/>
+		<result property="permLevel" column="permlevel"/>
 		<result property="flag" column="flag"/>
 		<result property="inTime" column="intime"/>
 	</resultMap>
 	
 	<sql id="select_what">
-		select username,password,email,perm_level,flag,intime from t_user_admin
+		select username,password,email,permlevel,flag,intime from t_user_admin
 	</sql>
 	
 	
@@ -42,7 +42,7 @@
 				#email#
 			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="permLevel">
-				perm_level =
+				permlevel =
 				#permLevel#
 			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="flag">

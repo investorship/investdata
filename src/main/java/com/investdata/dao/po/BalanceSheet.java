@@ -42,7 +42,7 @@ public class BalanceSheet implements Serializable {
 	private String capitalSurplus;//资本公积--
 	private String surplusReserve;//盈余公积--
 	private Integer flag;
-	private Timestamp inTime;
+	private Timestamp inTime; 
 	private String modUser;
 	public String getYear() {
 		return year;
@@ -86,7 +86,6 @@ public class BalanceSheet implements Serializable {
 	public void setLntangAssets(String lntangAssets) {
 		this.lntangAssets = lntangAssets;
 	}
-	
 	
 	public String getLntangAssetsAmortize() {
 		return lntangAssetsAmortize;

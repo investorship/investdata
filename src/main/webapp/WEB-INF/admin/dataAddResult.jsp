@@ -48,6 +48,13 @@
 			<br />
 				添加资产负债表数据成功 <a href="financeDataMgr/financeDataMgr!addBalanceInput.action">继续添加</a>
 		</c:when>
+		<c:when test="${operMethod == 'addStock'}">
+			<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+				管理菜单 >> 股票信息管理 >> 股票信息新增 >> 数据新增结果 </span>
+			<hr />
+			<br />
+				添加股票信息数据成功 <a href="stocksMgr/stocksMgr!addStockInput.action">继续添加</a>
+		</c:when>
 	</c:choose>
 
 

@@ -16,18 +16,59 @@
 <title>资产负责表数据修改</title>
 
 <jsp:include page="../autocomplete_admin.jsp" />
+<jsp:include page="../jquery_validate_admin.jsp" />
+
+<script type="text/javascript">
+function load() {
+	var code_val = $("#code").val();
+	var year_val = $("#year").val();
+	
+	if(code_val == '' || year_val == '') {
+		alert('请先填写 股票代码、数据年份');
+		return false;
+	}
+	
+	
+  $.ajax({
+        type: "post",
+        async: false,
+        url: "financeDataMgr/financeDataMgr!loadBalanceSheetData.action?loadFlag=1&code=" + code_val + "&year=" + year_val,
+        data: "{}",
+       // contentType: "application/json; charset=utf-8",
+       	dataType: "json",
+        success: function(data) {
+    	 	$.each(data,function(i,n){
+    	 		if (i == 'stockName') { //给Label标签赋值
+    	 			document.getElementById(i).innerHTML= n;     	 			
+    	 		} else if (i== 'flag') { //给单选按钮赋值
+    	 			$("input:radio[value='" + n +"']").attr('checked','true');
+    	 		} else { //给input域赋值。
+    	 			$("#" + i).val(n);
+    	 		}
+    	    });  
+        },
+        error: function(err) { //如果出现异常，做界面提示
+        	alert(error);
+        }
+    });
+}
+</script>
 
 </head>
-
 <body>
 	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
 		管理菜单 >> 财务数据管理 >> 资产负债表 >> 资产负债表数据修改 </span>
 	<hr />
-	<br />
+	<font size="5">当前股票名称：[<label id="stockName"></label>]</font>
+	<br/>
+	<br/>
 	<form id="balForm" name="balForm" method="post" action="financeDataMgr/financeDataMgr!updateBalance.action">
-		<label>股票代码 <input name="balanceSheet.code" type="text" id="code" size="25" />
-		</label> <label>数据年份 <input name="balanceSheet.year" type="text" id="year"
-			size="25" />
+		<fieldset>
+		<legend>请根据年度财报报表输入 <font color="red">单位:元</font></legend>
+		<br />
+		<label>股票代码<font color="red">*</font> <input name="balanceSheet.code" type="text" id="code" size="25" />
+		</label> <label>数据年份<font color="red">*</font> <input name="balanceSheet.year" type="text" id="year"
+			size="25" /><input type="button" value="加载" onclick="javascript:load()"/>
 		</label> <label>应收票据 <input name="balanceSheet.noteRecable" type="text"
 			id="noteRecable" size="25" />
 		</label> 预收账款 <input name="balanceSheet.advCustomers" type="text" id="advCustomers"
@@ -38,7 +79,7 @@
 			在建工程 <input name="balanceSheet.constrInPro" type="text" id="constrInPro" size="25" />
 			无形资产 <input name="balanceSheet.lntangAssets" type="text" id="lntangAssets"
 				size="25" /> 商&nbsp;&nbsp;誉 <input name="balanceSheet.goodWill" type="text"
-				id="goodwill" size="25" />
+				id="goodWill" size="25" />
 		</p>
 		<p>
 			短期借款 <input name="balanceSheet.shortTermLoans" type="text" id="shortTermLoans"
@@ -65,18 +106,18 @@
 			期末流动资产 <input name="balanceSheet.liquidAssetsEnd" type="text" id="liquidAssetsEnd" size="25" />
 			期初资产总额 <input name="balanceSheet.totalAssStart" type="text" id="totalAssStart" size="25" />
 			期末资产总额 <input name="balanceSheet.totalAssEnd" type="text" id="totalAssEnd" size="25" />
-		</p>
+		</p> 
 		<p>
 			期初股东权益 <input name="balanceSheet.shareHolderStart" type="text" id="shareHolderStart" size="25" />
 			期末股东权益 <input name="balanceSheet.shareHolderEnd" type="text" id="shareHolderEnd" size="25" />
 			期初固定资产 <input name="balanceSheet.fixedAssetsStart" type="text" id="fixedAssetsStart" size="25" />
 			期末固定资产 <input name="balanceSheet.fixedAssetsEnd" type="text" id="fixedAssetsEnd" size="25" />
 		</p>
-		<p>
+		<p> 
 			期初应收账款 <input name="balanceSheet.accRecableStart" type="text" id="accRecableStart" size="25" />
 			期末应收账款 <input name="balanceSheet.accRecableEnd" type="text" id="accRecableEnd" size="25" />
-			<label>一年内到期的非流动负债 <input type="text" name="balanceSheet.debitWithinYear" />
-			</label>
+			<label>一年内到期的非流动负债 <input type="text" name="balanceSheet.debitWithinYear" id="debitWithinYear"/>
+			</label> 
 		</p>
 		
 		<p>
@@ -100,11 +141,12 @@
 		<p>
 			<label>
 				<div align="center">
-					<input type="submit" name="Submit" value="提交" />
+					<input type="submit" name="Submit" onclick="javascript:balFormValid()" value="提交" />
 				</div>
 			</label>
 		</p>
 		<p>&nbsp;</p>
+		</fieldset>
 	</form>
 </body>
 </html>

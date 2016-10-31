@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
-<sqlMap namespace="balanceSheet">
+<sqlMap namespace="balanceSheet"> 
 	
 	<!-- 在此处用typeAlias标签声明后，后面的标签可以直接使用user代替 包名 + 类名的写法 -->
 	<typeAlias alias="balanceSheet" type="com.investdata.dao.po.BalanceSheet"/>
@@ -98,7 +98,7 @@
 	
 	<sql id="where_conditions">
 		<dynamic prepend=" where ">
-			<isNotEmpty property="year" >
+			<isNotEmpty prepend=" and " property="year" >
 				year = #year#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="code"  >

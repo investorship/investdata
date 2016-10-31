@@ -8,8 +8,14 @@ import com.investdata.dao.po.Stock;
 
 public class StockDaoImpl extends BaseDao implements TStockDao {
 	
+	//添加股票信息
 	public void add(Stock stock) throws Exception {
-		
+		dao.insert("stock.addStock", stock);
+	}
+	
+	//修改股票信息 
+	public void update(Stock stock) throws Exception {
+		dao.update("stock.updateStock", stock);
 	}
 	
 	/**
