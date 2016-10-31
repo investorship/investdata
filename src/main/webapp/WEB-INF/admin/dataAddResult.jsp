@@ -55,6 +55,13 @@
 			<br />
 				添加股票信息数据成功 <a href="stocksMgr/stocksMgr!addStockInput.action">继续添加</a>
 		</c:when>
+		<c:when test="${operMethod == 'addFinanceIndexInfo'}">
+			<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+				管理菜单 >> 财务指标管理 >> 财务指标新增 >> 数据新增结果 </span>
+			<hr />
+			<br />
+				添加财务指标数据成功 <a href="financeIndexMgr/financeIndexMgr!addInput.action">继续添加</a>
+		</c:when>
 	</c:choose>
 
 

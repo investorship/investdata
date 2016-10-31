@@ -24,5 +24,10 @@ public class FinanceIndexInfoDaoImpl extends BaseDao implements TFinanceIndexInf
 		return dao.queryForList("financeIndexInfo.FindByPage", map);
 	}
 
+	@Override
+	public void add(FinanceIndexInfo financeIndexInfo) throws Exception {
+		dao.insert("financeIndexInfo.add", financeIndexInfo);
+	}
+
 
 }

@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import com.investdata.utils.StringUtils;
-
 //财务指标信息类
 public class FinanceIndexInfo implements Serializable {
 	private Integer id;

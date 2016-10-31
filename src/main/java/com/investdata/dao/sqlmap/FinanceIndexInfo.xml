@@ -63,4 +63,17 @@
 		limit #start#,#length#
 	</statement>
 	
+	<insert id="add" parameterMap="financeIndexInfoParam">
+		insert into t_finance_index_info (
+			id,
+			name,
+			pid,
+			action,
+			flag,
+			intime
+		) values (
+			?,?,?,?,?,?
+		)
+	</insert>
+	
 </sqlMap>

@@ -23,7 +23,10 @@
 			<result name="input">/WEB-INF/admin/financeIndexMgr/financeIndexList.jsp</result>
 			<result name="update">/WEB-INF/admin/financeIndexMgr/financeIndexUpdate.jsp</result>
 			<result name="add">/WEB-INF/admin/financeIndexMgr/financeIndexAdd.jsp</result>
+			
 			<result name="ajax" type="json"></result>
+			<result name="data_add_result">/WEB-INF/admin/dataAddResult.jsp</result>
+			<result name="data_update_result">/WEB-INF/admin/dataUpdateResult.jsp</result>
 		</action>
 	</package>
 	

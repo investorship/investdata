@@ -315,6 +315,32 @@ function stockFormValid() {
 
 
 
+//财务指标表单
+function financeIndexFormValid() {
+	$(document).ready(function() {
+		$("#financeIndexForm").validate({
+			rules : {
+				"financeIndexInfo.name" : {
+					required : true
+				},
+				"financeIndexInfo.pid" : {
+					required : true
+				},
+				"financeIndexInfo.action" : {
+					required : true
+				},
+				"financeIndexInfo.flag" : {
+					required : true
+				}
+			}
+		});
+	});
+}
+
+
+
+
+
 
 
 
