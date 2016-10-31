@@ -29,5 +29,10 @@ public class FinanceIndexInfoDaoImpl extends BaseDao implements TFinanceIndexInf
 		dao.insert("financeIndexInfo.add", financeIndexInfo);
 	}
 
+	@Override
+	public void update(FinanceIndexInfo financeIndexInfo) throws Exception {
+		dao.update("financeIndexInfo.update", financeIndexInfo);
+	}
+
 
 }

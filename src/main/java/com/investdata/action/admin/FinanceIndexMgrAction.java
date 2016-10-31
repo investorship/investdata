@@ -24,6 +24,7 @@ import com.investdata.dao.TFinanceIndexInfoDao;
 import com.investdata.dao.TUserDao;
 import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.User;
+import com.investdata.utils.FunctionWrapper;
 import com.investdata.utils.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -39,7 +40,9 @@ public class FinanceIndexMgrAction extends BaseAction implements RequestAware,Se
 	private Map<String,Object> request;
 	private Map<String,Object> session;
 	private JSONObject jsonUser;
+	private JSONObject jsonFinanceIndexInfo;
 	private int flag; //用户状态 0-停用  1-启用
+	private int id; //财务指标ID号
 	private String userName;
 	private FinanceIndexInfo financeIndexInfo = new FinanceIndexInfo();
 	
@@ -128,19 +131,18 @@ public class FinanceIndexMgrAction extends BaseAction implements RequestAware,Se
 	}
 	
 	public String updateInput() throws Exception {
+		FinanceIndexInfo financeIndex = new FinanceIndexInfo();
+		financeIndex.setPid(0);
+		List<FinanceIndexInfo> financeIndexInfos = getFinanceIndexInfos(financeIndex);
+		request.put("financeIndexInfos", financeIndexInfos);
 		return UPDATE;
 	}
 	
 	public String addInput() throws Exception {
-		TFinanceIndexInfoDao fiid = DaoFactory.getTFinanceIndexInfoDao();
-		FinanceIndexInfo finIndexInfo = new FinanceIndexInfo();
-		finIndexInfo.setFlag(1);
-		finIndexInfo.setPid(0); //目前仅支持2级目录，查询pid=0的一级目录，供添加财务指标使用。
-		
-		List<FinanceIndexInfo> financeIndexInfos = fiid.getFinanceIndexInfos(finIndexInfo);
-		
+		FinanceIndexInfo financeIndex = new FinanceIndexInfo();
+		financeIndex.setPid(0);
+		List<FinanceIndexInfo> financeIndexInfos = getFinanceIndexInfos(financeIndex);
 		request.put("financeIndexInfos", financeIndexInfos);
-				
 		return ADD;
 	}
 	
@@ -154,6 +156,42 @@ public class FinanceIndexMgrAction extends BaseAction implements RequestAware,Se
 		request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
 		
 		return DATA_ADD_RESULT;
+	}
+	
+	//修改财务指标
+	public String updateFinanceIndexInfo() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
+		request.put("operMethod", methodName);
+		
+		TFinanceIndexInfoDao fiid = DaoFactory.getTFinanceIndexInfoDao();
+		financeIndexInfo.setInTime(new Timestamp(System.currentTimeMillis())); //修改时间
+		fiid.update(financeIndexInfo);
+		
+		return DATA_UPDATE_RESULT;
+	}
+	
+	//根据条件获取财务指标列表
+	public List<FinanceIndexInfo> getFinanceIndexInfos(FinanceIndexInfo finIndexInfo) throws Exception {
+		TFinanceIndexInfoDao fiid = DaoFactory.getTFinanceIndexInfoDao();
+		List<FinanceIndexInfo> financeIndexInfos = fiid.getFinanceIndexInfos(finIndexInfo);
+		return financeIndexInfos;
+	}
+	
+	//加载jsonFinanceIndexInfo
+	public String loadFinanceIndexInfo() throws Exception {
+		FinanceIndexInfo financeIndex = new FinanceIndexInfo();
+		financeIndex.setId(id);
+		
+		List<FinanceIndexInfo> financeIndexInfos = getFinanceIndexInfos(financeIndex);
+		
+		if (financeIndexInfos != null && financeIndexInfos.size() ==1) {
+			FinanceIndexInfo fii = financeIndexInfos.get(0);
+			jsonFinanceIndexInfo = new JSONObject();
+			FunctionWrapper.convertObj2Json(fii, jsonFinanceIndexInfo);
+			sendOutMsg(jsonFinanceIndexInfo);
+		}
+		
+		return AJAX;
 	}
 
 	public void setRequest(Map<String, Object> request) {
@@ -182,6 +220,14 @@ public class FinanceIndexMgrAction extends BaseAction implements RequestAware,Se
 
 	public void setFinanceIndexInfo(FinanceIndexInfo financeIndexInfo) {
 		this.financeIndexInfo = financeIndexInfo;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

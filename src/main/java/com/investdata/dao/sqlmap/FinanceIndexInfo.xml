@@ -76,4 +76,26 @@
 		)
 	</insert>
 	
+	<update id="update" parameterClass="financeIndexInfo">
+		update t_finance_index_info
+			set id = #id#
+			
+		<isNotEmpty  prepend=" , " property="name" >
+			name = #name#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="pid" >
+			pid = #pid#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="action" >
+			action = #action#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="flag" >
+			flag = #flag#
+		</isNotEmpty>
+		<isNotEmpty prepend=" , " property="inTime">
+			intime = #inTime#
+		</isNotEmpty>
+			where id=#id#
+	</update>
+	
 </sqlMap>
