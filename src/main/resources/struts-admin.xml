@@ -9,7 +9,9 @@
 		<action name="stocksMgr" class="stocksMgrAction">
 			<result name="stock_list">/WEB-INF/admin/stocksMgr/stocksList.jsp</result>
 			<result name="update_stock_input">/WEB-INF/admin/stocksMgr/stockUpdate.jsp</result>
-			<result name="add_stock">/WEB-INF/admin/stocksMgr/stockAdd.jsp</result>
+			<result name="add_stock_input">/WEB-INF/admin/stocksMgr/stockAdd.jsp</result>
+			<result name="add_stock_success">/WEB-INF/admin/stocksMgr/stockAdd_success.jsp</result>
+			<result name="data_add_result">/WEB-INF/admin/dataAddResult.jsp</result>
 			<result name="ajax" type="json"></result>
 		</action>
 	</package>
@@ -64,9 +66,9 @@
 			<result name="add_incstate_input">/WEB-INF/admin/financeDataMgr/incstateAdd.jsp</result>
 			<result name="update_incstate_input">/WEB-INF/admin/financeDataMgr/incstateUpdate.jsp</result>
 			
-			<result name="data_add_result">/WEB-INF/admin/financeDataMgr/dataAddResult.jsp</result>
-			<result name="data_update_result">/WEB-INF/admin/financeDataMgr/dataUpdateResult.jsp</result>
-			
+			<result name="data_add_result">/WEB-INF/admin/dataAddResult.jsp</result>
+			<result name="data_update_result">/WEB-INF/admin/dataUpdateResult.jsp</result>
+			<result name="ajax" type="json"></result>
 		</action>
 	</package>
 	
