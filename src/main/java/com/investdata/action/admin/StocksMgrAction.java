@@ -184,8 +184,12 @@ public class StocksMgrAction extends BaseAction implements RequestAware,SessionA
 	}
 	
 	public String updateStock() throws Exception {
+		String methodName = (String)ActionContext.getContext().get("methodName");
 		TStockDao stockDao = DaoFactory.getTStockDao();
 		stockDao.update(stock);
+		
+		request.put("operMethod", methodName); //用方法名区分当前是添加的哪类数据
+		
 		return DATA_UPDATE_RESULT;
 	}
 	

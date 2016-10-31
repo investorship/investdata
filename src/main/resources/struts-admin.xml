@@ -12,6 +12,7 @@
 			<result name="add_stock_input">/WEB-INF/admin/stocksMgr/stockAdd.jsp</result>
 			<result name="add_stock_success">/WEB-INF/admin/stocksMgr/stockAdd_success.jsp</result>
 			<result name="data_add_result">/WEB-INF/admin/dataAddResult.jsp</result>
+			<result name="data_update_result">/WEB-INF/admin/dataUpdateResult.jsp</result>
 			<result name="ajax" type="json"></result>
 		</action>
 	</package>

@@ -129,8 +129,8 @@
 		update t_stocks 
 			set code = #code#
 			
-		<isNotEmpty  prepend=" , " property="year" >
-			year = #year#
+		<isNotEmpty  prepend=" , " property="name" >
+			name = #name#
 		</isNotEmpty>
 		<isNotEmpty prepend=" , " property="shortName" >
 			shortname = #shortName#

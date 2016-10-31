@@ -49,6 +49,15 @@
 			<br />
 				修改资产负债表数据成功 <a href="financeDataMgr/financeDataMgr!updateBalanceInput.action">继续修改</a>
 		</c:when>
+		
+		<c:when test="${operMethod == 'updateStock'}">
+			<span style="font-weight: bold; font-size: 7px; color: #ff0000">
+				管理菜单 >> 股票信息管理 >> 股票信息修改  >> 数据修改结果 </span>
+			<hr />
+			<br />
+				修改股票信息数据成功 <a href="stocksMgr/stocksMgr!updateStockInput.action">继续修改</a>
+		</c:when>
+		
 	</c:choose>
 
 

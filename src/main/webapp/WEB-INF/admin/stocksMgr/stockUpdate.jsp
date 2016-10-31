@@ -55,7 +55,7 @@
 			管理菜单 >> 股票信息管理   >> 股票信息修改
 	</span>
 	<hr /><br />
-<form id="stockForm" name="stockForm" method="post" action="stocksMgr/stocksMgr!addStock.action">
+<form id="stockForm" name="stockForm" method="post" action="stocksMgr/stocksMgr!updateStock.action">
 		<fieldset>
 			<legend>股票信息修改</legend>
 			<br /> <label>股票代码 <input name="stock.code" type="text" id="code" /><input type="button" value="加载" onclick="javascript:load()"/>
