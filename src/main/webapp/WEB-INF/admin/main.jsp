@@ -55,7 +55,7 @@ body {
 		<div id="framecontentLeft">
 			<jsp:include page="leftTree.jsp" flush="true"/>
 		</div>
-		<div id="framecontentTop">
+		<div id="framecontentTop" style="background-image:url('images/admin/top.jpg');">
 			<div style="text-align: center;">
 				<div style="float: right;">
 					<c:choose>
@@ -65,7 +65,6 @@ body {
 						</c:when>
 					</c:choose>
 				</div>
-				<h1>后台管理系统</h1>
 			</div>
 		</div>
 		<div id="maincontent">

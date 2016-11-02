@@ -3,7 +3,7 @@
 position: absolute;
 top: 0;
 left: 0;
-height: 60px;
+height: 90px;
 width: 100%;
 overflow: hidden;
 vertical-align: middle;
@@ -26,7 +26,7 @@ background-color: #fff;
 {
 position: fixed;
 left: 200px;/*Set left value to WidthOfLeftFrameDiv*/
-top: 60px;/*Set top value to HeightOfTopFrameDiv*/
+top: 102px;/*Set top value to HeightOfTopFrameDiv*/
 right: 0;
 bottom: 0;
 overflow: auto;
