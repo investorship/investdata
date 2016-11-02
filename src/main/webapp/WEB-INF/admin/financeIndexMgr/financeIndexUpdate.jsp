@@ -73,7 +73,7 @@
 				</c:forEach>
 			</select>
 			
-			</label> <label>URL访问地址 <input name="financeIndexInfo.action" type="text" id="action" />
+			</label> <label>URL访问地址 <input name="financeIndexInfo.action" type="text" id="action" size="40" />
 			</label>
 			<p>&nbsp;</p>
 			<p>
