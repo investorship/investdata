@@ -1,10 +1,7 @@
 package com.investdata.action.admin;
 
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,12 +34,9 @@ import com.investdata.dao.po.FinanceIndexInfo;
 import com.investdata.dao.po.GendataSheet;
 import com.investdata.dao.po.IncstateSheet;
 import com.investdata.dao.po.User;
-import com.investdata.redis.RedisCache;
 import com.investdata.utils.FunctionWrapper;
 import com.investdata.utils.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
-
-import redis.clients.jedis.Jedis;
 
 /**
  * 财务数据Action
@@ -61,15 +55,14 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private static String UPDATE_GENDATA_INPUT = "update_genData_input"; 
 	private static String ADD_INCSTATE_INPUT = "add_incstate_input"; 
 	private static String UPDATE_INCSTATE_INPUT = "update_incstate_input"; 
-	
-	private static Jedis jedis = RedisCache.getJedis();
-	
+		
 	private GendataSheet  genDataSheet = new GendataSheet();
 	private CashFlowSheet cashFlowSheet = new CashFlowSheet();
 	private IncstateSheet incstateSheet = new IncstateSheet();
 	private BalanceSheet  balanceSheet = new BalanceSheet();
 	JSONObject jsonBalance = null;
 	JSONObject jsonIncstate = null;
+	JSONObject jsonCashFlow = null;
 
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -295,6 +288,28 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 			FunctionWrapper.convertObj2Json(isRetVal, jsonIncstate);
 		}
 		sendOutMsg(jsonIncstate);
+		
+		return AJAX;
+	}
+	
+	//加载现金流量表
+	public String loadCashFlowSheetData() throws Exception {
+		jsonCashFlow = new JSONObject();
+		Map<String,String> stockCodeMaping = (Map<String,String>)application.get("stockCodeMapping");
+		jsonCashFlow.put("stockName", stockCodeMaping.get(code));
+		
+		TCashFlowSheetDao cashFlowDao = DaoFactory.getTCashFlowSheetDao();
+		CashFlowSheet cfs = new CashFlowSheet();
+		cfs.setCode(code);
+		cfs.setYear(year);
+		
+		List<CashFlowSheet> cashFlowList = cashFlowDao.getCashFlowSheets(cfs);
+		
+		if (cashFlowList !=null && cashFlowList.size() == 1) {
+			CashFlowSheet cfsRetVal = cashFlowList.get(0);
+			FunctionWrapper.convertObj2Json(cfsRetVal, jsonCashFlow);
+		}
+		sendOutMsg(jsonCashFlow);
 		
 		return AJAX;
 	}

@@ -16,6 +16,35 @@
 <title>现金流量表数据新增</title>
 
 <jsp:include page="../autocomplete_admin.jsp" />
+<jsp:include page="../jquery_validate_admin.jsp" />
+
+<script type="text/javascript">
+	function load() {
+		var code_val = $("#code").val();
+		if(code_val == '') {
+			alert('请先填写 股票代码');
+			return false;
+		}
+		
+      $.ajax({
+	        type: "post",
+	        async: false,
+	        url: "financeDataMgr/financeDataMgr!loadBalanceSheetData.action?loadFlag=0&code=" + code_val,
+	        data: "{}",
+	       // contentType: "application/json; charset=utf-8",
+	       	dataType: "json",
+	        success: function(data) {
+        	 	$.each(data,function(i,n){
+        	 		document.getElementById(i).innerHTML= n; 
+        	    });  
+	        },
+	        error: function(err) { //如果出现异常，做界面提示
+	        	alert(error);
+	        }
+	    });
+	}
+</script>
+
 
 </head>
 
@@ -23,40 +52,44 @@
 	<span style="font-weight: bold; font-size: 7px; color: #ff0000">
 		管理菜单 >> 财务数据管理 >> 现金流量表 >> 现金流量表数据新增 </span>
 	<hr />
-	<br />
-<form id="cashFlowForm" name="cashFlowForm" method="post" action="financeDataMgr/financeDataMgr!addCashFlow.action">
-  <label>股票代码
-  <input name="cashFlowSheet.code" type="text" id="code" />
-  </label>
-  
-  <label>股票名称 <input type="text" disabled="disabled" />
-		</label> 
-  <label>数据年份
-  <input name="cashFlowSheet.year" type="text" id="year" />
-  </label>
-  <p>
-    <label>经营活动产生的现金流量净额
-    <input name="cashFlowSheet.operaActiveCash" type="text" id="operaActiveCash" />
-    </label>
-    <label>现金及现金等价物增加额
-    <input name="cashFlowSheet.cashAndCashequ" type="text" id="cashAndCashequ" />
-    </label>
-  </p>
-  <p>状态 
-    <label>
-    <input name="cashFlowSheet.flag" type="radio" value="1" checked="checked" />
-    启用</label>
-    <label>
-    <input type="radio" name="cashFlowSheet.flag" value="0" />
-    停用</label>
-  </p>
-  <p>
-    <label>
-    <div align="center">
-      <input type="submit" name="Submit" value="提交" />
-    </div>
-    </label>
-  </p>
-</form>
+	<font size="5">当前股票名称：[<label id="stockName"></label>]
+	</font>
+	<br /><br />
+	<form id="cashFlowForm" name="cashFlowForm" method="post"
+		action="financeDataMgr/financeDataMgr!addCashFlow.action">
+		<fieldset>
+			<legend>
+				请根据年度财报报表输入 <font color="red">单位:元</font>
+			</legend><br />
+			<label>股票代码 <input name="cashFlowSheet.code" type="text"
+				id="code" />
+			</label> <input type="button" value="加载" onclick="javascript:load()"/>
+			</label> <label>数据年份 <input name="cashFlowSheet.year" type="text"
+				id="year" />
+			</label>
+			<p>
+				<label>经营活动产生的现金流量净额 <input
+					name="cashFlowSheet.operaActiveCash" type="text"
+					id="operaActiveCash" />
+				</label> <label>现金及现金等价物增加额 <input
+					name="cashFlowSheet.cashAndCashequ" type="text" id="cashAndCashequ" />
+				</label>
+			</p>
+			<p>
+				状态 <label> <input name="cashFlowSheet.flag" type="radio"
+					value="1" checked="checked" /> 启用
+				</label> <label> <input type="radio" name="cashFlowSheet.flag"
+					value="0" /> 停用
+				</label>
+			</p>
+			<p>
+				<label>
+					<div align="center">
+						<input type="submit" name="Submit" value="提交" onclick="javascript:cashFlowFormValid()"/>
+					</div>
+				</label>
+			</p>
+		</fieldset>
+	</form>
 </body>
 </html>

@@ -534,6 +534,47 @@ function incstateFormValid() {
 
 
 
+//现金流量表表单
+function cashFlowFormValid() {
+	$(document).ready(function() {
+		$("#cashFlowForm").validate({
+			rules : {
+				"cashFlowSheet.code" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"cashFlowSheet.year" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"cashFlowSheet.operaActiveCash" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"cashFlowSheet.cashAndCashequ" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"cashFlowSheet.flag" : {
+					required : true,
+				}
+			}
+		});
+	});
+}
+
+
+
+
+
 
 
 

@@ -58,7 +58,7 @@
 	<form id="balForm" method="post" action="financeDataMgr/financeDataMgr!addBalance.action" onsubmit="return balFormValid()">
 	<fieldset>
 		<legend>请根据年度财报报表输入 <font color="red">单位:元</font></legend>
-		<br />
+		<br/>
 		<label>股票代码 <font color="red">*</font><input name="balanceSheet.code" type="text" id="code" size="25" /><input type="button" value="加载" onclick="javascript:load()"/>
 		</label> <label>数据年份 <input name="balanceSheet.year" type="text" id="year"
 			size="25" />
