@@ -338,6 +338,204 @@ function financeIndexFormValid() {
 }
 
 
+//利润表表单
+function incstateFormValid() {
+	$(document).ready(function() {
+		$("#incstateForm").validate({
+			rules : {
+				"incstateSheet.code" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"incstateSheet.year" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.busiIncomeThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.busiIncomeLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.totalBusiIncThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.totalBusiIncLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.operaProfitsThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.operaProfitsLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.fixedAssDepre" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.totalProfitStart" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.totalProfitEnd" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.marketConstsThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.marketConstsLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.financeConstsThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.financeConstsLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.mgrConstsThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.mgrConstsLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.longPreAmort" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.interExpense" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.netProfitsThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.netProfitsLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.netProfitsKfThis" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.netProfitsKfLast" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.fairValChange" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.busiTaxSurcharge" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.busiIncomeKf" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.operatCost" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.investIncome" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.nonOperaIncome" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.nonOperaOutcome" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16
+				},
+				"incstateSheet.flag" : {
+					required : true
+				},
+				
+			}
+		});
+	});
+}
+
+
+
+
+
 
 
 

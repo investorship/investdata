@@ -69,6 +69,7 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private IncstateSheet incstateSheet = new IncstateSheet();
 	private BalanceSheet  balanceSheet = new BalanceSheet();
 	JSONObject jsonBalance = null;
+	JSONObject jsonIncstate = null;
 
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -245,12 +246,9 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 		}
 	}
 	
+	//加载资产负债表数据
 	public String loadBalanceSheetData() throws Exception {
 		jsonBalance = new JSONObject();
-		HttpServletRequest httpRequest = ServletActionContext.getRequest();
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/json, charset=utf-8");
 		
 		if (loadFlag == 0) {
 			getStockName2Json(jsonBalance,code);
@@ -271,18 +269,32 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 			getStockName2Json(jsonBalance,code);
 			
 		} else {
-			
+			_log.warn("未知的标志位请求");
 		}
+		sendOutMsg(jsonBalance);
 		
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
+		return AJAX;
+	}
+	
+	
+	//加载利润表数据
+	public String loadIncstateSheetData() throws Exception {
+		jsonIncstate = new JSONObject();
+		Map<String,String> stockCodeMaping = (Map<String,String>)application.get("stockCodeMapping");
+		jsonIncstate.put("stockName", stockCodeMaping.get(code));
+		
+		TIncstateSheetDao incstateSheetDao = DaoFactory.getTIncstateSheetDao();
+		IncstateSheet is = new IncstateSheet();
+		is.setCode(code);
+		is.setYear(year);
+		
+		List<IncstateSheet> incstatesList = incstateSheetDao.getIncstateSheets(is);
+		
+		if (incstatesList !=null && incstatesList.size() == 1) {
+			IncstateSheet isRetVal = incstatesList.get(0);
+			FunctionWrapper.convertObj2Json(isRetVal, jsonIncstate);
 		}
-		out.print(jsonBalance);
-		
-		out.close();
+		sendOutMsg(jsonIncstate);
 		
 		return AJAX;
 	}
