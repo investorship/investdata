@@ -40,7 +40,7 @@
 	
 	<sql id="where_conditions">
 		<dynamic prepend=" where ">
-			<isNotEmpty property="year" >
+			<isNotEmpty prepend=" and " property="year" >
 				year = #year#
 			</isNotEmpty>
 			<isNotEmpty prepend=" and " property="code"  >

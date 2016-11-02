@@ -63,6 +63,7 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	JSONObject jsonBalance = null;
 	JSONObject jsonIncstate = null;
 	JSONObject jsonCashFlow = null;
+	JSONObject jsonGendata = null;
 
 	Logger _log = Logger.getLogger(UserMgrAction.class);
 	private Map<String,Object> request;
@@ -310,6 +311,28 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 			FunctionWrapper.convertObj2Json(cfsRetVal, jsonCashFlow);
 		}
 		sendOutMsg(jsonCashFlow);
+		
+		return AJAX;
+	}
+	
+	//加载现金流量表
+	public String loadGendataSheetData() throws Exception {
+		jsonGendata = new JSONObject();
+		Map<String,String> stockCodeMaping = (Map<String,String>)application.get("stockCodeMapping");
+		jsonGendata.put("stockName", stockCodeMaping.get(code));
+		
+		TGendataSheetDao genDataDao = DaoFactory.getTGendataSheetDao();
+		GendataSheet gs = new GendataSheet();
+		gs.setCode(code);
+		gs.setYear(year);
+		
+		List<GendataSheet> gendataList = genDataDao.getGendataSheets(gs);
+		
+		if (gendataList !=null && gendataList.size() == 1) {
+			GendataSheet gsRetVal = gendataList.get(0);
+			FunctionWrapper.convertObj2Json(gsRetVal, jsonGendata);
+		}
+		sendOutMsg(jsonGendata);
 		
 		return AJAX;
 	}

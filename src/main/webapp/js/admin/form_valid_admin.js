@@ -574,6 +574,58 @@ function cashFlowFormValid() {
 
 
 
+//综合数据表单验证
+function gendataFormValid() {
+	$(document).ready(function() {
+		$("#gendataForm").validate({
+			rules : {
+				"genDataSheet.code" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"genDataSheet.year" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"genDataSheet.totalStocks" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"genDataSheet.roeWa" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"genDataSheet.roeWaKf" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"genDataSheet.dividenPaySum" : {
+					number : true,
+					required : true,
+					minlength : 2,
+					maxlength : 16 
+				},
+				"genDataSheet.flag" : {
+					required : true,
+				}
+			}
+		});
+	});
+}
+
+
+
+
 
 
 
