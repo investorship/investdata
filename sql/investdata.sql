@@ -89,13 +89,13 @@ insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) 
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (20, 6, '注册用户查询', 1, 'userMgr/userMgr.action', 1, '2016-06-07 10:38:39.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (21, 6, '注册用户修改', 1, 'javascript:void(0)', 1, '2016-06-07 11:01:05.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (22, 7, '管理员用户查询', 1, 'adminUserMgr/adminUserMgr.action', 1, '2016-06-07 11:02:22.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (23, 32, '资产负债表数据查询', 1, 'financeDataMgr/financeDataMgr!queryBal.action', 1, '2016-06-07 10:32:35.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (24, 34, '现金流量表数据查询', 1, 'financeDataMgr/financeDataMgr!addCashFlowInput.action', 1, '2016-06-07 10:32:35.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (25, 33, '利润表数据查询', 1, 'financeDataMgr/financeDataMgr!queryIncst.action', 1, '2016-06-07 10:32:35.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (23, 32, '资产负债表数据查询', 1, 'financeDataMgr/financeDataMgr!queryBalanceInput.action', 1, '2016-06-07 10:32:35.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (24, 34, '现金流量表数据查询', 1, 'financeDataMgr/financeDataMgr!queryCashFlowInput.action', 1, '2016-06-07 10:32:35.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (25, 33, '利润表数据查询', 1, 'financeDataMgr/financeDataMgr!queryIncstateInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (26, 32, '资产负债表数据修改', 1, 'financeDataMgr/financeDataMgr!updateBalanceInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (27, 34, '现金流量表数据修改', 1, 'financeDataMgr/financeDataMgr!updateCashFlowInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (28, 33, '利润表数据修改', 1, 'financeDataMgr/financeDataMgr!updateIncstateInput.action', 1, '2016-06-07 10:32:35.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (29, 35, '综合数据表数据查询', 1, 'financeDataMgr/financeDataMgr!queryGen.action', 1, '2016-06-07 10:32:35.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (29, 35, '综合数据表数据查询', 1, 'financeDataMgr/financeDataMgr!queryGendataInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (30, 35, '综合数据表数据修改', 1, 'financeDataMgr/financeDataMgr!updateGendataInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (31, 35, '综合数据表数据新增', 1, 'financeDataMgr/financeDataMgr!addGendataInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (32, 4, '资产负债表', 0, 'javascript:void(0)', 1, '2016-06-07 10:10:04.0');
@@ -238,11 +238,11 @@ create table t_gendata_sheet
    code                 char(10) not null comment '股票代码',
    year                 int not null comment '年份',
    total_stocks         decimal(14) comment '总股本',
-   roe_wa               decimal(10,2) comment '加权平均净资产收益率',
-   roe_wa_kf            decimal(10,2) comment '加权平均净资产收益率（扣非）',
+   roe_wa               decimal(16,2) comment '加权平均净资产收益率',
+   roe_wa_kf            decimal(16,2) comment '加权平均净资产收益率（扣非）',
    dividen_pay_sum      decimal(16,2) comment '本年度发放的现金股利总和',
-   eps                  decimal(10,2) comment '基本每股收益',
-   eps_diluted          decimal(10,2) comment '稀释每股收益',
+   eps                  decimal(16,2) comment '基本每股收益',
+   eps_diluted          decimal(16,2) comment '稀释每股收益',
    flag                 int comment '标志位',
    intime               timestamp comment '入库时间',
    moduser              char(30) comment '修改人',
