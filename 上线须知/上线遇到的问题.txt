@@ -1,0 +1,9 @@
+1. 建表时定义中文字段增加：character set utf8
+2. tomcat启动时报
+		(error) MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. 
+		Commands that may modify the data set are disabled. Please check Redis logs for details about the error.
+	原因：强制关闭Redis快照导致不能持久化
+	解决办法：
+		运行config set stop-writes-on-bgsave-error no　命令后，关闭配置项stop-writes-on-bgsave-error解决该问题
+		127.0.0.1:6379> config set stop-writes-on-bgsave-error no
+		OK
