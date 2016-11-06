@@ -55,6 +55,8 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private static String UPDATE_GENDATA_INPUT = "update_genData_input"; 
 	private static String ADD_INCSTATE_INPUT = "add_incstate_input"; 
 	private static String UPDATE_INCSTATE_INPUT = "update_incstate_input"; 
+	private static String QUERY_BALANCE_INPUT = "query_balance_input";
+	private static String QUERY_INCSTATE_INPUT = "query_incstate_input";
 		
 	private GendataSheet  genDataSheet = new GendataSheet();
 	private CashFlowSheet cashFlowSheet = new CashFlowSheet();
@@ -76,6 +78,12 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private String code;
 	private String year;
 	private int loadFlag; //0-仅加载股票名称 1-加载财务数据及和股票名称
+	
+	//分页数据
+	private int start;
+	private int length;
+	private int draw;
+	
 	
 	//添加通用数据表项
 	public String addGendata() throws Exception {
@@ -270,6 +278,75 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 		return AJAX;
 	}
 	
+	//查询资产负债表列表
+	public String queryBalanceSheetList() throws Exception {
+		
+		Map qryMap = new HashMap();
+		qryMap.put("start", start);//起始记录
+		qryMap.put("length", length);//每页展示条数
+		qryMap.put("code", code);//股票代码
+		qryMap.put("year", year);//年份，可以为空
+		
+		TBalanceSheetDao balanceSheetDao = DaoFactory.getTBalanceSheetDao();
+		int recordsTotal = balanceSheetDao.getTotalCount(qryMap);
+		int recordsFiltered = recordsTotal;
+		
+		jsonBalance = new JSONObject();
+		jsonBalance.put("draw", draw);
+		jsonBalance.put("recordsTotal", recordsTotal);
+		jsonBalance.put("recordsFiltered", recordsFiltered);
+		
+		List<BalanceSheet> balanceSheetInfosList = balanceSheetDao.findBalanceSheetInfosByPage(qryMap);
+		
+		List<JSONObject> balanceSheetJsonList = new ArrayList<JSONObject>();
+		for(BalanceSheet balSheet : balanceSheetInfosList) {
+			JSONObject jsonBalListObj = new JSONObject();
+			FunctionWrapper.convertObj2Json(balSheet, jsonBalListObj);
+			balanceSheetJsonList.add(jsonBalListObj);
+		}
+		JSONArray jsonArray = new JSONArray(balanceSheetJsonList); 
+		jsonBalance.put("data", jsonArray);
+		
+		sendOutMsg(jsonBalance);
+		return AJAX;
+	}
+	
+	
+	//查询利润表数据列表（分页）
+	public String queryIncstateList() throws Exception {
+		
+		Map qryMap = new HashMap();
+		qryMap.put("start", start);//起始记录
+		qryMap.put("length", length);//每页展示条数
+		qryMap.put("code", code);//股票代码
+		qryMap.put("year", year);//年份，可以为空		
+		
+		TIncstateSheetDao incstateDao = DaoFactory.getTIncstateSheetDao();
+		int recordsTotal = incstateDao.getTotalCount(qryMap);
+		int recordsFiltered = recordsTotal;
+		
+		jsonIncstate = new JSONObject();
+		jsonIncstate.put("draw", draw);
+		jsonIncstate.put("recordsTotal", recordsTotal);
+		jsonIncstate.put("recordsFiltered", recordsFiltered);
+		
+		List<IncstateSheet> incstateSheetInfosList = incstateDao.findIncstateSheetInfosByPage(qryMap);
+		
+		List<JSONObject> incstateSheetJsonList = new ArrayList<JSONObject>();
+		for(IncstateSheet incstateSheet : incstateSheetInfosList) {
+			JSONObject jsonIncListObj = new JSONObject();
+			FunctionWrapper.convertObj2Json(incstateSheet, jsonIncListObj);
+			incstateSheetJsonList.add(jsonIncListObj);
+		}
+		JSONArray jsonArray = new JSONArray(incstateSheetJsonList); 
+		jsonIncstate.put("data", jsonArray);
+		
+		sendOutMsg(jsonIncstate);
+		return AJAX;
+	}
+	
+	
+	
 	
 	//加载利润表数据
 	public String loadIncstateSheetData() throws Exception {
@@ -401,6 +478,14 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	
 	public String updateIncstateInput() throws Exception {
 		return UPDATE_INCSTATE_INPUT;
+	}
+	
+	public String queryBalanceInput() throws Exception {
+		return QUERY_BALANCE_INPUT;
+	}
+	
+	public String queryIncstateInput() throws Exception {
+		return QUERY_INCSTATE_INPUT;
 	}
 	
 	
@@ -585,6 +670,31 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 		this.jsonBalance = jsonBalance;
 	}
 	
+	
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public int getDraw() {
+		return draw;
+	}
+
+	public void setDraw(int draw) {
+		this.draw = draw;
+	}
+
 	//返回股票名称Json代码
 	public void getStockName2Json(JSONObject jsonObj, String code) throws Exception {
 		Map<String,String> stockCodeMaping = (Map<String,String>)application.get("stockCodeMapping");

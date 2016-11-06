@@ -89,9 +89,9 @@ insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) 
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (20, 6, '注册用户查询', 1, 'userMgr/userMgr.action', 1, '2016-06-07 10:38:39.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (21, 6, '注册用户修改', 1, 'javascript:void(0)', 1, '2016-06-07 11:01:05.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (22, 7, '管理员用户查询', 1, 'adminUserMgr/adminUserMgr.action', 1, '2016-06-07 11:02:22.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (23, 32, '资产负债表数据查询', 1, 'financeDataMgr/financeDataMgr!queryBal.action', 1, '2016-06-07 10:32:35.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (23, 32, '资产负债表数据查询', 1, 'financeDataMgr/financeDataMgr!queryBalanceInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (24, 34, '现金流量表数据查询', 1, 'financeDataMgr/financeDataMgr!addCashFlowInput.action', 1, '2016-06-07 10:32:35.0');
-insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (25, 33, '利润表数据查询', 1, 'financeDataMgr/financeDataMgr!queryIncst.action', 1, '2016-06-07 10:32:35.0');
+insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (25, 33, '利润表数据查询', 1, 'financeDataMgr/financeDataMgr!queryIncstateInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (26, 32, '资产负债表数据修改', 1, 'financeDataMgr/financeDataMgr!updateBalanceInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (27, 34, '现金流量表数据修改', 1, 'financeDataMgr/financeDataMgr!updateCashFlowInput.action', 1, '2016-06-07 10:32:35.0');
 insert into investdata.t_mgr_menu (id, pid, name, isleaf, requrl, flag, intime) values (28, 33, '利润表数据修改', 1, 'financeDataMgr/financeDataMgr!updateIncstateInput.action', 1, '2016-06-07 10:32:35.0');
