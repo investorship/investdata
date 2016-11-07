@@ -9,14 +9,14 @@ import java.sql.Timestamp;
  *
  */
 public class GendataSheet implements Serializable {
-	private String year;
-	private String code;
-	private String totalStocks;
-	private String roeWa;
-	private String roeWaKf;
-	private String dividenPaySum;
-	private String eps;
-	private String epsDiluted;
+	private String year; 	//年份
+	private String code;	//代码
+	private String totalStocks; //总股本
+	private String roeWa;	//加权平均净资产收益率
+	private String roeWaKf; //加权平均净资产收益率（扣非）
+	private String dividenPaySum;//本年度发放的现金股利总和
+	private String eps; //基本每股收益
+	private String epsDiluted; //稀释每股收益
 	private Integer flag;
 	private Timestamp inTime;
 	private String modUser;

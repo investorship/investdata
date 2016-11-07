@@ -71,6 +71,8 @@
 			<result name="add_incstate_input">/WEB-INF/admin/financeDataMgr/incstateAdd.jsp</result>
 			<result name="query_incstate_input">/WEB-INF/admin/financeDataMgr/incstateSheetQuery.jsp</result>
 			<result name="update_incstate_input">/WEB-INF/admin/financeDataMgr/incstateUpdate.jsp</result>
+			<result name="query_cashflow_input">/WEB-INF/admin/financeDataMgr/cashFlowQuery.jsp</result>
+			<result name="query_gendata_input">/WEB-INF/admin/financeDataMgr/gendataQuery.jsp</result>
 			
 			<result name="data_add_result">/WEB-INF/admin/dataAddResult.jsp</result>
 			<result name="data_update_result">/WEB-INF/admin/dataUpdateResult.jsp</result>

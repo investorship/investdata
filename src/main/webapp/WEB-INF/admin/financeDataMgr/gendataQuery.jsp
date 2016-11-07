@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <!-- 禁止网页被搜索引擎抓取 -->
 <meta name="robots" content="none" />
-<title>查询利润表数据</title>
+<title>查询综合数据表数据</title>
 
 <jsp:include page="../autocomplete_admin.jsp" />
 <jsp:include page="../jquery_validate_admin.jsp" />
@@ -47,7 +47,7 @@
 	
 	var index =0;
 	
-	function loadIncstateList() {
+	function loadGendataList() {
 		index = index +1;
 		
 		if (index > 1) {
@@ -81,7 +81,7 @@
 		                "processing": false, //开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好
 		                "serverSide": true, //开启服务器模式，使用服务器端处理配置datatable
 		                "ajax":{
-		                	"url":"financeDataMgr/financeDataMgr!queryIncstateList.action",
+		                	"url":"financeDataMgr/financeDataMgr!queryGendataList.action",
 		                	"type": "POST",
 		                	"data":{"code": $("#code").val(),"year":$("#year").val()},
 		                	"dataType": 'json'
@@ -89,35 +89,12 @@
 		                "columns": [ //这个属性下的设置会应用到所有列，按顺序没有是空
 		                               {"data": 'code'},
 		                               {"data": 'year'}, //data 表示发请求时候本列的列名，返回的数据中相同下标名字的数据会填充到这一列
-		                               {"data": 'busiIncomeThis'},
-		                               {"data": 'busiIncomeLast'},
-		                               {"data": 'totalBusiIncThis'},
-		                               {"data": 'totalBusiIncLast'},
-		                               {"data": 'operaProfitsThis'},
-		                               {"data": 'operaProfitsLast'},
-		                               {"data": 'incomeTax'},
-		                               {"data": 'fixedAssDepre'},
-		                               {"data": 'longPreAmort'},
-		                               {"data": 'totalProfitStart'},
-		                               {"data": 'totalProfitEnd'},
-		                               {"data": 'marketConstsThis'},
-		                               {"data": 'marketConstsLast'},
-		                               {"data": 'financeConstsThis'},
-		                               {"data": 'financeConstsLast'},
-		                               {"data": 'mgrConstsThis'},
-		                               {"data": 'mgrConstsLast'},
-		                               {"data": 'interExpense'},
-		                               {"data": 'busiTaxSurcharge'},
-		                               {"data": 'netProfitsThis'},
-		                               {"data": 'netProfitsLast'},
-		                               {"data": 'netProfitsKfThis'},
-		                               {"data": 'netProfitsKfLast'},
-		                               {"data": 'operatCost'},
-		                               {"data": 'busiIncomeKf'},
-		                               {"data": 'fairValChange'},
-		                               {"data": 'investIncome'},
-		                               {"data": 'nonOperaIncome'},
-		                               {"data": 'nonOperaOutcome'},
+		                               {"data": 'totalStocks'},
+		                               {"data": 'roeWa'},
+		                               {"data": 'roeWaKf'},
+		                               {"data": 'dividenPaySum'},
+		                               {"data": 'eps'},
+		                               {"data": 'epsDiluted'},
 		                               {"data": 'flag'},
 		                               {"data": 'inTime'},
 		                               {"data": 'modUser'}
@@ -135,7 +112,7 @@
 
 <body> 
 <span style="font-weight:bold;font-size:7px;color:#ff0000">
-			管理菜单 >> 财务数据管理   >> 利润表  >> 利润表数据查询
+			管理菜单 >> 财务数据管理   >> 综合数据表  >> 综合数据表查询
 	</span>
 	<hr />
 	<font size="5">当前股票名称：[<label id="stockName"></label>]</font>
@@ -145,47 +122,24 @@
 			<legend>请输入以下条件查询</font></legend>
 			<label>股票代码 <font color="red">*</font><input name="balanceSheet.code" type="text" id="code" size="25" /><input type="button" value="加载" onclick="javascript:load()"/>
 			</label> <label>数据年份 <input name="balanceSheet.year" type="text" id="year"
-				size="25" /><input type="button" value="查询" onclick="javascript:loadIncstateList()"/>
+				size="25" /><input type="button" value="查询" onclick="javascript:loadGendataList()"/>
 		</fieldset>
 	</form>
 	
 	<!-- 数据列表 -->
-	<div style="width:5000; height:2000; overflow:scroll;"><br>
+	<div style="width:2000; height:2000; overflow:scroll;"><br>
 	<font size="2">
-		<table id="table_id" class="display" width="5000">
+		<table id="table_id" class="display" width="2000">
 		    <thead>
 		    	<tr>
 			    	<th >股票代码</th>
 			    	<th>数据年份</th>
-			    	<th>本期营业收入</th>
-			    	<th>上期营业收入</th>
-					<th>本期营业总收入</th>
-					<th>上期营业总收入</th>
-					<th>本期营业利润</th>
-					<th>上期营业利润</th>
-					<th>所得税</th>
-					<th>固定资产折旧</th>
-					<th>长期待摊费用摊销</th>
-					<th>期初利润总额</th>
-					<th>期末利润总额</th>
-					 <th>本期销售费用</th>
-					<th>上期销售费用</th>
-					<th>本期财务费用</th>
-					<th>上期财务费用</th>
-					<th>本期管理费用</th>
-					<th>上期管理费用</th>
-					<th>财务费用-利息支出</th>
-					<th>营业税金及附加</th>
-					<th>本期净利润</th>
-					<th>上期净利润</th>
-					<th>本期净利润（扣非）</th>
-					<th>上期净利润（扣非）</th>
-					<th>营业成本</th>
-					<th>营业收入(扣非)</th>
-					<th>公允价值变动</th>
-					<th>投资收益</th>
-					<th>营业外收入</th>
-					<th>营业外支出</th>
+			    	<th>总股本</th>
+			    	<th>加权平均净资产收益率</th>
+			    	<th>加权平均净资产收益率（扣非）</th>
+			    	<th>本年度发放的现金股利总和</th>
+			    	<th>基本每股收益</th>
+			    	<th>稀释每股收益</th>
 					<th>启用标志</th>
 					<th>入库时间</th>
 					<th>操作人</th>

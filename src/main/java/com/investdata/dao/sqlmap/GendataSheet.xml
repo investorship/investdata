@@ -138,4 +138,20 @@
 			
 			where code=#code# and year=#year#
 	</update>
+	
+	
+	<!-- 查询总记录数 -->
+	<statement id="getTotalCount" resultClass="int" parameterClass="java.util.HashMap">
+		select count(*) from t_gendata_sheet
+		<include refid="where_conditions"/>
+	</statement>
+	
+	
+	<!-- 分页查询 -->
+	<statement id="FindByPage" parameterClass="java.util.HashMap" resultMap="gendataSheetResultMap">
+		<include refid="select_what" />
+		<include refid="where_conditions" />
+		limit #start#,#length#
+	</statement>
+	
 </sqlMap>

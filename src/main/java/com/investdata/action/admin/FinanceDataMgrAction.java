@@ -57,6 +57,8 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	private static String UPDATE_INCSTATE_INPUT = "update_incstate_input"; 
 	private static String QUERY_BALANCE_INPUT = "query_balance_input";
 	private static String QUERY_INCSTATE_INPUT = "query_incstate_input";
+	private static String QUERY_CASHFLOW_INPUT = "query_cashflow_input";
+	private static String QUERY_GENDATA_INPUT = "query_gendata_input";
 		
 	private GendataSheet  genDataSheet = new GendataSheet();
 	private CashFlowSheet cashFlowSheet = new CashFlowSheet();
@@ -346,7 +348,70 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	}
 	
 	
+	//查询现金流量表数据
+	public String queryCashflowList() throws Exception {
+		Map qryMap = new HashMap();
+		qryMap.put("start", start);//起始记录
+		qryMap.put("length", length);//每页展示条数
+		qryMap.put("code", code);//股票代码
+		qryMap.put("year", year);//年份，可以为空		
+		
+		TCashFlowSheetDao cashFlowDao = DaoFactory.getTCashFlowSheetDao();
+		int recordsTotal = cashFlowDao.getTotalCount(qryMap);
+		int recordsFiltered = recordsTotal;
+		
+		jsonCashFlow = new JSONObject();
+		jsonCashFlow.put("draw", draw);
+		jsonCashFlow.put("recordsTotal", recordsTotal);
+		jsonCashFlow.put("recordsFiltered", recordsFiltered);
+		
+		List<CashFlowSheet> cashFlowSheetInfosList = cashFlowDao.findCashflowSheetInfosByPage(qryMap);
+		
+		List<JSONObject> cashFlowSheetJsonList = new ArrayList<JSONObject>();
+		for(CashFlowSheet cashFlowSheet : cashFlowSheetInfosList) {
+			JSONObject jsonCashFlowListObj = new JSONObject();
+			FunctionWrapper.convertObj2Json(cashFlowSheet, jsonCashFlowListObj);
+			cashFlowSheetJsonList.add(jsonCashFlowListObj);
+		}
+		JSONArray jsonArray = new JSONArray(cashFlowSheetJsonList); 
+		jsonCashFlow.put("data", jsonArray);
+		
+		sendOutMsg(jsonCashFlow);
+		return AJAX;
+	}
 	
+	
+	//加载综合数据表项数据
+	public String queryGendataList() throws Exception {
+		Map qryMap = new HashMap();
+		qryMap.put("start", start);//起始记录
+		qryMap.put("length", length);//每页展示条数
+		qryMap.put("code", code);//股票代码
+		qryMap.put("year", year);//年份，可以为空		
+		
+		TGendataSheetDao gendataDao = DaoFactory.getTGendataSheetDao();
+		int recordsTotal = gendataDao.getTotalCount(qryMap);
+		int recordsFiltered = recordsTotal;
+		
+		jsonGendata = new JSONObject();
+		jsonGendata.put("draw", draw);
+		jsonGendata.put("recordsTotal", recordsTotal);
+		jsonGendata.put("recordsFiltered", recordsFiltered);
+		
+		List<GendataSheet> genDataSheetInfosList = gendataDao.findGendataSheetInfosByPage(qryMap);
+		
+		List<JSONObject> gendataSheetJsonList = new ArrayList<JSONObject>();
+		for(GendataSheet gendataSheet : genDataSheetInfosList) {
+			JSONObject jsonGendataListObj = new JSONObject();
+			FunctionWrapper.convertObj2Json(gendataSheet, jsonGendataListObj);
+			gendataSheetJsonList.add(jsonGendataListObj);
+		}
+		JSONArray jsonArray = new JSONArray(gendataSheetJsonList); 
+		jsonGendata.put("data", jsonArray);
+		
+		sendOutMsg(jsonGendata);
+		return AJAX;
+	}
 	
 	//加载利润表数据
 	public String loadIncstateSheetData() throws Exception {
@@ -486,6 +551,14 @@ public class FinanceDataMgrAction extends BaseAction implements RequestAware,Ses
 	
 	public String queryIncstateInput() throws Exception {
 		return QUERY_INCSTATE_INPUT;
+	}
+	
+	public String queryCashFlowInput() throws Exception {
+		return QUERY_CASHFLOW_INPUT;
+	}
+	
+	public String queryGendataInput() throws Exception {
+		return QUERY_GENDATA_INPUT;
 	}
 	
 	

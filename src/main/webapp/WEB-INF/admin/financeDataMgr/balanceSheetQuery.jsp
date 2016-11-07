@@ -145,7 +145,7 @@
 	<hr />
 	<font size="5">当前股票名称：[<label id="stockName"></label>]</font>
 	<br /><br />
-	<form id="balForm" method="post" action="financeDataMgr/financeDataMgr!addBalance.action" onsubmit="return balFormValid()">
+	<form id="balForm" method="post" action="#">
 		<fieldset>
 			<legend>请输入以下条件查询</font></legend>
 			<label>股票代码 <font color="red">*</font><input name="balanceSheet.code" type="text" id="code" size="25" /><input type="button" value="加载" onclick="javascript:load()"/>
