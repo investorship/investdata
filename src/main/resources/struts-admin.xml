@@ -63,12 +63,16 @@
 		<action name="financeDataMgr" class="financeDataMgrAction">
 			<result name="add_balance_input">/WEB-INF/admin/financeDataMgr/balanceSheetAdd.jsp</result>
 			<result name="update_balance_input">/WEB-INF/admin/financeDataMgr/balanceSheetUpdate.jsp</result>
+			<result name="query_balance_input">/WEB-INF/admin/financeDataMgr/balanceSheetQuery.jsp</result>
 			<result name="add_cashFlow_input">/WEB-INF/admin/financeDataMgr/cashFlowAdd.jsp</result>
 			<result name="update_cashFlow_input">/WEB-INF/admin/financeDataMgr/cashFlowUpdate.jsp</result>
 			<result name="add_genData_input">/WEB-INF/admin/financeDataMgr/gendataAdd.jsp</result>
 			<result name="update_genData_input">/WEB-INF/admin/financeDataMgr/gendataUpdate.jsp</result>
 			<result name="add_incstate_input">/WEB-INF/admin/financeDataMgr/incstateAdd.jsp</result>
+			<result name="query_incstate_input">/WEB-INF/admin/financeDataMgr/incstateSheetQuery.jsp</result>
 			<result name="update_incstate_input">/WEB-INF/admin/financeDataMgr/incstateUpdate.jsp</result>
+			<result name="query_cashflow_input">/WEB-INF/admin/financeDataMgr/cashFlowQuery.jsp</result>
+			<result name="query_gendata_input">/WEB-INF/admin/financeDataMgr/gendataQuery.jsp</result>
 			
 			<result name="data_add_result">/WEB-INF/admin/dataAddResult.jsp</result>
 			<result name="data_update_result">/WEB-INF/admin/dataUpdateResult.jsp</result>
