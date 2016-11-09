@@ -14,6 +14,7 @@ public class Main {
 		//findataURL
 		String url = "http://www.cninfo.com.cn/cninfo-new/data/download";
 		String origIdUrl = "http://www.cninfo.com.cn/cninfo-new/data/query";
+		String fileDir = "d:\\job\\"; //文件存放路径
 		
 		/*Connection conn = JDBC.getConn();
 		PreparedStatement pst = conn.prepareStatement("select code,name from t_stocks");
@@ -25,7 +26,8 @@ public class Main {
 			
 			//获取orgId 与market等信息。
 		}*/
-		JSONObject jsonParam = Utils.getOrgInfoJsonObj("000858", origIdUrl);
-		Utils.getFinanceDataZip(url, jsonParam);
+		JSONObject jsonParam = Utils.getOrgInfoJsonObj("000651", origIdUrl);
+		Utils.getFinanceDataZip(url, jsonParam,fileDir); //获取财务数据
+		Utils.unZipFile(fileDir);
 	}
 }
