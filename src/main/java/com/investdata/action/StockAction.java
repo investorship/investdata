@@ -48,11 +48,11 @@ public class StockAction extends BaseAction  implements RequestAware,Application
 				}
 			}
 			
-			//若三种方式都无法匹配，返回错误!
+			//若三种方式都无法匹配，返回404错误!
 			
 			if (!matchFlag) {
-				logger.error(String.format("用户输入的关键字keyword[%s] 无法匹配相关投资品种", keyword));
-				return ERROR;
+				logger.error(String.format("用户输入的关键字keyword[%s] 无法匹配相关投资品种[404 error]", keyword));
+				return NOT_FOUND;
 			}
 		}
 		

@@ -34,6 +34,8 @@
 		
 		<global-results>
 			<result name="login" type="redirect">/login/login.action</result>
+			<result name="404_error">/WEB-INF/404.html</result>
+			<result name="error">/WEB-INF/error.html</result>
 		</global-results>
 		
 	</package>
