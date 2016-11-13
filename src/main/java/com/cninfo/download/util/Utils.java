@@ -321,8 +321,8 @@ public class Utils {
 		int len = columName.length;
 		StringBuilder sql = new StringBuilder();
 		if ("LLB".equals(type)) {
+			sql.append("insert into t_cashflow_sheet values ('").append(code).append("',").append(year).append(",");
 			for(int i=0; i<len; i++) {
-				sql.append("insert into t_cashflow_sheet values ('").append(code).append("',").append(year).append(",");
 				if("经营活动产生的现金流量净额".equals(columName[i])) {
 					sql.append(columVal[i]).append(",");
 				} else if (columName[i].endsWith("现金及现金等价物净增加额")) {
@@ -330,12 +330,25 @@ public class Utils {
 				}else {
 					
 				}
-				sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin'))").append("\n");
 			}
+			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');");
 			System.out.println(sql);
 		} else if ("FZB".equals(type)) {
+			sql.append("insert into t_balance_sheet values ('").append(code).append("',").append(year).append(",");
 			for(int i=0; i<len; i++) {
-				System.err.println("名称：" + columName[i] + "值：" + columVal[i]);
+				if("应收票据".equals(columName[i])) {
+					sql.append(columVal[i]).append(",");
+				}else if ("预收款项".equals(columName[i])) {
+					sql.append(columVal[i]).append(",");
+				}else if ("应付账款".equals(columName[i])) {
+					sql.append(columVal[i]).append(",");
+				}else if ("在建工程".equals(columName[i])) {
+					sql.append(columVal[i]).append(",");
+				}else if ("无形资产".equals(columName[i])) {
+					sql.append(columVal[i]).append(",");
+				}else if ("无形资产".equals(columName[i])) {
+					sql.append(columVal[i]).append(",");
+				}
 			}
 		}
 		
