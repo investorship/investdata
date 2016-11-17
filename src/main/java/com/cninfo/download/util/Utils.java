@@ -321,33 +321,130 @@ public class Utils {
 		int len = columName.length;
 		StringBuilder sql = new StringBuilder();
 		if ("LLB".equals(type)) {
+			String opera_active_cash = "0";
+			String cash_and_cashequ = "0";
 			sql.append("insert into t_cashflow_sheet values ('").append(code).append("',").append(year).append(",");
 			for(int i=0; i<len; i++) {
 				if("经营活动产生的现金流量净额".equals(columName[i])) {
-					sql.append(columVal[i]).append(",");
+					opera_active_cash = columVal[i];
 				} else if (columName[i].endsWith("现金及现金等价物净增加额")) {
-					sql.append(columVal[i]).append(",");
+					cash_and_cashequ = columVal[i];
 				}else {
 					
 				}
 			}
+			
+			sql.append(opera_active_cash).append(",").append(cash_and_cashequ).append(",");
 			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');");
 			System.out.println(sql);
+			
 		} else if ("FZB".equals(type)) {
 			sql.append("insert into t_balance_sheet values ('").append(code).append("',").append(year).append(",");
+			String note_recable = "0"; //应收票据
+			String adv_customers = "0"; //预收账款
+			String acc_payable = "0"; //应付账款
+			String constr_in_pro = "0"; //在建工程
+			String lntang_assets = "0"; //无形资产
+			String lntang_assets_amortize = "0"; //无形资产摊销 //这个在流量表中，需要单独处理
+			String goodwill = "0"; //商誉
+			String short_term_loans = "0"; //短期借款
+			String note_payable = "0"; //应付票据
+			String debit_within_year = "0"; //一年内到期的非流动负债
+			String long_term_loans = "0"; //长期借款
+			String bounds_payable = "0"; //应付债券
+			String long_acc_payable = "0";//长期应付款
+			String liquid_assets_start = "0"; //期初流动资产 --这个表里没有，需要看财报手动录入
+			String liquid_assets_end= "0"; //期末流动资产--报表里只有 流动资产合计
+			String curr_liab = "0"; //流动负债 --用报表里流动负债合计 代替
+			String curr_liab_non = "0"; //非流动负债 用报表里非流动负债合计 代替
+			String goods_start = "0"; //期初存货  不存在，需要看报表
+			String goods_end = "0"; //期末存货  取  存货
+			String cash = "0"; //货币资金
+			String trad_assets = "0"; //交易性金融资产 没有 用[以公允价值计量且其变动计入当期损益的金融资产]代替?
+			String total_liab_start = "0"; //期初负债总额
+			String total_liab_end = "0"; //期末负债总额 用负债合计代替
+			String total_ass_start = "0"; //期初资产总额
+			String total_ass_end = "0"; //期末资产总额 用资产总计代替
+			String share_holder_start = "0"; //期初股东权益
+			String share_holder_end = "0"; //期末股东权益 用[所有者权益（或股东权益）合计]代替
+			String fixed_assets_start = "0"; //期初固定资产
+			String fixed_assets_end = "0"; //期末固定资产 用【固定资产】代替
+			String retain_earnings = "0"; //未分配利润
+			String acc_recable_start = "0"; //期初应收账款
+			String acc_recable_end = "0"; //期末应收账款 用 应收账款 代替
+			String capital_surplus = "0"; //资本公积
+			String surplus_reserve = "0"; //盈余公积
+			
+			
 			for(int i=0; i<len; i++) {
 				if("应收票据".equals(columName[i])) {
-					sql.append(columVal[i]).append(",");
+					note_recable = columVal[i];
 				}else if ("预收款项".equals(columName[i])) {
-					sql.append(columVal[i]).append(",");
+					adv_customers = columVal[i];
 				}else if ("应付账款".equals(columName[i])) {
-					sql.append(columVal[i]).append(",");
+					acc_payable = columVal[i];
 				}else if ("在建工程".equals(columName[i])) {
-					sql.append(columVal[i]).append(",");
+					constr_in_pro = columVal[i];
 				}else if ("无形资产".equals(columName[i])) {
-					sql.append(columVal[i]).append(",");
-				}else if ("无形资产".equals(columName[i])) {
-					sql.append(columVal[i]).append(",");
+					lntang_assets = columVal[i];
+				}else if ("无形资产摊销".equals(columName[i])) {
+					lntang_assets_amortize = columVal[i];
+				}else if ("商誉".equals(columName[i])) {
+					goodwill = columVal[i];
+				}else if ("短期借款".equals(columName[i])) {
+					short_term_loans = columVal[i];
+				}else if ("应付票据".equals(columName[i])) {
+					note_payable = columVal[i];
+				}else if ("一年内到期的非流动负债".equals(columName[i])) {
+					debit_within_year = columVal[i];
+				}else if ("长期借款".equals(columName[i])) {
+					long_term_loans = columVal[i];
+				}else if ("应付债券".equals(columName[i])) {
+					bounds_payable = columVal[i];
+				}else if ("长期应付款".equals(columName[i])) {
+					long_acc_payable = columVal[i];
+				}else if ("期初流动资产".equals(columName[i])) {
+					liquid_assets_start = columVal[i];
+				}else if ("流动资产合计".equals(columName[i])) {
+					liquid_assets_end = columVal[i];
+				}else if ("流动负债合计".equals(columName[i])) {
+					curr_liab = columVal[i];
+				}else if ("非流动负债合计".equals(columName[i])) {
+					curr_liab_non = columVal[i];
+				}else if ("期初存货".equals(columName[i])) {
+					goods_start = columVal[i];
+				}else if ("存货".equals(columName[i])) {
+					goods_end = columVal[i];
+				}else if ("货币资金（元）".equals(columName[i])) {
+					cash = columVal[i];
+				}else if ("交易性金融资产".equals(columName[i])) {
+					trad_assets = columVal[i];
+				}else if ("期初负债总额".equals(columName[i])) {
+					total_liab_start = columVal[i];
+				}else if ("负债合计".equals(columName[i])) {
+					total_liab_end = columVal[i];
+				}else if ("期初资产总额".equals(columName[i])) {
+					total_ass_start = columVal[i];
+				}else if ("资产总计".equals(columName[i])) {
+					total_ass_end = columVal[i];
+				}else if ("期初股东权益".equals(columName[i])) {
+					share_holder_start = columVal[i];
+				}else if ("所有者权益（或股东权益）合计".equals(columName[i])) {
+					share_holder_end = columVal[i];
+				}else if ("期初固定资产".equals(columName[i])) {
+					fixed_assets_start = columVal[i];
+				}else if ("固定资产".equals(columName[i])) {
+					fixed_assets_end = columVal[i];
+				}else if ("未分配利润".equals(columName[i])) {
+					retain_earnings = columVal[i];
+				}else if ("期初应收账款".equals(columName[i])) {
+					acc_recable_start = columVal[i];
+				}else if ("应收账款".equals(columName[i])) {
+					acc_recable_end = columVal[i];
+				}else if ("资本公积".equals(columName[i])) {
+					capital_surplus = columVal[i];
+				}else if ("盈余公积".equals(columName[i])) {
+					surplus_reserve = columVal[i];
 				}
 			}
 		}
