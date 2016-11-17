@@ -229,7 +229,7 @@ public class Utils {
 					if ("llb".equals(fileType)) {
 						parseLLB(zipFile,entry);
 					}else if ("fzb".equals(fileType)) {
-//						parseFZB(zipFile,entry);
+						parseFZB(zipFile,entry);
 					} else if ("lrb".equals(fileType)) {
 //						parseLRB(zipFile,entry);
 					}else {
@@ -325,6 +325,12 @@ public class Utils {
 			String cash_and_cashequ = "0";
 			sql.append("insert into t_cashflow_sheet values ('").append(code).append("',").append(year).append(",");
 			for(int i=0; i<len; i++) {
+				
+				String filterStr = columVal[i];
+				if("".equals(filterStr.trim())) { 
+					continue;
+				}
+				
 				if("经营活动产生的现金流量净额".equals(columName[i])) {
 					opera_active_cash = columVal[i];
 				} else if (columName[i].endsWith("现金及现金等价物净增加额")) {
@@ -339,7 +345,7 @@ public class Utils {
 			System.out.println(sql);
 			
 		} else if ("FZB".equals(type)) {
-			sql.append("insert into t_balance_sheet values ('").append(code).append("',").append(year).append(",");
+			
 			String note_recable = "0"; //应收票据
 			String adv_customers = "0"; //预收账款
 			String acc_payable = "0"; //应付账款
@@ -375,8 +381,17 @@ public class Utils {
 			String capital_surplus = "0"; //资本公积
 			String surplus_reserve = "0"; //盈余公积
 			
+			sql.append("insert into t_balance_sheet values ('").append(code).append("',").append(year).append(",");
+			
+			StringBuilder updateSQL = new StringBuilder();
 			
 			for(int i=0; i<len; i++) {
+				
+				String filterStr = columVal[i];
+				if("".equals(filterStr.trim())) { 
+					continue;
+				}
+				
 				if("应收票据".equals(columName[i])) {
 					note_recable = columVal[i];
 				}else if ("预收款项".equals(columName[i])) {
@@ -406,7 +421,10 @@ public class Utils {
 				}else if ("期初流动资产".equals(columName[i])) {
 					liquid_assets_start = columVal[i];
 				}else if ("流动资产合计".equals(columName[i])) {
-					liquid_assets_end = columVal[i];
+					liquid_assets_end = columVal[i]; 
+					
+					updateSQL.append("update t_balance_sheet set liquid_assets_start=").append(liquid_assets_end). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
 				}else if ("流动负债合计".equals(columName[i])) {
 					curr_liab = columVal[i];
 				}else if ("非流动负债合计".equals(columName[i])) {
@@ -423,6 +441,10 @@ public class Utils {
 					total_liab_start = columVal[i];
 				}else if ("负债合计".equals(columName[i])) {
 					total_liab_end = columVal[i];
+					
+					updateSQL.append("update t_balance_sheet set total_liab_start=").append(total_liab_end). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					
 				}else if ("期初资产总额".equals(columName[i])) {
 					total_ass_start = columVal[i];
 				}else if ("资产总计".equals(columName[i])) {
@@ -431,23 +453,76 @@ public class Utils {
 					share_holder_start = columVal[i];
 				}else if ("所有者权益（或股东权益）合计".equals(columName[i])) {
 					share_holder_end = columVal[i];
+					
+					updateSQL.append("update t_balance_sheet set share_holder_start=").append(share_holder_end). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					
+					
 				}else if ("期初固定资产".equals(columName[i])) {
 					fixed_assets_start = columVal[i];
 				}else if ("固定资产".equals(columName[i])) {
 					fixed_assets_end = columVal[i];
+					
+					updateSQL.append("update t_balance_sheet set fixed_assets_start=").append(fixed_assets_end). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					
 				}else if ("未分配利润".equals(columName[i])) {
 					retain_earnings = columVal[i];
 				}else if ("期初应收账款".equals(columName[i])) {
 					acc_recable_start = columVal[i];
 				}else if ("应收账款".equals(columName[i])) {
 					acc_recable_end = columVal[i];
+					
+					updateSQL.append("update t_balance_sheet set acc_recable_start=").append(acc_recable_end). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					
 				}else if ("资本公积".equals(columName[i])) {
 					capital_surplus = columVal[i];
 				}else if ("盈余公积".equals(columName[i])) {
 					surplus_reserve = columVal[i];
 				}
+				
 			}
+			sql.append(note_recable).append(",")
+			.append(adv_customers).append(",")
+			.append(acc_payable).append(",")
+			.append(constr_in_pro).append(",");
+			sql.append(lntang_assets).append(",")
+			.append(lntang_assets_amortize).append(",")
+			.append(goodwill).append(",")
+			.append(short_term_loans).append(",")
+			.append(note_payable).append(",");
+			sql.append(debit_within_year).append(",")
+			.append(long_term_loans).append(",")
+			.append(bounds_payable).append(",")
+			.append(long_acc_payable).append(",");
+			sql.append(liquid_assets_start).append(",")
+			.append(liquid_assets_end).append(",")
+			.append(curr_liab).append(",")
+			.append(curr_liab_non).append(",")
+			.append(goods_start).append(",");
+			sql.append(goods_end).append(",")
+			.append(cash).append(",")
+			.append(trad_assets).append(",")
+			.append(total_liab_start).append(",")
+			.append(total_liab_end).append(",");
+			sql.append(total_ass_start).append(",")
+			.append(total_ass_end).append(",")
+			.append(share_holder_start).append(",")
+			.append(share_holder_end).append(",");
+			sql.append(fixed_assets_start).append(",")
+			.append(fixed_assets_end).append(",")
+			.append(retain_earnings).append(",")
+			.append(acc_recable_start).append(",");
+			sql.append(acc_recable_end).append(",")
+			.append(capital_surplus).append(",")
+			.append(surplus_reserve).append(",");
+			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');").append("\n");
+			sql.append(updateSQL); //追加update SQL
+			System.out.println(sql);
 		}
+		
+		
 		
 	}
 	
