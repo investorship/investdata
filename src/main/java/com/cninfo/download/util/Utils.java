@@ -231,7 +231,7 @@ public class Utils {
 					}else if ("fzb".equals(fileType)) {
 						parseFZB(zipFile,entry);
 					} else if ("lrb".equals(fileType)) {
-//						parseLRB(zipFile,entry);
+						parseLRB(zipFile,entry);
 					}else {
 						throw new RuntimeException("解析的zip包里面文件不合法");
 					}
@@ -308,11 +308,25 @@ public class Utils {
 		BufferedReader bReader = new BufferedReader(new InputStreamReader(is,"gbk")); //防止乱码
 		String strLine = "";
 		String entryFileName = entry.getName();
-		System.err.println("----解析文件:" + entryFileName + "------");
+		String reportYear = entryFileName.split("\\_")[3];
+		int index = reportYear.indexOf(".");
+		reportYear = reportYear.substring(0, index);
+		year = reportYear;
+		int i = 0;
+		String[] columNameArry = null;
+		String[] columValArray  = null;
 		while((strLine = bReader.readLine()) != null) {
-//			genSQL("LRB",strLine,entryFileName);
+			if (i == 0) {
+				columNameArry = strLine.split("\\,",-1);
+			}else {
+				columValArray = strLine.split("\\,",-1);
+				if (columValArray[5].contains(reportYear + "-12")) { //只要年度报表 "2015-12-31" 包含 "2015-12"
+					genSQL("LRB",entryFileName,columNameArry,columValArray);
+				}
+			}
+			i++;
+			
 		}
-		
 	}
 	
 	
@@ -320,6 +334,7 @@ public class Utils {
 	private static void  genSQL(String type,String fileName,String[] columName, String[] columVal) throws Exception {
 		int len = columName.length;
 		StringBuilder sql = new StringBuilder();
+		StringBuilder updateSQL = new StringBuilder();
 		if ("LLB".equals(type)) {
 			String opera_active_cash = "0";
 			String cash_and_cashequ = "0";
@@ -383,7 +398,7 @@ public class Utils {
 			
 			sql.append("insert into t_balance_sheet values ('").append(code).append("',").append(year).append(",");
 			
-			StringBuilder updateSQL = new StringBuilder();
+			
 			
 			for(int i=0; i<len; i++) {
 				
@@ -520,9 +535,146 @@ public class Utils {
 			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');").append("\n");
 			sql.append(updateSQL); //追加update SQL
 			System.out.println(sql);
+			
+		} else if ("LRB".equals(type)) {
+			sql.append("insert into t_incstate_sheet values ('").append(code).append("',").append(year).append(",");
+			
+			String busi_income_this = "0"; //本期营业收入 用 【其中：营业收入（元）】代替
+			String busi_income_last = "0"; //上期营业收入
+			String total_busi_inc_this = "0"; //本期营业总收入 用【营业总收入】
+			String total_busi_inc_last = "0"; //上期营业总收入
+			String opera_profits_this = "0"; // 本期营业利润 用 【三、营业利润】营业利润代替
+			String opera_profits_last = "0"; //上期营业利润
+			String income_tax = "0"; //所得税 用 [减：所得税]代替
+			String fixed_ass_depre = "0"; //固定资产折旧 没有 要单补
+			String long_pre_amort = "0"; //长期待摊费用摊销
+			String total_profit_start = "0"; //期初利润总额
+			String total_profit_end = "0"; //期末利润总额 用 【四、利润总额】代替
+			String market_consts_this = "0"; // 本期销售费用 用 【销售费用】代替
+			String market_consts_last = "0"; //上期销售费用
+			String finance_consts_this = "0"; // 本期财务费用 用【财务费用】代替
+			String finance_consts_last = "0"; //上期财务费用
+			String mgr_consts_this = "0"; //本期管理费用 用【管理费用】代替
+			String mgr_consts_last = "0"; //上期管理费用
+			String inter_expense = "0"; //财务费用-利息支出
+			String busi_tax_surcharge = "0";//营业税金及附加
+			String net_profits_this = "0"; //本期净利润 用【五、净利润】 代替
+			String net_profits_last = "0"; //上期净利润
+			String net_profits_kf_last = "0"; //上期净利润（扣非）没有
+			String net_profits_kf_this = "0"; //本期净利润（扣非）没有
+			String operat_cost = "0"; //营业成本 用 【其中：营业成本】代替
+			String busi_income_kf = "0"; //营业收入(扣非) 没有
+			String fair_val_change = "0"; //公允价值变动 用【加：公允价值变动净收益】代替
+			String invest_income = "0"; //投资收益
+			String non_opera_income = "0";//营业外收入
+			String non_opera_outcome = "0"; //营业外支出 用【减：营业外支出】代替
+			
+			for(int i=0; i<len; i++) {
+				
+				String filterStr = columVal[i];
+				if("".equals(filterStr.trim())) { 
+					continue;
+				}
+				
+				if("其中：营业收入（元）".equals(columName[i])) {
+					busi_income_this = filterStr;
+				}else if ("上期营业收入".equals(columName[i])) {
+					busi_income_last = filterStr;
+				}else if ("营业总收入".equals(columName[i])) {
+					total_busi_inc_this = filterStr;
+				}else if ("上期营业总收入".equals(columName[i])) {
+					total_busi_inc_last = filterStr;
+				}else if ("三、营业利润".equals(columName[i])) {
+					opera_profits_this = filterStr;
+				}else if ("上期营业利润".equals(columName[i])) {
+					opera_profits_last = filterStr;
+				}else if ("减：所得税".equals(columName[i])) {
+					income_tax = filterStr;
+				}else if ("固定资产折旧".equals(columName[i])) {
+					fixed_ass_depre = filterStr;
+				}else if ("长期待摊费用摊销".equals(columName[i])) {
+					//在现金流量表中
+					long_pre_amort = filterStr;
+				}else if ("期初利润总额".equals(columName[i])) {
+					total_profit_start = filterStr;
+				}else if ("四、利润总额".equals(columName[i])) {
+					total_profit_end = filterStr;
+				}else if ("销售费用".equals(columName[i])) {
+					market_consts_this = filterStr;
+				}else if ("上期销售费用".equals(columName[i])) {
+					market_consts_last = filterStr;
+				}else if ("财务费用".equals(columName[i])) {
+					finance_consts_this = filterStr;
+				}else if ("上期财务费用".equals(columName[i])) {
+					finance_consts_last = filterStr;
+				}else if ("管理费用".equals(columName[i])) {
+					mgr_consts_this = filterStr;
+				}else if ("上期管理费用".equals(columName[i])) {
+					mgr_consts_last = filterStr;
+				}else if ("利息支出".equals(columName[i])) {
+					inter_expense = filterStr;
+				}else if ("营业税金及附加".equals(columName[i])) {
+					busi_tax_surcharge = filterStr;
+				}else if ("五、净利润".equals(columName[i])) {
+					net_profits_this = filterStr;
+				}else if ("上期净利润".equals(columName[i])) {
+					net_profits_last = filterStr;
+				}else if ("上期净利润（扣非）".equals(columName[i])) {
+					net_profits_kf_last = filterStr;
+				}else if ("本期净利润（扣非）".equals(columName[i])) {
+					net_profits_kf_this = filterStr;
+				}else if ("其中：营业成本".equals(columName[i])) {
+					operat_cost = filterStr;
+				}else if ("营业收入(扣非)".equals(columName[i])) {
+					busi_income_kf = filterStr;
+				}else if ("加：公允价值变动净收益".equals(columName[i])) {
+					fair_val_change = filterStr;
+				}else if ("投资收益".equals(columName[i])) {
+					invest_income = filterStr;
+				}else if ("营业外收入".equals(columName[i])) {
+					invest_income = filterStr;
+				}else if ("减：营业外支出".equals(columName[i])) {
+					non_opera_outcome = filterStr;
+				}
+			}
+			
+			sql.append(busi_income_this).append(",");
+			sql.append(busi_income_last).append(",");
+			sql.append(total_busi_inc_this).append(",");
+			sql.append(total_busi_inc_last).append(",");
+			sql.append(opera_profits_this).append(",");
+			sql.append(opera_profits_last).append(",");
+			sql.append(income_tax).append(",");
+			sql.append(fixed_ass_depre).append(",");
+			sql.append(long_pre_amort).append(",");
+			sql.append(total_profit_start).append(",");
+			sql.append(total_profit_end).append(",");
+			sql.append(market_consts_this).append(",");
+			sql.append(market_consts_last).append(",");
+			sql.append(finance_consts_this).append(",");
+			sql.append(finance_consts_last).append(",");
+			sql.append(mgr_consts_this).append(",");
+			sql.append(mgr_consts_last).append(",");
+			sql.append(inter_expense).append(",");
+			sql.append(busi_tax_surcharge).append(",");
+			sql.append(net_profits_this).append(",");
+			sql.append(net_profits_last).append(",");
+			sql.append(net_profits_kf_last).append(",");
+			sql.append(net_profits_kf_this).append(",");
+			sql.append(operat_cost).append(",");
+			sql.append(busi_income_kf).append(",");
+			sql.append(fair_val_change).append(",");
+			sql.append(invest_income).append(",");
+			sql.append(non_opera_income).append(",");
+			sql.append(non_opera_outcome).append(",");
+			
+			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');").append("\n");
+			sql.append(updateSQL); //追加update SQL
+			System.out.println(sql);
+			
+		} else {
+			System.err.println("错误的报表标识.....");
 		}
-		
-		
 		
 	}
 	
