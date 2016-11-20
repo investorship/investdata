@@ -335,9 +335,11 @@ public class Utils {
 		int len = columName.length;
 		StringBuilder sql = new StringBuilder();
 		StringBuilder updateSQL = new StringBuilder();
+		StringBuilder gendataSQL = new StringBuilder(); //综合数据表项内容，由于比较特殊，字段掺杂在利润表中，所以单独处理。
 		if ("LLB".equals(type)) {
 			String opera_active_cash = "0";
 			String cash_and_cashequ = "0";
+			String lntang_assets_amortize = "0"; //资产负债表中的无形资产摊销  在流量表中。
 			sql.append("insert into t_cashflow_sheet values ('").append(code).append("',").append(year).append(",");
 			for(int i=0; i<len; i++) {
 				
@@ -350,14 +352,20 @@ public class Utils {
 					opera_active_cash = columVal[i];
 				} else if (columName[i].endsWith("现金及现金等价物净增加额")) {
 					cash_and_cashequ = columVal[i];
+				} else if (columName[i].endsWith("无形资产摊销")) {
+					lntang_assets_amortize = columVal[i];
+					
+					updateSQL.append("update t_balance_sheet set lntang_assets_amortize=").append(lntang_assets_amortize). //今年的期末就是明年的期初
+					append(" where year=").append(year).append(" and code='").append(code).append("';").append("\n");
+					
 				}else {
 					
 				}
 			}
 			
 			sql.append(opera_active_cash).append(",").append(cash_and_cashequ).append(",");
-			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');");
-			System.out.println(sql);
+			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');\n");
+			
 			
 		} else if ("FZB".equals(type)) {
 			
@@ -439,7 +447,7 @@ public class Utils {
 					liquid_assets_end = columVal[i]; 
 					
 					updateSQL.append("update t_balance_sheet set liquid_assets_start=").append(liquid_assets_end). //今年的期末就是明年的期初
-					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
 				}else if ("流动负债合计".equals(columName[i])) {
 					curr_liab = columVal[i];
 				}else if ("非流动负债合计".equals(columName[i])) {
@@ -458,7 +466,7 @@ public class Utils {
 					total_liab_end = columVal[i];
 					
 					updateSQL.append("update t_balance_sheet set total_liab_start=").append(total_liab_end). //今年的期末就是明年的期初
-					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
 					
 				}else if ("期初资产总额".equals(columName[i])) {
 					total_ass_start = columVal[i];
@@ -470,7 +478,7 @@ public class Utils {
 					share_holder_end = columVal[i];
 					
 					updateSQL.append("update t_balance_sheet set share_holder_start=").append(share_holder_end). //今年的期末就是明年的期初
-					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
 					
 					
 				}else if ("期初固定资产".equals(columName[i])) {
@@ -479,7 +487,7 @@ public class Utils {
 					fixed_assets_end = columVal[i];
 					
 					updateSQL.append("update t_balance_sheet set fixed_assets_start=").append(fixed_assets_end). //今年的期末就是明年的期初
-					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
 					
 				}else if ("未分配利润".equals(columName[i])) {
 					retain_earnings = columVal[i];
@@ -489,7 +497,7 @@ public class Utils {
 					acc_recable_end = columVal[i];
 					
 					updateSQL.append("update t_balance_sheet set acc_recable_start=").append(acc_recable_end). //今年的期末就是明年的期初
-					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code=").append(code).append(";").append("\n");
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
 					
 				}else if ("资本公积".equals(columName[i])) {
 					capital_surplus = columVal[i];
@@ -533,8 +541,8 @@ public class Utils {
 			.append(capital_surplus).append(",")
 			.append(surplus_reserve).append(",");
 			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');").append("\n");
-			sql.append(updateSQL); //追加update SQL
-			System.out.println(sql);
+//			sql.append(updateSQL); //追加update SQL
+//			System.out.println(sql);
 			
 		} else if ("LRB".equals(type)) {
 			sql.append("insert into t_incstate_sheet values ('").append(code).append("',").append(year).append(",");
@@ -569,6 +577,16 @@ public class Utils {
 			String non_opera_income = "0";//营业外收入
 			String non_opera_outcome = "0"; //营业外支出 用【减：营业外支出】代替
 			
+			///下面是 综合数据表项的内容
+			String total_stocks = "0";//总股本
+			String roe_wa = "0"; //加权平均净资产收益率
+			String roe_wa_kf = "0"; //加权平均净资产收益率（扣非）
+			String dividen_pay_sum = "0";// 本年度发放的现金股利总和
+			String eps = "0"; //基本每股收益
+			String eps_diluted = "0"; //稀释每股收益
+			
+			gendataSQL.append("insert into t_gendata_sheet values ('").append(code).append("',").append(year).append(",");
+			
 			for(int i=0; i<len; i++) {
 				
 				String filterStr = columVal[i];
@@ -578,14 +596,28 @@ public class Utils {
 				
 				if("其中：营业收入（元）".equals(columName[i])) {
 					busi_income_this = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set busi_income_last=").append(busi_income_this). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
 				}else if ("上期营业收入".equals(columName[i])) {
 					busi_income_last = filterStr;
+					
 				}else if ("营业总收入".equals(columName[i])) {
 					total_busi_inc_this = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set total_busi_inc_last=").append(total_busi_inc_this). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
 				}else if ("上期营业总收入".equals(columName[i])) {
 					total_busi_inc_last = filterStr;
 				}else if ("三、营业利润".equals(columName[i])) {
 					opera_profits_this = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set opera_profits_last=").append(opera_profits_this). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
+					
 				}else if ("上期营业利润".equals(columName[i])) {
 					opera_profits_last = filterStr;
 				}else if ("减：所得税".equals(columName[i])) {
@@ -599,16 +631,33 @@ public class Utils {
 					total_profit_start = filterStr;
 				}else if ("四、利润总额".equals(columName[i])) {
 					total_profit_end = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set total_profit_start=").append(total_profit_end). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
 				}else if ("销售费用".equals(columName[i])) {
 					market_consts_this = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set market_consts_last=").append(market_consts_this). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
 				}else if ("上期销售费用".equals(columName[i])) {
 					market_consts_last = filterStr;
 				}else if ("财务费用".equals(columName[i])) {
 					finance_consts_this = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set finance_consts_last=").append(finance_consts_this). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
+					
 				}else if ("上期财务费用".equals(columName[i])) {
 					finance_consts_last = filterStr;
 				}else if ("管理费用".equals(columName[i])) {
 					mgr_consts_this = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set mgr_consts_last=").append(mgr_consts_this). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
 				}else if ("上期管理费用".equals(columName[i])) {
 					mgr_consts_last = filterStr;
 				}else if ("利息支出".equals(columName[i])) {
@@ -617,6 +666,10 @@ public class Utils {
 					busi_tax_surcharge = filterStr;
 				}else if ("五、净利润".equals(columName[i])) {
 					net_profits_this = filterStr;
+					
+					updateSQL.append("update t_incstate_sheet set net_profits_last=").append(net_profits_this). //今年的期末就是明年的期初
+					append(" where year=").append(Integer.parseInt(year) + 1).append(" and code='").append(code).append("';").append("\n");
+					
 				}else if ("上期净利润".equals(columName[i])) {
 					net_profits_last = filterStr;
 				}else if ("上期净利润（扣非）".equals(columName[i])) {
@@ -636,7 +689,24 @@ public class Utils {
 				}else if ("减：营业外支出".equals(columName[i])) {
 					non_opera_outcome = filterStr;
 				}
+				//下面是 综合数据表项的2个字段
+				else if ("（一）基本每股收益".equals(columName[i])) {
+					eps = filterStr;
+				}else if ("（二）稀释每股收益".equals(columName[i])) {
+					eps_diluted = filterStr;
+				}
+				
+				
 			}
+			
+			gendataSQL.append(total_stocks).append(",");
+			gendataSQL.append(roe_wa).append(",");
+			gendataSQL.append(roe_wa_kf).append(",");
+			gendataSQL.append(dividen_pay_sum).append(",");
+			gendataSQL.append(eps).append(",");
+			gendataSQL.append(eps_diluted).append(",");
+			gendataSQL.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');").append("\n");
+			
 			
 			sql.append(busi_income_this).append(",");
 			sql.append(busi_income_last).append(",");
@@ -669,12 +739,15 @@ public class Utils {
 			sql.append(non_opera_outcome).append(",");
 			
 			sql.append("1,'").append(new Timestamp(System.currentTimeMillis())).append("','admin');").append("\n");
-			sql.append(updateSQL); //追加update SQL
-			System.out.println(sql);
+//			sql.append(updateSQL); //追加update SQL
+//			System.out.println(sql);
 			
 		} else {
 			System.err.println("错误的报表标识.....");
 		}
+		
+		sql.append(updateSQL).append(gendataSQL);  //追加update SQL
+		System.out.println(sql);
 		
 	}
 	
