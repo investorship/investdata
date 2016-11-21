@@ -144,6 +144,9 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				IncstateSheet incSheet = incSheetsList.get(i);
 				
 				int totoalStocks = Integer.valueOf(genSheet.getTotalStocks());
+				
+				if(totoalStocks == 0) continue;
+				
 				double busiIncomeThis = Double.valueOf(incSheet.getBusiIncomeThis());
 				
 				//每股营业收入=营业收入/期末总股本
@@ -153,8 +156,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(mincmPs).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -199,6 +205,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				int totoalStocks = Integer.valueOf(genSheet.getTotalStocks());
 				double operaProfitsThis = Double.valueOf(incSheet.getOperaProfitsThis());
 				
+				if(totoalStocks == 0) continue;
+				
 				//每股营业利润=本年度营业利润/期末总股本
 				String opeprfPS = MathUtils.format2DecPoint(operaProfitsThis / totoalStocks);
 				
@@ -206,8 +214,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(opeprfPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -253,6 +264,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				int totoalStocks = Integer.valueOf(genSheet.getTotalStocks());
 				double capitalSurplus = Double.valueOf(balanceSheet.getCapitalSurplus());
 				
+				if(totoalStocks == 0) continue;
+				
 				//每股资本公积=资本公积/期末总股本
 				String capsurfdPS = MathUtils.format2DecPoint(capitalSurplus / totoalStocks);
 				
@@ -260,8 +273,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(capsurfdPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -306,6 +322,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				int totoalStocks = Integer.valueOf(genSheet.getTotalStocks());
 				double surplusReserve = Double.valueOf(balanceSheet.getSurplusReserve());
 				
+				if(totoalStocks == 0) continue;
+				
 				//每股盈余公积=盈余公积/期末总股本
 				String surrefdPS = MathUtils.format2DecPoint(surplusReserve / totoalStocks);
 				
@@ -313,8 +331,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(surrefdPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -363,6 +384,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				//资本公积
 				double capitalSurplus = Double.valueOf(balanceSheet.getCapitalSurplus());
 				
+				if(totoalStocks == 0) continue;
+				
 				double sumPS = surplusReserve + capitalSurplus;
 				
 				//每股公积=资本公积 + 盈余公积 / 期末总股本
@@ -372,8 +395,10 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(accumfdPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -419,6 +444,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				int totoalStocks = Integer.valueOf(genSheet.getTotalStocks());
 				double retainEarnings = Double.valueOf(balanceSheet.getRetainEarnings());
 				
+				if(totoalStocks == 0) continue;
 				
 				//每股未分配利润= 未分配利润  / 期末总股本
 				String undivprfPS = MathUtils.format2DecPoint(retainEarnings / totoalStocks);
@@ -427,8 +453,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(undivprfPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -479,6 +508,9 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				
 				double sumPs = surplusReserve + retainEarnings;
 				
+				if(totoalStocks == 0) continue;
+				
+				
 				//每股留存收益= 未分配利润 + 盈余公积 / 期末总股本
 				String retearPS = MathUtils.format2DecPoint(sumPs / totoalStocks);
 				
@@ -486,8 +518,12 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(retearPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -533,6 +569,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				//经营活动产生的现金流量净额
 				double operaActiveCash = Double.valueOf(canshFlowSheet.getOperaActiveCash());
 				
+				if(totoalStocks == 0) continue;
+				
 				//每股经营活动现金流量= 经营活动产生的现金流量净额  / 期末总股本
 				String opeCFPS = MathUtils.format2DecPoint(operaActiveCash / totoalStocks);
 				
@@ -540,8 +578,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(opeCFPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -588,6 +629,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				//现金及现金等价物净增加额
 				double cashAndCashequ = Double.valueOf(canshFlowSheet.getCashAndCashequ());
 				
+				if(totoalStocks == 0) continue;
+				
 				//每股净现金流量	现金及现金等价物净增加额  / 期末总股本
 				String CFPS = MathUtils.format2DecPoint(cashAndCashequ / totoalStocks);
 				
@@ -595,8 +638,12 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(CFPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -645,6 +692,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				//净资产 = 资产总额 - 负债总额
 				double  netAss = totalAssEnd - totalLiab;
 				
+				if(totoalStocks == 0) continue;
+				
 				//每股净资产 = 	净资产/期末普通股股数	
 				String NAPS = MathUtils.format2DecPoint(netAss / totoalStocks);
 				
@@ -652,8 +701,10 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(NAPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -696,6 +747,9 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				GendataSheet genSheet = genDataList.get(i);
 				IncstateSheet incstateSheet = incstateSheets.get(i);
 				int totoalStocks = Integer.valueOf(genSheet.getTotalStocks());
+				
+				if(totoalStocks == 0) continue;
+				
 				//期末利润总额
 				double totalAssEnd = Double.valueOf(incstateSheet.getTotalProfitEnd());
 				//财务费用中 利息支出部分
@@ -709,8 +763,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(EBITPS).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
