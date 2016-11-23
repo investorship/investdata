@@ -120,7 +120,7 @@
 				series : [
 						{
 							name : '${chart.legendData}',
-							type : 'bar',
+							type : 'line',
 							barWidth: 36, //柱状图的宽度
 							data : [ ${chart.data}],
 							markPoint : {

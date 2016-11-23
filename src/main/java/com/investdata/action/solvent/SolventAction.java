@@ -515,6 +515,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//利息费用
 				double interExpense = Double.valueOf(incstateSheet.getInterExpense());
 				
+				if (interExpense == 0) continue;
+				
 				//利息保障倍数 = 税息前利润 /（利息费用　＋　资本化利息支出) 
 				//由于资本化利息支出数据不在财报中体现具体数据，所以只取值财务报表中的-利息费用
 				String intcvr = MathUtils.format2DecPoint((totalLiab + interExpense) / interExpense);
@@ -523,8 +525,10 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				dataBuilder.append(intcvr).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
