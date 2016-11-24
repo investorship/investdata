@@ -48,12 +48,12 @@
         <div class="headInf">
             <ul>
                 <li><span>上市时间：</span>${stock.ipoTime }</li>
-                <li><span>发行量：</span>${stock.ipoStocks}（股）</li>
+                <li><span>发行量：</span>${stock.ipoStocks}（万股）</li>
                 <li><span>发行市盈率：</span>${stock.issuedPE }</li>
                 <li><span>发行价格：</span>${stock.issuedPrice }</li>
             </ul>
             <ul>
-                <li><span>企业法人：</span>${stock.issuedPrice}</li>
+                <li><span>企业法人：</span>${stock.legaler}</li>
                 <li><span>所属行业：</span>${stock.category }</li>
                 <li><span>公司网址：</span>${stock.compyWebsite}</li>
             </ul>
