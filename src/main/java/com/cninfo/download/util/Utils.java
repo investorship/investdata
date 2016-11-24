@@ -2,10 +2,13 @@ package com.cninfo.download.util;
 
 import java.beans.PropertyDescriptor;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
@@ -34,6 +37,8 @@ import com.cninfo.download.vo.OrgVo;
 public class Utils {
 	private static String code;
 	private static String year;
+	
+	private static StringBuilder financeDataSQL;
 	
 	// 使用反射机制填充参数。
 	public static void convertFormParam(List<NameValuePair> nvp, Object obj)
@@ -207,8 +212,9 @@ public class Utils {
 	}
 	
 	//解压zip文件
-	public static void unZipFile(String fileDir) throws Exception {
+	public static void unZipFile(String fileDir, String code) throws Exception {
 		File fileList = new File(fileDir);
+		financeDataSQL = new StringBuilder();
 		if (fileList != null && fileList.isDirectory()) {
 			File[] files = fileList.listFiles(new FileFilter() {
 				@Override
@@ -222,7 +228,7 @@ public class Utils {
 				}
 			});
 			
-			for(File file : files) {
+			for(File file : files) { //解析文件生成SQL
 				ZipFile zipFile = new ZipFile(file);
 				for(Enumeration entries = zipFile.getEntries();entries.hasMoreElements();) {
 					ZipEntry entry = (ZipEntry)entries.nextElement(); 
@@ -242,6 +248,31 @@ public class Utils {
 				}
 				
 			}
+			
+			//每只股票的SQL写入一个以股票代码命名的sql文件中。
+			BufferedWriter  sqlWriter = new BufferedWriter(new FileWriter(new File(fileDir + "\\sql\\" + code + ".sql")));
+			sqlWriter.write(financeDataSQL.toString());
+			sqlWriter.flush();
+			
+			//删除文件
+			File[] deleFiles = fileList.listFiles(new FilenameFilter() {
+				
+				@Override
+				public boolean accept(File dir, String name) {
+					if (name.endsWith(".zip")) return true;
+					else return false;
+				}
+			});
+			
+			for (File file : deleFiles) {
+				
+				if (!file.isDirectory()) {
+					file.delete();					
+				}
+//				System.err.println("删除文件" + file.getName());
+			}
+			
+			Thread.sleep(700);
 			
 		}
 	}
@@ -272,6 +303,7 @@ public class Utils {
 			i++;
 			
 		}
+		bReader.close();
 		
 	}
 	
@@ -302,6 +334,8 @@ public class Utils {
 			
 		}
 		
+		bReader.close();
+		
 	}
 	
 	//解析利润表
@@ -330,6 +364,8 @@ public class Utils {
 			i++;
 			
 		}
+		
+		bReader.close();
 	}
 	
 	
@@ -745,12 +781,15 @@ public class Utils {
 //			sql.append(updateSQL); //追加update SQL
 //			System.out.println(sql);
 			
+			
 		} else {
 			System.err.println("错误的报表标识.....");
 		}
 		
-		sql.append(updateSQL).append(gendataSQL);  //追加update SQL
-		System.out.println(sql);
+		financeDataSQL.append(sql).append(updateSQL).append(gendataSQL); //四大报表SQL汇总
+		
+//		sql.append(updateSQL).append(gendataSQL);  //追加update SQL
+//		System.out.println(sql);
 		
 	}
 	
@@ -832,7 +871,7 @@ public class Utils {
 	
 
 	public static void main(String[] args) throws Exception {
-		Utils.unZipFile("d:\\job\\");
+//		Utils.unZipFile("d:\\job\\");
 	}
 	
 	
