@@ -352,8 +352,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//长期应付款
 				double longAccPayable= Double.parseDouble(balSheet.getLongAccPayable());
 				
+				double total = longTermLoans + boundsPayAable + longAccPayable;
+				
+				if (total == 0) continue;
+				
 				//负债结构比率= 流动负债 / 长期负债（长期负债=长期借款  + 应付债券 + 长期应付款） * 100%
-				String debtEnsemble = MathUtils.format2DecPoint(currLiab / (longTermLoans + boundsPayAable + longAccPayable) * 100);
+				String debtEnsemble = MathUtils.format2DecPoint((currLiab / total) * 100);
 						
 				yearBuilder.append(balSheet.getYear()).append(",");
 				dataBuilder.append(debtEnsemble).append(",");

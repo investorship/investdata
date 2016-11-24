@@ -372,6 +372,8 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				//期末资产总额
 				double totalAssEnd = Double.parseDouble(balSheet.getTotalAssEnd());
 				
+				if (totalAssStart == 0) continue;
+				
 				
 				//总资产增长率 = (期末资产总额 - 期初资产总额) / 期初资产总额  *  100%
 				String netassgrrt = MathUtils.format2DecPoint((totalAssEnd - totalAssStart) / totalAssStart  * 100);
@@ -380,8 +382,11 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				dataBuilder.append(netassgrrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -422,6 +427,8 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				//期末股东权益
 				double shareHolderEnd = Double.parseDouble(balSheet.getShareHolderEnd());
 				
+				if (shareHolderStart == 0) continue; 
+				
 				//总资产增长率 = (期末资产总额 - 期初资产总额) / 期初资产总额  *  100%
 				String shareHolderEquity = MathUtils.format2DecPoint((shareHolderEnd - shareHolderStart) / shareHolderStart  * 100);
 						
@@ -429,8 +436,11 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				dataBuilder.append(shareHolderEquity).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);

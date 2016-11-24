@@ -71,6 +71,8 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				double constsLast = marketConstsLast + financeConstsLast + mgrConstsLast;
 				double constsThis = marketConstsThis + financeConstsThis + mgrConstsThis;
 				
+				if (constsLast == 0) continue;
+				
 				double diff = constsThis - constsLast;
 			
 				String netprfgrrt = MathUtils.format2DecPoint(diff / constsLast  * 100);
@@ -79,8 +81,11 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(netprfgrrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -119,6 +124,8 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				//本期管理费用
 				double mgrConstsThis = Double.parseDouble(incstSheet.getMgrConstsThis());
 				
+				if (mgrConstsLast == 0) continue;
+				
 				double diff = mgrConstsThis - mgrConstsLast;
 			
 				String netprfgrrt = MathUtils.format2DecPoint(diff / mgrConstsLast  * 100);
@@ -127,8 +134,10 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(netprfgrrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -168,6 +177,8 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				double marketConstsThis = Double.parseDouble(incstSheet.getMarketConstsThis());
 				
 				double diff = marketConstsThis - marketConstsLast;
+				
+				if (marketConstsLast == 0) continue;
 			
 				String netprfgrrt = MathUtils.format2DecPoint(diff / marketConstsLast  * 100);
 						
@@ -175,8 +186,11 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(netprfgrrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -214,9 +228,10 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				double financeConstsLast = Double.parseDouble(incstSheet.getFinanceConstsLast());
 				//本期财务费用
 				double financeConstsThis = Double.parseDouble(incstSheet.getFinanceConstsThis());
-
 				
 				double diff = financeConstsThis - financeConstsLast;
+				
+				if (financeConstsLast == 0) continue;
 			
 				String netprfgrrt = MathUtils.format2DecPoint(diff / financeConstsLast  * 100);
 						
@@ -224,8 +239,10 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(netprfgrrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -269,14 +286,18 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				//期末应收账款
 				double accRecableEnd = Double.parseDouble(balSheet.getAccRecableEnd());
 				
+				if (busiIncThis == 0) continue;
+				
 				String recAcctBusiRatio = MathUtils.format2DecPoint(accRecableEnd / busiIncThis  * 100);
 						
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(recAcctBusiRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -321,14 +342,18 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				//预收账款
 				double advCustomers = Double.parseDouble(balSheet.getAdvCustomers());
 				
+				if (busiIncThis ==0) continue;
+				
 				String advanceAcctBusiRatio = MathUtils.format2DecPoint(advCustomers / busiIncThis  * 100);
 						
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(advanceAcctBusiRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -367,14 +392,18 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				
 				double goodsEnd = Double.parseDouble(balSheet.getGoodsEnd());
 				
+				if (goodsEnd == 0) continue;
+				
 				String dueAcctStock = MathUtils.format2DecPoint(accPayable / goodsEnd  * 100);
 						
 				yearBuilder.append(balSheet.getYear()).append(",");
 				dataBuilder.append(dueAcctStock).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -413,14 +442,19 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				
 				double goodsEnd = Double.parseDouble(balSheet.getGoodsEnd());
 				
+				if (liquidAssetsEnd == 0) continue;
+				
 				String stockLiquid = MathUtils.format2DecPoint(goodsEnd / liquidAssetsEnd  * 100);
 						
 				yearBuilder.append(balSheet.getYear()).append(",");
 				dataBuilder.append(stockLiquid).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -465,8 +499,11 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(fixedAndunderCons).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -513,6 +550,8 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				
 				//期末净资产
 				double endNetassgrrt = totalAssEnd - totalLiabEnd;
+				
+				if (endNetassgrrt == 0) continue;
 
 				String fixedConsNetAsset = MathUtils.format2DecPoint((constrInPro + fixedAssetsEnd) / endNetassgrrt * 100);
 						
@@ -520,8 +559,10 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(fixedConsNetAsset).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
