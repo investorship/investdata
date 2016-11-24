@@ -60,18 +60,20 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 				double netprofitsLast = Double.parseDouble(incstSheet.getNetProfitsLast());
 				//当期净利润
 				double netprofitsThis = Double.parseDouble(incstSheet.getNetProfitsThis());
+				
+				if (netprofitsLast ==0) continue;
+				
 				//净利润增长率 = (当期净利润-上期净利润) /上期净利润  *  100%
-				String netprfgrrt = "0";
-				if (netprofitsLast != 0) {
-					netprfgrrt = MathUtils.format2DecPoint((netprofitsThis - netprofitsLast) / netprofitsLast  * 100);
-				}
-						
+				String netprfgrrt = MathUtils.format2DecPoint((netprofitsThis - netprofitsLast) / netprofitsLast  * 100);
+			
 				yearBuilder.append(incstSheet.getYear()).append(",");
 				dataBuilder.append(netprfgrrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);

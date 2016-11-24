@@ -69,6 +69,8 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				//平均应收账款
 				double avgAccRecableEnd = (accRecableStart + accRecableEnd) / 2;
 				
+				if (avgAccRecableEnd == 0) continue;
+				
 				//投资收益 / 利润总额  * 100
 				String aRTrat = MathUtils.format2DecPoint(busiIncomeThis / avgAccRecableEnd);
 						
@@ -76,8 +78,10 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(aRTrat).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -128,6 +132,8 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				//平均存货
 				double avgGoods = (goodsStart + goodsEnd)  / 2;
 				
+				if (avgGoods == 0) continue;
+				
 				//营业成本/[（年初存货 + 年末存货）/2 ]
 				String invtrtrrat = MathUtils.format2DecPoint(operatCost / avgGoods);
 						
@@ -135,8 +141,10 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(invtrtrrat).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -186,18 +194,24 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				//平均存货
 				double avgGoods = (goodsStart + goodsEnd)  / 2;
 				
-				//营业成本/[（年初存货 + 年末存货）/2 ]
-				String invtrtrrat = MathUtils.format2DecPoint(operatCost / avgGoods);
+				if (avgGoods ==0) continue;
 				
-				String invtrtrday = MathUtils.format2DecPoint(360 / Double.valueOf(invtrtrrat));
+				//营业成本/[（年初存货 + 年末存货）/2 ]
+				double invtrtrrat = Double.valueOf(MathUtils.format2DecPoint(operatCost / avgGoods));
+				
+				if (invtrtrrat == 0) continue;
+				
+				String invtrtrday = MathUtils.format2DecPoint(360 / invtrtrrat);
 				
 						
 				yearBuilder.append(incsSheet.getYear()).append(",");
 				dataBuilder.append(invtrtrday).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -246,16 +260,22 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				//平均应收账款
 				double avgAccRecableEnd = (accRecableStart + accRecableEnd) / 2;
 				
-				String aRTrat = MathUtils.format2DecPoint(busiIncomeThis / avgAccRecableEnd);
+				if (avgAccRecableEnd == 0) continue;
 				
-				String aRTday = MathUtils.format2DecPoint(360 / Double.parseDouble(aRTrat));
+				double aRTrat = Double.valueOf(MathUtils.format2DecPoint(busiIncomeThis / avgAccRecableEnd));
+				
+				if (aRTrat == 0) continue;
+				
+				String aRTday = MathUtils.format2DecPoint(360 / aRTrat);
 						
 				yearBuilder.append(incsSheet.getYear()).append(",");
 				dataBuilder.append(aRTday).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -304,14 +324,18 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				//平均流动资产
 				double avgliquidAssets = (liquidAssetsStart + liquidAssetsEnd) / 2;
 				
+				if (avgliquidAssets ==0 )  continue;
+				
 				String currat = MathUtils.format2DecPoint(busiIncomeThis / avgliquidAssets);
 										
 				yearBuilder.append(incsSheet.getYear()).append(",");
 				dataBuilder.append(currat).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -359,14 +383,18 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				//平均流动资产
 				double avgfixedAssets = (fixedAssetsStart + fixedAssetsEnd) / 2;
 				
+				if (avgfixedAssets ==0) continue;
+				
 				String fixassrat = MathUtils.format2DecPoint(busiIncomeThis / avgfixedAssets);
 										
 				yearBuilder.append(incsSheet.getYear()).append(",");
 				dataBuilder.append(fixassrat).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -414,14 +442,18 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 				//平均流动资产
 				double avgTotalAss = (totalAssStart + totalAssEnd) / 2;
 				
+				if (avgTotalAss == 0) continue;
+				
 				String totassrat = MathUtils.format2DecPoint(busiIncomeThis / avgTotalAss);
 										
 				yearBuilder.append(incsSheet.getYear()).append(",");
 				dataBuilder.append(totassrat).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);

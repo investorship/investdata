@@ -107,15 +107,19 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 				//本期净利润
 				double netProfitsThis = Double.parseDouble(incSheet.getNetProfitsThis());
 				
+				if (netProfitsThis == 0) continue;
+				
 				String operBusiCashRatio = MathUtils.format2DecPoint(operaActiveCash / netProfitsThis);
 				
 				yearBuilder.append(cashFlowSheet.getYear()).append(",");
 				dataBuilder.append(operBusiCashRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
-			
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+		
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
 			
@@ -157,6 +161,9 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 				double operaActiveCash = Double.parseDouble(cashFlowSheet.getOperaActiveCash());
 				//本期营业收入
 				double busiIncomeThis = Double.parseDouble(incSheet.getBusiIncomeThis());
+				
+				if (busiIncomeThis == 0) continue;
+				
 				//主营业务现金比率 = 经营性获取产生的现金流量净额 / 本期营业收入
 				String coreBusiCashRatio = MathUtils.format2DecPoint(operaActiveCash / busiIncomeThis);
 				
@@ -164,8 +171,10 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 				dataBuilder.append(coreBusiCashRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);

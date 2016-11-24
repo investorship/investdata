@@ -59,6 +59,8 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//期末负债总额
 				double totalLiabEnd= Double.parseDouble(balSheet.getTotalLiabEnd());
 				
+				if (totalAssEnd == 0) continue;
+				
 				//资产负债率 = 负债总额 /资产总额  * 100%
 				String dbastrt = MathUtils.format2DecPoint(totalLiabEnd / totalAssEnd  * 100);
 						
@@ -66,8 +68,11 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(dbastrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -106,6 +111,8 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//期末股东权益总额
 				double shareHolderEnd= Double.parseDouble(balSheet.getShareHolderEnd());
 				
+				if (shareHolderEnd == 0) continue;
+				
 				//权益乘数 = 期末资产总额 /期末股东权益总额  * 100%
 				String equmul = MathUtils.format2DecPoint(totalAssEnd / shareHolderEnd);
 						
@@ -113,8 +120,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(equmul).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -152,6 +161,8 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//期末固定资产
 				double fixedAssetsEnd= Double.parseDouble(balSheet.getFixedAssetsEnd());
 				
+				if (totalAssEnd == 0) continue;
+				
 				//固定资产比率 = 期末固定资产 /期末资产总额  * 100%
 				String fixassrt = MathUtils.format2DecPoint(fixedAssetsEnd / totalAssEnd * 100);
 						
@@ -159,8 +170,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(fixassrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -199,6 +212,8 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//无形资产
 				double lntangAssets= Double.parseDouble(balSheet.getLntangAssets());
 				
+				if (totalAssEnd == 0) continue;
+				
 				//无形资产比率 = 无形资产 /期末资产总额  * 100%
 				String intanassrt = MathUtils.format2DecPoint(lntangAssets / totalAssEnd * 100);
 						
@@ -206,8 +221,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(intanassrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -240,7 +257,6 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 			for (int i=0; i<balSheetsList.size();  i++) {
 				BalanceSheet balSheet = balSheetsList.get(i);
 				
-				
 				//期末资产总额
 				double totalAssEnd = Double.parseDouble(balSheet.getTotalAssEnd());
 				//期末负债总额
@@ -248,6 +264,8 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				
 				//期末净资产
 				double endNetassgrrt = totalAssEnd - totalLiabEnd;
+				
+				if (endNetassgrrt == 0) continue;
 				
 				//商誉
 				double goodwill= Double.parseDouble(balSheet.getGoodWill());
@@ -259,8 +277,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(goodwillRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -299,6 +319,8 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//期末股东权益
 				double shareHolderEnd= Double.parseDouble(balSheet.getShareHolderEnd());
 				
+				if (totalAssEnd == 0) continue;
+				
 				//股东权益比率= 股东权益 / 资产总额  * 100%
 				String equass = MathUtils.format2DecPoint(shareHolderEnd / totalAssEnd * 100);
 						
@@ -306,8 +328,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(equass).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -363,8 +387,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(debtEnsemble).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -400,6 +426,8 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				//期末股东权益
 				double shareHolderEnd = Double.parseDouble(balSheet.getShareHolderEnd());
 				
+				if (shareHolderEnd == 0) continue;
+				
 				//长期借款
 				double longTermLoans= Double.parseDouble(balSheet.getLongTermLoans());
 				
@@ -416,8 +444,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(longDebtRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);

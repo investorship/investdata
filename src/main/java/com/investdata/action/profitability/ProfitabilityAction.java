@@ -150,6 +150,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				//平均资产总额
 				double avgAssEnd = (totalAssEnd + totalAssStart) / 2 ;
 				
+				if (avgAssEnd == 0) continue;
+				
 				//本期净利润
 				double profit = Double.parseDouble(incstSheet.getNetProfitsThis());
 				
@@ -159,8 +161,10 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(ROA).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -209,6 +213,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				//平均资产总额
 				double avgAssEnd = (totalAssEnd + totalAssStart) / 2 ;
 				
+				if (avgAssEnd == 0) continue;
+				
 				//本期利润总额
 				double totalProfitEnd = Double.parseDouble(incstSheet.getTotalProfitEnd());
 				
@@ -255,6 +261,9 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				
 				//本期营业收入
 				double busiInComeThis = Double.parseDouble(incstSheet.getBusiIncomeThis());
+				
+				if (busiInComeThis == 0) continue;
+				
 				//营业成本
 				double operatCost = Double.parseDouble(incstSheet.getOperatCost());
 				
@@ -265,8 +274,10 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(grossProfit).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -305,6 +316,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				//净利润
 				double netProfitsThis = Double.parseDouble(incstSheet.getNetProfitsThis());
 				
+				if (busiInComeThis == 0) continue;
+				
 				//净利润/营业收入 *100%	
 				String grossProfit = MathUtils.format2DecPoint(netProfitsThis / busiInComeThis * 100);
 						
@@ -312,8 +325,10 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(grossProfit).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -352,6 +367,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				//净利润(扣非)
 				double netProfitsThis = Double.parseDouble(incstSheet.getNetProfitsKfThis());
 				
+				if (busiInComeThis == 0) continue;
+				
 				//净利润(扣非) /营业收入 *100%	
 				String grossProfit = MathUtils.format2DecPoint(netProfitsThis / busiInComeThis * 100);
 						
@@ -359,8 +376,10 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(grossProfit).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -408,6 +427,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				//成本费用总额=营业成本+营业税金及附加+管理费用+财务费用 +销售费用
 				double totalConsts = operatCost + busiTaxSurcharge + mgrConstsThis + finConstsThis + marketConstsThis;
 				
+				if (totalConsts == 0) continue;
+				
 				//成本费用净利率 = 净利润/成本费用总额		
 				String costExpProRatio = MathUtils.format2DecPoint(netProfitsThis / totalConsts * 100);
 						
@@ -415,8 +436,10 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				dataBuilder.append(costExpProRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -468,6 +491,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 				
 				//平均资产总额
 				double avgAssEnd = (totalAssEnd + totalAssStart) / 2 ;
+				
+				if (avgAssEnd == 0) continue;
 				
 				//资产息税前利润率 = 息税前利润/资产平均总额	
 				String costExpProRatio = MathUtils.format2DecPoint((totalProfitEnd + interExpense) / avgAssEnd * 100);

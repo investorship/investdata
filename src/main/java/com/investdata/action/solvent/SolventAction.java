@@ -65,6 +65,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//流动负债
 				double curr_liab = Double.valueOf(balanceSheet.getCurrLiab());
 				
+				if (curr_liab == 0) continue;
+				
 				//流动比率= 流动资产 / 流动负债
 				String currt = MathUtils.format2DecPoint(liquidAssetsEnd / curr_liab);
 				
@@ -72,8 +74,10 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				dataBuilder.append(currt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -120,6 +124,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//流动负债
 				double curr_liab = Double.valueOf(balanceSheet.getCurrLiab());
 				
+				if (curr_liab == 0)  continue;
+				
 				//速动比例 = (流动资产 - 存货 )/ 流动负债
 				String qckrt = MathUtils.format2DecPoint((liquidAssetsEnd -goodEnd) / curr_liab);
 				
@@ -127,8 +133,10 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				dataBuilder.append(qckrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -175,6 +183,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//流动负债
 				double curr_liab = Double.valueOf(balanceSheet.getCurrLiab());
 				
+				if (curr_liab == 0) continue;
+				
 				//现金比率= (现金等价物+有价证券)/流动负债
 				String cashRate = MathUtils.format2DecPoint((cash + tradeAssets) / curr_liab);
 				
@@ -182,8 +192,10 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				dataBuilder.append(cashRate).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -234,6 +246,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//流动负债
 				double currLiab = Double.valueOf(balanceSheet.getCurrLiab());
 				
+				if (currLiab == 0) continue;
+				
 				//现金流量比率 = 经营活动产生的现金流量净额/流动负债
 				String cashFlow = MathUtils.format2DecPoint(operaActiveCash/ currLiab);
 				
@@ -241,8 +255,10 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				dataBuilder.append(cashFlow).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -287,6 +303,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//期末股东权益 
 				double shareHolderEnd = Double.valueOf(balanceSheet.getShareHolderEnd());
 				
+				if (shareHolderEnd == 0) continue;
+				
 				//产权比率 = 负债总额/股东权益	
 				String dbequrt = MathUtils.format2DecPoint(totalLiab/ shareHolderEnd);
 				
@@ -294,8 +312,10 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				dataBuilder.append(dbequrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -347,6 +367,8 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//经营活动产生的现金流量净额
 				double operaActiveCash = Double.valueOf(cashFlowSheet.getOperaActiveCash());
 				
+				if (operaActiveCash == 0) continue;
+				
 				//偿债保障比率 = 负债总额 / 经营活动产生的现金流量净额
 				String dbequrt = MathUtils.format2DecPoint(totalLiab / operaActiveCash);
 				
@@ -354,8 +376,10 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				dataBuilder.append(dbequrt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -792,22 +816,29 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				//商誉
 				double goodWill = Double.valueOf(balanceSheet.getGoodWill());
 				
+				double diff = shareHolderEnd - lntangAssets - goodWill;
+				
+				if (diff == 0) continue;
+				
 				//有形净值债务比率 = 负债总额 /( 股东权益 - 无形资产净值 - 商誉 )		
-				String dbtaneQurt = MathUtils.format2DecPoint(totalLiab /(shareHolderEnd - lntangAssets - goodWill));
+				String dbtaneQurt = MathUtils.format2DecPoint((totalLiab / diff) * 100);
 				
 				yearBuilder.append(balanceSheet.getYear()).append(",");
 				dataBuilder.append(dbtaneQurt).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
+			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
 			
 			chart.setxAxis(yearBuilder.toString());
 			chart.setData(dataBuilder.toString());
-			chart.setLegendData("有形净值债务比率");
+			chart.setLegendData("有形净值债务比率(%)");
 			chart.setText(code + " " + stockName);
 		}
 		request.put("chart", chart);

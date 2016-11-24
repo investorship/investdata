@@ -59,6 +59,8 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 				//利润总额
 				double totalProfitEnd= Double.parseDouble(incsSheet.getTotalProfitEnd());
 				
+				if (totalProfitEnd == 0) continue;
+				
 				//投资收益 / 利润总额  * 100
 				String investProfitRatio = MathUtils.format2DecPoint(investIncome / totalProfitEnd  * 100);
 						
@@ -66,8 +68,10 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(investProfitRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -105,6 +109,8 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 				//利润总额
 				double totalProfitEnd= Double.parseDouble(incsSheet.getTotalProfitEnd());
 				
+				if (totalProfitEnd == 0) continue;
+				
 				//公允价值变动 / 利润总额  * 100
 				String fairValueRatio = MathUtils.format2DecPoint(fairValChange / totalProfitEnd  * 100);
 						
@@ -112,8 +118,10 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(fairValueRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
@@ -157,6 +165,8 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 				//利润总额
 				double totalProfitEnd= Double.parseDouble(incsSheet.getTotalProfitEnd());
 				
+				if (totalProfitEnd == 0) continue;
+				
 				//营业外收支净额  / 利润总额
 				String noNBusiProRatio = MathUtils.format2DecPoint(noNBusiPro / totalProfitEnd  * 100);
 						
@@ -164,8 +174,10 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 				dataBuilder.append(noNBusiProRatio).append(",");
 			}
 			
-			yearBuilder.deleteCharAt(yearBuilder.length() -1 );
-			dataBuilder.deleteCharAt(dataBuilder.length() -1);
+			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
+				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
+				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
+			}
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");
 			String stockName = stockCodeMapping.get(code);
