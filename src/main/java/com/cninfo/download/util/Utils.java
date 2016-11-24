@@ -23,6 +23,9 @@ import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import com.cninfo.download.http.HttpRequest;
 import com.cninfo.download.vo.FinanceDataVo;
@@ -751,6 +754,81 @@ public class Utils {
 		
 	}
 	
+	public static void getStockBaseInfo(String code,StringBuilder updateSQL) throws Exception {
+		String temp = getMarket(code);
+		
+		HttpEntity respEntity = HttpRequest.httpPost("http://www.cninfo.com.cn/information/brief/" + temp + code + ".html",null);
+		String stockInfo = EntityUtils.toString(respEntity,"GBK");
+//		System.out.println(stockInfo);
+		Document doc = Jsoup.parse(stockInfo);
+		Elements trs = doc.select("table").select("tr");
+		
+		String ipotime = "0";
+		String ipostocks = "0";
+		String issuedPE = "0";
+		String issuedprice = "0";
+		String address = "";
+		String compywebsite = "0";
+		String reportaddress = "http://www.cninfo.com.cn/information/companyinfo_n.html?fulltext?" + temp;
+		String phone = "0";
+		String legaler = "";
+		
+//		updateSQL = new StringBuilder();
+		
+		for (int i=1; i<trs.size(); i++) {
+			Elements tds = trs.get(i).select("td");
+            for(int j = 0;j<tds.size();j++){
+            	if (j % 2 ==0) continue;
+                String text = tds.get(j).text();
+//                System.out.println("j=" + j +" i=" + i +" text=" + text);
+                
+                if (i == 13) {
+                	ipotime = text;
+                } else if (i == 15) {
+                	ipostocks = text;
+                	ipostocks = ipostocks.replaceAll(",", "");
+                } else if (i ==16) {
+                	issuedprice = text;
+                } else if (i == 17) {
+                	/*if (!"".equals(text.trim())) {
+                		issuedPE = text;
+                	}*/
+                } else if (i == 3) {
+                	address = text;
+                } else if (i == 12) {
+                	compywebsite = text;
+                } else if (i ==10) {
+                	phone = text;
+                } else if (i == 5) {
+                	legaler = text;
+                }
+                
+            }
+		}
+		
+		updateSQL.append("update t_stocks set ipotime='").append(ipotime).append("',").append("ipostocks=").append(ipostocks).append(",");
+		updateSQL.append("issuedPE=").append(issuedPE).append(",").append("issuedprice=").append(issuedprice).append(",");
+		updateSQL.append("address='").append(address).append("',").append("compywebsite='http://").append(compywebsite).append("',");
+		updateSQL.append("phone='").append(phone).append("',").append("legaler='").append(legaler).append("',");
+		updateSQL.append("reportaddress='").append(reportaddress).append("'");
+		updateSQL.append(" where code='").append(code).append("';").append("\n");
+		
+	}
+	
+	
+	public static String getMarket(String stockCode){
+		String sc = stockCode.substring(0,1);
+		if(sc.equals("6") || sc.equals("9")){
+			return "shmb";
+		}else if(sc.equals("3")){
+			return "szcn";
+		}else if(stockCode.substring(0,3).equals("002")){
+			return "szsme";
+		}else{
+			return "szmb";
+		}
+	}
+
 	
 
 	public static void main(String[] args) throws Exception {

@@ -162,10 +162,18 @@
 		    <version>4.2.5</version>
 		</dependency>
 		
+		<!-- 为解析.zip压缩文件加入 -->
 		<dependency>
 			<groupId>ant</groupId>
 			<artifactId>ant</artifactId>
 			<version>1.7.0</version>
+		</dependency>
+		
+		<!-- 为解析html文档加入 -->
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.8.3</version>
 		</dependency>
 		
 
