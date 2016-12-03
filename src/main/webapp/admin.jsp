@@ -40,7 +40,7 @@
 								id="Text3" type="text" class="txtCode" name="randCode" />
 						</span>  
 						<a href="javascript:changeImageAuth()">
-						<img width="80px"  height="20px" id="imageAuth" src="imageAuth/imageAuth.action" alt="验证码"></a>
+						<img width="70px"  height="25px" id="imageAuth" src="imageAuth/imageAuth.action" alt="验证码"></a>
 						</li>
 						<li>
 						<div id="loginFail" class="top-msg " style="color:#F00;font-weight:blod"></div>
