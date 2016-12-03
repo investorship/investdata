@@ -63,8 +63,8 @@ ul {
 .topE {
 	width: 31px;
 	height: 140px; /* float: left; */
-	right: 288px;
-	position: absolute;
+	right: 122px;
+	position: relative;
 	overflow: hidden;
 	z-index: -999;
 	background: url(../../images/admin/login_07.gif) no-repeat;
