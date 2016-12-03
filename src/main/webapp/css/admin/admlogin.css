@@ -151,7 +151,8 @@ ul
 	height:34px;
 	text-align: right;
 	display: -moz-inline-box;
-	display: inline-block;
+	/**
+	#display: inline-block; **/
 	padding-bottom:3px;
 }
 

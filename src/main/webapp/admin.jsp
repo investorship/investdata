@@ -33,7 +33,7 @@
 								id="userName" type="text" class="txt" name="userName" />
 
 						</span></li>
-						<li><span class="left">密 码：</span> <span style=""> <input
+						<li><span class="left">密&nbsp;&nbsp;&nbsp;码：</span> <span style=""> <input
 								id="password" type="password" class="txt" name="password" />
 						</span></li>
 						<li><span class="left">验证码：</span> <span style=""> <input
