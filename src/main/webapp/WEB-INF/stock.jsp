@@ -51,43 +51,23 @@
                 <li><span>上市时间：</span>${stock.ipoTime }</li>
                 <li><span>发行量：</span>${stock.ipoStocks}（万股）</li>
                 <li><span>发行市盈率：</span>${stock.issuedPE }</li>
-                <li><span>发行价格：</span>${stock.issuedPrice }</li>
             </ul>
             <ul>
+                <li><span>发行价格：</span>${stock.issuedPrice }</li>
                 <li><span>企业法人：</span>${stock.legaler}</li>
                 <li><span>所属行业：</span>${stock.category }</li>
+            </ul>
+            <ul>
+                <li><span>电话：</span>${stock.phone }</li>
+                <li><span>公告查询：</span><a href="${stock.reportAddress}${stock.code}" target="_blank">巨潮资讯直达</a></li>
                 <li><span>公司网址：</span>${stock.compyWebsite}</li>
             </ul>
             <ul>
                 <li><span>公司地址：</span>${stock.address }</li>
-                <li><span>电话：</span>${stock.phone }</li>
-                <li><span>公告查询：</span><a href="${stock.reportAddress}${stock.code}" target="_blank">巨潮资讯直达</a></li>
             </ul>
         </div>
     </div>
-    <!-- 
-    <div class="province_choose">
-        <label>
-            请选择分类：</label>
-        <span>
-            <select id="selectProvince">
-                <option value="0">每股指标</option>
-                <option value="1">偿债能力</option>
-            </select>
-        </span>
-        <span>
-            <select id="selectCity">
-                <option value="0">每股收益</option>
-                <option value="1">稀释每股收益</option>
-            </select>&nbsp;
-        </span>
-        <input type="button" name="btn" id="btn"  value="确定">
-
-        <div class="share">
-            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-        </div>
-    </div> -->
+    
     <div class="city_box">
         <ul class="letter-list" id="J-city-list">
         	<c:forEach items="${parentsIndexList }" var="parentsIndex">
