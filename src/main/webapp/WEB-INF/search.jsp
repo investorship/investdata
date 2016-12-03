@@ -14,9 +14,9 @@
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>投资数据网</title>
-<meta name="keywords" content=""/>
-<meta name="description" content=""/>
+<title>投资数据网-您身边的投资助手-上市公司历史财务数据查询</title>
+<meta name="keywords" content="历年财务数据、财务指标走势"/>
+<meta name="description" content="上市公司历史财务数据查询，历年财务数据、财务指标走势"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="document-state" content="dynamic"/>
 <link href="css/i.css" type="text/css" rel="stylesheet" />
@@ -44,6 +44,7 @@
 	    return false;  
 	};
 </script>
+<jsp:include page="/WEB-INF/baidu_statistics.jsp"/> <!-- 百度统计 -->
 </head>
 <body id="home">
 <div class="wbyTop fn-clear">
