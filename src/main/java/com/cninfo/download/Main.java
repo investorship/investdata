@@ -16,7 +16,7 @@ public class Main {
 		String origIdUrl = "http://www.cninfo.com.cn/cninfo-new/data/query";
 		String fileDir = "d:\\job\\"; //文件存放路径
 		
-		Connection conn = JDBC.getConn();
+		/*Connection conn = JDBC.getConn();
 		PreparedStatement pst = conn.prepareStatement("select code,name from t_stocks");
 		ResultSet rs = pst.executeQuery();
 		
@@ -30,11 +30,11 @@ public class Main {
 			//获取orgId 与market等信息。
 		}
 		
-		/*Thread.sleep(1000);
+		Thread.sleep(1000);*/
 		
-		JSONObject jsonParam1 = Utils.getOrgInfoJsonObj("002537", origIdUrl);
+		JSONObject jsonParam1 = Utils.getOrgInfoJsonObj("000651", origIdUrl);
 		Utils.getFinanceDataZip(url, jsonParam1,fileDir); //获取财务数据
-		Utils.unZipFile(fileDir,"002537");*/
+		Utils.unZipFile(fileDir,"000651");
 	}
 	
 	/*public static void main(String[] args) throws Exception {
