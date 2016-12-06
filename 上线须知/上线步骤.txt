@@ -4,3 +4,7 @@
 3、cd src    redis-server  --启动
 4、修改 redis.conf 注释掉 bind 127.0.0.1 ::1(绑定本机IP)
 5、./redis-cli    执行  config set requirepass admin123  设定密码
+
+
+--常用命令：
+mysqldump -uroot -p investdata > /home/guohailong/bak/investdata.sql
