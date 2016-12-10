@@ -109,7 +109,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 				
 				if (netProfitsThis == 0) continue;
 				
-				String operBusiCashRatio = MathUtils.format2DecPoint(operaActiveCash / netProfitsThis);
+				String operBusiCashRatio = MathUtils.format2DecPoint(operaActiveCash / netProfitsThis * 100);
 				
 				yearBuilder.append(cashFlowSheet.getYear()).append(",");
 				dataBuilder.append(operBusiCashRatio).append(",");
@@ -165,7 +165,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 				if (busiIncomeThis == 0) continue;
 				
 				//主营业务现金比率 = 经营性获取产生的现金流量净额 / 本期营业收入
-				String coreBusiCashRatio = MathUtils.format2DecPoint(operaActiveCash / busiIncomeThis);
+				String coreBusiCashRatio = MathUtils.format2DecPoint(operaActiveCash / busiIncomeThis * 100);
 				
 				yearBuilder.append(cashFlowSheet.getYear()).append(",");
 				dataBuilder.append(coreBusiCashRatio).append(",");
