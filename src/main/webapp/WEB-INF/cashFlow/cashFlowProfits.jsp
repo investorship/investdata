@@ -11,8 +11,8 @@
 <base href="<%=basePath%>">
 <title>投资数据网 - 历史经营性现金流与净利润之比走势图</title>
 <meta name="viewport" content="width=1010" />
-<meta name="keywords" content="历史经营性现金流与净利润之比，历年经营性现金流与净利润之比查询" />
-<meta name="description" content="上市公司经营性现金流与净利润之比查询，上市公司历年经营性现金流与净利润之比走势图" />
+<meta name="keywords" content="历史经营性现金净流量与净利润之比，历年经营性现金净流量与净利润之比查询" />
+<meta name="description" content="上市公司经营性现金净流量与净利润之比查询，上市公司历年经营性现金净流量与净利润之比走势图" />
 <link href="css/basic.css" type="text/css" rel="stylesheet" />
 <link href="css/list.css" type="text/css" rel="stylesheet" />
 <link href="css/login.css" type="text/css" rel="stylesheet" />
@@ -58,8 +58,8 @@
 		</div>
 	</div>
 	<div class="report_tip">
-		<span style="font-weight:bold;">指标名称：</span>经营性现金流 / 净利润<br>
-		<span style="font-weight:bold;">计算公式：</span> 经营性现金流 / 净利润  × 100% <br>
+		<span style="font-weight:bold;">指标名称：</span>经营性现金净流量 / 净利润<br>
+		<span style="font-weight:bold;">计算公式：</span> 经营性现金净流量 / 净利润  × 100% <br>
 		<span style="font-weight:bold;">说明：</span><br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该指标用来衡量，每年获取的现金流量净额占公司净利润的百分比，用于衡量公司净利润转换为现金流的能力。
 	</div>
