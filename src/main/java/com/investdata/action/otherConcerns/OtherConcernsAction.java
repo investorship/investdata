@@ -236,7 +236,15 @@ public class OtherConcernsAction extends BaseAction implements RequestAware,Appl
 				String netprfgrrt = MathUtils.format2DecPoint(diff / financeConstsLast  * 100);
 						
 				yearBuilder.append(incstSheet.getYear()).append(",");
-				dataBuilder.append(netprfgrrt).append(",");
+				
+				//考虑了财务费用为负数的情况，利息收入 >利息支出，如果今年减去年 值为负数就就说明是下降的，数据应该取负值，图形
+				//显示更直观。
+				if (diff < 0) { 
+					dataBuilder.append(String.valueOf( 0 - Math.abs(Double.valueOf(netprfgrrt)))).append(",");					
+				}else {
+					dataBuilder.append(Math.abs(Double.valueOf(netprfgrrt))).append(",");	
+				}
+				
 			}
 			
 			if (yearBuilder.length() > 1 && dataBuilder.length() > 1) {
