@@ -186,7 +186,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				if (curr_liab == 0) continue;
 				
 				//现金比率= (现金等价物+有价证券)/流动负债
-				String cashRate = MathUtils.format2DecPoint((cash + tradeAssets) / curr_liab);
+				String cashRate = MathUtils.format2DecPoint((cash + tradeAssets) / curr_liab * 100);
 				
 				yearBuilder.append(balanceSheet.getYear()).append(",");
 				dataBuilder.append(cashRate).append(",");
@@ -202,7 +202,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			
 			chart.setxAxis(yearBuilder.toString());
 			chart.setData(dataBuilder.toString());
-			chart.setLegendData("现金比率");
+			chart.setLegendData("现金比率(%)");
 			chart.setText(code + " " + stockName);
 		}
 		
@@ -249,7 +249,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				if (currLiab == 0) continue;
 				
 				//现金流量比率 = 经营活动产生的现金流量净额/流动负债
-				String cashFlow = MathUtils.format2DecPoint(operaActiveCash/ currLiab);
+				String cashFlow = MathUtils.format2DecPoint(operaActiveCash/ currLiab * 100);
 				
 				yearBuilder.append(balanceSheet.getYear()).append(",");
 				dataBuilder.append(cashFlow).append(",");
@@ -265,7 +265,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			
 			chart.setxAxis(yearBuilder.toString());
 			chart.setData(dataBuilder.toString());
-			chart.setLegendData("现金流量比率");
+			chart.setLegendData("现金流量比率(%)");
 			chart.setText(code + " " + stockName);
 		}
 		
@@ -306,7 +306,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 				if (shareHolderEnd == 0) continue;
 				
 				//产权比率 = 负债总额/股东权益	
-				String dbequrt = MathUtils.format2DecPoint(totalLiab/ shareHolderEnd);
+				String dbequrt = MathUtils.format2DecPoint(totalLiab/ shareHolderEnd * 100);
 				
 				yearBuilder.append(balanceSheet.getYear()).append(",");
 				dataBuilder.append(dbequrt).append(",");
@@ -322,7 +322,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			
 			chart.setxAxis(yearBuilder.toString());
 			chart.setData(dataBuilder.toString());
-			chart.setLegendData("产权比率");
+			chart.setLegendData("产权比率(%)");
 			chart.setText(code + " " + stockName);
 		}
 		
