@@ -160,6 +160,15 @@ public class Utils {
 		String market = fdv.getMarket();
 		String type = fdv.getType();
 		String fileName = code + "_" + market + "_" + type + ".zip";
+		
+//		fileDir = fileDir + code;
+		
+		File dirFile = new File(fileDir);
+		
+		if (!dirFile.exists()) {
+			dirFile.mkdir();
+		}
+		
 		fileName = fileDir + fileName;
 		
 		int times = 0;
@@ -176,6 +185,7 @@ public class Utils {
 				}
 				fos.flush();
 				fos.close();
+				is.close();
 				
 				File checkFile = new File(fileName);
 				if (checkFile != null && checkFile.isFile() && checkFile.length() > 0) {
@@ -259,13 +269,14 @@ public class Utils {
 			financeDataSQL.append(sql).append(gendataSQL).append(updateSQL); //四大报表SQL汇总 保证Insert在前，update在后
 			
 			//每只股票的SQL写入一个以股票代码命名的sql文件中。
-			BufferedWriter  sqlWriter = new BufferedWriter(new FileWriter(new File(fileDir + "\\sql\\" + code + ".sql")));
+			BufferedWriter  sqlWriter = new BufferedWriter(new FileWriter(new File("D:\\job\\sql\\" + code + ".sql")));
 			sqlWriter.write(financeDataSQL.toString());
 			sqlWriter.flush();
+			sqlWriter.close();
 			
 			//写入完成之后，清空保存SQL的 StringBuffer
 			financeDataSQL.delete(0, financeDataSQL.length());
-			sql.delete(0, sql.length() -1 );
+			sql.delete(0, sql.length());
 			gendataSQL.delete(0, gendataSQL.length());
 			updateSQL.delete(0, updateSQL.length());
 			
@@ -283,12 +294,10 @@ public class Utils {
 			for (File file : deleFiles) {
 				
 				if (!file.isDirectory()) {
-					file.delete();					
+					file.getAbsoluteFile().delete();				
 				}
 //				System.err.println("删除文件" + file.getName());
 			}
-			
-			Thread.sleep(700);
 			
 		}
 	}
@@ -320,6 +329,7 @@ public class Utils {
 			
 		}
 		bReader.close();
+		is.close();
 		
 	}
 	
@@ -351,6 +361,7 @@ public class Utils {
 		}
 		
 		bReader.close();
+		is.close();
 		
 	}
 	
@@ -382,6 +393,7 @@ public class Utils {
 		}
 		
 		bReader.close();
+		is.close();
 	}
 	
 	
