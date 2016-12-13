@@ -91,7 +91,7 @@ public class Utils {
 			if (orgId != "") {
 				System.err.println("代码： " + code + "  名称:" + name + "  组织ID："+ orgId);
 
-				if ("6".equals(code)) { // 区分 上海 or 深圳 市场
+				if (code.startsWith("6")) { // 区分 上海 or 深圳 市场
 					jsonObj.put("market", "sh");
 				} else {
 					jsonObj.put("market", "sz");
