@@ -22,12 +22,12 @@
 			<interceptor name="adminUrlMacValidInterceptor" class="com.investdata.common.interceptor.AdminUrlMacValidInterceptor"></interceptor>
 			<interceptor-stack name="investInterceptor">
 				<interceptor-ref name="defaultStack" ></interceptor-ref>
-				<interceptor-ref name="searchIndexInterceptor" ></interceptor-ref>
 				<interceptor-ref name="adminUrlMacValidInterceptor"></interceptor-ref>
 				<interceptor-ref name="methodInterceptor"></interceptor-ref>
 				<interceptor-ref name="adminLoginInterceptor"></interceptor-ref>
 				
 				<!--
+				<interceptor-ref name="searchIndexInterceptor" ></interceptor-ref>
 				<interceptor-ref name="illegalCharacterInterceptor"></interceptor-ref>
 				
 				<interceptor-ref name="loginInterceptor"></interceptor-ref>	

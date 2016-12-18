@@ -42,6 +42,26 @@ public class CacheManager {
 	private static Jedis jedis = RedisCache.getJedis();
 	
 	/**
+	 * 清除所有数据-->加载数据之前
+	 * @throws Exception
+	 */
+	public static void flushAll() throws Exception {
+		long before = getDbsize();
+		jedis.flushAll();
+		long after = getDbsize();
+		_log.info(String.format("Redis数据已经全部清除，清除前[%s],清除后[%s]", before,after));
+	}
+	
+	/** 
+	 * 返回当前数据库中key的数量
+	 * @return
+	 * @throws Exception
+	 */
+	public static long getDbsize() throws Exception {
+		return jedis.dbSize();
+	}
+	
+	/**
 	 * 初始化股票检索列表与对应关系数据
 	 * 
 	 * @throws Exception

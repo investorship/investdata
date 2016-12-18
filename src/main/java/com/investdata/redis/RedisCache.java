@@ -43,6 +43,13 @@ public class RedisCache {
 		return jedis;
 	}
 	
+	public static void destory() {
+		if (jedisPool != null) {
+			jedisPool.destroy();
+			_log.info("销毁redis资源池");
+		}
+	}
+	
 	public static void main(String[] args) {
 		Jedis jedis = getJedis();
 		

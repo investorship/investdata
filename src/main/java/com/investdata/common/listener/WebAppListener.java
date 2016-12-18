@@ -23,7 +23,8 @@ public class WebAppListener implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
-
+		//销毁redis资源池
+		RedisCache.destory();
 	}
 	
 	/**
@@ -38,6 +39,7 @@ public class WebAppListener implements ServletContextListener {
 		ServletContext application = event.getServletContext();
 		
 		try {
+			CacheManager.flushAll();
 			CacheManager.initStockData(application);  // 初始化页面检索数据
 			CacheManager.initFinanceIndexInfo(application); // 初始化财务指标信息
 			CacheManager.initGendataSheet();  // 初始化综合数据表项数据.
