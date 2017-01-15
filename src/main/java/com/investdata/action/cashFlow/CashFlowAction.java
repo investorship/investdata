@@ -34,16 +34,15 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
-	
-	
 	
 	//经营现金净流量
 	public String operBusiCashRatio() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String cashFlowKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] in = jedis.get(cashFlowKey.getBytes());
 		List<CashFlowSheet> cashFlowList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -82,6 +81,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 	}
 	//经营现金净流量/净利润
 	public String cashFlowProfits() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String cashFlowKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] in = jedis.get(cashFlowKey.getBytes());
@@ -90,6 +90,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 		String incKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] incIn = jedis.get(incKey.getBytes());
 		List<IncstateSheet> incSheetList = ObjectsTranscoder.deserialize(incIn); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -137,6 +138,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 	
 	//主营业务现金比率
 	public String coreBusiCashRatio() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String cashFlowKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] in = jedis.get(cashFlowKey.getBytes());
@@ -145,6 +147,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 		String incKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] incIn = jedis.get(incKey.getBytes());
 		List<IncstateSheet> incSheetList = ObjectsTranscoder.deserialize(incIn); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -192,11 +195,12 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 	
 	//现金及其等价物净增加额
 	public String cashFlowInc() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String cashFlowKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] in = jedis.get(cashFlowKey.getBytes());
 		List<CashFlowSheet> cashFlowList = ObjectsTranscoder.deserialize(in);  		
-	
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -236,6 +240,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 	
 	//总资产现金回收率
 	public String cashAndAssetRatio() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String cashFlowKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] in = jedis.get(cashFlowKey.getBytes());
@@ -244,6 +249,7 @@ public class CashFlowAction extends BaseAction implements RequestAware,Applicati
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] balIn = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balSheetList = ObjectsTranscoder.deserialize(balIn);  	
+		jedis.close();
 		
 		
 		Chart chart = new Chart();

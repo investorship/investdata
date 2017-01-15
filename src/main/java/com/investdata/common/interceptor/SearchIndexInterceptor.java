@@ -1,11 +1,9 @@
 package com.investdata.common.interceptor;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,17 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.StrutsStatics;
 
-import redis.clients.jedis.Jedis;
-
 import com.investdata.common.Const;
-import com.investdata.common.listener.WebAppListener;
 import com.investdata.dao.po.SearchIndex;
 import com.investdata.redis.ObjectsTranscoder;
 import com.investdata.redis.RedisCache;
-import com.investdata.utils.PropertiesUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * 搜索指数拦截器，主要用于统计首页热搜榜 股票和财务指标的搜索频率
@@ -35,27 +31,30 @@ public class SearchIndexInterceptor extends AbstractInterceptor {
 	Logger _log = Logger.getLogger(SearchIndexInterceptor.class);
 	
 	private static final long serialVersionUID = 1L;
-	private static List<Map<String,String>> stockIndexList = new ArrayList<Map<String,String>>(); //股票搜索指数
-	private static List<Map<String,String>> financeIndexList = new ArrayList<Map<String,String>>(); //财务指标指数
+//	private static List<Map<String,String>> stockIndexList = new ArrayList<Map<String,String>>(); //股票搜索指数
+//	private static List<Map<String,String>> financeIndexList = new ArrayList<Map<String,String>>(); //财务指标指数
 	
 	private static StockIndexSort sis = new StockIndexSort();
 	
 	private static HashMap<String,String> stockCodeMapping = null;
 	
-	private static Jedis jedis = RedisCache.getJedis();
-	private static Set<String> mappingKeys  = jedis.hkeys(Const.STOCK_CODE_MAPPING);
+	private static Set<String> mappingKeys  = null;
 	static  {
+		Jedis jedis = RedisCache.getJedis();
+		mappingKeys = jedis.hkeys(Const.STOCK_CODE_MAPPING);
 		stockCodeMapping = new HashMap<String,String>();
 		for (String key : mappingKeys) {
 			List<String> value = jedis.hmget(Const.STOCK_CODE_MAPPING, key);
 			stockCodeMapping.put(key, value.get(0));
 		}
+		
+		jedis.close();
 	}
 
 
 	@Override
 	public String intercept(ActionInvocation arg0) throws Exception {
-		
+		Jedis jedis = RedisCache.getJedis();
 		byte[] searchIndexIn = jedis.get(Const.SEARCHINDEX_KEY.getBytes());		
 		List<SearchIndex> searchIndexList = ObjectsTranscoder.deserialize(searchIndexIn);
 		
@@ -99,9 +98,8 @@ public class SearchIndexInterceptor extends AbstractInterceptor {
 			_log.info(String.format("%s:访问次数[%s]", si.getName(),si.getCount()));
 		}
 		
-		
 		jedis.set(Const.SEARCHINDEX_KEY.getBytes(), ObjectsTranscoder.serialize(searchIndexList));
-		
+		jedis.close();
 		return arg0.invoke();
 	}
 	

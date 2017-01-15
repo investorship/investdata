@@ -35,7 +35,6 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
 	
 	//流动比率
 	public String currt() throws Exception {
@@ -44,10 +43,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -101,10 +101,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -155,7 +156,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 	//现金比率
 	public String cash() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
@@ -163,6 +164,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		String compxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -218,7 +220,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(in);  
@@ -227,6 +229,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		String incCompxKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<CashFlowSheet> cashFlowSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -283,9 +286,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			return ERROR;
 		}
 		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -339,7 +344,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(in);  
@@ -348,6 +353,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		String incCompxKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<CashFlowSheet> cashFlowSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -403,10 +409,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -455,7 +462,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
@@ -463,6 +470,7 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		String key = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(key.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -519,9 +527,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			return ERROR;
 		}
 		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -576,9 +586,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			return ERROR;
 		}
 		
+		Jedis jedis = RedisCache.getJedis();
 		String key = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(key.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -626,10 +638,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String key = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(key.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -675,10 +688,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String key = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(key.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -730,10 +744,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String key = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(key.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -792,9 +807,11 @@ public class SolventAction extends BaseAction implements RequestAware,Applicatio
 			return ERROR;
 		}
 		
+		Jedis jedis = RedisCache.getJedis();
 		String key = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(key.getBytes());
 		List<BalanceSheet> balanceSheetsList = ObjectsTranscoder.deserialize(inBal);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		

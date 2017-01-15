@@ -7,17 +7,16 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 
-import redis.clients.jedis.Jedis;
-
 import com.investdata.common.BaseAction;
 import com.investdata.common.Const;
-import com.investdata.dao.po.BalanceSheet;
 import com.investdata.dao.po.Chart;
 import com.investdata.dao.po.IncstateSheet;
 import com.investdata.redis.ObjectsTranscoder;
 import com.investdata.redis.RedisCache;
 import com.investdata.utils.MathUtils;
 import com.opensymphony.xwork2.ActionContext;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * 核心业务质量计算
@@ -33,16 +32,15 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
-	
-	
 	
 	//投资收益 / 利润总额
 	public String investProfitRatio() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
-		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  		
+		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -89,10 +87,12 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 	
 	//公允价值变动 / 利润总额
 	public String fairValueRatio() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
-		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  		
+		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -139,10 +139,12 @@ public class CoreBusiQualityAction extends BaseAction implements RequestAware,Ap
 	
 	//营业外收支净额 / 利润总额
 	public String noNBusiProRatio() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
-		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  		
+		List<IncstateSheet> incstateSheetList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		

@@ -33,12 +33,11 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
-	
 	
 	
 	//应收账款周转率
 	public String aRTrat() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
@@ -47,6 +46,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balanceSheetList = ObjectsTranscoder.deserialize(inBal); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -100,6 +100,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 	
 	//存货周转率
 	public String invtrtrrat() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
@@ -108,6 +109,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balanceSheetList = ObjectsTranscoder.deserialize(inBal); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -162,6 +164,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 	
 	//存货周转天数
 	public String invtrtrday() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
@@ -170,6 +173,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balanceSheetList = ObjectsTranscoder.deserialize(inBal); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -230,6 +234,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 	
 	//应收账款周转天数
 	public String aRTday() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
@@ -238,6 +243,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balanceSheetList = ObjectsTranscoder.deserialize(inBal); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -294,6 +300,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 	
 	//流动资产周转率
 	public String currat() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
@@ -302,6 +309,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balanceSheetList = ObjectsTranscoder.deserialize(inBal); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -353,6 +361,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 	
 	//固定资产周转率
 	public String fixassrat() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
@@ -361,6 +370,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balanceSheetList = ObjectsTranscoder.deserialize(inBal); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -412,6 +422,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 	
 	//总资产周转率
 	public String totassrat() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incCompxKey.getBytes());
@@ -420,6 +431,7 @@ public class OperaCapacityAction extends BaseAction implements RequestAware,Appl
 		String balKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inBal = jedis.get(balKey.getBytes());
 		List<BalanceSheet> balanceSheetList = ObjectsTranscoder.deserialize(inBal); 
+		jedis.close();
 		
 		Chart chart = new Chart();
 		

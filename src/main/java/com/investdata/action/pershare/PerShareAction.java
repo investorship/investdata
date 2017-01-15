@@ -36,18 +36,18 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
 	
 	//每股收益
 	public String EPS() throws Exception {
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String compxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<GendataSheet> genDataList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		StringBuilder epsData = new StringBuilder();
 		StringBuilder yearData = new StringBuilder();
@@ -84,10 +84,11 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		if (StringUtils.isEmpty(code)) {
 			return ERROR;
 		}
-		
+		Jedis jedis = RedisCache.getJedis();
 		String compxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(compxKey.getBytes());
 		List<GendataSheet> genDataList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		StringBuilder dataBuilder = new StringBuilder();
 		StringBuilder yearBuilder = new StringBuilder();
@@ -120,7 +121,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股营业收入
 	public String mincmPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -130,6 +131,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<IncstateSheet> incSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -179,7 +181,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股营业利润
 	public String opeprfPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -189,6 +191,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<IncstateSheet> incSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -238,7 +241,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股资本公积
 	public String capsurfdPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -248,6 +251,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -296,6 +300,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股盈余公积
 	public String surrefdPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
+		Jedis jedis = RedisCache.getJedis();
 		
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
@@ -306,6 +311,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -355,7 +361,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股公积金
 	public String accumfdPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -365,6 +371,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -418,7 +425,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股未分配利润
 	public String undivprfPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -428,6 +435,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -477,7 +485,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股留存收益
 	public String retearPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -487,6 +495,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<BalanceSheet> balanceSheetsList =  ObjectsTranscoder.deserialize(inc);
+		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -542,6 +552,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股经营活动现金流量
 	public String opeCFPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
+		Jedis jedis = RedisCache.getJedis();
 		
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
@@ -552,6 +563,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<CashFlowSheet> cashFlowSheets =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
+		
 		
 		Chart chart = new Chart();
 		
@@ -602,7 +615,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股净现金流量
 	public String CFPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -612,6 +625,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.CASHFLOWDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<CashFlowSheet> cashFlowSheets =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -662,7 +676,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股净资产
 	public String NAPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -672,6 +686,8 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<BalanceSheet> balanceSheets =  ObjectsTranscoder.deserialize(inc);
+		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -724,7 +740,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 	//每股息税前利润
 	public String EBITPS() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		//获取各年度总股本数据
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
@@ -734,6 +750,7 @@ public class PerShareAction extends BaseAction implements RequestAware,Applicati
 		String incCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] inc = jedis.get(incCompxKey.getBytes());
 		List<IncstateSheet> incstateSheets =  ObjectsTranscoder.deserialize(inc);
+		jedis.close();
 		
 		Chart chart = new Chart();
 		

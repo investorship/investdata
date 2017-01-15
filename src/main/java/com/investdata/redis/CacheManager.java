@@ -39,16 +39,17 @@ import com.investdata.utils.StringUtils;
 public class CacheManager {
 	
 	private static Logger _log = Logger.getLogger(CacheManager.class);
-	private static Jedis jedis = RedisCache.getJedis();
 	
 	/**
 	 * 清除所有数据-->加载数据之前
 	 * @throws Exception
 	 */
 	public static void flushAll() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		long before = getDbsize();
 		jedis.flushAll();
 		long after = getDbsize();
+		jedis.close();
 		_log.info(String.format("Redis数据已经全部清除，清除前[%s],清除后[%s]", before,after));
 	}
 	
@@ -58,7 +59,10 @@ public class CacheManager {
 	 * @throws Exception
 	 */
 	public static long getDbsize() throws Exception {
-		return jedis.dbSize();
+		Jedis jedis = RedisCache.getJedis();
+		long dbSize = jedis.dbSize();
+		jedis.close();
+		return dbSize;
 	}
 	
 	/**
@@ -111,10 +115,10 @@ public class CacheManager {
 		application.setAttribute("stockCodeMapping", stockCodeMapping);// 股票代码与名称的对应关系map
 		application.setAttribute("shortNameCodeMapping", shortNameCodeMapping);// 股票字母简称与股票代码对应关系
 		application.setAttribute("hanziCodeMapping", hanziCodeMapping);// 股票汉字与股票代码对应关系
-		
+		Jedis jedis = RedisCache.getJedis();
 //		jedis.set(Const.STOCK_SEARCH_LIST, stocksItems.toString()); 
 		jedis.hmset(Const.STOCK_CODE_MAPPING, stockCodeMapping); 
-
+		jedis.close();
 		_log.info("############监听器step1-end:初始化股票检索与对应关系数据完成########");
 	}
 	
@@ -176,10 +180,12 @@ public class CacheManager {
 			}
 			
 			Set<String> keys = gendataSheetListMap.keySet();
+			Jedis jedis = RedisCache.getJedis();
 			for (String key : keys) {
 				String compxKey = key + "#" + Const.GENDATA_KEY;
 				jedis.set(compxKey.getBytes(), ObjectsTranscoder.serialize(gendataSheetListMap.get(key)));
-			}			
+			}
+			jedis.close();
 		}
 		
 
@@ -210,11 +216,13 @@ public class CacheManager {
 				}
 			}
 			
+			Jedis jedis = RedisCache.getJedis();
 			Set<String> keys = incstateSheetListMap.keySet();
 			for (String key : keys) {
 				String compxKey = key + "#" + Const.INCSTATEDATA_KEY;
 				jedis.set(compxKey.getBytes(), ObjectsTranscoder.serialize(incstateSheetListMap.get(key)));
-			}			
+			}
+			jedis.close();
 		}
 		
 		_log.info("############监听器step4-end:初始化利润表数据结束########");
@@ -242,12 +250,14 @@ public class CacheManager {
 					cashFlowSheetListMap.put(code, cfList);
 				}
 			}
-			
+			Jedis jedis = RedisCache.getJedis();
 			Set<String> keys = cashFlowSheetListMap.keySet();
 			for (String key : keys) {
 				String compxKey = key + "#" + Const.CASHFLOWDATA_KEY;
 				jedis.set(compxKey.getBytes(), ObjectsTranscoder.serialize(cashFlowSheetListMap.get(key)));
 			}			
+			
+			jedis.close();
 		}
 		
 		_log.info("############监听器step5-end:初始化现金流量表数据结束##########");
@@ -280,10 +290,12 @@ public class CacheManager {
 			}
 			
 			Set<String> keys = BalanceSheetListMap.keySet();
+			Jedis jedis = RedisCache.getJedis();
 			for (String key : keys) {
 				String compxKey = key + "#" + Const.BALANCEDATA_KEY;
 				jedis.set(compxKey.getBytes(), ObjectsTranscoder.serialize(BalanceSheetListMap.get(key)));
 			}
+			jedis.close();
 		}
 		
 		_log.info("############监听器step6-end:初始化资产负债表数据结束##########");
@@ -291,7 +303,7 @@ public class CacheManager {
 	
 	public static void initSearchIndex() {
 		_log.info("############监听器step7-start:准备初始化首页搜索指数列表########");
-		
+		Jedis jedis = RedisCache.getJedis();
 		Set<String> mappingKeys  = jedis.hkeys(Const.STOCK_CODE_MAPPING);
 		Map<String,String> stockCodeMapping = new HashMap<String,String>();
 		//股票代码与名称的对应关系
@@ -299,6 +311,7 @@ public class CacheManager {
 			List<String> value = jedis.hmget(Const.STOCK_CODE_MAPPING, key);
 			stockCodeMapping.put(key, value.get(0));
 		}
+		
 		
 		List<SearchIndex> searchIndexList = new ArrayList<SearchIndex>();
 		
@@ -316,7 +329,7 @@ public class CacheManager {
 		}
 		
 		jedis.set(Const.SEARCHINDEX_KEY.getBytes(), ObjectsTranscoder.serialize(searchIndexList));
-		
+		jedis.close();
 		_log.info("############监听器step7-end:初始化首页搜索指数列表结束##########");
 	}
 }

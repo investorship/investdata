@@ -7,18 +7,17 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 
-import redis.clients.jedis.Jedis;
-
 import com.investdata.common.BaseAction;
 import com.investdata.common.Const;
 import com.investdata.dao.po.BalanceSheet;
 import com.investdata.dao.po.Chart;
-import com.investdata.dao.po.GendataSheet;
 import com.investdata.dao.po.IncstateSheet;
 import com.investdata.redis.ObjectsTranscoder;
 import com.investdata.redis.RedisCache;
 import com.investdata.utils.MathUtils;
 import com.opensymphony.xwork2.ActionContext;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * 成长能力计算
@@ -34,17 +33,16 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
-	
 	
 	
 	//净利润增长率
 	public String netprfgrrt() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -92,11 +90,13 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 		
 	//净利润增长率(扣非)
 	public String netprfgrrtKF() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -142,10 +142,11 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 	//营业利润增长率
 	public String opeprfgrrt() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -191,11 +192,13 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 	
 	//利润总额增长率
 	public String totprfgrrt() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -241,11 +244,13 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 	
 	//营业收入增长率
 	public String opeincmgrrt() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -291,10 +296,12 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 	//净资产增长率
 	public String netassgrrt() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
+		Jedis jedis = RedisCache.getJedis();
 		
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -354,10 +361,11 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 	//总资产增长率
 	public String totassgrrt() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -408,11 +416,13 @@ public class GrowthCapabAction extends BaseAction implements RequestAware,Applic
 	
 	//股东权益相对年初增长率
 	public String shareHolderEquity() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		

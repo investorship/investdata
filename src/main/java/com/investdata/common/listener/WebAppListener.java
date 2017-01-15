@@ -19,7 +19,7 @@ import com.investdata.redis.RedisCache;
  */
 public class WebAppListener implements ServletContextListener {
 	Logger _log = Logger.getLogger(WebAppListener.class);
-	Jedis jedis = RedisCache.getJedis();
+//	Jedis jedis = RedisCache.getJedis();
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {

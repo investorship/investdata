@@ -7,17 +7,16 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 
-import redis.clients.jedis.Jedis;
-
 import com.investdata.common.BaseAction;
 import com.investdata.common.Const;
 import com.investdata.dao.po.BalanceSheet;
 import com.investdata.dao.po.Chart;
-import com.investdata.dao.po.IncstateSheet;
 import com.investdata.redis.ObjectsTranscoder;
 import com.investdata.redis.RedisCache;
 import com.investdata.utils.MathUtils;
 import com.opensymphony.xwork2.ActionContext;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * 资本结构计算
@@ -33,16 +32,16 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
-	
 	
 	
 	//资产负债率
 	public String dbastrt() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -91,9 +90,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//权益乘数
 	public String equmul() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
+		jedis.close();
+		
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
 		
 		Chart chart = new Chart();
@@ -141,10 +143,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//固定资产比率
 	public String fixassrt() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -192,10 +196,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//无形资产比率
 	public String intanassrt() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -242,10 +248,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//商誉占净资产比例
 	public String goodwill() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -298,10 +306,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//股东权益比率
 	public String equass() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -349,10 +359,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//负债结构比率
 	public String debtEnsemble() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
-		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  	
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -408,10 +420,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//长期负债权益比率
 	public String longDebtRatio() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -465,10 +479,12 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 	
 	//营运资金
 	public String wrkcap() throws Exception {
+		Jedis jedis = RedisCache.getJedis();
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
-		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  
+		jedis.close();
 		
 		Chart chart = new Chart();
 		

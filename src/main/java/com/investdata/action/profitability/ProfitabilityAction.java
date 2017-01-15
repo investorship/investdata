@@ -34,18 +34,16 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	private Map<String,Object> application = null;
 	private String code;
 	private String indexName;
-	private static Jedis jedis = RedisCache.getJedis();
-	
-	
 	
 	//加权平均净资产收益率
 	public String ROE() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
 		List<GendataSheet> genDataList = ObjectsTranscoder.deserialize(in);  		
 		Chart chart = new Chart();
+		jedis.close();
 		
 		if (genDataList != null && genDataList.size() > 0) {
 			//保留两位小数
@@ -81,11 +79,12 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//加权平均净资产收益率(扣非)
 	public String ROEcut() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String genCompxKey = code + "#" + Const.GENDATA_KEY;
 		byte[] in = jedis.get(genCompxKey.getBytes());
 		List<GendataSheet> genDataList = ObjectsTranscoder.deserialize(in);  		
 		Chart chart = new Chart();
+		jedis.close();
 		
 		if (genDataList != null && genDataList.size() > 0) {
 			//保留两位小数
@@ -121,7 +120,7 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//资产净利率
 	public String ROA() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
@@ -130,6 +129,7 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] balIn = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(balIn);  	
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -184,7 +184,7 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//资产利润率
 	public String assetsProRatio() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
@@ -193,6 +193,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] balIn = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(balIn);  	
+		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -244,10 +246,11 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//毛利率
 	public String grossProfit() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -296,10 +299,11 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//净利率
 	public String splashes() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -347,10 +351,11 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//净利率(扣非)
 	public String splashesKF() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -398,10 +403,11 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//成本费用净利率
 	public String costExpProRatio() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
@@ -459,7 +465,7 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 	//资产息税前利润率
 	public String ebitRatio() throws Exception {
 		String methodName = (String)ActionContext.getContext().get("methodName");
-		
+		Jedis jedis = RedisCache.getJedis();
 		String incstCompxKey = code + "#" + Const.INCSTATEDATA_KEY;
 		byte[] in = jedis.get(incstCompxKey.getBytes());
 		List<IncstateSheet> incstSheetsList = ObjectsTranscoder.deserialize(in);  		
@@ -467,6 +473,8 @@ public class ProfitabilityAction extends BaseAction implements RequestAware,Appl
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] balIn = jedis.get(balCompxKey.getBytes());
 		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(balIn);  
+		
+		jedis.close();
 		
 		Chart chart = new Chart();
 		
