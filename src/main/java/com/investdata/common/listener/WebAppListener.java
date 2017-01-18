@@ -6,8 +6,6 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.log4j.Logger;
 
-import redis.clients.jedis.Jedis;
-
 import com.investdata.redis.CacheManager;
 import com.investdata.redis.RedisCache;
 

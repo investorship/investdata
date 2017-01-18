@@ -16,7 +16,7 @@ public class RedisCache {
 	private static  Logger _log = Logger.getLogger(RedisCache.class);
 	
 	private static JedisPool jedisPool;
-	private static Jedis jedis;
+	
 	private static String redisIp = PropertiesUtils.getPropsValue("redis_ip", "");
 	private static int redisPort = Integer.parseInt(PropertiesUtils.getPropsValue("redis_port", ""));
 	private static String redisAuth = PropertiesUtils.getPropsValue("redis_auth", "");
@@ -36,6 +36,7 @@ public class RedisCache {
 	 * @return
 	 */
 	public static Jedis getJedis() {
+		Jedis jedis = null;
 		if (jedis == null) {
 			jedis = jedisPool.getResource();
 		}
