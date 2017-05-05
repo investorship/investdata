@@ -60,13 +60,17 @@ public class StockAction extends BaseAction  implements RequestAware,Application
 		Stock stockParam = new Stock();
 		stockParam.setCode(keyword);
 		
+		logger.info(String.format("准备根据code[%s]查询stock信息", keyword));
 		List<Stock> stocks =  stockDao.getStocks(stockParam);
+		logger.info(String.format("code[%s]的查询结果数量为[%s]", keyword,stocks == null ? 0 : stocks.size()));
 		Stock stock = null;
 		if (stocks != null) {
 			stock = stocks.get(0);
 		} else {
 			return ERROR;
 		}
+		
+		logger.info(String.format("打印stock信息:\n [%s]", stock));
 		
 		TIndustryCategoryDao icDao = DaoFactory.getTIndustryCategoryDao();
 		

@@ -40,7 +40,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 		String methodName = (String)ActionContext.getContext().get("methodName");
 		String balCompxKey = code + "#" + Const.BALANCEDATA_KEY;
 		byte[] in = jedis.get(balCompxKey.getBytes());
-		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);  		
+		List<BalanceSheet> balSheetsList = ObjectsTranscoder.deserialize(in);
+		
+		_log.info(String.format("从redis获取的资产负债表数据条数为[%s]", balSheetsList == null ? 0 : balSheetsList.size()));
+		
 		jedis.close();
 		
 		Chart chart = new Chart();
@@ -71,6 +74,10 @@ public class CapitalEnsembleAction extends BaseAction implements RequestAware,Ap
 				yearBuilder.deleteCharAt(yearBuilder.length() -1 );
 				dataBuilder.deleteCharAt(dataBuilder.length() -1);				
 			}
+			
+			
+			_log.info(String.format("yearBuilder:\n[%s]", yearBuilder.toString()));
+			_log.info(String.format("dataBuilder:\n[%s]", dataBuilder.toString()));
 			
 			
 			Map<String,String> stockCodeMapping = (Map<String,String>)application.get("stockCodeMapping");

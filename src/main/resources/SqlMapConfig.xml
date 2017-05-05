@@ -12,11 +12,14 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
                 maxSessions="20"
                 maxTransactions="10"/>
         <transactionManager type="JDBC">
-                 <dataSource  type="SIMPLE">
+                 <dataSource  type="DBCP">
 		            <property name="JDBC.Driver" value="${driverClass}" />
 					<property name="JDBC.ConnectionURL" value="${jdbcUrl}" />
 					<property name="JDBC.Username" value="${user}" />
 					<property name="JDBC.Password" value="${password}" />
+					<property name="Pool.MaximumActiveConnections" value="15"/>  
+            		<property name="Pool.MaximumIdleConnections" value="15"/>  
+            		<property name="Pool.MaximumWait" value="12000"/>
                 </dataSource>
         </transactionManager>
 		<sqlMap resource="com/investdata/dao/sqlmap/User.xml"/>
