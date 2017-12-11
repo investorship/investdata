@@ -7,7 +7,8 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<constant name="struts.action.extension" value="action" />
 	<constant name="struts.objectFactory" value="spring" />
-	<constant name="struts.i18n.encoding" value="UTF-8"></constant> 
+	<constant name="struts.i18n.encoding" value="UTF-8"/> 
+	<constant name="struts.multipart.maxSize" value="1" /> <!-- 将文件上传大小限定为1个字节，禁止上传文件，后台有人恶意上传木马 -->
 	
 	<!-- 基础配置包[拦截器]，所有包继承该包 -->
 	<package name="struts_basic" extends="struts-default,json-default">
