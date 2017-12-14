@@ -137,7 +137,8 @@ public class Utils {
 		fdv.setMarket(market);
 		fdv.setType("lrb");
 		fdv.setOrgid(orgId);
-		fdv.setMinYear(startTime);
+//		fdv.setMinYear(startTime);
+		fdv.setMinYear("2015");//只要2016年的
 		fdv.setMaxYear("2016");
 		
 		getFile(url,fdv,fileDir); //利润表

@@ -10,6 +10,14 @@ import org.json.JSONObject;
 import com.cninfo.download.util.JDBC;
 import com.cninfo.download.util.Utils;
 
+/**
+ * 因很多指标有年初和年末，而巨潮资讯下载的财务报表中的一般是指年末，年初的怎么来呢？ 去年的年末就是今年的年初。所以即便比如你想要
+ * 录入2017年的数据，在下载财务数据文件时，也要从16年开始，这样：2017年的数据才能完整，只不过会生成很多2016年的insert数据，因为有
+ * 主键防重，所以执行失败不用关心即可。
+ * @author guohailong
+ *
+ */
+
 public class Main {
 	public static void main(String[] args) throws Exception{
 		//findataURL
@@ -18,7 +26,7 @@ public class Main {
 		String fileDir = "d:\\job\\"; //文件存放路径
 		
 		Connection conn = JDBC.getConn();
-		PreparedStatement pst = conn.prepareStatement("select code,name from t_stocks");
+		PreparedStatement pst = conn.prepareStatement("select code,name from t_stocks where flag = 1");
 		ResultSet rs = pst.executeQuery();
 		int i = 0;
 		while(rs.next()) {
@@ -39,7 +47,7 @@ public class Main {
 			i++;
 			System.out.println("当前处理条数：" + i + "当前处理代码:【" + code + "】");
 			//获取orgId 与market等信息。
-			Thread.sleep(2000);
+			Thread.sleep(2500);
 		}
 		
 		
